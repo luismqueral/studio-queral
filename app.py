@@ -1,53 +1,109 @@
 import os
+import yaml
+import markdown
 from pathlib import Path
+from datetime import datetime
 from flask import Flask, render_template, request
-from cache_manager import PostCacheManager
-from typing import List
+from typing import List, Dict, Optional
 
 app = Flask(__name__)
 
-# Fix path handling for Vercel serverless environment
-# Get the directory containing this script
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# Global data - loaded once at startup
+posts_data = []
+tags_data = {}
+build_info = {}
 
-# In Vercel serverless environment, we need to find the deployment root
-# In local development, look in parent directory
-if os.environ.get('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME'):
-    # In Vercel, find the deployment root by looking for the journals directory
-    # Start from current directory and walk up until we find it
-    search_dir = current_dir
-    for _ in range(5):  # Safety limit
-        journals_path = os.path.join(search_dir, "journals")
-        if os.path.exists(journals_path):
-            vault_path = search_dir
-            break
-        search_dir = os.path.dirname(search_dir)
+def parse_markdown_file(file_path: Path) -> Dict:
+    """Parse a markdown file with YAML frontmatter"""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Split frontmatter and content
+    if content.startswith('---\n'):
+        try:
+            _, frontmatter_str, markdown_content = content.split('---\n', 2)
+            frontmatter = yaml.safe_load(frontmatter_str)
+        except ValueError:
+            # No frontmatter found
+            frontmatter = {}
+            markdown_content = content
     else:
-        # Fallback if not found
-        vault_path = os.path.dirname(current_dir)
-else:
-    vault_path = os.path.join(current_dir, "..")  # Local development
+        frontmatter = {}
+        markdown_content = content
+    
+    # Convert markdown to HTML
+    md = markdown.Markdown(extensions=['extra', 'codehilite', 'toc'])
+    html_content = md.convert(markdown_content)
+    
+    # Parse date if it's a string
+    if 'date' in frontmatter and isinstance(frontmatter['date'], str):
+        frontmatter['date_obj'] = datetime.fromisoformat(frontmatter['date'])
+        frontmatter['date_formatted'] = frontmatter['date_obj'].strftime('%B %d, %Y')
+    
+    return {
+        **frontmatter,
+        'content': markdown_content,
+        'html_content': html_content,
+        'file_path': str(file_path)
+    }
 
-# Initialize cache manager with proper paths
-cache_manager = PostCacheManager(vault_path, ".cache")
+def load_content():
+    """Load content from markdown files"""
+    global posts_data, tags_data, build_info
+    
+    current_dir = Path(__file__).parent
+    content_dir = current_dir / "content"
+    posts_dir = content_dir / "posts"
+    
+    # Load posts
+    posts_data = []
+    if posts_dir.exists():
+        for md_file in posts_dir.glob("*.md"):
+            try:
+                post = parse_markdown_file(md_file)
+                posts_data.append(post)
+            except Exception as e:
+                print(f"⚠️  Error loading {md_file.name}: {e}")
+        
+        # Sort by date (newest first)
+        posts_data.sort(key=lambda p: p.get('date_obj', datetime.min), reverse=True)
+    
+    # Load tags
+    tags_file = content_dir / "tags.md"
+    if tags_file.exists():
+        try:
+            tags_info = parse_markdown_file(tags_file)
+            tags_data = {
+                'tags': tags_info.get('tags', []),
+                'tag_counts': tags_info.get('tag_counts', {}),
+                'total_tags': tags_info.get('total_tags', 0)
+            }
+        except Exception as e:
+            print(f"⚠️  Error loading tags: {e}")
+            tags_data = {'tags': [], 'tag_counts': {}, 'total_tags': 0}
+    
+    # Load build info
+    build_file = content_dir / "build_info.md"
+    if build_file.exists():
+        try:
+            build_info = parse_markdown_file(build_file)
+        except Exception as e:
+            print(f"⚠️  Error loading build info: {e}")
+            build_info = {}
 
-def get_all_posts() -> List:
-    """Get all cached posts"""
-    return cache_manager.get_cached_posts()
+def get_all_posts() -> List[Dict]:
+    """Get all posts"""
+    return posts_data
 
 def get_all_tags():
     """Get unique tags from all posts"""
-    posts = get_all_posts()
-    tags = set()
-    for post in posts:
-        tags.update(post.tags)
-    return sorted(list(tags))
+    return tags_data.get('tags', [])
 
 def get_posts(tag_filter=None):
     """Get posts, optionally filtered by tag"""
     posts = get_all_posts()
     if tag_filter:
-        return [p for p in posts if tag_filter in p.tags]
+        return [p for p in posts if tag_filter in p.get('tags', [])]
     return posts
 
 @app.route('/')
@@ -75,7 +131,7 @@ def posts_fragment():
     """HTMX endpoint - returns just the posts list fragment"""
     tag_filter = request.args.get('tag')
     posts = get_posts(tag_filter)
-    all_tags = get_all_tags()  # Always include all_tags for filtering
+    all_tags = get_all_tags()
     
     # Check if this is an HTMX request
     is_htmx = request.headers.get('HX-Request')
@@ -97,7 +153,7 @@ def posts_fragment():
 def post_detail(slug):
     """Individual post page"""
     posts = get_all_posts()
-    post = next((p for p in posts if p.slug == slug), None)
+    post = next((p for p in posts if p.get('slug') == slug), None)
     if not post:
         return "Post not found", 404
     
@@ -112,262 +168,117 @@ def post_detail(slug):
 def tags_index():
     """Tags overview page"""
     all_tags = get_all_tags()
-    tag_counts = {}
-    for tag in all_tags:
-        tag_counts[tag] = len(get_posts(tag))
+    tag_counts = tags_data.get('tag_counts', {})
     
     return render_template('tags.html', tags=all_tags, tag_counts=tag_counts)
 
 @app.route('/about')
 def about_page():
-    """Stub page for About - handles full page and HTMX fragment loads."""
+    """About page - handles full page and HTMX fragment loads."""
     if request.headers.get('HX-Request'):
         return render_template('fragments/about_content.html')
     return render_template('about.html')
 
 @app.route('/projects')
 def projects_page():
-    """Stub page for Projects - handles full page and HTMX fragment loads."""
+    """Projects page - handles full page and HTMX fragment loads."""
     if request.headers.get('HX-Request'):
         return render_template('fragments/projects_content.html')
     return render_template('projects.html')
 
 @app.route('/scratch-book')
 def scratch_book_page():
-    """Stub page for Scratch Book"""
+    """Scratch Book page"""
     if request.headers.get('HX-Request'):
         return render_template('fragments/scratch_book_content.html')
     return render_template('scratch_book.html')
 
-# Cache management endpoints
-@app.route('/cache/rebuild')
-def rebuild_cache():
-    """Rebuild cache for changed files"""
-    cache_manager.rebuild_cache()
-    stats = cache_manager.get_cache_stats()
-    return f"""
-    <h2>✅ Cache Rebuilt!</h2>
-    <p>Processed posts from changed files.</p>
-    <ul>
-        <li>Cached posts: {stats['cached_posts']}</li>
-        <li>Cache size: {stats['total_size_mb']} MB</li>
-        <li>Location: {stats['cache_location']}</li>
-    </ul>
-    <p><a href="/">← Back to blog</a></p>
-    """
-
-@app.route('/cache/rebuild-force')
-def rebuild_cache_force():
-    """Force rebuild all cache"""
-    cache_manager.rebuild_cache(force_all=True)
-    stats = cache_manager.get_cache_stats()
-    return f"""
-    <h2>✅ Cache Force Rebuilt!</h2>
-    <p>Processed all posts from scratch.</p>
-    <ul>
-        <li>Cached posts: {stats['cached_posts']}</li>
-        <li>Cache size: {stats['total_size_mb']} MB</li>
-        <li>Location: {stats['cache_location']}</li>
-    </ul>
-    <p><a href="/">← Back to blog</a></p>
-    """
-
-@app.route('/cache/clear')
-def clear_cache():
-    """Clear all cache"""
-    cache_manager.clear_cache()
-    return """
-    <h2>🧹 Cache Cleared!</h2>
-    <p>All cached posts have been removed.</p>
-    <p><strong>Note:</strong> You'll need to rebuild the cache to see posts again.</p>
-    <p><a href="/cache/rebuild">Rebuild Cache</a> | <a href="/">Back to blog</a></p>
-    """
-
-@app.route('/cache/stats')
-def cache_stats():
-    """Show cache statistics"""
-    stats = cache_manager.get_cache_stats()
-    return f"""
-    <h2>📊 Cache Statistics</h2>
-    <ul>
-        <li><strong>Cached files:</strong> {stats['cached_files']}</li>
-        <li><strong>Cached posts:</strong> {stats['cached_posts']}</li>
-        <li><strong>Total size:</strong> {stats['total_size_mb']} MB</li>
-        <li><strong>Location:</strong> {stats['cache_location']}</li>
-        <li><strong>Last updated:</strong> {stats.get('last_updated', 'Never')}</li>
-    </ul>
-    
-    <h3>Cache Actions:</h3>
-    <ul>
-        <li><a href="/cache/rebuild">Rebuild Changed Files</a></li>
-        <li><a href="/cache/rebuild-force">Force Rebuild All</a></li>
-        <li><a href="/cache/clear">Clear Cache</a></li>
-    </ul>
-    
-    <p><a href="/">← Back to blog</a></p>
-    """
-
 @app.route('/debug')
-def debug_files():
-    """Debug endpoint to show what files are being found"""
-    from parser import StudioLogParser
-    from pathlib import Path
+def debug_info():
+    """Debug endpoint to show build info and content status"""
+    current_dir = Path(__file__).parent
+    content_dir = current_dir / "content"
+    posts_dir = content_dir / "posts"
     
-    parser = StudioLogParser(Path(vault_path), Path("content"))
-    files = parser.find_studio_log_files()
+    output = ["<h2>🔍 Debug: Markdown Site Status</h2>"]
     
-    cache_stats = cache_manager.get_cache_stats()
+    # Build info
+    if build_info:
+        output.append("<h3>🏗️ Build Info:</h3>")
+        output.append("<ul>")
+        output.append(f"<li>Build time: {build_info.get('build_time', 'Unknown')}</li>")
+        output.append(f"<li>Total posts: {build_info.get('total_posts', 0)}</li>")
+        output.append(f"<li>Total tags: {build_info.get('total_tags', 0)}</li>")
+        output.append(f"<li>Assets processed: {build_info.get('assets_processed', False)}</li>")
+        output.append("</ul>")
+        
+        source_files = build_info.get('source_files', [])
+        if source_files:
+            output.append("<h4>Source files:</h4>")
+            output.append("<ul>")
+            for file in source_files:
+                output.append(f"<li><code>{file}</code></li>")
+            output.append("</ul>")
+    else:
+        output.append("<p><strong>No build info found!</strong> Run <code>python build_markdown.py</code> to build content.</p>")
     
-    output = ["<h2>Debug: Studio Log Files & Cache</h2>"]
-    output.append(f"<p>Looking in: <code>{Path(vault_path).resolve()}</code></p>")
-    
-    output.append("<h3>📁 Source Files Found:</h3>")
-    output.append(f"<p>Found {len(files)} files:</p>")
+    # Content status
+    output.append("<h3>📁 Content Files:</h3>")
     output.append("<ul>")
-    for file_path in files:
-        relative_path = file_path.relative_to(Path(vault_path))
-        output.append(f"<li><code>{relative_path}</code></li>")
+    
+    # Check for markdown files
+    if posts_dir.exists():
+        md_files = list(posts_dir.glob("*.md"))
+        output.append(f"<li>✅ Posts directory: {len(md_files)} markdown files</li>")
+        
+        if md_files:
+            output.append("<li>Recent files:</li>")
+            output.append("<ul>")
+            for md_file in sorted(md_files)[-5:]:  # Show last 5 files
+                size = md_file.stat().st_size
+                output.append(f"<li><code>{md_file.name}</code> ({size} bytes)</li>")
+            output.append("</ul>")
+    else:
+        output.append("<li>❌ Posts directory missing</li>")
+    
+    for filename in ['tags.md', 'build_info.md']:
+        file_path = content_dir / filename
+        if file_path.exists():
+            size = file_path.stat().st_size
+            output.append(f"<li>✅ <code>{filename}</code> ({size} bytes)</li>")
+        else:
+            output.append(f"<li>❌ <code>{filename}</code> (missing)</li>")
+    
     output.append("</ul>")
     
-    output.append("<h3>💾 Cache Status:</h3>")
-    output.append(f"<ul>")
-    output.append(f"<li>Cached posts: {cache_stats['cached_posts']}</li>")
-    output.append(f"<li>Cache size: {cache_stats['total_size_mb']} MB</li>")
-    output.append(f"<li>Last updated: {cache_stats.get('last_updated', 'Never')}</li>")
-    output.append(f"</ul>")
+    # Posts status
+    output.append("<h3>📝 Posts Status:</h3>")
+    output.append(f"<p>Loaded posts: {len(posts_data)}</p>")
     
-    if not files:
-        output.append("<p><strong>No files found!</strong> Make sure you have studio log files in:</p>")
+    if posts_data:
+        output.append("<h4>Recent posts:</h4>")
         output.append("<ul>")
-        output.append("<li><code>journals/studio log/*.md</code></li>")
-        output.append("<li>Or files with 'studio log' in the filename</li>")
+        for post in posts_data[:5]:
+            title = post.get('title', 'Untitled')
+            date = post.get('date', 'No date')
+            tags = post.get('tags', [])
+            output.append(f"<li><strong>{title}</strong> ({date}) - {len(tags)} tags</li>")
         output.append("</ul>")
     
-    if cache_stats['cached_posts'] == 0:
-        output.append("<p><strong>No cached posts!</strong> <a href='/cache/rebuild'>Rebuild cache</a> to process posts.</p>")
-    
-    output.append("<p><a href='/cache/stats'>View Cache Stats</a> | <a href='/'>Back to blog</a></p>")
+    output.append("<p><a href='/'>← Back to site</a></p>")
     
     return "<br/>".join(output)
 
-@app.route('/markdown-test')
-def markdown_test():
-    """Test endpoint to show markdown processing capabilities"""
-    test_markdown = """
-# Markdown Processing Test
-
-This shows how **markdown** and *HTML* mix together.
-
-## Lists and Code
-
-Here's a list:
-- Item one with `inline code`
-- Item two with [a link](https://example.com)
-- Item three with **bold text**
-
-## Code Blocks
-
-```python
-def hello_world():
-    print("Hello from markdown!")
-    return "success"
-```
-
-## Mixed HTML
-
-<div style="padding: 1rem; background: #f0f0f0; border-radius: 4px;">
-This is **markdown inside HTML** - the `md_in_html` extension handles this!
-</div>
-
-## Tables
-
-| Feature | Supported |
-|---------|-----------|
-| **Bold** | ✅ |
-| *Italic* | ✅ |
-| `Code` | ✅ |
-| Tables | ✅ |
-
-## Images and Media
-
-![Example](https://via.placeholder.com/400x200?text=Test+Image)
-
-<video controls width="400">
-  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-## Blockquotes
-
-> This is a blockquote with **formatting** and `code`.
-> It supports multiple lines too.
-
----
-
-Pretty neat, right? 🎉
-"""
-    
-    # Process the test markdown
-    from parser import StudioLogParser
-    from pathlib import Path
-    
-    parser = StudioLogParser(Path(vault_path), Path("content"))
-    html_content, excerpt = parser.process_markdown_content(test_markdown)
-    
-    return f"""
-    <html>
-    <head>
-        <title>Markdown Test</title>
-        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
-        <style>
-        /* Basic styling for markdown test */
-        .content h1, .content h2, .content h3 { margin-top: 1.5rem; margin-bottom: 1rem; }
-        .content p { margin-bottom: 1rem; }
-        .content code { background: #f4f4f4; padding: 0.125rem 0.25rem; border-radius: 3px; }
-        .content pre { background: #f8f8f8; padding: 1rem; border-radius: 4px; overflow-x: auto; }
-        </style>
-    </head>
-    <body class="sans-serif bg-light-gray pa4">
-        <div class="mw7 center">
-            <div class="mb4 pa3 bg-white br2">
-                <h1>Markdown Processing Test</h1>
-                <p><a href="/">&larr; Back to demo</a></p>
-            </div>
-            
-            <div class="mb4 pa3 bg-white br2">
-                <h2>Raw Markdown Input:</h2>
-                <pre><code>{test_markdown}</code></pre>
-            </div>
-            
-            <div class="pa4 bg-white br2">
-                <h2>Processed HTML Output:</h2>
-                <div class="content">
-                    {html_content}
-                </div>
-            </div>
-            
-            <div class="mt4 pa3 bg-white br2">
-                <h2>Generated Excerpt:</h2>
-                <p><em>{excerpt}</em></p>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
+# Load content at startup
+load_content()
 
 if __name__ == '__main__':
-    print("🚀 Starting HTMX Studio Log Demo with Caching")
-    print("📁 Will look for studio log files in ../")
+    print("🚀 Starting Markdown-based HTMX Studio Site")
+    print(f"📊 Loaded {len(posts_data)} posts and {len(tags_data.get('tags', []))} tags")
     print()
-    print("🌐 Main URLs:")
-    print("   http://localhost:5002/                   - Blog homepage")
-    print("   http://localhost:5002/markdown-test      - Markdown processing demo")
-    print("   http://localhost:5002/debug              - File discovery & cache status")
-    print()
-    print("💾 Cache Management:")
-    print("   http://localhost:5002/cache/stats        - Cache statistics")
-    print("   http://localhost:5002/cache/rebuild      - Rebuild changed files")
-    print("   http://localhost:5002/cache/rebuild-force - Force rebuild all")
-    print("   http://localhost:5002/cache/clear        - Clear all cache")
+    print("🌐 URLs:")
+    print("   http://localhost:5002/                   - Homepage")
+    print("   http://localhost:5002/blog               - Blog index")
+    print("   http://localhost:5002/debug              - Debug info")
     print()
     app.run(debug=True, port=5002) 

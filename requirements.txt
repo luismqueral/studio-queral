@@ -4,4 +4,6 @@ Markdown
 requests
 Pillow
 vercel-blob
-pymdown-extensions 
+pymdown-extensions
+PyYAML
+python-dotenv 

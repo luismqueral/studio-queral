@@ -10,9 +10,9 @@
                    hx-get="/posts/{{ post.slug }}" 
                    hx-target="main" 
                    hx-push-url="/posts/{{ post.slug }}">
-                    <time class="post-date" datetime="{{ post.date.isoformat() }}">
-                        {{ post.date.strftime('%B %d, %Y') }}
-                    </time>
+                                         <time class="post-date" datetime="{{ post.date }}">
+                          {{ post.date_formatted }}
+                      </time>
                 </a>
             </div>
             {% if post.has_title %}

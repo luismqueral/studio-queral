@@ -14,9 +14,9 @@
         </div>
         
         <div class="f5 gray mb3">
-            <time class="post-date" datetime="{{ post.date.isoformat() }}">
-                {{ post.date.strftime('%B %d, %Y') }}
-            </time>
+                    <time class="post-date" datetime="{{ post.date }}">
+                  {{ post.date_formatted }}
+              </time>
         </div>
         
         {% if post.has_title %}
