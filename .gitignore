@@ -51,3 +51,4 @@ blob_cache.json
 # Test files
 test_*.py
 *_test.py 
+.vercel
