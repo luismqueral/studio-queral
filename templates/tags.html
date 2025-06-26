@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Tags - Studio Log{% endblock %}
+
+{% block content %}
+<div class="mb5">
+    <header class="tc mb5">
+        <h1 class="f2 f1-ns lh-title">Tags</h1>
+        <p class="f5 gray">Explore posts by topic</p>
+    </header>
+    
+    <div class="flex flex-wrap justify-center">
+        {% for tag in tags %}
+        <div class="ma2">
+            <button 
+                hx-get="/posts?tag={{ tag }}" 
+                hx-target="main"
+                hx-push-url="/posts?tag={{ tag }}"
+                class="db ba b--light-gray br2 pa3 bg-white hover-bg-near-white link gray hover-blue bn pointer tc">
+                <div class="f4 fw6 mb2">#{{ tag }}</div>
+                <div class="f6 gray">{{ tag_counts[tag] }} post{% if tag_counts[tag] != 1 %}s{% endif %}</div>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

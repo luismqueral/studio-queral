@@ -1,0 +1,7 @@
+Flask
+Werkzeug
+Markdown
+requests
+Pillow
+vercel-blob
+pymdown-extensions 

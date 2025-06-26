@@ -1,0 +1,191 @@
+<!-- Homepage-specific navigation (overrides base nav) -->
+<header class="mb3 flex justify-center">
+    <nav class="flex flex-wrap justify-center">
+        <a href="/blog" 
+           class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/blog" hx-target="main" hx-push-url="/blog">
+            studio log
+        </a>
+        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
+            scratch book
+        </a>
+        <a href="/projects" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/projects" hx-target="main" hx-push-url="/projects">
+            projects
+        </a>
+        <a href="/about" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
+           hx-get="/about" hx-target="main" hx-push-url="/about">
+            about
+        </a>
+    </nav>
+</header>
+
+<!-- Large Logo Header (matching original) -->
+<header class="logo-header tc mw7 center mb3 br2" style="padding: clamp(2rem, 8vw, 5rem);" id="logo-header">
+    <h1 class="ma0 lh-solid" style="font-size: clamp(3rem, 12vw, 10rem);">
+        <span class="link no-underline" id="homepage-logo">
+            <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><br><span>Q</span><span>u</span><span>e</span><span>r</span><span>A</span><span>l</span>
+        </span>
+    </h1>
+</header>
+
+<!-- Bio Content (matching original) -->
+<main class="tc">
+    <div class="ph5 tl center tl center">
+        <p class="f6 f4-ns near-black lh-copy mb4 mb3-ns">
+            This is the personal website of <a href="#" class="link gray hover-near-black underline-hover">Luis Queral</a>.
+        </p>
+
+        <p class="f6 f4-ns near-black lh-copy">
+            He is a <a href="#" class="link gray hover-near-black underline-hover">software designer</a>, <a href="#" class="link gray hover-near-black underline-hover">hypermedia artist</a>, and <a href="#" class="link gray hover-near-black underline-hover">researcher</a> who studies <a href="#" class="link gray hover-near-black underline-hover">generative design</a> at The New York Times.
+        </p>
+    </div>
+</main>
+
+<style>
+/* Hide base template navigation on homepage */
+.homepage-hide-nav .mw7 > header.mb4.tc {
+    display: none !important;
+}
+
+/* Also hide via direct targeting of nav elements */
+.homepage-hide-nav .nav-logo-container {
+    display: none !important;
+}
+
+/* Homepage-specific logo styles */
+.logo-header {
+    border: 6px solid #000;
+    cursor: pointer;
+    transition: opacity 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    opacity: 0; /* Hide initially */
+}
+
+/* Show homepage logo after fonts are loaded */
+.fonts-loaded .logo-header {
+    opacity: 1;
+}
+
+.logo-header:hover {
+    border-color: var(--hover-border-color, #000);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-header:active {
+    border-color: var(--active-border-color, #000);
+}
+
+#homepage-logo {
+    outline: none !important;
+    color: transparent; /* Hide text by default to prevent FOUC */
+    transition: color 0.4s ease; /* Smoothly fade color in once applied */
+}
+
+#homepage-logo:focus {
+    outline: none !important;
+}
+
+/* Utility to disable transitions for instant style changes */
+.logo-header.no-transition,
+.logo-header.no-transition * {
+    transition: none !important;
+}
+</style>
+
+<script>
+    // Homepage-specific logo randomization
+    function generateHomepageColors() {
+        const hue = Math.floor(Math.random() * 360);
+        const saturation = Math.floor(Math.random() * 30) + 10;
+        const lightness = Math.floor(Math.random() * 15) + 85;
+        const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
+        const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
+        const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
+        const textLightness = lightness > 90 ? 20 : 30;
+        const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
+        return { backgroundColor, borderColor, hoverBorderColor, activeBorderColor, textColor };
+    }
+
+    function applyHomepageRandomization() {
+        const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
+        const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
+        const fonts = ['font-comic-sans', 'font-lucida-blackletter', 'font-times', 'font-helvetica-bold', selectedGalapagos];
+        const logoSpans = document.querySelectorAll('#homepage-logo span');
+        logoSpans.forEach((span, index) => {
+            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            span.className = randomFont;
+            if (index === 0) {
+                span.textContent = Math.random() < 0.5 ? 'S' : 's';
+            }
+        });
+
+        const header = document.getElementById('logo-header');
+        const logo = document.getElementById('homepage-logo');
+
+        // Temporarily disable transitions for an instant change
+        header.classList.add('no-transition');
+        
+        const colors = generateHomepageColors();
+        header.style.backgroundColor = colors.backgroundColor;
+        header.style.borderColor = colors.borderColor;
+        logo.style.color = colors.textColor;
+        document.documentElement.style.setProperty('--hover-border-color', colors.hoverBorderColor);
+        document.documentElement.style.setProperty('--active-border-color', colors.activeBorderColor);
+
+        // Force browser to apply styles immediately
+        header.offsetHeight; 
+
+        // Re-enable transitions for the next hover
+        header.classList.remove('no-transition');
+    }
+
+    // Single initialization function for the homepage.
+    async function initializeHomepage() {
+        // Wait for fonts to be ready
+        await new Promise((resolve) => {
+            if ('fonts' in document) {
+                Promise.all([
+                    document.fonts.load('1em "galapagos-a"'),
+                    document.fonts.load('1em "galapagos-ab"'),
+                    document.fonts.load('1em "galapagos-abc"'),
+                    document.fonts.load('1em "Comic Sans MS"'),
+                    document.fonts.load('1em "Lucida Blackletter"')
+                ]).then(resolve).catch(() => setTimeout(resolve, 100));
+            } else {
+                setTimeout(resolve, 100);
+            }
+        });
+
+        // Apply randomization and make the logo interactive
+        applyHomepageRandomization();
+        const logoHeader = document.getElementById('logo-header');
+        if (logoHeader) {
+            logoHeader.onclick = applyHomepageRandomization;
+        }
+
+        // Make the logo visible
+        document.body.classList.add('fonts-loaded');
+    }
+
+    // --- Event Listeners ---
+
+    // Run for initial load
+    if (document.readyState !== 'loading') {
+        initializeHomepage();
+    } else {
+        document.addEventListener('DOMContentLoaded', initializeHomepage);
+    }
+
+    // Run when navigating back to the page from browser cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            initializeHomepage();
+        }
+    });
+</script> 

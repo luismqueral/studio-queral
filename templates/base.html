@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Studio Log{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    
+    <!-- Preload critical fonts to prevent FOUC -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/InterVariable.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Medium.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Inter-Bold.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/ComicSansMS.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/LucidaBlackletter.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/GalapagosAGrid-Bold.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/GalapagosABGrid-Bold.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/GalapagosABCGrid-Bold.woff2') }}" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tachyons-ext.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        /* Rule to hide main site nav when on the homepage */
+        .on-homepage .main-site-nav {
+            display: none;
+        }
+
+        /* Inline critical font declarations with no font swapping */
+        @font-face {
+            font-family: "galapagos-a";
+            src: url("{{ url_for('static', filename='fonts/GalapagosAGrid-Bold.woff2') }}") format('woff2'),
+                 url("{{ url_for('static', filename='fonts/GalapagosAGrid-Bold.woff') }}") format('woff');
+            font-display: block;
+        }
+        @font-face {
+            font-family: "galapagos-ab";
+            src: url("{{ url_for('static', filename='fonts/GalapagosABGrid-Bold.woff2') }}") format('woff2'),
+                 url("{{ url_for('static', filename='fonts/GalapagosABGrid-Bold.woff') }}") format('woff');
+            font-display: block;
+        }
+        @font-face {
+            font-family: "galapagos-abc";
+            src: url("{{ url_for('static', filename='fonts/GalapagosABCGrid-Bold.woff2') }}") format('woff2'),
+                 url("{{ url_for('static', filename='fonts/GalapagosABCGrid-Bold.woff') }}") format('woff');
+            font-display: block;
+        }
+        @font-face {
+            font-family: 'Comic Sans MS';
+            src: url("{{ url_for('static', filename='fonts/ComicSansMS.woff2') }}") format('woff2'),
+                 url("{{ url_for('static', filename='fonts/ComicSansMS.woff') }}") format('woff');
+            font-display: block;
+        }
+        @font-face {
+            font-family: 'Lucida Blackletter';
+            src: url("{{ url_for('static', filename='fonts/LucidaBlackletter.woff2') }}") format('woff2'),
+                 url("{{ url_for('static', filename='fonts/LucidaBlackletter.woff') }}") format('woff');
+            font-display: block;
+        }
+
+        /* Inter font family - Modern sans-serif */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url("{{ url_for('static', filename='fonts/Inter-Regular.woff2') }}") format('woff2');
+        }
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url("{{ url_for('static', filename='fonts/Inter-Medium.woff2') }}") format('woff2');
+        }
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url("{{ url_for('static', filename='fonts/Inter-Bold.woff2') }}") format('woff2');
+        }
+        @font-face {
+            font-family: 'InterVariable';
+            font-style: normal;
+            font-weight: 100 900;
+            font-display: swap;
+            src: url("{{ url_for('static', filename='fonts/InterVariable.woff2') }}") format('woff2');
+        }
+        @font-face {
+            font-family: 'InterVariable';
+            font-style: italic;
+            font-weight: 100 900;
+            font-display: swap;
+            src: url("{{ url_for('static', filename='fonts/InterVariable-Italic.woff2') }}") format('woff2');
+        }
+
+        /* Hide logo initially to prevent FOUC */
+        .nav-logo-container {
+            opacity: 0;
+            transition: opacity 0.3s ease, box-shadow 0.2s ease;
+        }
+        
+        /* Show logo after fonts are loaded */
+        .fonts-loaded .nav-logo-container {
+            opacity: 1;
+        }
+
+        /* Your existing logo styles */
+        .nav-logo {
+            text-decoration: none !important;
+            transition: color 0.2s ease, transform 0.1s ease;
+        }
+        .nav-logo:active,
+        .nav-logo:focus {
+            transform: translateY(1px);
+            text-decoration: none !important;
+            outline: none;
+        }
+        
+        .nav-logo-container {
+            border: 3px solid #000;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        .nav-logo-container:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Extended font classes */
+        .font-galapagos-a { font-family: 'galapagos-a', monospace; }
+        .font-galapagos-ab { font-family: 'galapagos-ab', monospace; }
+        .font-galapagos-abc { font-family: 'galapagos-abc', monospace; }
+        .font-times { font-family: 'Times New Roman', serif; }
+        .font-helvetica-bold { font-family: 'Arial Black', sans-serif; font-weight: bold; }
+        .font-comic-sans { font-family: 'Comic Sans MS', cursive; }
+        .font-lucida-blackletter { font-family: 'Lucida Blackletter', fantasy; }
+        .font-inter { font-family: 'Inter', 'InterVariable', sans-serif; }
+
+        /* Make Inter the default sans-serif font */
+        body.sans-serif, 
+        .sans-serif {
+            font-family: 'Inter', 'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+        }
+
+        /* HTMX loading indicator */
+        .htmx-indicator {
+            opacity: 0;
+            transition: opacity 200ms ease-in;
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+        .htmx-request .htmx-indicator,
+        .htmx-request.htmx-indicator {
+            opacity: 1;
+        }
+
+        /* Tag filter active state */
+        .tag-active {
+            background-color: #357edd !important;
+            color: white !important;
+        }
+
+        /* Markdown content styling */
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        
+        .content h1 { font-size: 2rem; }
+        .content h2 { font-size: 1.5rem; }
+        .content h3 { font-size: 1.25rem; }
+        .content h4 { font-size: 1rem; }
+        
+        .content p {
+            margin-bottom: 1rem;
+        }
+        
+        .content ul, .content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid #e5e5e5;
+            padding-left: 1rem;
+            margin-left: 0;
+            margin-bottom: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .content code {
+            background-color: #f5f5f5;
+            padding: 0.125rem 0.25rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+            font-size: 0.875em;
+        }
+        
+        .content pre {
+            background-color: #f8f8f8;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+        }
+        
+        .content pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        .content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .content th, .content td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        
+        .content th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .content figure {
+            margin: 1.5rem 0;
+        }
+        
+        .content figcaption {
+            font-size: 0.875rem;
+            color: #666;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .content hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 2rem 0;
+        }
+        
+        /* Video and media styles */
+        .content video {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        /* Definition lists */
+        .content dl {
+            margin-bottom: 1rem;
+        }
+        
+        .content dt {
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .content dd {
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footnotes */
+        .content .footnote {
+            font-size: 0.875rem;
+            vertical-align: super;
+        }
+        
+        .content .footnote-ref {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="sans-serif bg-light-gray">
+    <div class="mw7 center pa3 pa4-ns">
+        <header class="mb4 tc main-site-nav">
+            <div class="nav-logo-container mb3" id="nav-logo-container">
+                <h1 class="f2 ma0 gray">
+                    <a href="/" class="link nav-logo" id="random-logo"
+                       hx-get="/" hx-target="main" hx-push-url="/">
+                        <span>s</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><span> </span><span>q</span><span>u</span><span>e</span><span>r</span><span>a</span><span>l</span>
+                    </a>
+                </h1>
+            </div>
+            <nav class="flex flex-wrap justify-center">
+                <a href="/blog"
+                   class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                   hx-get="/blog" hx-target="main" hx-push-url="/blog">
+                    studio log
+                </a>
+                <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                   hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
+                    scratch book
+                </a>
+                <a href="/projects" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                   hx-get="/projects" hx-target="main" hx-push-url="/projects">
+                    projects
+                </a>
+                <a href="/about" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
+                   hx-get="/about" hx-target="main" hx-push-url="/about">
+                    about
+                </a>
+            </nav>
+        </header>
+        
+        <main hx-history-elt>
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Loading indicator -->
+        <div class="htmx-indicator">
+            <div class="dib ba b--light-gray br2 pa2 bg-white" style="box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                <span class="f6 gray">Loading...</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Your existing logo randomization code
+        function generateRandomColors() {
+            const hue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 30) + 10;
+            const lightness = Math.floor(Math.random() * 15) + 85;
+            
+            const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
+            const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
+            const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
+            
+            const textLightness = lightness > 90 ? 20 : 30;
+            const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
+            
+            return { backgroundColor, borderColor, hoverBorderColor, activeBorderColor, textColor };
+        }
+        
+        function applyRandomization() {
+            // Pick one Galapagos variation for this generation
+            const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
+            const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
+            
+            const fonts = [
+                'font-comic-sans', 
+                'font-lucida-blackletter', 
+                'font-times', 
+                'font-helvetica-bold', 
+                selectedGalapagos
+            ];
+            
+            const logoSpans = document.querySelectorAll('#random-logo span');
+            logoSpans.forEach((span, index) => {
+                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                span.className = randomFont;
+                
+                if (index === 0) {
+                    span.textContent = Math.random() < 0.5 ? 'S' : 's';
+                }
+            });
+            
+            const colors = generateRandomColors();
+            const container = document.getElementById('nav-logo-container');
+            const logo = document.getElementById('random-logo');
+            
+            container.style.backgroundColor = colors.backgroundColor;
+            container.style.borderColor = colors.borderColor;
+            logo.style.color = colors.textColor;
+        }
+        
+        // Font loading detection
+        function checkFontsLoaded() {
+            return new Promise((resolve) => {
+                // Check if fonts are loaded using font loading API
+                if ('fonts' in document) {
+                    Promise.all([
+                        document.fonts.load('1em "Inter"'),
+                        document.fonts.load('1em "InterVariable"'),
+                        document.fonts.load('1em "galapagos-a"'),
+                        document.fonts.load('1em "galapagos-ab"'), 
+                        document.fonts.load('1em "galapagos-abc"'),
+                        document.fonts.load('1em "Comic Sans MS"'),
+                        document.fonts.load('1em "Lucida Blackletter"')
+                    ]).then(() => {
+                        resolve();
+                    }).catch(() => {
+                        // Fallback timeout
+                        setTimeout(resolve, 100);
+                    });
+                } else {
+                    // Fallback for browsers without font loading API
+                    setTimeout(resolve, 100);
+                }
+            });
+        }
+
+        // Initialize logo after fonts load
+        async function initializeLogo() {
+            await checkFontsLoaded();
+            applyRandomization();
+            document.body.classList.add('fonts-loaded');
+        }
+
+        // Run immediately, don't wait for DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeLogo);
+        } else {
+            initializeLogo();
+        }
+        
+        // Re-randomize on logo click (set up after DOM is ready)
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.getElementById('nav-logo-container');
+            if (logoContainer) {
+                logoContainer.onclick = function() {
+                    applyRandomization();
+                };
+            }
+        });
+
+        // This function runs after every HTMX swap to manage the UI state.
+        function updateNavDisplay() {
+            // Check if the loaded content is the homepage by looking for its unique logo ID
+            const isHomepage = !!document.getElementById('logo-header');
+
+            if (isHomepage) {
+                // Add class to body to hide the main site navigation via CSS
+                document.body.classList.add('on-homepage');
+            } else {
+                // Remove class to ensure the main site navigation is visible
+                document.body.classList.remove('on-homepage');
+                
+                // Re-style the navigation logo since we are on a content page
+                const navHeader = document.querySelector('.nav-logo-container');
+                if (navHeader) {
+                    applyRandomization();
+                    navHeader.onclick = function() {
+                        applyRandomization();
+                    };
+                }
+            }
+        }
+
+        // Run on initial page load to set the correct state
+        document.addEventListener('DOMContentLoaded', updateNavDisplay);
+
+        // Run after any HTMX content swap to update the state
+        document.addEventListener('htmx:afterSwap', updateNavDisplay);
+    </script>
+</body>
+</html> 
