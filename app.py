@@ -10,11 +10,21 @@ app = Flask(__name__)
 # Get the directory containing this script
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# In Vercel serverless environment, the app runs from api/ but content is in parent directory
+# In Vercel serverless environment, we need to find the deployment root
 # In local development, look in parent directory
 if os.environ.get('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME'):
-    # In Vercel, we're running from api/ directory, so go up one level to find content
-    vault_path = os.path.dirname(current_dir)
+    # In Vercel, find the deployment root by looking for the journals directory
+    # Start from current directory and walk up until we find it
+    search_dir = current_dir
+    for _ in range(5):  # Safety limit
+        journals_path = os.path.join(search_dir, "journals")
+        if os.path.exists(journals_path):
+            vault_path = search_dir
+            break
+        search_dir = os.path.dirname(search_dir)
+    else:
+        # Fallback if not found
+        vault_path = os.path.dirname(current_dir)
 else:
     vault_path = os.path.join(current_dir, "..")  # Local development
 
