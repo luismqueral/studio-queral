@@ -8,7 +8,7 @@ slug: generative-point-guards
 tags:
 - strategy
 title: Generative Point Guards
-url_path: generative-point-guards/
+url_path: log/generative-point-guards/
 ---
 
 
@@ -16,6 +16,6 @@ Been thinking a lot about basketball lately and how an internal effort to upskil
 
 **The one I feel most comfortable sharing is this one:**
 <figure>
-<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750712949384-IUYu2QV3ubgbdCYe8k6PZwY1u2xUC2.webp" class="ba b--light-gray bw2" width="auto">
+<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750712949384-Z3IuWptDuqmrIl08nPFDlfVblGBYrW.webp" class="ba b--light-gray bw2" width="auto">
 <figcaption></figcaption>
 </figure>

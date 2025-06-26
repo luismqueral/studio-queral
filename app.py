@@ -113,9 +113,9 @@ def homepage():
         return render_template('fragments/homepage_content.html')
     return render_template('homepage.html')
 
-@app.route('/blog')
-def blog_index():
-    """Blog index page - handles full page and HTMX fragment loads."""
+@app.route('/log')
+def log_index():
+    """Studio log index page - handles full page and HTMX fragment loads."""
     posts = get_posts()
     all_tags = get_all_tags()
     
@@ -149,7 +149,7 @@ def posts_fragment():
                              all_tags=all_tags,
                              active_tag=tag_filter)
 
-@app.route('/posts/<slug>')
+@app.route('/log/<slug>')
 def post_detail(slug):
     """Individual post page"""
     posts = get_all_posts()
@@ -278,7 +278,7 @@ if __name__ == '__main__':
     print()
     print("🌐 URLs:")
     print("   http://localhost:5002/                   - Homepage")
-    print("   http://localhost:5002/blog               - Blog index")
+    print("   http://localhost:5002/log                - Studio log")
     print("   http://localhost:5002/debug              - Debug info")
     print()
     app.run(debug=True, port=5002) 

@@ -36,7 +36,7 @@ class Post:
     @property
     def url_path(self) -> str:
         """Generate URL path for this post"""
-        return f"{self.slug}/"
+        return f"log/{self.slug}/"
 
 class StudioLogParser:
     """Simplified version of the original parser for HTMX demo"""
