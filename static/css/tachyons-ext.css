@@ -730,3 +730,44 @@ html {
 .anim-reverse {
   animation-direction: reverse !important;
 }
+
+/* ===== CUSTOM TACHYONS BREAKPOINT OVERRIDES ===== */
+
+/* Override Tachyons -ns breakpoint to kick in later (35em = 560px instead of default 30em = 480px) */
+@media screen and (min-width: 35em) {
+  /* Font sizes */
+  .f1-ns { font-size: 3rem; }
+  .f2-ns { font-size: 2.25rem; }
+  .f3-ns { font-size: 1.5rem; }
+  .f4-ns { font-size: 1.25rem; }
+  .f5-ns { font-size: 1rem; }
+  .f6-ns { font-size: .875rem; }
+  .f7-ns { font-size: .75rem; }
+  
+  /* Padding horizontal */
+  .ph1-ns { padding-left: .25rem; padding-right: .25rem; }
+  .ph2-ns { padding-left: .5rem; padding-right: .5rem; }
+  .ph3-ns { padding-left: 1rem; padding-right: 1rem; }
+  .ph4-ns { padding-left: 2rem; padding-right: 2rem; }
+  .ph5-ns { padding-left: 4rem; padding-right: 4rem; }
+  
+  /* Padding vertical */
+  .pv1-ns { padding-top: .25rem; padding-bottom: .25rem; }
+  .pv2-ns { padding-top: .5rem; padding-bottom: .5rem; }
+  .pv3-ns { padding-top: 1rem; padding-bottom: 1rem; }
+  .pv4-ns { padding-top: 2rem; padding-bottom: 2rem; }
+  .pv5-ns { padding-top: 4rem; padding-bottom: 4rem; }
+  
+  /* Margins */
+  .mr1-ns { margin-right: .25rem; }
+  .mr2-ns { margin-right: .5rem; }
+  .mr3-ns { margin-right: 1rem; }
+  .mr4-ns { margin-right: 2rem; }
+  .mr5-ns { margin-right: 4rem; }
+  
+  .mb1-ns { margin-bottom: .25rem; }
+  .mb2-ns { margin-bottom: .5rem; }
+  .mb3-ns { margin-bottom: 1rem; }
+  .mb4-ns { margin-bottom: 2rem; }
+  .mb5-ns { margin-bottom: 4rem; }
+}

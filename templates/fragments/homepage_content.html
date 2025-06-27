@@ -22,8 +22,8 @@
 </header>
 
 <!-- Large Logo Header (matching original) -->
-<header class="logo-header tc mw7 center mb3 br2" style="padding: clamp(2rem, 8vw, 5rem);" id="logo-header">
-    <h1 class="ma0 lh-solid" style="font-size: clamp(3rem, 12vw, 10rem);">
+<header class="logo-header tc mw7 center mb3 br2" id="logo-header">
+    <h1 class="ma0 lh-solid f-homepage-logo">
         <span class="link no-underline" id="homepage-logo">
             <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><br><span>Q</span><span>u</span><span>e</span><span>r</span><span>A</span><span>l</span>
         </span>
@@ -64,6 +64,45 @@
     -moz-user-select: none;
     -ms-user-select: none;
     opacity: 0; /* Hide initially */
+    padding: 3rem 2rem;
+    overflow: hidden; /* Prevent text from extending beyond border */
+}
+
+/* Custom homepage logo font size class */
+.f-homepage-logo {
+    font-size: 10vw;
+    min-height: 0.9em; /* Ensure consistent height regardless of font */
+}
+
+/* Ensure line break is always respected */
+#homepage-logo {
+    white-space: normal !important;
+}
+
+#homepage-logo br {
+    display: block !important;
+    content: "";
+    clear: both;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 37.5em) {
+    .logo-header {
+        padding: 2rem 1rem;
+    }
+    .f-homepage-logo {
+        font-size: 17vw;
+    }
+}
+
+@media screen and (min-width: 62.5em) {
+    .logo-header {
+        padding: 4rem 3rem;
+    }
+    .f-homepage-logo {
+        font-size: 8rem;
+        max-width: 100%;
+    }
 }
 
 /* Show homepage logo after fonts are loaded */
@@ -100,16 +139,66 @@
 <script>
     // Homepage-specific logo randomization
     function generateHomepageColors() {
-        const hue = Math.floor(Math.random() * 360);
-        const saturation = Math.floor(Math.random() * 30) + 10;
-        const lightness = Math.floor(Math.random() * 15) + 85;
-        const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-        const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
-        const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
-        const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
-        const textLightness = lightness > 90 ? 20 : 30;
-        const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
-        return { backgroundColor, borderColor, hoverBorderColor, activeBorderColor, textColor };
+        // 50/50 chance of solid vs gradient
+        const useGradient = Math.random() < 0.5;
+        
+        if (useGradient) {
+            // Generate gradient with two colors
+            const hue1 = Math.floor(Math.random() * 360);
+            const hue2 = Math.floor(Math.random() * 360);
+            const saturation1 = Math.floor(Math.random() * 30) + 10;
+            const saturation2 = Math.floor(Math.random() * 30) + 10;
+            const lightness1 = Math.floor(Math.random() * 15) + 85;
+            const lightness2 = Math.floor(Math.random() * 15) + 85;
+            
+            const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
+            const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
+            
+            // Random gradient direction
+            const directions = ['45deg', '135deg', '90deg', '180deg', '0deg'];
+            const direction = directions[Math.floor(Math.random() * directions.length)];
+            
+            const backgroundColor = `linear-gradient(${direction}, ${color1}, ${color2})`;
+            
+            // Use average hue for border colors
+            const avgHue = (hue1 + hue2) / 2;
+            const avgSaturation = (saturation1 + saturation2) / 2;
+            const avgLightness = (lightness1 + lightness2) / 2;
+            
+            const borderColor = `hsl(${avgHue}, ${avgSaturation + 15}%, ${avgLightness - 15}%)`;
+            const hoverBorderColor = `hsl(${avgHue}, ${avgSaturation + 20}%, ${avgLightness - 25}%)`;
+            const activeBorderColor = `hsl(${avgHue}, ${avgSaturation + 30}%, ${avgLightness - 35}%)`;
+            const textLightness = avgLightness > 90 ? 20 : 30;
+            const textColor = `hsl(${avgHue}, ${avgSaturation + 10}%, ${textLightness}%)`;
+            
+            return { 
+                backgroundColor, 
+                borderColor, 
+                hoverBorderColor, 
+                activeBorderColor, 
+                textColor,
+                isGradient: true
+            };
+        } else {
+            // Generate solid color (original logic)
+            const hue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 30) + 10;
+            const lightness = Math.floor(Math.random() * 15) + 85;
+            const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
+            const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
+            const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
+            const textLightness = lightness > 90 ? 20 : 30;
+            const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
+            return { 
+                backgroundColor, 
+                borderColor, 
+                hoverBorderColor, 
+                activeBorderColor, 
+                textColor,
+                isGradient: false
+            };
+        }
     }
 
     function applyHomepageRandomization() {
@@ -120,6 +209,26 @@
         logoSpans.forEach((span, index) => {
             const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
             span.className = randomFont;
+            
+            // Add random rotation to each letter with three categories: none, subtle, or strong
+            const rotationType = Math.floor(Math.random() * 3); // 0, 1, or 2
+            let rotation = 0;
+            
+            if (rotationType === 0) {
+                // None: 0 degrees
+                rotation = 0;
+            } else if (rotationType === 1) {
+                // Subtle: ±5 degrees
+                rotation = (Math.random() - 0.5) * 10; // -5 to +5 degrees
+            } else {
+                // Strong: ±15 degrees
+                rotation = (Math.random() - 0.5) * 30; // -15 to +15 degrees
+            }
+            
+            span.style.transform = `rotate(${rotation}deg)`;
+            span.style.display = 'inline-block'; // Required for transforms to work properly
+            span.style.transformOrigin = 'center center'; // Rotate around center
+            
             if (index === 0) {
                 span.textContent = Math.random() < 0.5 ? 'S' : 's';
             }
@@ -132,7 +241,16 @@
         header.classList.add('no-transition');
         
         const colors = generateHomepageColors();
-        header.style.backgroundColor = colors.backgroundColor;
+        
+        // Clear any existing background styles and apply new ones
+        if (colors.isGradient) {
+            header.style.backgroundColor = '';
+            header.style.background = colors.backgroundColor;
+        } else {
+            header.style.background = '';
+            header.style.backgroundColor = colors.backgroundColor;
+        }
+        
         header.style.borderColor = colors.borderColor;
         logo.style.color = colors.textColor;
         document.documentElement.style.setProperty('--hover-border-color', colors.hoverBorderColor);

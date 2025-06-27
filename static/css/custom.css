@@ -157,8 +157,8 @@ pre:hover .copy-button {
 /* Random Logo Font Utilities */
 .font-comic { font-family: 'Comic Sans MS', cursive; }
 .font-blackletter { font-family: 'Lucida Blackletter', serif; }
-.font-times { font-family: 'Times New Roman', serif; }
-.font-helvetica-bold { font-family: 'Helvetica Neue', Helvetica, sans-serif; font-weight: bold; }
+.font-times { font-family: 'Times New Roman', serif; font-size: 1.1em; }
+
 .font-galapagos { font-family: 'ABC Galapagos AB Grid Unlicensed Trial', sans-serif; }
 .font-inter { font-family: 'Inter', 'InterVariable', sans-serif; }
 
