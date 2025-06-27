@@ -115,7 +115,7 @@
     function applyHomepageRandomization() {
         const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
         const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
-        const fonts = ['font-comic-sans', 'font-lucida-blackletter', 'font-times', 'font-helvetica-bold', selectedGalapagos];
+        const fonts = ['font-comic-sans', 'font-lucida-blackletter', 'font-times', 'font-inter', selectedGalapagos];
         const logoSpans = document.querySelectorAll('#homepage-logo span');
         logoSpans.forEach((span, index) => {
             const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
@@ -155,7 +155,9 @@
                     document.fonts.load('1em "galapagos-ab"'),
                     document.fonts.load('1em "galapagos-abc"'),
                     document.fonts.load('1em "Comic Sans MS"'),
-                    document.fonts.load('1em "Lucida Blackletter"')
+                    document.fonts.load('1em "Lucida Blackletter"'),
+                    document.fonts.load('1em "Inter"'),
+                    document.fonts.load('1em "InterVariable"')
                 ]).then(resolve).catch(() => setTimeout(resolve, 100));
             } else {
                 setTimeout(resolve, 100);
