@@ -98,48 +98,66 @@
 
         /* Simple circle logo styles */
         .simple-logo-circle {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: #000;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
+            background: linear-gradient(135deg, #dee2e6 0%, #ced4da 50%, #adb5bd 100%);
+            transition: background 0.2s ease, transform 0.1s ease;
         }
         
         .simple-logo-circle:hover {
-            background-color: #333;
+            background: linear-gradient(135deg, #ced4da 0%, #adb5bd 50%, #868e96 100%);
+        }
+        
+        .simple-logo-circle:active {
+            transform: translateY(2px);
+            background: linear-gradient(135deg, #adb5bd 0%, #868e96 50%, #6c757d 100%);
         }
 
-        /* Header layout with left circle and centered nav */
+        /* Header layout - starts vertical on small screens */
         .header-with-circle {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            gap: 1rem;
             width: 100%;
         }
 
         .header-circle-container {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
             display: flex;
             align-items: center;
         }
         
-        /* Adjust circle position for larger screens to match content padding */
-        @media screen and (min-width: 30em) {
+        .header-nav-container {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        /* At 600px+, switch to horizontal layout with circle on left */
+        @media screen and (min-width: 37.5em) {
+            .header-with-circle {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                gap: 0;
+            }
+            
+            .header-circle-container {
+                position: absolute;
+                left: 1rem;
+                top: 43%;
+                transform: translateY(-50%);
+            }
+            
+            .header-nav-container {
+                width: auto;
+            }
+        }
+        
+        /* Adjust circle position for larger screens */
+        @media screen and (min-width: 48em) {
             .header-circle-container {
                 left: 2rem;
             }
-        }
-
-        .header-nav-container {
-            display: flex;
-            justify-content: center;
-            flex: 1;
         }
 
         /* Extended font classes */
@@ -318,13 +336,13 @@
                 <!-- Simple circle logo on the left -->
                 <div class="header-circle-container">
                     <a href="/" hx-get="/" hx-target="main" hx-push-url="/">
-                        <div class="simple-logo-circle"></div>
+                        <div class="simple-logo-circle w2 h2 br-100 flex-none pointer"></div>
                     </a>
                 </div>
                 
-                <!-- Centered navigation -->
+                <!-- Right-aligned navigation -->
                 <div class="header-nav-container">
-                    <nav class="flex flex-wrap justify-center">
+                    <nav class="flex flex-wrap">
                         <a href="/log"
                            class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
                            hx-get="/log" hx-target="main" hx-push-url="/log">
