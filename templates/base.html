@@ -96,42 +96,41 @@
             src: url("{{ url_for('static', filename='fonts/InterVariable-Italic.woff2') }}") format('woff2');
         }
 
-        /* Hide logo initially to prevent FOUC */
-        .nav-logo-container {
-            opacity: 0;
-            transition: opacity 0.3s ease, box-shadow 0.2s ease;
+        /* Simple circle logo styles */
+        .simple-logo-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #000;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
         
-        /* Show logo after fonts are loaded */
-        .fonts-loaded .nav-logo-container {
-            opacity: 1;
+        .simple-logo-circle:hover {
+            background-color: #333;
         }
 
-        /* Your existing logo styles */
-        .nav-logo {
-            text-decoration: none !important;
-            transition: color 0.2s ease, transform 0.1s ease;
+        /* Header layout with left circle and centered nav */
+        .header-with-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
         }
-        .nav-logo:active,
-        .nav-logo:focus {
-            transform: translateY(1px);
-            text-decoration: none !important;
-            outline: none;
+
+        .header-circle-container {
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
         }
-        
-        .nav-logo-container {
-            border: 3px solid #000;
-            cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-        }
-        .nav-logo-container:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        .header-nav-container {
+            display: flex;
+            justify-content: center;
+            flex: 1;
         }
 
         /* Extended font classes */
@@ -305,34 +304,38 @@
 </head>
 <body class="sans-serif bg-light-gray">
     <div class="mw7 center pa3 pa4-ns">
-        <header class="mb4 tc main-site-nav">
-            <div class="nav-logo-container mb3" id="nav-logo-container">
-                <h1 class="f2 ma0 gray">
-                    <a href="/" class="link nav-logo" id="random-logo"
-                       hx-get="/" hx-target="main" hx-push-url="/">
-                        <span>s</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><span> </span><span>q</span><span>u</span><span>e</span><span>r</span><span>a</span><span>l</span>
+        <header class="mb4 main-site-nav">
+            <div class="header-with-circle mb3">
+                <!-- Simple circle logo on the left -->
+                <div class="header-circle-container">
+                    <a href="/" hx-get="/" hx-target="main" hx-push-url="/">
+                        <div class="simple-logo-circle"></div>
                     </a>
-                </h1>
+                </div>
+                
+                <!-- Centered navigation -->
+                <div class="header-nav-container">
+                    <nav class="flex flex-wrap justify-center">
+                        <a href="/log"
+                           class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                           hx-get="/log" hx-target="main" hx-push-url="/log">
+                            studio log
+                        </a>
+                        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                           hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
+                            scratch book
+                        </a>
+                        <a href="/projects" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                           hx-get="/projects" hx-target="main" hx-push-url="/projects">
+                            projects
+                        </a>
+                        <a href="/about" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
+                           hx-get="/about" hx-target="main" hx-push-url="/about">
+                            about
+                        </a>
+                    </nav>
+                </div>
             </div>
-            <nav class="flex flex-wrap justify-center">
-                <a href="/log"
-                   class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-                   hx-get="/log" hx-target="main" hx-push-url="/log">
-                    studio log
-                </a>
-                <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-                   hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
-                    scratch book
-                </a>
-                <a href="/projects" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-                   hx-get="/projects" hx-target="main" hx-push-url="/projects">
-                    projects
-                </a>
-                <a href="/about" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
-                   hx-get="/about" hx-target="main" hx-push-url="/about">
-                    about
-                </a>
-            </nav>
         </header>
         
         <main hx-history-elt>
@@ -348,105 +351,6 @@
     </div>
     
     <script>
-        // Your existing logo randomization code
-        function generateRandomColors() {
-            const hue = Math.floor(Math.random() * 360);
-            const saturation = Math.floor(Math.random() * 30) + 10;
-            const lightness = Math.floor(Math.random() * 15) + 85;
-            
-            const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-            const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
-            const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
-            const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
-            
-            const textLightness = lightness > 90 ? 20 : 30;
-            const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
-            
-            return { backgroundColor, borderColor, hoverBorderColor, activeBorderColor, textColor };
-        }
-        
-        function applyRandomization() {
-            // Pick one Galapagos variation for this generation
-            const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
-            const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
-            
-            const fonts = [
-                'font-comic-sans', 
-                'font-lucida-blackletter', 
-                'font-times', 
-                'font-helvetica-bold', 
-                selectedGalapagos
-            ];
-            
-            const logoSpans = document.querySelectorAll('#random-logo span');
-            logoSpans.forEach((span, index) => {
-                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                span.className = randomFont;
-                
-                if (index === 0) {
-                    span.textContent = Math.random() < 0.5 ? 'S' : 's';
-                }
-            });
-            
-            const colors = generateRandomColors();
-            const container = document.getElementById('nav-logo-container');
-            const logo = document.getElementById('random-logo');
-            
-            container.style.backgroundColor = colors.backgroundColor;
-            container.style.borderColor = colors.borderColor;
-            logo.style.color = colors.textColor;
-        }
-        
-        // Font loading detection
-        function checkFontsLoaded() {
-            return new Promise((resolve) => {
-                // Check if fonts are loaded using font loading API
-                if ('fonts' in document) {
-                    Promise.all([
-                        document.fonts.load('1em "Inter"'),
-                        document.fonts.load('1em "InterVariable"'),
-                        document.fonts.load('1em "galapagos-a"'),
-                        document.fonts.load('1em "galapagos-ab"'), 
-                        document.fonts.load('1em "galapagos-abc"'),
-                        document.fonts.load('1em "Comic Sans MS"'),
-                        document.fonts.load('1em "Lucida Blackletter"')
-                    ]).then(() => {
-                        resolve();
-                    }).catch(() => {
-                        // Fallback timeout
-                        setTimeout(resolve, 100);
-                    });
-                } else {
-                    // Fallback for browsers without font loading API
-                    setTimeout(resolve, 100);
-                }
-            });
-        }
-
-        // Initialize logo after fonts load
-        async function initializeLogo() {
-            await checkFontsLoaded();
-            applyRandomization();
-            document.body.classList.add('fonts-loaded');
-        }
-
-        // Run immediately, don't wait for DOMContentLoaded
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeLogo);
-        } else {
-            initializeLogo();
-        }
-        
-        // Re-randomize on logo click (set up after DOM is ready)
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoContainer = document.getElementById('nav-logo-container');
-            if (logoContainer) {
-                logoContainer.onclick = function() {
-                    applyRandomization();
-                };
-            }
-        });
-
         // This function runs after every HTMX swap to manage the UI state.
         function updateNavDisplay() {
             // Check if the loaded content is the homepage by looking for its unique logo ID
@@ -458,15 +362,6 @@
             } else {
                 // Remove class to ensure the main site navigation is visible
                 document.body.classList.remove('on-homepage');
-                
-                // Re-style the navigation logo since we are on a content page
-                const navHeader = document.querySelector('.nav-logo-container');
-                if (navHeader) {
-                    applyRandomization();
-                    navHeader.onclick = function() {
-                        applyRandomization();
-                    };
-                }
             }
         }
 
