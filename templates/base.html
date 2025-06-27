@@ -96,19 +96,11 @@
             src: url("{{ url_for('static', filename='fonts/InterVariable-Italic.woff2') }}") format('woff2');
         }
 
-        /* Simple circle logo styles */
-        .simple-logo-circle {
-            background: linear-gradient(135deg, #dee2e6 0%, #ced4da 50%, #adb5bd 100%);
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-        
-        .simple-logo-circle:hover {
-            background: linear-gradient(135deg, #ced4da 0%, #adb5bd 50%, #868e96 100%);
-        }
-        
-        .simple-logo-circle:active {
-            transform: translateY(2px);
-            background: linear-gradient(135deg, #adb5bd 0%, #868e96 50%, #6c757d 100%);
+        /* SVG logo container styles */
+        .svg-logo-container {
+            display: flex;
+            align-items: center;
+            line-height: 0; /* Prevent spacing issues with SVG */
         }
 
         /* Header layout - starts vertical on small screens */
@@ -335,8 +327,12 @@
             <div class="header-with-circle mb3">
                 <!-- Simple circle logo on the left -->
                 <div class="header-circle-container">
-                    <a href="/" hx-get="/" hx-target="main" hx-push-url="/">
-                        <div class="simple-logo-circle w2 h2 br-100 flex-none pointer"></div>
+                    <a href="/" hx-get="/" hx-target="main" hx-push-url="/" class="svg-logo-container">
+                        <img src="{{ url_for('static', filename='images/logo-current.svg') }}" 
+                             alt="Studio Queral Logo" 
+                             width="48" 
+                             height="48"
+                             class="flex-none">
                     </a>
                 </div>
                 

@@ -11,7 +11,7 @@ import sys
 import os
 
 def main():
-    """Run the markdown build process"""
+    """Run the complete build process"""
     print("🚀 Building studio site...")
     
     # Load environment variables
@@ -23,23 +23,35 @@ def main():
                     key, value = line.strip().split('=', 1)
                     env[key] = value.strip('"\'')
     
-    # Run the markdown builder
+    # Step 1: Generate new logo variations
+    print("\n🎨 Generating logo variations...")
+    try:
+        result = subprocess.run([
+            sys.executable, 'generate_logo.py'
+        ], env=env, check=True)
+        print("✅ Logo generation complete!")
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Logo generation failed: {e}")
+        return False
+    
+    # Step 2: Run the markdown builder
+    print("\n📝 Building markdown content...")
     try:
         result = subprocess.run([
             sys.executable, 'build_markdown.py'
         ], env=env, check=True)
-        
-        print("\n🎉 Build complete!")
-        print("\n📋 Next steps:")
-        print("   1. git add content/")
-        print("   2. git commit -m 'Update posts'")
-        print("   3. git push")
-        
-        return True
-        
+        print("✅ Markdown build complete!")
     except subprocess.CalledProcessError as e:
-        print(f"❌ Build failed: {e}")
+        print(f"❌ Markdown build failed: {e}")
         return False
+        
+    print("\n🎉 Build complete!")
+    print("\n📋 Next steps:")
+    print("   1. git add content/ static/images/")
+    print("   2. git commit -m 'Update posts and logo'")
+    print("   3. git push")
+    
+    return True
 
 if __name__ == "__main__":
     success = main()

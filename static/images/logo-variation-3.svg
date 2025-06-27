@@ -1,0 +1,43 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Default gradient -->
+    <linearGradient id="grad_1751050442" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d3ddde;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#afc8cf;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#86b0c4;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Hover gradient -->
+    <linearGradient id="grad_hover_1751050442" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a0b7ba;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7ca8b4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5594b2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Active gradient -->
+    <linearGradient id="grad_active_1751050442" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#628a90;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#477e8d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#326a85;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <style>
+    .logo-circle {
+      fill: url(#grad_1751050442);
+      transition: fill 0.2s ease, transform 0.1s ease;
+      cursor: pointer;
+    }
+    
+    .logo-circle:hover {
+      fill: url(#grad_hover_1751050442);
+    }
+    
+    .logo-circle:active {
+      fill: url(#grad_active_1751050442);
+      transform: translateY(2px);
+    }
+  </style>
+  
+  <circle cx="24" cy="24" r="24" class="logo-circle" />
+</svg>
