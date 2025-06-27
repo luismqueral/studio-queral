@@ -102,6 +102,14 @@
             align-items: center;
             line-height: 0; /* Prevent spacing issues with SVG */
         }
+        
+        .svg-logo-container img {
+            transition: transform 0.1s ease;
+        }
+        
+        .svg-logo-container:active img {
+            transform: translateY(2px);
+        }
 
         /* Header layout - starts vertical on small screens */
         .header-with-circle {
@@ -330,8 +338,8 @@
                     <a href="/" hx-get="/" hx-target="main" hx-push-url="/" class="svg-logo-container">
                         <img src="{{ url_for('static', filename='images/logo-current.svg') }}" 
                              alt="Studio Queral Logo" 
-                             width="48" 
-                             height="48"
+                             width="32" 
+                             height="32"
                              class="flex-none">
                     </a>
                 </div>

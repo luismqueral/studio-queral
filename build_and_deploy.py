@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Deploy with Logo Generation - Automated deployment script
+Build and Deploy - Automated build and deployment script
 that generates new logo variations and commits them.
 """
 
@@ -30,7 +30,7 @@ def check_git_status():
 
 def main():
     """Main deployment process"""
-    print("🚀 Starting deployment with logo generation...")
+    print("🚀 Starting build and deployment process...")
     
     # Generate new logos
     print("\n🎨 Generating fresh logo variations...")
