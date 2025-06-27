@@ -122,9 +122,16 @@
 
         .header-circle-container {
             position: absolute;
-            left: 0;
+            left: 1rem;
             display: flex;
             align-items: center;
+        }
+        
+        /* Adjust circle position for larger screens to match content padding */
+        @media screen and (min-width: 30em) {
+            .header-circle-container {
+                left: 2rem;
+            }
         }
 
         .header-nav-container {
