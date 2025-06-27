@@ -13,7 +13,7 @@ import os
 import yaml
 from pathlib import Path
 from datetime import datetime
-from parser import StudioLogParser
+from parser import ContentParser, get_all_content_from_vault
 from asset_processor import AssetProcessor
 
 def build_markdown_site():
@@ -36,18 +36,17 @@ def build_markdown_site():
     print(f"📦 Output: {posts_dir}")
     print()
     
-    # Initialize parser
-    parser = StudioLogParser(vault_path, content_dir)
+    # Parse all content (studio logs and scratch books)
+    print("📝 Parsing content...")
+    studio_logs, scratch_books = get_all_content_from_vault(vault_path)
     
-    # Parse all posts
-    print("📝 Parsing posts...")
-    posts = parser.parse_all_files()
+    posts = studio_logs + scratch_books  # Combine for asset processing
     
     if not posts:
         print("❌ No posts found!")
         return False
     
-    print(f"✅ Found {len(posts)} posts")
+    print(f"✅ Found {len(studio_logs)} studio log posts and {len(scratch_books)} scratch book posts")
     print()
     
     # Process assets if blob token is available
@@ -141,12 +140,18 @@ def build_markdown_site():
     print(f"🏷️  Created tags.md with {len(all_tags)} tags")
     
     # Generate build info
+    parser = ContentParser(vault_path, content_dir)  # Create parser instance for file discovery
+    studio_log_files = parser.find_studio_log_files()
+    scratch_book_files = parser.find_scratch_book_files()
+    
     build_info = {
         'build_time': datetime.now().isoformat(),
         'total_posts': len(posts),
+        'studio_log_posts': len(studio_logs),
+        'scratch_book_posts': len(scratch_books),
         'total_tags': len(all_tags),
         'assets_processed': asset_processor is not None,
-        'source_files': [str(f.relative_to(vault_path)) for f in parser.find_studio_log_files()]
+        'source_files': [str(f.relative_to(vault_path)) for f in studio_log_files + scratch_book_files]
     }
     
     build_file = content_dir / "build_info.md"
@@ -163,7 +168,9 @@ def build_markdown_site():
     print("🎉 Build complete!")
     print()
     print("📋 Summary:")
-    print(f"   - Posts: {len(posts)} markdown files")
+    print(f"   - Studio Log Posts: {len(studio_logs)} markdown files")
+    print(f"   - Scratch Book Posts: {len(scratch_books)} markdown files")
+    print(f"   - Total Posts: {len(posts)} markdown files")
     print(f"   - Tags: {len(all_tags)}")
     print(f"   - Assets: {'Processed' if asset_processor else 'Skipped'}")
     print(f"   - Output: {posts_dir}")

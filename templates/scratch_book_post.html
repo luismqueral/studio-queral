@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Scratch Book{% endblock %}
+
+{% block content %}
+<article class="mb5 pa4 bg-white br2">
+    <header class="mb4">
+        <div class="mb3">
+            <a href="/scratch-book" 
+               class="f6 link blue hover-dark-blue"
+               hx-get="/scratch-book-posts" hx-target="main" hx-push-url="/scratch-book">
+                ← Back to scratch book
+            </a>
+        </div>
+        
+        <div class="f5 gray mb3">
+                    <time class="post-date" datetime="{{ post.date }}">
+                  {{ post.date_formatted }}
+              </time>
+        </div>
+        
+        {% if post.has_title %}
+        <h1 class="f2 f1-ns lh-title ma0 mb4">
+            {{ post.title }}
+        </h1>
+        {% endif %}
+    </header>
+    
+    <div class="lh-copy f5 content">
+        <!-- Use processed HTML content with proper markdown rendering -->
+        {{ post.html_content | safe }}
+    </div>
+
+    {% if post.tags %}
+    <footer class="mt5 pt4 bt b--light-gray">
+        <div class="flex items-center flex-wrap">
+            <span class="f6 gray mr3 mb2">Tagged:</span>
+            {% for tag in post.tags %}
+            <button 
+                hx-get="/scratch-book-posts?tag={{ tag }}" 
+                hx-target="main"
+                hx-push-url="/scratch-book-posts?tag={{ tag }}"
+                class="f6 bg-near-white hover-bg-light-gray br2 pa2 link gray hover-blue mr3 mb2 bn pointer">
+                #{{ tag }}
+            </button>
+            {% endfor %}
+        </div>
+    </footer>
+    {% endif %}
+</article>
+{% endblock %} 

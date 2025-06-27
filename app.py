@@ -10,7 +10,9 @@ app = Flask(__name__)
 
 # Global data - loaded once at startup
 posts_data = []
+scratch_book_data = []
 tags_data = {}
+scratch_book_tags_data = {}
 build_info = {}
 
 def parse_markdown_file(file_path: Path) -> Dict:
@@ -49,24 +51,31 @@ def parse_markdown_file(file_path: Path) -> Dict:
 
 def load_content():
     """Load content from markdown files"""
-    global posts_data, tags_data, build_info
+    global posts_data, scratch_book_data, tags_data, scratch_book_tags_data, build_info
     
     current_dir = Path(__file__).parent
     content_dir = current_dir / "content"
     posts_dir = content_dir / "posts"
     
-    # Load posts
+    # Load posts and scratch books
     posts_data = []
+    scratch_book_data = []
     if posts_dir.exists():
         for md_file in posts_dir.glob("*.md"):
             try:
                 post = parse_markdown_file(md_file)
-                posts_data.append(post)
+                # Determine content type based on URL path or content type field
+                content_type = post.get('content_type', 'log')
+                if content_type == 'scratch-book':
+                    scratch_book_data.append(post)
+                else:
+                    posts_data.append(post)
             except Exception as e:
                 print(f"⚠️  Error loading {md_file.name}: {e}")
         
-        # Sort by date (newest first)
+        # Sort both collections by date (newest first)
         posts_data.sort(key=lambda p: p.get('date_obj', datetime.min), reverse=True)
+        scratch_book_data.sort(key=lambda p: p.get('date_obj', datetime.min), reverse=True)
     
     # Load tags
     tags_file = content_dir / "tags.md"
@@ -105,6 +114,24 @@ def get_posts(tag_filter=None):
     if tag_filter:
         return [p for p in posts if tag_filter in p.get('tags', [])]
     return posts
+
+def get_all_scratch_books() -> List[Dict]:
+    """Get all scratch book posts"""
+    return scratch_book_data
+
+def get_all_scratch_book_tags():
+    """Get unique tags from all scratch book posts"""
+    tags = set()
+    for post in scratch_book_data:
+        tags.update(post.get('tags', []))
+    return sorted(list(tags))
+
+def get_scratch_books(tag_filter=None):
+    """Get scratch book posts, optionally filtered by tag"""
+    scratch_books = get_all_scratch_books()
+    if tag_filter:
+        return [p for p in scratch_books if tag_filter in p.get('tags', [])]
+    return scratch_books
 
 @app.route('/')
 def homepage():
@@ -187,11 +214,55 @@ def projects_page():
     return render_template('projects.html')
 
 @app.route('/scratch-book')
-def scratch_book_page():
-    """Scratch Book page"""
+def scratch_book_index():
+    """Scratch book index page - handles full page and HTMX fragment loads."""
+    scratch_books = get_scratch_books()
+    all_tags = get_all_scratch_book_tags()
+    
     if request.headers.get('HX-Request'):
-        return render_template('fragments/scratch_book_content.html')
-    return render_template('scratch_book.html')
+        # For HTMX requests, return just the list of scratch books fragment
+        return render_template('fragments/scratch_book_list.html', posts=scratch_books, all_tags=all_tags)
+    
+    # For regular browser requests, return the full page
+    return render_template('scratch_book.html', posts=scratch_books, all_tags=all_tags)
+
+@app.route('/scratch-book-posts')
+def scratch_book_posts_fragment():
+    """HTMX endpoint - returns just the scratch book posts list fragment"""
+    tag_filter = request.args.get('tag')
+    scratch_books = get_scratch_books(tag_filter)
+    all_tags = get_all_scratch_book_tags()
+    
+    # Check if this is an HTMX request
+    is_htmx = request.headers.get('HX-Request')
+    
+    if is_htmx:
+        # Return just the scratch books fragment for HTMX
+        return render_template('fragments/scratch_book_list.html', 
+                             posts=scratch_books, 
+                             all_tags=all_tags,
+                             active_tag=tag_filter)
+    else:
+        # Full page for direct access (SEO, bookmarks)
+        return render_template('scratch_book.html', 
+                             posts=scratch_books, 
+                             all_tags=all_tags,
+                             active_tag=tag_filter)
+
+@app.route('/scratch-book/<slug>')
+def scratch_book_detail(slug):
+    """Individual scratch book post page"""
+    scratch_books = get_all_scratch_books()
+    post = next((p for p in scratch_books if p.get('slug') == slug), None)
+    if not post:
+        return "Scratch book post not found", 404
+    
+    is_htmx = request.headers.get('HX-Request')
+    
+    if is_htmx:
+        return render_template('fragments/scratch_book_detail.html', post=post)
+    else:
+        return render_template('scratch_book_post.html', post=post)
 
 @app.route('/debug')
 def debug_info():

@@ -22,7 +22,7 @@ DATE_FORMATS = [
 
 @dataclass
 class Post:
-    """Represents a single studio log post"""
+    """Represents a single post (studio log or scratch book)"""
     title: str
     slug: str
     date: datetime
@@ -30,16 +30,19 @@ class Post:
     html_content: str
     excerpt: str
     source_file: Path
+    content_type: str = "log"  # "log" or "scratch-book"
     has_title: bool = False
     tags: List[str] = field(default_factory=list)
     
     @property
     def url_path(self) -> str:
-        """Generate URL path for this post"""
+        """Generate URL path for this post based on content type"""
+        if self.content_type == "scratch-book":
+            return f"scratch-book/{self.slug}/"
         return f"log/{self.slug}/"
 
-class StudioLogParser:
-    """Simplified version of the original parser for HTMX demo"""
+class ContentParser:
+    """Parser for both studio logs and scratch books"""
     
     def __init__(self, vault_path: Path, content_dir: Path):
         self.vault_path = Path(vault_path)
@@ -215,7 +218,7 @@ class StudioLogParser:
         # Fallback to date if no clean title
         return f"{date.month}-{date.day}-{date.year}"
     
-    def parse_section(self, section: str, source_file: Path) -> Optional[Post]:
+    def parse_section(self, section: str, source_file: Path, content_type: str = "log") -> Optional[Post]:
         """Parse a single section into a Post"""
         lines = section.split('\n')
         if not lines:
@@ -269,12 +272,13 @@ class StudioLogParser:
             html_content=html_content,    # Processed HTML for display
             excerpt=excerpt,              # Plain text excerpt
             source_file=source_file,
+            content_type=content_type,
             has_title=has_title,
             tags=tags
         )
     
-    def parse_file(self, file_path: Path) -> List[Post]:
-        """Parse a studio log file into individual posts"""
+    def parse_file(self, file_path: Path, content_type: str = "log") -> List[Post]:
+        """Parse a file into individual posts"""
         if not file_path.exists():
             return []
         
@@ -302,7 +306,7 @@ class StudioLogParser:
             if not section:
                 continue
             
-            post = self.parse_section(section, file_path)
+            post = self.parse_section(section, file_path, content_type)
             if post and 'draft' not in post.tags:  # Skip draft posts
                 posts.append(post)
         
@@ -329,8 +333,23 @@ class StudioLogParser:
         
         return studio_log_files
     
-    def parse_all_files(self) -> List[Post]:
-        """Parse all studio log files and return combined posts"""
+    def find_scratch_book_files(self) -> List[Path]:
+        """Find scratch book files in journals/studio log/ directory"""
+        scratch_book_files = []
+        
+        # Look for files with "scratch book" in the name
+        studio_log_dir = self.vault_path / "journals" / "studio log"
+        if studio_log_dir.exists():
+            for md_file in studio_log_dir.glob("*scratch book*.md"):
+                scratch_book_files.append(md_file)
+                print(f"📓 Found scratch book: {md_file.relative_to(self.vault_path)}")
+        else:
+            print(f"⚠️  Studio log directory not found: {studio_log_dir}")
+        
+        return scratch_book_files
+    
+    def parse_studio_logs(self) -> List[Post]:
+        """Parse studio log files and return posts"""
         print("🚀 Starting Studio Log Parser")
         
         studio_log_files = self.find_studio_log_files()
@@ -344,27 +363,74 @@ class StudioLogParser:
         all_posts = []
         
         for file_path in studio_log_files:
-            print(f"📝 Parsing: {file_path.name}")
+            # Skip scratch book files
+            if "scratch book" in file_path.name.lower():
+                continue
+                
+            print(f"📝 Parsing studio log: {file_path.name}")
             try:
-                posts = self.parse_file(file_path)
+                posts = self.parse_file(file_path, "log")
                 all_posts.extend(posts)
                 print(f"  ✅ Found {len(posts)} posts")
             except Exception as e:
                 print(f"  ❌ Error parsing {file_path}: {e}")
         
-        print(f"📊 Total posts parsed: {len(all_posts)}")
-        print(f"📎 Referenced assets: {len(self.referenced_assets)}")
-        
+        print(f"📊 Total studio log posts parsed: {len(all_posts)}")
         return all_posts
+    
+    def parse_scratch_books(self) -> List[Post]:
+        """Parse scratch book files and return posts"""
+        print("📓 Starting Scratch Book Parser")
+        
+        scratch_book_files = self.find_scratch_book_files()
+        
+        if not scratch_book_files:
+            print("❌ No scratch book files found!")
+            return []
+        
+        print(f"📁 Found {len(scratch_book_files)} scratch book files")
+        
+        all_posts = []
+        
+        for file_path in scratch_book_files:
+            print(f"📝 Parsing scratch book: {file_path.name}")
+            try:
+                posts = self.parse_file(file_path, "scratch-book")
+                all_posts.extend(posts)
+                print(f"  ✅ Found {len(posts)} posts")
+            except Exception as e:
+                print(f"  ❌ Error parsing {file_path}: {e}")
+        
+        print(f"📊 Total scratch book posts parsed: {len(all_posts)}")
+        return all_posts
+    
+    def parse_all_files(self) -> List[Post]:
+        """Parse all files (studio logs only) - legacy method for compatibility"""
+        return self.parse_studio_logs()
 
 def get_posts_from_vault(vault_path="../") -> List[Post]:
-    """Main function to get posts from the vault"""
-    parser = StudioLogParser(Path(vault_path), Path("content"))
-    return parser.parse_all_files()
+    """Main function to get studio log posts from the vault"""
+    parser = ContentParser(Path(vault_path), Path("content"))
+    return parser.parse_studio_logs()
+
+def get_scratch_books_from_vault(vault_path="../") -> List[Post]:
+    """Main function to get scratch book posts from the vault"""
+    parser = ContentParser(Path(vault_path), Path("content"))
+    return parser.parse_scratch_books()
+
+def get_all_content_from_vault(vault_path="../") -> tuple[List[Post], List[Post]]:
+    """Get both studio logs and scratch books from the vault"""
+    parser = ContentParser(Path(vault_path), Path("content"))
+    studio_logs = parser.parse_studio_logs()
+    scratch_books = parser.parse_scratch_books()
+    return studio_logs, scratch_books
 
 if __name__ == "__main__":
     # Test the parser
-    posts = get_posts_from_vault()
-    print(f"Found {len(posts)} posts:")
-    for post in posts[:3]:  # Show first 3
+    studio_logs, scratch_books = get_all_content_from_vault()
+    print(f"Found {len(studio_logs)} studio log posts:")
+    for post in studio_logs[:3]:  # Show first 3
+        print(f"  - {post.title} ({post.date.strftime('%Y-%m-%d')}) [{', '.join(post.tags)}]")
+    print(f"Found {len(scratch_books)} scratch book posts:")
+    for post in scratch_books[:3]:  # Show first 3
         print(f"  - {post.title} ({post.date.strftime('%Y-%m-%d')}) [{', '.join(post.tags)}]") 

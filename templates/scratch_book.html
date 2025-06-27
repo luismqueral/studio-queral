@@ -3,5 +3,8 @@
 {% block title %}Scratch Book{% endblock %}
 
 {% block content %}
-    {% include 'fragments/scratch_book_content.html' %}
+<!-- Scratch Book Container - This gets replaced by HTMX -->
+<div id="scratch-book-container">
+    {% include 'fragments/scratch_book_list.html' %}
+</div>
 {% endblock %} 

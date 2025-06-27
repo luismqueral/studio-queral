@@ -1,0 +1,46 @@
+<!-- Scratch book posts list -->
+
+<div class="scratch-book-list">
+    {% for post in posts %}
+    <article class="mb4 mb5-ns pa3 pa4-ns bg-white br2">
+        <header class="mb3 mb3-ns">
+            <div class="f7 f6-ns gray mb3 mb3-ns">
+                <a href="/scratch-book/{{ post.slug }}" 
+                   class="link gray hover-blue"
+                   hx-get="/scratch-book/{{ post.slug }}" 
+                   hx-target="main" 
+                   hx-push-url="/scratch-book/{{ post.slug }}">
+                                         <time class="post-date" datetime="{{ post.date }}">
+                          {{ post.date_formatted }}
+                      </time>
+                </a>
+            </div>
+            {% if post.has_title %}
+            <h2 class="f4 f3-ns lh-title ma0">
+                <a href="/scratch-book/{{ post.slug }}" 
+                   class="link black underline-hover"
+                   hx-get="/scratch-book/{{ post.slug }}" 
+                   hx-target="main" 
+                   hx-push-url="/scratch-book/{{ post.slug }}">
+                    {{ post.title }}
+                </a>
+            </h2>
+            {% endif %}
+        </header>
+        
+        <div class="f6 f5-ns lh-copy content">
+            <!-- Show full article content -->
+            {{ post.html_content | safe }}
+        </div>
+
+        <!-- Tags removed for demo -->
+        
+    </article>
+    {% endfor %}
+    
+    {% if not posts %}
+    <div class="tc pa4">
+        <p class="f5 gray">No scratch book posts found{% if active_tag %} for tag "{{ active_tag }}"{% endif %}.</p>
+    </div>
+    {% endif %}
+</div> 
