@@ -1,4 +1,5 @@
 ---
+content_type: log
 date: '2025-05-23T00:00:00'
 excerpt: Next year….
 has_title: true

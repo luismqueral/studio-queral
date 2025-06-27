@@ -1,4 +1,5 @@
 ---
+content_type: log
 date: '2025-06-12T00:00:00'
 excerpt: One of my ongoing side-quests (I guess also battles?) has been what to do
   about my journal. Specifically what to do about my Studio Log which is the thing

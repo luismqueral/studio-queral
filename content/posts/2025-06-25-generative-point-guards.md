@@ -1,4 +1,5 @@
 ---
+content_type: log
 date: '2025-06-25T00:00:00'
 excerpt: Been thinking a lot about basketball lately and how an internal effort to
   upskill our design organization with GenAI tools and thinking is leading to some

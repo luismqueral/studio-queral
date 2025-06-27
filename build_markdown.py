@@ -49,6 +49,9 @@ def build_markdown_site():
     print(f"✅ Found {len(studio_logs)} studio log posts and {len(scratch_books)} scratch book posts")
     print()
     
+    # Create parser instance for asset processing
+    parser = ContentParser(vault_path, content_dir)
+    
     # Process assets if blob token is available
     asset_processor = None
     blob_token = os.getenv('BLOB_READ_WRITE_TOKEN')
@@ -97,6 +100,7 @@ def build_markdown_site():
             'title': post.title,
             'date': post.date.isoformat(),
             'slug': post.slug,
+            'content_type': post.content_type,  # This is the missing piece!
             'tags': post.tags,
             'excerpt': post.excerpt,
             'has_title': post.has_title,
@@ -140,7 +144,6 @@ def build_markdown_site():
     print(f"🏷️  Created tags.md with {len(all_tags)} tags")
     
     # Generate build info
-    parser = ContentParser(vault_path, content_dir)  # Create parser instance for file discovery
     studio_log_files = parser.find_studio_log_files()
     scratch_book_files = parser.find_scratch_book_files()
     
