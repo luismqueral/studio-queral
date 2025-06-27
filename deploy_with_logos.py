@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build and Deploy - Automated build and deployment script
+Deploy with Logo Generation - Automated deployment script
 that generates new logo variations and commits them.
 """
 
@@ -30,7 +30,7 @@ def check_git_status():
 
 def main():
     """Main deployment process"""
-    print("🚀 Starting build and deployment process...")
+    print("🚀 Starting deployment with logo generation...")
     
     # Generate new logos
     print("\n🎨 Generating fresh logo variations...")
@@ -64,27 +64,9 @@ def main():
     if not run_command(f'git commit -m "{commit_msg}"', 'Committing changes'):
         return False
     
-    # Push to remote (with upstream setup if needed)
-    push_result = subprocess.run(['git', 'push'], capture_output=True, text=True)
-    if push_result.returncode != 0:
-        if "no upstream branch" in push_result.stderr:
-            # Get current branch name
-            branch_result = subprocess.run(['git', 'branch', '--show-current'], capture_output=True, text=True)
-            if branch_result.returncode == 0:
-                current_branch = branch_result.stdout.strip()
-                print(f"📋 Setting upstream for branch '{current_branch}'...")
-                if not run_command(f'git push --set-upstream origin {current_branch}', 'Setting upstream and pushing'):
-                    return False
-            else:
-                print(f"❌ Push failed: {push_result.stderr}")
-                return False
-        else:
-            print(f"❌ Push failed: {push_result.stderr}")
-            return False
-    else:
-        print("📋 Pushing to remote repository...")
-        if push_result.stdout.strip():
-            print(f"   {push_result.stdout.strip()}")
+    # Push to remote
+    if not run_command('git push', 'Pushing to remote repository'):
+        return False
     
     print("\n🎉 Deployment complete!")
     print(f"✅ New logo variations generated and deployed")
