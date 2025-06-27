@@ -14,9 +14,13 @@
         </div>
         
         <div class="f5 gray mb3">
-                    <time class="post-date" datetime="{{ post.date }}">
-                  {{ post.date_formatted }}
-              </time>
+            <a href="/log" 
+               class="link gray hover-near-black underline-hover"
+               hx-get="/log" hx-target="main" hx-push-url="/log">
+                <time class="post-date" datetime="{{ post.date }}">
+                    {{ post.date_formatted }}
+                </time>
+            </a>
         </div>
         
         {% if post.has_title %}

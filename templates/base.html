@@ -196,6 +196,28 @@
             background-color: #357edd !important;
             color: white !important;
         }
+        
+        /* Navigation active state */
+        .nav-active {
+            font-weight: 500 !important; /* Inter Medium */
+        }
+        
+        /* Remove focus outline from navigation links */
+        .main-site-nav nav a:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        /* Remove focus outline from all links */
+        a:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        /* Ensure no sticky focus states */
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
 
         /* Markdown content styling */
         .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
@@ -394,13 +416,69 @@
                 // Remove class to ensure the main site navigation is visible
                 document.body.classList.remove('on-homepage');
             }
+            
+            // Update navigation active states
+            updateNavActiveStates();
+        }
+        
+        function updateNavActiveStates() {
+            // Get current path
+            const currentPath = window.location.pathname;
+            
+            // Remove active classes from all nav links
+            const navLinks = document.querySelectorAll('.main-site-nav nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('near-black', 'nav-active');
+                link.classList.add('gray');
+            });
+            
+            // Add active classes to current page link
+            let activeLink = null;
+            if (currentPath === '/' || currentPath === '') {
+                // Homepage - no active nav item
+            } else if (currentPath.startsWith('/log') || currentPath.startsWith('/posts')) {
+                activeLink = document.querySelector('nav a[href="/log"]');
+            } else if (currentPath.startsWith('/scratch-book')) {
+                activeLink = document.querySelector('nav a[href="/scratch-book"]');
+            } else if (currentPath.startsWith('/projects')) {
+                activeLink = document.querySelector('nav a[href="/projects"]');
+            } else if (currentPath.startsWith('/about')) {
+                activeLink = document.querySelector('nav a[href="/about"]');
+            }
+            
+            if (activeLink) {
+                activeLink.classList.remove('gray');
+                activeLink.classList.add('near-black', 'nav-active');
+            }
+        }
+
+        // Remove focus from links after clicking to prevent sticky hover states
+        function addBlurHandlers() {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Small delay to allow HTMX to process, then blur
+                    setTimeout(() => {
+                        e.target.blur();
+                    }, 100);
+                });
+            });
         }
 
         // Run on initial page load to set the correct state
-        document.addEventListener('DOMContentLoaded', updateNavDisplay);
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavDisplay();
+            addBlurHandlers();
+        });
 
         // Run after any HTMX content swap to update the state
-        document.addEventListener('htmx:afterSwap', updateNavDisplay);
+        document.addEventListener('htmx:afterSwap', function() {
+            updateNavDisplay();
+            addBlurHandlers(); // Re-add blur handlers to new content
+        });
+        
+        // Also run on browser back/forward navigation
+        window.addEventListener('popstate', updateNavActiveStates);
     </script>
 </body>
 </html> 
