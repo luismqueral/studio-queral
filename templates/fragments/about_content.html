@@ -8,12 +8,17 @@
 
     <!-- WebGL Morphing Canvas and slider container -->
     <div class="pa4 br2 center" style="max-width: 400px;">
-        <!-- WebGL Morphing Canvas -->
-        <div class="tc mb4">
+        <!-- WebGL Morphing Canvas with Skeleton Loader -->
+        <div class="tc mb4 relative">
+            <!-- Skeleton Loader -->
+            <div id="webglSkeleton" class="webgl-skeleton br2 w-50 center" style="width: 100%; height: 300px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;">
+            </div>
+            
+            <!-- WebGL Canvas (initially hidden) -->
             <canvas id="morphCanvas" 
                     width="300" 
                     height="300" 
-                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; background-color: #f5f5f5;" 
+                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; background-color: #f5f5f5; display: none;" 
                     class="br2 w-50 webgl-canvas">
                 Your browser does not support WebGL.
             </canvas>
@@ -96,6 +101,47 @@
 .webgl-canvas:active {
     transform: translateY(2px);
 }
+
+/* WebGL Skeleton Loader */
+.webgl-skeleton {
+    position: relative;
+    overflow: hidden;
+}
+
+.webgl-skeleton-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin: 0 auto;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Smooth transition when WebGL loads */
+.webgl-loaded {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 </style>
 
 <style>
@@ -156,27 +202,8 @@ class WebGLMorpher {
         this.initialized = false;
         this.animationId = null;
         
-        // DIVERSE RANDOMIZATION - Each combination creates different anchor patterns!
-        this.randomParams = {
-            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Determines corner anchoring
-            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Determines corner anchoring
-            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
-            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
-            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Multi-point ripple frequency
-            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Multi-point ripple speed
-            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Edge anchor selection + rotation
-            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Corner swirl speed + anchor choice
-            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Diagonal flow frequency + edge anchoring
-            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
-            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0, // Overall effect intensity
-            
-            // NEW: Pixel sorting parameters
-            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Horizontal vs vertical sorting
-            pixelSortIntensity: Math.random() * 2.0,               // 0-2 range (0-1 basic, 1-2 diagonal)
-            pixelSortThreshold: Math.random() * 0.8 + 0.1          // 0.1-0.9 brightness threshold
-        };
+        // STATISTICALLY WEIGHTED RANDOMIZATION - Subtle effects more likely than extreme!
+        this.randomParams = this.generateWeightedRandomParams();
         
         console.log('Random distortion parameters:', this.randomParams);
         
@@ -195,40 +222,110 @@ class WebGLMorpher {
     }
     
     randomizeEffects() {
-        console.log('🎲 Randomizing effects with diverse anchor points...');
-        // DIVERSE RANDOMIZATION - Each combination creates different anchor patterns!
-        this.randomParams = {
-            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Determines corner anchoring
-            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Determines corner anchoring
-            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
-            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
-            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Multi-point ripple frequency
-            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Multi-point ripple speed
-            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Edge anchor selection + rotation
-            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Corner swirl speed + anchor choice
-            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Diagonal flow frequency + edge anchoring
-            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
-            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0, // Overall effect intensity
-            
-            // NEW: Pixel sorting parameters
-            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Horizontal vs vertical sorting
-            pixelSortIntensity: Math.random() * 2.0,               // 0-2 range (0-1 basic, 1-2 diagonal)
-            pixelSortThreshold: Math.random() * 0.8 + 0.1          // 0.1-0.9 brightness threshold
-        };
+        console.log('🎲 Randomizing effects with statistically weighted probabilities...');
+        // STATISTICALLY WEIGHTED RANDOMIZATION - Subtle effects more likely than extreme!
+        this.randomParams = this.generateWeightedRandomParams();
         
-        // Log anchor pattern and pixel sort info for this randomization
+        // Log anchor pattern, pixel sort info, and statistical distribution
         const anchorPattern = this.getAnchorPattern();
         const pixelSortInfo = this.getPixelSortInfo();
+        const distortionLevel = this.getDistortionLevel();
         console.log('🎯 Anchor pattern:', anchorPattern);
         console.log('🔀 Pixel sort pattern:', pixelSortInfo);
-        console.log('🎲 New random parameters:', this.randomParams);
+        console.log('📊 Distortion level:', distortionLevel);
+        console.log('🎲 New weighted parameters:', this.randomParams);
         
         // Re-render with new parameters
         if (this.initialized) {
             this.render();
         }
+    }
+    
+    // Generate statistically weighted random parameters that favor subtle effects over extreme ones
+    generateWeightedRandomParams() {
+        // Helper function: Weighted choice between two values with bias toward the first (subtle) option
+        const biasedChoice = (subtleValue, extremeValue, subtleBias = 0.75) => {
+            return Math.random() < subtleBias ? subtleValue : extremeValue;
+        };
+        
+        // Helper function: Power curve distribution (favors lower values)
+        const powerCurveRandom = (min, max, power = 2) => {
+            return min + (max - min) * Math.pow(Math.random(), power);
+        };
+        
+        // Helper function: Exponential decay distribution (heavily favors lower values)
+        const exponentialRandom = (min, max, decay = 3) => {
+            return min + (max - min) * (1 - Math.pow(Math.random(), 1/decay));
+        };
+        
+        console.log('🎲 Generating statistically weighted parameters (75% subtle, 25% extreme)...');
+        
+        return {
+            // Wave frequencies: 75% chance for lower (subtle) frequencies
+            waveFreqX: biasedChoice(4.0, 20.0, 0.75),
+            waveFreqY: biasedChoice(3.0, 18.0, 0.75),
+            
+            // Wave speeds: 80% chance for slower (subtle) speeds  
+            waveSpeedX: biasedChoice(0.5, 4.0, 0.8),
+            waveSpeedY: biasedChoice(0.5, 4.0, 0.8),
+            
+            // Ripple frequencies: 70% chance for lower (subtle) frequencies
+            rippleFreq: biasedChoice(8.0, 30.0, 0.7),
+            
+            // Ripple speeds: 75% chance for slower (subtle) speeds
+            rippleSpeed: biasedChoice(1.0, 6.0, 0.75),
+            
+            // Swirl direction: Keep 50/50 for variety
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0,
+            
+            // Swirl speed: 80% chance for slower (subtle) speeds
+            swirlSpeed: biasedChoice(0.3, 3.0, 0.8),
+            
+            // Turbulence frequencies: 70% chance for lower (subtle) frequencies
+            turbulenceX: biasedChoice(6.0, 30.0, 0.7),
+            turbulenceY: biasedChoice(5.0, 25.0, 0.7),
+            
+            // Turbulence speeds: 80% chance for slower (subtle) speeds
+            turbulenceSpeedX: biasedChoice(0.5, 5.0, 0.8),
+            turbulenceSpeedY: biasedChoice(0.5, 5.0, 0.8),
+            
+            // INTENSITY MULTIPLIER: Most important for controlling extremeness
+            // Power curve heavily favors 0.5-1.0 range (subtle to moderate)
+            // Only 15% chance of getting extreme 1.5-2.0 values
+            intensityMultiplier: (() => {
+                const rand = Math.random();
+                if (rand < 0.5) {
+                    // 50% chance: Subtle range 0.5-0.75
+                    return 0.5 + (Math.random() * 0.25);
+                } else if (rand < 0.85) {
+                    // 35% chance: Moderate range 0.75-1.25
+                    return 0.75 + (Math.random() * 0.5);
+                } else {
+                    // 15% chance: Extreme range 1.25-2.0  
+                    return 1.25 + (Math.random() * 0.75);
+                }
+            })(),
+            
+            // Pixel sorting direction: Keep 50/50 for variety
+            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0,
+            
+            // PIXEL SORTING INTENSITY: Power curve heavily favors lower intensities
+            // 0.0-1.0 = subtle effects (75% probability)
+            // 1.0-2.0 = extreme effects (25% probability)
+            pixelSortIntensity: powerCurveRandom(0.0, 2.0, 3.0), // Power of 3 heavily favors low values
+            
+            // Pixel sorting threshold: Slight bias toward middle values for better visibility
+            pixelSortThreshold: (() => {
+                const rand = Math.random();
+                if (rand < 0.6) {
+                    // 60% chance: Sweet spot range 0.3-0.7
+                    return 0.3 + (Math.random() * 0.4);
+                } else {
+                    // 40% chance: Full range 0.1-0.9
+                    return 0.1 + (Math.random() * 0.8);
+                }
+            })()
+        };
     }
     
     getAnchorPattern() {
@@ -293,6 +390,98 @@ class WebGLMorpher {
             features: features,
             progressiveMode: 'PELICAN_INCREASES_WITH_MORPH',
             intensityLevel: intensity.toFixed(2)
+        };
+    }
+    
+    getDistortionLevel() {
+        // Analyze current parameters to determine overall distortion level
+        const params = this.randomParams;
+        
+        // Count extreme values (parameters that create high distortion)
+        let extremeCount = 0;
+        let subtleCount = 0;
+        let moderateCount = 0;
+        
+        // Intensity multiplier analysis (most important)
+        if (params.intensityMultiplier >= 1.5) extremeCount += 3; // Weighted heavily
+        else if (params.intensityMultiplier >= 1.0) moderateCount += 2;
+        else subtleCount += 2;
+        
+        // Pixel sorting intensity analysis
+        if (params.pixelSortIntensity >= 1.5) extremeCount += 2;
+        else if (params.pixelSortIntensity >= 1.0) moderateCount += 1;
+        else subtleCount += 1;
+        
+        // Wave frequency analysis
+        if (params.waveFreqX >= 15.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.waveFreqY >= 15.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Speed analysis
+        if (params.waveSpeedX >= 3.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.waveSpeedY >= 3.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Ripple analysis
+        if (params.rippleFreq >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.rippleSpeed >= 4.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Swirl speed analysis
+        if (params.swirlSpeed >= 2.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Turbulence analysis
+        if (params.turbulenceX >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.turbulenceY >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Calculate overall level
+        const totalParams = extremeCount + moderateCount + subtleCount;
+        const extremeRatio = extremeCount / totalParams;
+        const subtleRatio = subtleCount / totalParams;
+        
+        let overallLevel = 'SUBTLE';
+        let confidence = 'HIGH';
+        
+        if (extremeRatio >= 0.4) {
+            overallLevel = 'EXTREME';
+            confidence = extremeRatio >= 0.6 ? 'VERY_HIGH' : 'HIGH';
+        } else if (extremeRatio >= 0.25 || subtleRatio < 0.5) {
+            overallLevel = 'MODERATE';
+            confidence = 'MEDIUM';
+        } else {
+            overallLevel = 'SUBTLE';
+            confidence = subtleRatio >= 0.7 ? 'VERY_HIGH' : 'HIGH';
+        }
+        
+        return {
+            level: overallLevel,
+            confidence: confidence,
+            extremeRatio: Math.round(extremeRatio * 100) + '%',
+            subtleRatio: Math.round(subtleRatio * 100) + '%',
+            breakdown: {
+                extremeCount: extremeCount,
+                moderateCount: moderateCount,
+                subtleCount: subtleCount
+            },
+            keyFactors: {
+                intensityMultiplier: params.intensityMultiplier.toFixed(2),
+                pixelSortIntensity: params.pixelSortIntensity.toFixed(2),
+                frequencyLevel: params.waveFreqX >= 15.0 || params.waveFreqY >= 15.0 ? 'HIGH' : 'LOW',
+                speedLevel: params.waveSpeedX >= 3.0 || params.waveSpeedY >= 3.0 ? 'FAST' : 'SLOW'
+            },
+            probability: 'This result had ~' + (overallLevel === 'EXTREME' ? '15-25%' : 
+                                               overallLevel === 'MODERATE' ? '25-35%' : 
+                                               '60-75%') + ' chance of occurring'
         };
     }
     
@@ -1037,7 +1226,6 @@ class WebGLMorpher {
         
         // Initialize with fallbacks immediately so something shows
         this.initialized = true;
-        this.render();
         
         // Then try to load real images and replace fallbacks
         imageUrls.forEach((url, index) => {
@@ -1054,6 +1242,7 @@ class WebGLMorpher {
                 
                 if (loadedCount === 2) {
                     console.log('🎉 All real images loaded!');
+                    this.hideSkeletonLoader();
                 }
             };
             
@@ -1065,6 +1254,7 @@ class WebGLMorpher {
                 
                 if (loadedCount === 2) {
                     console.log('⚠️ Using all fallback textures - check image URLs');
+                    this.showSkeletonError();
                 }
             };
             
@@ -1074,11 +1264,56 @@ class WebGLMorpher {
                     console.warn(`⏰ Image ${index + 1} taking too long to load, using fallback`);
                     img.src = ''; // Cancel loading
                     loadedCount++;
+                    
+                    if (loadedCount === 2) {
+                        this.showSkeletonError();
+                    }
                 }
             }, 3000); // 3 second timeout
             
             img.src = url;
         });
+        
+        // Hide skeleton immediately if we already have textures and can render
+        this.render();
+        setTimeout(() => {
+            if (this.initialized) {
+                this.hideSkeletonLoader();
+            }
+        }, 500); // Small delay to show the skeleton briefly
+    }
+    
+    hideSkeletonLoader() {
+        console.log('🎭 Hiding skeleton loader, showing WebGL canvas...');
+        const skeleton = document.getElementById('webglSkeleton');
+        const canvas = document.getElementById('morphCanvas');
+        
+        if (skeleton && canvas) {
+            // Fade out skeleton
+            skeleton.style.transition = 'opacity 0.3s ease-out';
+            skeleton.style.opacity = '0';
+            
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                canvas.style.display = 'block';
+                canvas.classList.add('webgl-loaded');
+                console.log('✨ WebGL canvas revealed with fade-in animation');
+            }, 300);
+        }
+    }
+    
+    showSkeletonError() {
+        console.log('❌ Showing skeleton error state...');
+        const skeleton = document.getElementById('webglSkeleton');
+        
+        if (skeleton) {
+            skeleton.innerHTML = `
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px;">⚠️</div>
+            `;
+            skeleton.style.background = '#f8f8f8';
+            skeleton.style.animation = 'none';
+            skeleton.style.position = 'relative';
+        }
     }
     
     createTexture(img) {
