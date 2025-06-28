@@ -170,7 +170,12 @@ class WebGLMorpher {
             turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
             turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
             turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Overall effect intensity
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0, // Overall effect intensity
+            
+            // NEW: Pixel sorting parameters
+            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Horizontal vs vertical sorting
+            pixelSortIntensity: Math.random() * 2.0,               // 0-2 range (0-1 basic, 1-2 diagonal)
+            pixelSortThreshold: Math.random() * 0.8 + 0.1          // 0.1-0.9 brightness threshold
         };
         
         console.log('Random distortion parameters:', this.randomParams);
@@ -205,12 +210,19 @@ class WebGLMorpher {
             turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
             turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
             turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Overall effect intensity
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0, // Overall effect intensity
+            
+            // NEW: Pixel sorting parameters
+            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Horizontal vs vertical sorting
+            pixelSortIntensity: Math.random() * 2.0,               // 0-2 range (0-1 basic, 1-2 diagonal)
+            pixelSortThreshold: Math.random() * 0.8 + 0.1          // 0.1-0.9 brightness threshold
         };
         
-        // Log anchor pattern for this randomization
+        // Log anchor pattern and pixel sort info for this randomization
         const anchorPattern = this.getAnchorPattern();
+        const pixelSortInfo = this.getPixelSortInfo();
         console.log('🎯 Anchor pattern:', anchorPattern);
+        console.log('🔀 Pixel sort pattern:', pixelSortInfo);
         console.log('🎲 New random parameters:', this.randomParams);
         
         // Re-render with new parameters
@@ -250,6 +262,37 @@ class WebGLMorpher {
             swirlAnchors: [swirlCorner1, swirlCorner2, edgeAnchor],
             quarterAnchors: ['TOP-LEFT-Q', 'TOP-RIGHT-Q', 'BOTTOM-LEFT-Q', 'BOTTOM-RIGHT-Q'],
             totalAnchors: 5
+        };
+    }
+    
+    getPixelSortInfo() {
+        // Decode pixel sorting configuration
+        const direction = this.randomParams.pixelSortDirection > 0.0 ? 'HORIZONTAL' : 'VERTICAL';
+        const intensity = this.randomParams.pixelSortIntensity;
+        const threshold = (this.randomParams.pixelSortThreshold * 100).toFixed(0) + '%';
+        
+        let sortType = 'NONE';
+        let features = [];
+        
+        if (intensity > 1.5) {
+            sortType = 'FULL_PROGRESSIVE';
+            features = ['BANDS', 'DIAGONAL', 'RADIAL', 'DUAL_TEXTURE'];
+        } else if (intensity > 1.0) {
+            sortType = 'DIAGONAL_PROGRESSIVE'; 
+            features = ['BANDS', 'DIAGONAL', 'DUAL_TEXTURE'];
+        } else if (intensity > 0.5) {
+            sortType = 'BANDS_PROGRESSIVE';
+            features = ['BANDS', 'DUAL_TEXTURE'];
+        }
+        
+        return {
+            primaryDirection: direction,
+            sortType: sortType,
+            luisThreshold: threshold,
+            pelicanThreshold: (100 - parseInt(threshold)).toString() + '%', // Inverted
+            features: features,
+            progressiveMode: 'PELICAN_INCREASES_WITH_MORPH',
+            intensityLevel: intensity.toFixed(2)
         };
     }
     
@@ -374,6 +417,11 @@ class WebGLMorpher {
             uniform float u_turbulenceSpeedY;
             uniform float u_intensityMultiplier;
             
+            // NEW: Pixel sorting parameters
+            uniform float u_pixelSortDirection;
+            uniform float u_pixelSortIntensity;
+            uniform float u_pixelSortThreshold;
+            
             varying vec2 v_texCoord;
             
             void main() {
@@ -448,6 +496,151 @@ class WebGLMorpher {
                 float edgeWave2 = cos(uv.y * u_waveFreqX - u_time * u_waveSpeedX) * 
                                  sin(uv.x * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.025;
                 
+                // ENHANCED PIXEL SORTING EFFECTS - Progressive for both textures
+                vec2 luisPixelSort = vec2(0.0, 0.0);
+                vec2 pelicanPixelSort = vec2(0.0, 0.0);
+                
+                // Sample both textures for brightness-based sorting
+                vec4 luisSample = texture2D(u_texture1, uv);
+                vec4 pelicanSample = texture2D(u_texture2, uv);
+                float luisBrightness = dot(luisSample.rgb, vec3(0.299, 0.587, 0.114));
+                float pelicanBrightness = dot(pelicanSample.rgb, vec3(0.299, 0.587, 0.114));
+                
+                // Luis strength decreases with morph
+                float luisSortStrength = u_pixelSortIntensity * warpPower * 0.15 * (1.0 - u_morphValue * 0.5); // Luis fades more aggressively
+                
+                // Pelican: DRAMATIC entry at 55%, intense until 75%, then exponentially static
+                float pelicanEntry = smoothstep(0.55, 0.65, u_morphValue); // Faster, stronger appearance 55%-65%
+                float pelicanStaticDecay = 1.0 - pow(smoothstep(0.75, 1.0, u_morphValue), 3.0); // Exponential decay 75%-100%
+                
+                // MUCH STRONGER time-based movement that decays exponentially after 75%
+                float pelicanTimeMovement = (1.0 + sin(u_time * 1.3) * 0.8 + cos(u_time * 0.7) * 0.6) * pelicanStaticDecay; // BIGGER amplitude
+                float pelicanTimeStrength = u_pixelSortIntensity * warpPower * 0.25 * pelicanTimeMovement; // MUCH stronger base (0.25 vs 0.12)
+                float pelicanSortStrength = pelicanTimeStrength * pelicanEntry;
+                
+                // BASIC BAND SORTING - Horizontal/Vertical strips
+                if (u_pixelSortIntensity > 0.5) {
+                    if (u_pixelSortDirection > 0.0) {
+                        // HORIZONTAL SORTING
+                        float bandHeight = 0.04 + sin(u_time * 0.5) * 0.01; // Dynamic band size
+                        float luisBandIndex = floor(uv.y / bandHeight);
+                        float pelicanBandIndex = floor((uv.y + u_morphValue * 0.1) / bandHeight); // Offset for pelican
+                        
+                        float luisBandOffset = sin(luisBandIndex * 2.0 + u_time * u_rippleSpeed) * 0.5 + 0.5;
+                        float pelicanBandOffset = cos(pelicanBandIndex * 2.5 - u_time * u_rippleSpeed * 1.2) * 0.5 + 0.5;
+                        
+                        // Luis horizontal sorting
+                        float luisSortOffset = (luisBrightness - u_pixelSortThreshold) * luisSortStrength;
+                        if (luisBrightness > u_pixelSortThreshold) {
+                            luisPixelSort.x += luisSortOffset * sin(uv.y * 25.0 + u_time);
+                        }
+                        luisPixelSort.x += sin(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
+                        
+                        // Pelican horizontal sorting - INTENSE until 75%, then exponentially static
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.8) * 0.3 * pelicanStaticDecay; // BIGGER threshold swing
+                        float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
+                        if (pelicanBrightness < pelicanThreshold) {
+                            pelicanPixelSort.x += pelicanSortOffset * cos(uv.y * (18.0 + sin(u_time * 0.4) * 12.0 * pelicanStaticDecay) - u_time * 1.3); // BIGGER frequency shift
+                        }
+                        // STRONGER secondary waves that decay exponentially
+                        pelicanPixelSort.x += cos(pelicanBandIndex * 2.5 + pelicanBandOffset * 4.0) * pelicanSortStrength * 0.8; // Stronger
+                        pelicanPixelSort.x += sin(uv.y * 12.0 + u_time * 2.1) * pelicanSortStrength * 0.7 * pelicanStaticDecay; // Stronger
+                        // Third wave layer that becomes still - MUCH stronger
+                        pelicanPixelSort.x += cos(uv.y * 8.0 - u_time * 3.2) * pelicanTimeStrength * 0.6;
+                    }
+                    else {
+                        // VERTICAL SORTING
+                        float bandWidth = 0.03 + cos(u_time * 0.7) * 0.01; // Dynamic band size
+                        float luisBandIndex = floor(uv.x / bandWidth);
+                        float pelicanBandIndex = floor((uv.x + u_morphValue * 0.15) / bandWidth);
+                        
+                        float luisBandOffset = cos(luisBandIndex * 1.8 + u_time * u_rippleSpeed) * 0.5 + 0.5;
+                        float pelicanBandOffset = sin(pelicanBandIndex * 2.2 - u_time * u_rippleSpeed * 0.8) * 0.5 + 0.5;
+                        
+                        // Luis vertical sorting
+                        float luisSortOffset = (luisBrightness - u_pixelSortThreshold) * luisSortStrength;
+                        if (luisBrightness > u_pixelSortThreshold) {
+                            luisPixelSort.y += luisSortOffset * cos(uv.x * 22.0 + u_time * 0.8);
+                        }
+                        luisPixelSort.y += cos(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
+                        
+                        // Pelican vertical sorting - INTENSE until 75%, then exponentially static
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 0.6) * 0.3 * pelicanStaticDecay; // BIGGER threshold swing
+                        float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
+                        if (pelicanBrightness < pelicanThreshold) {
+                            pelicanPixelSort.y += pelicanSortOffset * sin(uv.x * (16.0 + cos(u_time * 0.5) * 10.0 * pelicanStaticDecay) - u_time * 1.1); // BIGGER frequency shift
+                        }
+                        // STRONGER secondary waves that decay exponentially
+                        pelicanPixelSort.y += sin(pelicanBandIndex * 2.8 + pelicanBandOffset * 5.0) * pelicanSortStrength * 0.8; // Stronger
+                        pelicanPixelSort.y += cos(uv.x * 14.0 - u_time * 1.8) * pelicanSortStrength * 0.7 * pelicanStaticDecay; // Stronger
+                        // Third wave layer that becomes still - MUCH stronger
+                        pelicanPixelSort.y += sin(uv.x * 10.0 + u_time * 2.8) * pelicanTimeStrength * 0.6;
+                    }
+                }
+                
+                // DIAGONAL ANCHOR-BASED SORTING - More sophisticated
+                if (u_pixelSortIntensity > 1.0) {
+                    float diagonalStrength = (u_pixelSortIntensity - 1.0) * warpPower * 0.12;
+                    
+                    // Luis: Sort along anchor1 to anchor4 direction
+                    vec2 luisSortDirection = normalize(anchor4 - anchor1);
+                    float luisSortProjection = dot(uv - anchor1, luisSortDirection);
+                    float luisSortBand = floor(luisSortProjection * 18.0) / 18.0;
+                    
+                    float luisStreakDisplace = (luisBrightness - u_pixelSortThreshold) * diagonalStrength;
+                    if (luisBrightness > u_pixelSortThreshold) {
+                        luisPixelSort += luisSortDirection * luisStreakDisplace * sin(luisSortBand * 12.0 + u_time * 2.0);
+                    }
+                    
+                    // Pelican: DRAMATIC sort with rotation that slows down
+                    vec2 pelicanSortDirection = normalize(anchor5 - anchor2);
+                    // BIGGER rotation that slows exponentially after 75%
+                    float rotationAngle = sin(u_time * 0.3) * 0.4 * pelicanStaticDecay; // DOUBLE the rotation
+                    vec2 rotatedDirection = vec2(
+                        pelicanSortDirection.x * cos(rotationAngle) - pelicanSortDirection.y * sin(rotationAngle),
+                        pelicanSortDirection.x * sin(rotationAngle) + pelicanSortDirection.y * cos(rotationAngle)
+                    );
+                    
+                    float pelicanSortProjection = dot(uv - anchor2, rotatedDirection);
+                    float pelicanSortBand = floor(pelicanSortProjection * (15.0 + sin(u_time * 0.4) * 3.0)) / 15.0;
+                    
+                    float dynamicThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.9) * 0.3 * pelicanStaticDecay; // BIGGER threshold variation
+                    float pelicanStreakDisplace = (pelicanBrightness - dynamicThreshold) * diagonalStrength * pelicanTimeStrength;
+                    if (pelicanBrightness < dynamicThreshold) {
+                        pelicanPixelSort += rotatedDirection * pelicanStreakDisplace * cos(pelicanSortBand * 8.0 - u_time * 1.5) * 
+                                           (0.8 + sin(u_time * 2.2) * 1.2 * pelicanStaticDecay); // MUCH stronger intensity
+                    }
+                }
+                
+                // RADIAL SORTING - Sort from anchor points outward (inspired by webgl-shaders.com)
+                if (u_pixelSortIntensity > 1.5) {
+                    float radialStrength = (u_pixelSortIntensity - 1.5) * warpPower * 0.08;
+                    
+                    // Luis: Radial sort from anchor1
+                    vec2 luisRadialDir = normalize(uv - anchor1);
+                    float luisRadialDist = length(uv - anchor1);
+                    float luisRadialBand = floor(luisRadialDist * 25.0) / 25.0;
+                    
+                    if (luisBrightness > u_pixelSortThreshold) {
+                        luisPixelSort += luisRadialDir * (luisBrightness - u_pixelSortThreshold) * radialStrength * 
+                                       sin(luisRadialBand * 15.0 + u_time * 3.0);
+                    }
+                    
+                    // Pelican: DRAMATIC radial sort with focal point that slows to stillness
+                    vec2 dynamicAnchor3 = anchor3 + vec2(sin(u_time * 0.6) * 0.2 * pelicanStaticDecay, cos(u_time * 0.8) * 0.2 * pelicanStaticDecay); // BIGGER movement
+                    vec2 pelicanRadialDir = normalize(uv - dynamicAnchor3);
+                    float pelicanRadialDist = length(uv - dynamicAnchor3);
+                    float pelicanRadialBand = floor(pelicanRadialDist * (20.0 + cos(u_time * 0.5) * 8.0 * pelicanStaticDecay)) / 20.0; // BIGGER band variation
+                    
+                    float dynamicRadialThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 1.1) * 0.25 * pelicanStaticDecay; // BIGGER threshold swing
+                    if (pelicanBrightness < dynamicRadialThreshold) {
+                        float radialIntensity = (0.6 + sin(u_time * 1.7) * 1.0 * pelicanStaticDecay); // MUCH stronger pulsing
+                        pelicanPixelSort += pelicanRadialDir * (dynamicRadialThreshold - pelicanBrightness) * 
+                                           radialStrength * pelicanTimeStrength * radialIntensity * 
+                                           cos(pelicanRadialBand * 10.0 - u_time * 2.2);
+                    }
+                }
+                
                 // MULTIPLE CORNER SWIRLS - More variety, more anchors
                 vec2 swirlAnchor1 = u_swirlSpeed > 2.5 ? topLeft : 
                                    (u_swirlSpeed > 2.0 ? topRight :
@@ -477,16 +670,23 @@ class WebGLMorpher {
                 vec2 warpedUV1 = uv;
                 vec2 warpedUV2 = uv;
                 
-                // Luis gets COMPLEX MULTI-ANCHOR distortion
-                warpedUV1.x += flowX + ripple1 + diagonalFlow1 + swirl2 + curvedFlow1 + edgeWave1;
-                warpedUV1.y += flowY + swirl1 + diagonalFlow2 + edgeSwirl + curvedFlow2 + edgeWave2;
+                // Luis gets COMPLEX MULTI-ANCHOR distortion + PROGRESSIVE PIXEL SORTING
+                warpedUV1.x += flowX + ripple1 + diagonalFlow1 + swirl2 + curvedFlow1 + edgeWave1 + luisPixelSort.x;
+                warpedUV1.y += flowY + swirl1 + diagonalFlow2 + edgeSwirl + curvedFlow2 + edgeWave2 + luisPixelSort.y;
                 
-                // Pelican gets different multi-anchor distortion during transition (but clean at end)
-                if (u_morphValue < 0.9) {
-                    float pelicanWarp = warpPower * (1.0 - smoothstep(0.85, 1.0, u_morphValue));
-                    warpedUV2.x += (swirl1 + diagonalFlow1 * 0.8 + ripple2 + curvedFlow2 + edgeWave2 * 0.7) * pelicanWarp / warpPower;
-                    warpedUV2.y += (ripple3 + diagonalFlow2 * 0.6 + flowY * 0.5 + edgeSwirl * 0.6 + curvedFlow1 * 0.8) * pelicanWarp / warpPower;
-                }
+                // Pelican: DRAMATIC entry, intense effects, then exponential stillness
+                float pelicanWarp = warpPower * pelicanEntry * 1.5; // 50% STRONGER warp strength
+                
+                // MUCH STRONGER time-based variation that exponentially decays to stillness
+                float pelicanTimeVariation = (1.0 + sin(u_time * 0.9) * 0.8 + cos(u_time * 1.4) * 0.6) * pelicanStaticDecay; // BIGGER variation
+                
+                // Clean end - pelican becomes perfectly static at 100%
+                float pelicanMovementMultiplier = pelicanTimeVariation * (1.0 - smoothstep(0.98, 1.0, u_morphValue));
+                
+                warpedUV2.x += (swirl1 + diagonalFlow1 * 0.8 + ripple2 + curvedFlow2 + edgeWave2 * 0.7 + pelicanPixelSort.x) * 
+                               pelicanWarp * pelicanMovementMultiplier;
+                warpedUV2.y += (ripple3 + diagonalFlow2 * 0.6 + flowY * 0.5 + edgeSwirl * 0.6 + curvedFlow1 * 0.8 + pelicanPixelSort.y) * 
+                               pelicanWarp * pelicanMovementMultiplier;
                 
                 // Keep coordinates in bounds
                 warpedUV1 = clamp(warpedUV1, 0.0, 1.0);
@@ -496,9 +696,9 @@ class WebGLMorpher {
                 vec4 color1 = texture2D(u_texture1, warpedUV1);
                 vec4 color2 = texture2D(u_texture2, warpedUV2);
                 
-                // SURPRISE blending - pelican appears suddenly near the end!
-                float surpriseBlend = smoothstep(0.75, 0.95, u_morphValue); // Luis until 75%, quick transition 75%-95%
-                gl_FragColor = mix(color1, color2, surpriseBlend);
+                // GRADUAL PELICAN EMERGENCE - starts at 55%, smooth transition
+                float pelicanBlend = smoothstep(0.55, 0.85, u_morphValue); // Gradual transition 55%-85%
+                gl_FragColor = mix(color1, color2, pelicanBlend);
             }
         `;
         
@@ -1001,19 +1201,19 @@ class WebGLMorpher {
         this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_morphValue'), this.morphValue);
         this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_time'), this.time);
         
-        // Set RANDOMIZED parameters with minimal logging
+        // Set RANDOMIZED parameters including pixel sorting
         const uniforms = [
             'u_waveFreqX', 'u_waveFreqY', 'u_waveSpeedX', 'u_waveSpeedY',
             'u_rippleFreq', 'u_rippleSpeed', 'u_swirlDirection', 'u_swirlSpeed',
             'u_turbulenceX', 'u_turbulenceY', 'u_turbulenceSpeedX', 'u_turbulenceSpeedY',
-            'u_intensityMultiplier'
+            'u_intensityMultiplier', 'u_pixelSortDirection', 'u_pixelSortIntensity', 'u_pixelSortThreshold'
         ];
         
         const paramKeys = [
             'waveFreqX', 'waveFreqY', 'waveSpeedX', 'waveSpeedY',
             'rippleFreq', 'rippleSpeed', 'swirlDirection', 'swirlSpeed',
             'turbulenceX', 'turbulenceY', 'turbulenceSpeedX', 'turbulenceSpeedY',
-            'intensityMultiplier'
+            'intensityMultiplier', 'pixelSortDirection', 'pixelSortIntensity', 'pixelSortThreshold'
         ];
         
         uniforms.forEach((uniformName, index) => {
@@ -1109,6 +1309,7 @@ function initializeWebGLMorpher() {
         if (morpher && morpher.initialized) {
             console.log('✅ WebGL is working!');
             console.log('🎯 Current anchor pattern:', morpher.getAnchorPattern());
+            console.log('🔀 Current pixel sort pattern:', morpher.getPixelSortInfo());
             console.log('Random parameters being used:', morpher.randomParams);
         } else {
             console.log('❌ WebGL failed to initialize');
@@ -1160,7 +1361,7 @@ document.addEventListener('htmx:afterSwap', function(event) {
         
         // Add a small delay to ensure DOM is fully ready
         setTimeout(() => {
-            initializeWebGLMorpher();
+        initializeWebGLMorpher();
         }, 100);
     } else {
         console.log('❌ No morphCanvas found in swapped content');
