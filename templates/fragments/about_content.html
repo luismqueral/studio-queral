@@ -1,14 +1,26 @@
-<div class="mw6 center">
-<!-- Introduction Card -->
+<!-- Introduction Card - Full width -->
+<div class="mw7 center">
 <div class="pa4 bg-white br2 mb4 ba b--light-gray">
     <!-- Small intro, no heading -->
     <p class="f5 lh-copy mb2 near-black tc">
         Hello, my name is Luis Queral.
     </p>
 
-    <!-- Video and slider container -->
+    <!-- WebGL Morphing Canvas and slider container -->
     <div class="pa4 br2 center" style="max-width: 400px;">
-        <!-- Morphing video -->
+        <!-- WebGL Morphing Canvas -->
+        <div class="tc mb4">
+            <canvas id="morphCanvas" 
+                    width="300" 
+                    height="300" 
+                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer;" 
+                    class="br2 ba b--silver w-50 webgl-canvas">
+                Your browser does not support WebGL.
+            </canvas>
+        </div>
+
+        <!-- Commented out video version for reference -->
+        <!--
         <div class="tc mb4">
             <video id="morphVideo" 
                    style="width: 100%; height: 100%;; object-fit: cover;" 
@@ -19,6 +31,7 @@
                 Your browser does not support the video tag.
             </video>
         </div>
+        -->
 
         <!-- Luis / Not Luis slider -->
         <div class="center" style="max-width: 300px;">
@@ -38,7 +51,8 @@
     </div>
 </div>
 
-<!-- Content Sections -->
+<!-- Content Sections - Regular width -->
+<div class="mw6 center">
 <div class="pa4 bg-white br2 mb4">
 
     
@@ -67,6 +81,21 @@
         </p>
     </section>
 </div>
+
+<style>
+/* Interactive WebGL Canvas */
+.webgl-canvas {
+    transition: transform 0.1s ease;
+}
+
+.webgl-canvas:hover {
+    cursor: pointer;
+}
+
+.webgl-canvas:active {
+    transform: translateY(2px);
+}
+</style>
 
 <style>
 /* Custom slider styling */
@@ -101,6 +130,820 @@
 </style>
 
 <script>
+// WebGL Morphing Implementation with Wavy Distortion
+class WebGLMorpher {
+    constructor(canvasId) {
+        console.log('Initializing WebGL morpher for canvas:', canvasId);
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) {
+            console.error('Canvas not found:', canvasId);
+            return;
+        }
+        
+        console.log('Canvas found, getting WebGL context...');
+        this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+        if (!this.gl) {
+            console.error('WebGL not supported on this device');
+            return;
+        }
+        
+        console.log('WebGL context created successfully');
+        this.morphValue = 0.0;
+        this.time = 0.0;
+        this.textures = {};
+        this.program = null;
+        this.initialized = false;
+        this.animationId = null;
+        
+        // EXTREME RANDOMIZATION for testing - Should be very obvious!
+        this.randomParams = {
+            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Either slow or fast waves
+            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Either slow or fast waves  
+            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
+            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
+            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Either big or tiny ripples
+            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Either slow or fast ripples
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Clockwise or counter-clockwise
+            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Either very slow or very fast
+            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Either gentle or chaotic
+            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Either gentle or chaotic
+            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
+            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Either subtle or intense
+        };
+        
+        console.log('Random distortion parameters:', this.randomParams);
+        
+        console.log('Initializing shaders...');
+        this.initShaders();
+        console.log('Loading images...');
+        this.loadImages();
+        console.log('Starting animation loop...');
+        this.startAnimation();
+        
+        // Add click listener for effect randomization
+        this.canvas.addEventListener('click', () => {
+            console.log('🖱️ Canvas clicked! Randomizing effects...');
+            this.randomizeEffects();
+        });
+    }
+    
+    randomizeEffects() {
+        console.log('🎲 Randomizing effects...');
+        // EXTREME RANDOMIZATION for testing - Should be very obvious!
+        this.randomParams = {
+            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Either slow or fast waves
+            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Either slow or fast waves  
+            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
+            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
+            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Either big or tiny ripples
+            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Either slow or fast ripples
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Clockwise or counter-clockwise
+            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Either very slow or very fast
+            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Either gentle or chaotic
+            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Either gentle or chaotic
+            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
+            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Either subtle or intense
+        };
+        
+        console.log('🎲 New random parameters:', this.randomParams);
+        
+        // Re-render with new parameters
+        if (this.initialized) {
+            this.render();
+        }
+    }
+    
+    initShaders() {
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            attribute vec2 a_texCoord;
+            varying vec2 v_texCoord;
+            
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+                v_texCoord = a_texCoord;
+            }
+        `;
+        
+        // VARIATION 1: Wavy Distortion (commented out)
+        /*
+        const fragmentShaderSource = `
+            precision mediump float;
+            
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
+            varying vec2 v_texCoord;
+            
+            // Noise function for organic distortion
+            float noise(vec2 co) {
+                return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+            }
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // Create wavy distortion that peaks in the middle of transition and fades at ends
+                float distortionStrength = sin(u_morphValue * 3.14159) * 0.15;
+                
+                // Separate distortion strengths for each texture
+                float distortion1Strength = distortionStrength * (1.0 - smoothstep(0.0, 0.2, u_morphValue)); // Less distortion as we move away from Luis
+                float distortion2Strength = distortionStrength * (1.0 - smoothstep(0.8, 1.0, u_morphValue)); // No distortion when fully pelican
+                
+                // Multiple wave layers for complex distortion
+                float wave1 = sin(uv.x * 8.0 + u_time * 2.0 + u_morphValue * 6.28);
+                float wave2 = cos(uv.y * 6.0 + u_time * 1.5 + u_morphValue * 4.0);
+                float wave3 = sin((uv.x + uv.y) * 4.0 + u_time + u_morphValue * 8.0);
+                
+                // Swirl distortion for transition phase only
+                vec2 center = vec2(0.5, 0.5);
+                vec2 offset = uv - center;
+                float dist = length(offset);
+                float angle = atan(offset.y, offset.x);
+                float swirlStrength = sin(u_morphValue * 3.14159) * u_morphValue * (1.0 - u_morphValue) * 4.0; // Peaks in middle, zero at ends
+                angle += sin(dist * 10.0 - u_time * 2.0) * swirlStrength * 0.1;
+                
+                // Apply distortions - Luis texture gets distorted throughout, pelican only during transition
+                vec2 distortedUV1 = uv;
+                vec2 distortedUV2 = uv;
+                
+                // Luis distortion (distorted throughout but less so as we transition away)
+                distortedUV1.x += (wave1 + wave3 * 0.5) * distortion1Strength;
+                distortedUV1.y += (wave2 - wave3 * 0.5) * distortion1Strength;
+                
+                // Pelican distortion (only during transition, clean at 100%)
+                if (u_morphValue < 0.9) {  // No distortion in final 10% of transition
+                    distortedUV2.x += center.x + cos(angle) * dist - center.x + wave1 * distortion2Strength * 0.5;
+                    distortedUV2.y += center.y + sin(angle) * dist - center.y + wave2 * distortion2Strength * 0.5;
+                }
+                
+                // Ensure UV coordinates stay in bounds
+                distortedUV1 = clamp(distortedUV1, 0.0, 1.0);
+                distortedUV2 = clamp(distortedUV2, 0.0, 1.0);
+                
+                // Sample textures with distorted coordinates
+                vec4 color1 = texture2D(u_texture1, distortedUV1);
+                vec4 color2 = texture2D(u_texture2, distortedUV2);
+                
+                // Complex morphing with multiple transition zones
+                float morphZone1 = smoothstep(0.0, 0.3, u_morphValue);
+                float morphZone2 = smoothstep(0.2, 0.7, u_morphValue);
+                float morphZone3 = smoothstep(0.6, 1.0, u_morphValue);
+                
+                // Blend with different patterns, but cleaner transition near the end
+                float noisePattern = noise(uv * 20.0 + u_time * 0.5);
+                float noiseInfluence = 1.0 - smoothstep(0.85, 1.0, u_morphValue); // Reduce noise influence near pelican
+                float blendFactor = mix(morphZone1, morphZone3, noisePattern * noiseInfluence + (1.0 - noiseInfluence) * morphZone3);
+                
+                // Add chromatic aberration only during heavy morphing, not at the ends
+                float aberration = sin(u_morphValue * 3.14159) * 0.01 * (1.0 - smoothstep(0.9, 1.0, u_morphValue));
+                if (aberration > 0.005) {
+                    color1.r = texture2D(u_texture1, distortedUV1 + vec2(aberration, 0.0)).r;
+                    color1.b = texture2D(u_texture1, distortedUV1 - vec2(aberration, 0.0)).b;
+                    color2.r = texture2D(u_texture2, distortedUV2 + vec2(aberration, 0.0)).r;
+                    color2.b = texture2D(u_texture2, distortedUV2 - vec2(aberration, 0.0)).b;
+                }
+                
+                gl_FragColor = mix(color1, color2, blendFactor);
+            }
+        `;
+        */
+        
+        // VARIATION 5: Fast Efficient Warping with RANDOMIZATION (ACTIVE)
+        const fragmentShaderSource = `
+            precision mediump float;
+            
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
+            
+            // RANDOMIZED PARAMETERS - Different every load!
+            uniform float u_waveFreqX;
+            uniform float u_waveFreqY;
+            uniform float u_waveSpeedX;
+            uniform float u_waveSpeedY;
+            uniform float u_rippleFreq;
+            uniform float u_rippleSpeed;
+            uniform float u_swirlDirection;
+            uniform float u_swirlSpeed;
+            uniform float u_turbulenceX;
+            uniform float u_turbulenceY;
+            uniform float u_turbulenceSpeedX;
+            uniform float u_turbulenceSpeedY;
+            uniform float u_intensityMultiplier;
+            
+            varying vec2 v_texCoord;
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // INTENSE warp strength that peaks in middle (now randomized!)
+                float warpPower = sin(u_morphValue * 3.14159) * 0.4 * u_intensityMultiplier;
+                
+                // RANDOMIZED ripple effect from center
+                vec2 center = vec2(0.5, 0.5);
+                float dist = length(uv - center);
+                float ripple = sin(dist * u_rippleFreq - u_time * u_rippleSpeed) * warpPower * 0.08;
+                
+                // RANDOMIZED wave distortions
+                float waveX = sin(uv.y * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.06;
+                float waveY = cos(uv.x * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.05;
+                
+                // RANDOMIZED turbulent waves
+                float turbulentX = sin(uv.y * u_turbulenceX - u_time * u_turbulenceSpeedX) * cos(uv.x * 8.0 + u_time * 1.8) * warpPower * 0.04;
+                float turbulentY = cos(uv.x * u_turbulenceY + u_time * u_turbulenceSpeedY) * sin(uv.y * 6.0 - u_time * 2.1) * warpPower * 0.035;
+                
+                // RANDOMIZED swirl effect (can go clockwise or counter-clockwise!)
+                float angle = atan(uv.y - 0.5, uv.x - 0.5);
+                float swirl = sin(angle * 4.0 * u_swirlDirection + u_time * u_swirlSpeed + dist * 15.0) * warpPower * 0.07;
+                
+                // Secondary swirl layer (opposite direction for chaos)
+                float swirl2 = cos(angle * 2.0 * -u_swirlDirection - u_time * u_swirlSpeed * 1.3 + dist * 12.0) * warpPower * 0.04;
+                
+                // Apply INTENSE warping to both textures differently
+                vec2 warpedUV1 = uv;
+                vec2 warpedUV2 = uv;
+                
+                // Luis gets INTENSE wavy distortion
+                warpedUV1.x += waveX + ripple + turbulentX + swirl2;
+                warpedUV1.y += waveY + swirl + turbulentY;
+                
+                // Pelican gets strong distortion during transition (but clean at end)
+                if (u_morphValue < 0.9) {
+                    float pelicanWarp = warpPower * (1.0 - smoothstep(0.85, 1.0, u_morphValue));
+                    warpedUV2.x += (swirl + turbulentX * 0.8) * pelicanWarp / warpPower;
+                    warpedUV2.y += (ripple + turbulentY * 0.6) * pelicanWarp / warpPower;
+                }
+                
+                // Keep coordinates in bounds
+                warpedUV1 = clamp(warpedUV1, 0.0, 1.0);
+                warpedUV2 = clamp(warpedUV2, 0.0, 1.0);
+                
+                // Sample textures
+                vec4 color1 = texture2D(u_texture1, warpedUV1);
+                vec4 color2 = texture2D(u_texture2, warpedUV2);
+                
+                // SURPRISE blending - pelican appears suddenly near the end!
+                float surpriseBlend = smoothstep(0.75, 0.95, u_morphValue); // Luis until 75%, quick transition 75%-95%
+                gl_FragColor = mix(color1, color2, surpriseBlend);
+            }
+        `;
+        
+        // VARIATION 4: Simple Time Shifting (commented out)
+        /*
+        const fragmentShaderSource = `
+            precision mediump float;
+            
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
+            varying vec2 v_texCoord;
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // Simple time shifting with reduced complexity
+                float shiftStrength = sin(u_morphValue * 3.14159) * 0.15;
+                
+                // Simple flowing waves
+                float wave1 = sin(uv.x * 4.0 + u_time) * 0.02;
+                float wave2 = cos(uv.y * 4.0 + u_time * 1.2) * 0.02;
+                
+                // Apply simple displacement
+                vec2 shiftedUV1 = uv + vec2(wave1, wave2) * shiftStrength;
+                vec2 shiftedUV2 = uv + vec2(-wave1, -wave2) * shiftStrength;
+                
+                // Clean up pelican at the end
+                if (u_morphValue > 0.9) {
+                    shiftedUV2 = uv;
+                }
+                
+                // Clamp coordinates
+                shiftedUV1 = clamp(shiftedUV1, 0.0, 1.0);
+                shiftedUV2 = clamp(shiftedUV2, 0.0, 1.0);
+                
+                // Sample textures
+                vec4 color1 = texture2D(u_texture1, shiftedUV1);
+                vec4 color2 = texture2D(u_texture2, shiftedUV2);
+                
+                // Simple blend
+                gl_FragColor = mix(color1, color2, u_morphValue);
+            }
+        `;
+        */
+        
+        // VARIATION 3: Swirly Rolling Warping (commented out)
+        /*
+        const fragmentShaderSource = `
+            precision mediump float;
+            
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
+            varying vec2 v_texCoord;
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // Rolling animation strength
+                float rollStrength = sin(u_morphValue * 3.14159) * 0.3;
+                float transitionPhase = sin(u_morphValue * 3.14159);
+                
+                // Continuous rolling motion
+                float rollOffset = u_time * 1.5;
+                
+                // Create swirly distortions
+                vec2 center = vec2(0.5, 0.5);
+                vec2 offset = uv - center;
+                float dist = length(offset);
+                float angle = atan(offset.y, offset.x);
+                
+                // Multiple spiral layers
+                float spiral1 = sin(dist * 12.0 - angle * 3.0 + rollOffset) * rollStrength;
+                float spiral2 = cos(dist * 8.0 + angle * 2.0 - rollOffset * 0.7) * rollStrength * 0.6;
+                float spiral3 = sin(dist * 16.0 - angle * 4.0 + rollOffset * 1.3) * rollStrength * 0.4;
+                
+                // Rolling cylinder effect
+                float cylinderWarp = sin(uv.x * 6.28 + rollOffset) * rollStrength * 0.15;
+                float barrelDistortion = (dist - 0.5) * rollStrength * 0.2;
+                
+                // Apply rolling transformation
+                vec2 rolledUV1 = uv;
+                vec2 rolledUV2 = uv;
+                
+                // Luis texture - gets swirly and rolls
+                rolledUV1.x += spiral1 + cylinderWarp;
+                rolledUV1.y += spiral2 + sin(uv.y * 6.28 + rollOffset * 0.8) * rollStrength * 0.1;
+                rolledUV1 += normalize(offset) * (spiral3 + barrelDistortion);
+                
+                // Pelican texture - different swirl pattern, clean at end
+                if (u_morphValue < 0.9) {
+                    float pelicanRoll = rollStrength * (1.0 - smoothstep(0.85, 1.0, u_morphValue));
+                    rolledUV2.x += cos(angle * 2.0 + dist * 10.0 - rollOffset * 1.2) * pelicanRoll;
+                    rolledUV2.y += sin(angle * 3.0 - dist * 8.0 + rollOffset) * pelicanRoll * 0.7;
+                    
+                    // Add some barrel roll effect
+                    rolledUV2 += normalize(offset) * sin(dist * 15.0 + rollOffset * 2.0) * pelicanRoll * 0.3;
+                }
+                
+                // Additional swirly motion based on position
+                float positionSwirl = sin(uv.x * uv.y * 50.0 + rollOffset * 2.0) * rollStrength * 0.08;
+                rolledUV1.x += positionSwirl;
+                rolledUV1.y += cos(uv.x * uv.y * 40.0 - rollOffset * 1.5) * rollStrength * 0.06;
+                
+                // Clamp UV coordinates
+                rolledUV1 = clamp(rolledUV1, 0.0, 1.0);
+                rolledUV2 = clamp(rolledUV2, 0.0, 1.0);
+                
+                // Sample textures
+                vec4 color1 = texture2D(u_texture1, rolledUV1);
+                vec4 color2 = texture2D(u_texture2, rolledUV2);
+                
+                // Rolling-based blending
+                float rollBlend = 0.5 + 0.5 * sin(rollOffset + u_morphValue * 6.28);
+                float baseBlend = smoothstep(0.0, 1.0, u_morphValue);
+                float swirlyBlend = mix(baseBlend, rollBlend, transitionPhase * 0.3);
+                
+                // Add some shimmer during rolling
+                float shimmer = sin(dist * 20.0 + rollOffset * 3.0) * transitionPhase * 0.1;
+                swirlyBlend += shimmer;
+                swirlyBlend = clamp(swirlyBlend, 0.0, 1.0);
+                
+                gl_FragColor = mix(color1, color2, swirlyBlend);
+            }
+        `;
+        */
+        
+        // VARIATION 2: Fluid Warping Distortion (commented out)
+        /*
+        const fragmentShaderSource = `
+            precision mediump float;
+            
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
+            varying vec2 v_texCoord;
+            
+            // Improved noise function
+            float noise(vec2 st) {
+                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+            }
+            
+            // Fractal noise for more complex patterns
+            float fbm(vec2 st) {
+                float value = 0.0;
+                float amplitude = 0.5;
+                float frequency = 0.0;
+                
+                for (int i = 0; i < 4; i++) {
+                    value += amplitude * noise(st);
+                    st *= 2.0;
+                    amplitude *= 0.5;
+                }
+                return value;
+            }
+            
+            // Turbulence function
+            float turbulence(vec2 st) {
+                float value = 0.0;
+                float amplitude = 0.5;
+                
+                for (int i = 0; i < 3; i++) {
+                    value += amplitude * abs(noise(st) - 0.5);
+                    st *= 2.0;
+                    amplitude *= 0.5;
+                }
+                return value;
+            }
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // Displacement strength that peaks during transition
+                float warpStrength = sin(u_morphValue * 3.14159) * 0.25;
+                float transitionPhase = sin(u_morphValue * 3.14159); // 0 at both ends, 1 at middle
+                
+                // Create flowing displacement vectors using turbulence
+                vec2 displacement1 = vec2(
+                    fbm(uv * 4.0 + vec2(u_time * 0.8, u_time * 0.3)) - 0.5,
+                    fbm(uv * 4.0 + vec2(u_time * 0.4, u_time * 0.9)) - 0.5
+                ) * warpStrength;
+                
+                vec2 displacement2 = vec2(
+                    turbulence(uv * 6.0 + vec2(-u_time * 0.5, u_time * 0.7)) - 0.5,
+                    turbulence(uv * 6.0 + vec2(u_time * 0.6, -u_time * 0.4)) - 0.5
+                ) * warpStrength;
+                
+                // Radial warping from multiple focal points
+                vec2 focal1 = vec2(0.3 + sin(u_time * 0.7) * 0.2, 0.4 + cos(u_time * 0.5) * 0.2);
+                vec2 focal2 = vec2(0.7 + cos(u_time * 0.6) * 0.2, 0.6 + sin(u_time * 0.8) * 0.2);
+                
+                float dist1 = length(uv - focal1);
+                float dist2 = length(uv - focal2);
+                
+                // Create radial displacement
+                vec2 radialDisp1 = normalize(uv - focal1) * sin(dist1 * 15.0 - u_time * 3.0) * transitionPhase * 0.08;
+                vec2 radialDisp2 = normalize(uv - focal2) * cos(dist2 * 12.0 + u_time * 2.5) * transitionPhase * 0.06;
+                
+                // Vortex effect
+                vec2 center = vec2(0.5, 0.5);
+                vec2 toCenter = center - uv;
+                float centerDist = length(toCenter);
+                float vortexStrength = exp(-centerDist * 3.0) * transitionPhase * 0.5;
+                vec2 vortexDisp = vec2(-toCenter.y, toCenter.x) * vortexStrength * sin(u_time * 2.0);
+                
+                // Different displacement patterns for each texture
+                vec2 warpedUV1 = uv + displacement1 + radialDisp1 + vortexDisp * 0.5;
+                vec2 warpedUV2 = uv + displacement2 + radialDisp2 - vortexDisp * 0.5;
+                
+                // Reduce warping for pelican near the end
+                if (u_morphValue > 0.85) {
+                    float fadeOut = 1.0 - smoothstep(0.85, 1.0, u_morphValue);
+                    warpedUV2 = mix(uv, warpedUV2, fadeOut);
+                }
+                
+                // Clamp to valid range
+                warpedUV1 = clamp(warpedUV1, 0.0, 1.0);
+                warpedUV2 = clamp(warpedUV2, 0.0, 1.0);
+                
+                // Sample textures
+                vec4 color1 = texture2D(u_texture1, warpedUV1);
+                vec4 color2 = texture2D(u_texture2, warpedUV2);
+                
+                // Dynamic blending based on local displacement intensity
+                float localIntensity = length(displacement1 + displacement2) * 5.0;
+                float noisyBlend = fbm(uv * 12.0 + u_time * 0.3) * 0.3;
+                
+                // Multiple blend factors for complex transitions
+                float baseBlend = smoothstep(0.0, 1.0, u_morphValue);
+                float turbulentBlend = smoothstep(0.2, 0.8, u_morphValue + noisyBlend * transitionPhase);
+                float finalBlend = mix(baseBlend, turbulentBlend, localIntensity);
+                
+                // Liquid-like edge effects
+                float edgeEffect = 1.0 - smoothstep(0.4, 0.6, abs(u_morphValue - 0.5) + fbm(uv * 8.0 + u_time) * 0.1);
+                
+                // Color distortion during heavy warping
+                if (transitionPhase > 0.3) {
+                    float colorWarp = transitionPhase * 0.02;
+                    color1.r = texture2D(u_texture1, warpedUV1 + vec2(colorWarp, 0.0)).r;
+                    color1.b = texture2D(u_texture1, warpedUV1 - vec2(colorWarp, 0.0)).b;
+                    color2.r = texture2D(u_texture2, warpedUV2 + vec2(-colorWarp, 0.0)).r;
+                    color2.b = texture2D(u_texture2, warpedUV2 + vec2(colorWarp, 0.0)).b;
+                }
+                
+                // Apply edge glow during heavy transition
+                vec3 edgeGlow = vec3(0.1, 0.3, 0.6) * edgeEffect * transitionPhase * 0.3;
+                
+                vec4 finalColor = mix(color1, color2, finalBlend);
+                finalColor.rgb += edgeGlow;
+                
+                gl_FragColor = finalColor;
+            }
+        `;
+        */
+        
+        const vertexShader = this.createShader(this.gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
+        
+        this.program = this.createProgram(vertexShader, fragmentShader);
+        
+        // Set up geometry
+        const positions = new Float32Array([
+            -1, -1,  0, 1,
+             1, -1,  1, 1,
+            -1,  1,  0, 0,
+             1,  1,  1, 0,
+        ]);
+        
+        const positionBuffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
+        
+        const positionLocation = this.gl.getAttribLocation(this.program, 'a_position');
+        const texCoordLocation = this.gl.getAttribLocation(this.program, 'a_texCoord');
+        
+        this.gl.enableVertexAttribArray(positionLocation);
+        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 16, 0);
+        
+        this.gl.enableVertexAttribArray(texCoordLocation);
+        this.gl.vertexAttribPointer(texCoordLocation, 2, this.gl.FLOAT, false, 16, 8);
+    }
+    
+    createShader(type, source) {
+        const shader = this.gl.createShader(type);
+        this.gl.shaderSource(shader, source);
+        this.gl.compileShader(shader);
+        
+        if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+            const errorLog = this.gl.getShaderInfoLog(shader);
+            console.error('❌ Shader compilation failed!');
+            console.error('Shader type:', type === this.gl.VERTEX_SHADER ? 'VERTEX' : 'FRAGMENT');
+            console.error('Error log:', errorLog);
+            console.error('Shader source:', source);
+            this.gl.deleteShader(shader);
+            return null;
+        }
+        
+        console.log('✅ Shader compiled successfully:', type === this.gl.VERTEX_SHADER ? 'VERTEX' : 'FRAGMENT');
+        return shader;
+    }
+    
+    createProgram(vertexShader, fragmentShader) {
+        const program = this.gl.createProgram();
+        this.gl.attachShader(program, vertexShader);
+        this.gl.attachShader(program, fragmentShader);
+        this.gl.linkProgram(program);
+        
+        if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
+            console.error('Program linking error:', this.gl.getProgramInfoLog(program));
+            this.gl.deleteProgram(program);
+            return null;
+        }
+        
+        return program;
+    }
+    
+    loadImages() {
+        // Debug: Show what URLs we're trying to load
+        const imageUrls = [
+            '{{ url_for("static", filename="images/luis.png") }}',
+            '{{ url_for("static", filename="images/pelican.png") }}'
+        ];
+        
+        console.log('Loading images:', imageUrls);
+        
+        let loadedCount = 0;
+        
+        imageUrls.forEach((url, index) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                console.log(`Image ${index + 1} loaded successfully:`, url);
+                this.textures[`texture${index + 1}`] = this.createTexture(img);
+                loadedCount++;
+                
+                if (loadedCount === 2) {
+                    console.log('All images loaded, initializing WebGL...');
+                    this.initialized = true;
+                    this.render();
+                }
+            };
+            img.onerror = () => {
+                console.error('Failed to load image:', url);
+                console.log('Creating fallback texture for image', index + 1);
+                // Create a colored fallback texture
+                this.textures[`texture${index + 1}`] = this.createFallbackTexture(index);
+                loadedCount++;
+                
+                if (loadedCount === 2) {
+                    console.log('All textures ready (with fallbacks), initializing WebGL...');
+                    this.initialized = true;
+                    this.render();
+                }
+            };
+            img.src = url;
+        });
+    }
+    
+    createTexture(img) {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, img);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
+        return texture;
+    }
+    
+    createDefaultTexture() {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        // Create a 1x1 gray pixel as fallback
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([128, 128, 128, 255]));
+        return texture;
+    }
+    
+    createFallbackTexture(index) {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        // Create different colored textures for debugging
+        const colors = [
+            [255, 100, 100, 255], // Red for texture 1 (Luis)
+            [100, 100, 255, 255]  // Blue for texture 2 (Pelican)
+        ];
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array(colors[index]));
+        return texture;
+    }
+    
+    startAnimation() {
+        const animate = () => {
+            this.time += 0.016; // ~60fps
+            if (this.initialized) {
+                this.render();
+            }
+            this.animationId = requestAnimationFrame(animate);
+        };
+        animate();
+    }
+    
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    }
+    
+    setMorphValue(value) {
+        this.morphValue = Math.max(0, Math.min(1, value));
+        console.log('Morph value set to:', this.morphValue);
+        if (this.initialized) {
+            this.render();
+        } else {
+            console.log('WebGL not initialized yet, cannot render');
+        }
+    }
+    
+    render() {
+        if (!this.initialized || !this.program) {
+            console.log('Cannot render - initialized:', this.initialized, 'program:', !!this.program);
+            return;
+        }
+        
+        console.log('Rendering with morph value:', this.morphValue, 'time:', this.time.toFixed(2));
+        
+        this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        
+        this.gl.useProgram(this.program);
+        
+        // Bind textures
+        this.gl.activeTexture(this.gl.TEXTURE0);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, this.textures.texture1);
+        this.gl.uniform1i(this.gl.getUniformLocation(this.program, 'u_texture1'), 0);
+        
+        this.gl.activeTexture(this.gl.TEXTURE1);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, this.textures.texture2);
+        this.gl.uniform1i(this.gl.getUniformLocation(this.program, 'u_texture2'), 1);
+        
+        // Set uniforms
+        this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_morphValue'), this.morphValue);
+        this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_time'), this.time);
+        
+        // Set RANDOMIZED parameters with debugging
+        const uniforms = [
+            'u_waveFreqX', 'u_waveFreqY', 'u_waveSpeedX', 'u_waveSpeedY',
+            'u_rippleFreq', 'u_rippleSpeed', 'u_swirlDirection', 'u_swirlSpeed',
+            'u_turbulenceX', 'u_turbulenceY', 'u_turbulenceSpeedX', 'u_turbulenceSpeedY',
+            'u_intensityMultiplier'
+        ];
+        
+        const paramKeys = [
+            'waveFreqX', 'waveFreqY', 'waveSpeedX', 'waveSpeedY',
+            'rippleFreq', 'rippleSpeed', 'swirlDirection', 'swirlSpeed',
+            'turbulenceX', 'turbulenceY', 'turbulenceSpeedX', 'turbulenceSpeedY',
+            'intensityMultiplier'
+        ];
+        
+        uniforms.forEach((uniformName, index) => {
+            const location = this.gl.getUniformLocation(this.program, uniformName);
+            const value = this.randomParams[paramKeys[index]];
+            
+            if (location === null) {
+                console.error(`❌ Uniform location not found: ${uniformName}`);
+            } else {
+                this.gl.uniform1f(location, value);
+                if (this.time < 1.0) { // Only log once at start
+                    console.log(`✅ ${uniformName}: ${value.toFixed(3)}`);
+                }
+            }
+        });
+        
+        // Draw
+        this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+    }
+    
+    destroy() {
+        this.stopAnimation();
+        if (this.gl) {
+            // Clean up WebGL resources
+            Object.values(this.textures).forEach(texture => {
+                this.gl.deleteTexture(texture);
+            });
+            if (this.program) {
+                this.gl.deleteProgram(this.program);
+            }
+        }
+    }
+}
+
+// Initialize WebGL morpher
+let morpher = null;
+
+function initializeWebGLMorpher() {
+    console.log('=== INITIALIZING WEBGL MORPHER ===');
+    const canvas = document.getElementById('morphCanvas');
+    const slider = document.querySelector('.luis-slider');
+    
+    if (!canvas) {
+        console.error('Canvas not found!');
+        return;
+    }
+    if (!slider) {
+        console.error('Slider not found!');
+        return;
+    }
+    
+    console.log('Canvas and slider found successfully');
+    
+    // Clean up existing morpher
+    if (morpher) {
+        console.log('Cleaning up existing morpher');
+        morpher.destroy();
+    }
+    
+    console.log('Creating new WebGL morpher...');
+    morpher = new WebGLMorpher('morphCanvas');
+    
+    // Update morph value when slider changes
+    slider.addEventListener('input', function() {
+        const percentage = this.value / 100;
+        console.log('Slider moved to:', percentage);
+        if (morpher) {
+            morpher.setMorphValue(percentage);
+        } else {
+            console.error('Morpher not initialized!');
+        }
+    });
+    
+    // Set initial morph value
+    console.log('Setting initial morph value to 0');
+    if (morpher) {
+        morpher.setMorphValue(0);
+    }
+    
+    // Test if WebGL is working after 2 seconds
+    setTimeout(() => {
+        console.log('=== WEBGL STATUS CHECK ===');
+        if (morpher && morpher.initialized) {
+            console.log('✅ WebGL is working!');
+            console.log('Random parameters being used:', morpher.randomParams);
+        } else {
+            console.log('❌ WebGL failed to initialize');
+        }
+    }, 2000);
+}
+
+// Commented out video-based implementation for reference
+/*
 function initializeMorphSlider() {
     const video = document.getElementById('morphVideo');
     const slider = document.querySelector('.luis-slider');
@@ -127,16 +970,18 @@ function initializeMorphSlider() {
         }
     });
 }
+*/
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', initializeMorphSlider);
+document.addEventListener('DOMContentLoaded', initializeWebGLMorpher);
 
 // Re-initialize when HTMX swaps content
 document.addEventListener('htmx:afterSwap', function(event) {
-    // Only reinitialize if the swapped content contains our video
-    if (event.detail.target.querySelector('#morphVideo')) {
-        initializeMorphSlider();
+    // Only reinitialize if the swapped content contains our canvas
+    if (event.detail.target.querySelector('#morphCanvas')) {
+        initializeWebGLMorpher();
     }
 });
 </script>
+</div>
 </div> 

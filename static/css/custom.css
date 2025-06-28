@@ -1,3 +1,11 @@
+/* Prevent scrollbar jitter between pages */
+html {
+  /* Modern approach - reserves space for scrollbar */
+  scrollbar-gutter: stable;
+  /* Fallback for older browsers - force scrollbar to always be visible */
+  overflow-y: scroll;
+}
+
 /* Code Block Styling */
 pre {
   position: relative;

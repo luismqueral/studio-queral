@@ -1,4 +1,116 @@
-<div class="pa4 bg-white br2">
-    <h1 class="f2 mt0">Projects</h1>
-    <p class="lh-copy">This is the projects page. Content coming soon!</p>
-</div> 
+<!-- Projects page uses unique mw9 container -->
+<div class="mw9 center">
+    <!-- Projects grid container -->
+    <div class="grid-container">
+        <!-- Project Card: Generative Strategies -->
+        <a href="https://strategy.garden" 
+           target="_blank" 
+           class="project-card pa3 bg-white br2 ba b--light-gray mb4 tc link">
+            <div class="pa3" style="margin-bottom: -0.5rem;">
+                <img src="{{ url_for('static', filename='images/generative-strategies.png') }}" 
+                     alt="Generative Strategies" 
+                     class="mw-100 h-auto" 
+                     style="max-height: 120px;">
+            </div>
+            <span class="f6 gray project-link-text"
+                  style="font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;">
+                strategy.garden
+            </span>
+        </a>
+
+        <!-- Project Card: Split Triple Diamond Method -->
+        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
+            <h2 class="f6 fw6 mb3 near-black mt0">Split Triple Diamond Method</h2>
+            <p class="f6 lh-copy gray">
+                Design methodology framework for complex problem solving
+            </p>
+        </div>
+
+        <!-- Project Card: Spooky Looper -->
+        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
+            <h2 class="f6 fw6 mb3 near-black mt0">Spooky Looper</h2>
+            <p class="f6 lh-copy gray">
+                Interactive audio looping application
+            </p>
+        </div>
+
+        <!-- Project Card: Happybirthdaybridget.biz -->
+        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
+            <h2 class="f6 fw6 mb3 near-black mt0">Happybirthdaybridget.biz</h2>
+            <p class="f6 lh-copy gray">
+                Birthday celebration website
+            </p>
+        </div>
+
+        <!-- Project Card: PR Detective -->
+        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
+            <h2 class="f6 fw6 mb3 near-black mt0">PR Detective</h2>
+            <p class="f6 lh-copy gray">
+                Tool for analyzing and tracking pull request activity
+            </p>
+        </div>
+
+        <!-- Project Card: Jump City Records -->
+        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
+            <h2 class="f6 fw6 mb3 near-black mt0">Jump City Records</h2>
+            <p class="f6 lh-copy gray">
+                Music label and artist collective platform
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Grid layout for projects - Two columns */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+}
+
+/* Ensure consistent card heights */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 200px;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.project-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: #cccccc;
+}
+
+.project-card:active {
+    transform: translateY(1px);
+}
+
+.project-card:hover .project-link-text {
+    text-decoration: underline;
+}
+
+/* Special styling for logo card */
+.project-card.tc {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 60em) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 30em) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+</style> 
