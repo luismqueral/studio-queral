@@ -35,12 +35,16 @@
         </div>
 
         <!-- Project Card: Happybirthdaybridget.biz -->
-        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
-            <h2 class="f6 fw6 mb3 near-black mt0">Happybirthdaybridget.biz</h2>
-            <p class="f6 lh-copy gray">
-                Birthday celebration website
+        <a href="https://happybirthdaybridget.biz" 
+           target="_blank" 
+           class="project-card pa3 br2 ba b--light-gray mb4 tc link birthday-card"
+           style="font-family: 'Comic Sans MS', cursive, sans-serif; background: linear-gradient(135deg, #fff5a5, #ffeb3b, #ffc107);">
+            <div class="f3 mb2">🎈🎈🎈</div>
+            <h2 class="f4 fw6 mb0 near-black mt0 pa3 br2" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)); font-family: 'Lucida Blackletter', serif;">happy birthday bridget .biz</h2>
+            <p class="f6 lh-copy near-black">
+                the official website for bridgets birthday
             </p>
-        </div>
+        </a>
 
         <!-- Project Card: PR Detective -->
         <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
@@ -91,6 +95,11 @@
 }
 
 .project-card:hover .project-link-text {
+    text-decoration: underline;
+}
+
+/* Special styling for birthday card */
+.birthday-card:hover h2 {
     text-decoration: underline;
 }
 

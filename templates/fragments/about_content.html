@@ -13,8 +13,8 @@
             <canvas id="morphCanvas" 
                     width="300" 
                     height="300" 
-                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer;" 
-                    class="br2 ba b--silver w-50 webgl-canvas">
+                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; background-color: #f5f5f5;" 
+                    class="br2 w-50 webgl-canvas">
                 Your browser does not support WebGL.
             </canvas>
         </div>
@@ -43,7 +43,7 @@
                 <input type="range" 
                        min="0" 
                        max="100" 
-                       value="0" 
+                       value="50" 
                        class="w-100 luis-slider"
                        style="appearance: none; height: 6px; border-radius: 3px; background: #e5e5e5; outline: none;">
             </div>
@@ -59,8 +59,9 @@
     
     <section class="mb4 lh-copy">
         <p class="mb2">I am a designer, artist, and researcher based in <br> Baltimore, Maryland.</p>
-        <p><strong>Studio Queral</strong> is the label I use for both my creative and professional practice, which are complementary.</h2>
-        <p class="mb2">This website is where I store my work, share scraps of inspiration, and write about my process.</p>
+        <p>I am a senior designer at The New York Times, where I help build platforms and technical products for our development team. I also am a founding member of the Generative Design team, where I help advance our GenAI practice and workflows.
+</p>
+        <p>This website is where I store my work, share scraps of inspiration, and write about my process.</p>
     </section>
 </div>
 <div class="pa4 bg-white br2 mb4">
@@ -717,37 +718,57 @@ class WebGLMorpher {
             '{{ url_for("static", filename="images/pelican.png") }}'
         ];
         
-        console.log('Loading images:', imageUrls);
+        console.log('🖼️ Loading images:', imageUrls);
         
         let loadedCount = 0;
         
+        // Pre-create fallback textures in case images fail
+        console.log('🔧 Creating initial fallback textures...');
+        this.textures.texture1 = this.createFallbackTexture(0);
+        this.textures.texture2 = this.createFallbackTexture(1);
+        
+        // Initialize with fallbacks immediately so something shows
+        this.initialized = true;
+        this.render();
+        
+        // Then try to load real images and replace fallbacks
         imageUrls.forEach((url, index) => {
             const img = new Image();
             img.crossOrigin = 'anonymous';
+            
             img.onload = () => {
-                console.log(`Image ${index + 1} loaded successfully:`, url);
+                console.log(`✅ Image ${index + 1} loaded successfully:`, url.substring(0, 50) + '...');
                 this.textures[`texture${index + 1}`] = this.createTexture(img);
                 loadedCount++;
                 
+                console.log(`🔄 Replacing fallback texture ${index + 1} with real image`);
+                this.render(); // Re-render with real image
+                
                 if (loadedCount === 2) {
-                    console.log('All images loaded, initializing WebGL...');
-                    this.initialized = true;
-                    this.render();
+                    console.log('🎉 All real images loaded!');
                 }
             };
-            img.onerror = () => {
-                console.error('Failed to load image:', url);
-                console.log('Creating fallback texture for image', index + 1);
-                // Create a colored fallback texture
-                this.textures[`texture${index + 1}`] = this.createFallbackTexture(index);
+            
+            img.onerror = (error) => {
+                console.error(`❌ Failed to load image ${index + 1}:`, url);
+                console.error('Error details:', error);
+                console.log('🔧 Keeping fallback texture for image', index + 1);
                 loadedCount++;
                 
                 if (loadedCount === 2) {
-                    console.log('All textures ready (with fallbacks), initializing WebGL...');
-                    this.initialized = true;
-                    this.render();
+                    console.log('⚠️ Using all fallback textures - check image URLs');
                 }
             };
+            
+            // Add timeout for image loading
+            setTimeout(() => {
+                if (img.complete === false) {
+                    console.warn(`⏰ Image ${index + 1} taking too long to load, using fallback`);
+                    img.src = ''; // Cancel loading
+                    loadedCount++;
+                }
+            }, 3000); // 3 second timeout
+            
             img.src = url;
         });
     }
@@ -774,12 +795,38 @@ class WebGLMorpher {
     createFallbackTexture(index) {
         const texture = this.gl.createTexture();
         this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-        // Create different colored textures for debugging
-        const colors = [
-            [255, 100, 100, 255], // Red for texture 1 (Luis)
-            [100, 100, 255, 255]  // Blue for texture 2 (Pelican)
-        ];
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array(colors[index]));
+        
+        // Create a simple 2x2 pattern for more visible fallback
+        const size = 64; // 64x64 texture
+        const data = new Uint8Array(size * size * 4);
+        
+        // Generate a simple pattern so we can see something is working
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                const idx = (i * size + j) * 4;
+                if (index === 0) {
+                    // Luis fallback - red with pattern
+                    data[idx] = 255;     // R
+                    data[idx + 1] = (i + j) % 32 < 16 ? 100 : 150; // G
+                    data[idx + 2] = 100; // B
+                    data[idx + 3] = 255; // A
+                } else {
+                    // Pelican fallback - blue with pattern
+                    data[idx] = 100;     // R
+                    data[idx + 1] = 100; // G
+                    data[idx + 2] = (i + j) % 32 < 16 ? 200 : 255; // B
+                    data[idx + 3] = 255; // A
+                }
+            }
+        }
+        
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, size, size, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, data);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
+        
+        console.log(`🎨 Created ${index === 0 ? 'red' : 'blue'} fallback texture ${index + 1}`);
         return texture;
     }
     
@@ -813,19 +860,27 @@ class WebGLMorpher {
     
     render() {
         if (!this.initialized || !this.program) {
-            console.log('Cannot render - initialized:', this.initialized, 'program:', !!this.program);
+            console.log('❌ Cannot render - initialized:', this.initialized, 'program:', !!this.program);
             return;
         }
         
-        console.log('Rendering with morph value:', this.morphValue, 'time:', this.time.toFixed(2));
+        if (!this.textures.texture1 || !this.textures.texture2) {
+            console.log('❌ Cannot render - missing textures');
+            return;
+        }
+        
+        // Only log occasionally to avoid spam
+        if (this.time < 1.0 || Math.floor(this.time) % 5 === 0) {
+            console.log('🎬 Rendering with morph value:', this.morphValue, 'time:', this.time.toFixed(2));
+        }
         
         this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
-        this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        this.gl.clearColor(0.96, 0.96, 0.96, 1.0); // Light gray background matching CSS (#f5f5f5)
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
         
         this.gl.useProgram(this.program);
         
-        // Bind textures
+        // Bind textures with error checking
         this.gl.activeTexture(this.gl.TEXTURE0);
         this.gl.bindTexture(this.gl.TEXTURE_2D, this.textures.texture1);
         this.gl.uniform1i(this.gl.getUniformLocation(this.program, 'u_texture1'), 0);
@@ -838,7 +893,7 @@ class WebGLMorpher {
         this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_morphValue'), this.morphValue);
         this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_time'), this.time);
         
-        // Set RANDOMIZED parameters with debugging
+        // Set RANDOMIZED parameters with minimal logging
         const uniforms = [
             'u_waveFreqX', 'u_waveFreqY', 'u_waveSpeedX', 'u_waveSpeedY',
             'u_rippleFreq', 'u_rippleSpeed', 'u_swirlDirection', 'u_swirlSpeed',
@@ -858,17 +913,26 @@ class WebGLMorpher {
             const value = this.randomParams[paramKeys[index]];
             
             if (location === null) {
-                console.error(`❌ Uniform location not found: ${uniformName}`);
+                if (this.time < 1.0) console.error(`❌ Uniform location not found: ${uniformName}`);
             } else {
                 this.gl.uniform1f(location, value);
-                if (this.time < 1.0) { // Only log once at start
-                    console.log(`✅ ${uniformName}: ${value.toFixed(3)}`);
-                }
             }
         });
         
+        // Check for WebGL errors
+        const error = this.gl.getError();
+        if (error !== this.gl.NO_ERROR) {
+            console.error('🚨 WebGL error before drawing:', error);
+        }
+        
         // Draw
         this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+        
+        // Check for errors after drawing
+        const drawError = this.gl.getError();
+        if (drawError !== this.gl.NO_ERROR) {
+            console.error('🚨 WebGL error after drawing:', drawError);
+        }
     }
     
     destroy() {
@@ -924,10 +988,11 @@ function initializeWebGLMorpher() {
         }
     });
     
-    // Set initial morph value
-    console.log('Setting initial morph value to 0');
+    // Set initial morph value from slider
+    const initialValue = slider.value / 100;
+    console.log('Setting initial morph value to:', initialValue);
     if (morpher) {
-        morpher.setMorphValue(0);
+        morpher.setMorphValue(initialValue);
     }
     
     // Test if WebGL is working after 2 seconds
