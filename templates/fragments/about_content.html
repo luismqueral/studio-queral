@@ -1,30 +1,142 @@
-<div class="pa4 bg-white br2">
+<div class="mw6 center">
+<!-- Introduction Card -->
+<div class="pa4 bg-white br2 mb4 ba b--light-gray">
     <!-- Small intro, no heading -->
-    <p class="f5 lh-copy mb4 gray">
-        TK
+    <p class="f5 lh-copy mb2 near-black tc">
+        Hello, my name is Luis Queral.
     </p>
 
+    <!-- Video and slider container -->
+    <div class="pa4 br2 center" style="max-width: 400px;">
+        <!-- Morphing video -->
+        <div class="tc mb4">
+            <video id="morphVideo" 
+                   style="width: 100%; height: 100%;; object-fit: cover;" 
+                   class="br2 ba b--silver w-50"
+                   muted 
+                   preload="metadata">
+                <source src="{{ url_for('static', filename='images/morph.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Luis / Not Luis slider -->
+        <div class="center" style="max-width: 300px;">
+            <div class="flex items-center justify-between mb2">
+                <span class="f6 gray">luis</span>
+                <span class="f6 gray">not luis</span>
+            </div>
+            <div class="relative">
+                <input type="range" 
+                       min="0" 
+                       max="100" 
+                       value="0" 
+                       class="w-100 luis-slider"
+                       style="appearance: none; height: 6px; border-radius: 3px; background: #e5e5e5; outline: none;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Sections -->
+<div class="pa4 bg-white br2 mb4">
+
+    
+    
+    <section class="mb4 lh-copy">
+        <p class="mb2">I am a designer, artist, and researcher based in <br> Baltimore, Maryland.</p>
+        <p><strong>Studio Queral</strong> is the label I use for both my creative and professional practice, which are complementary.</h2>
+        <p class="mb2">This website is where I store my work, share scraps of inspiration, and write about my process.</p>
+    </section>
+</div>
+<div class="pa4 bg-white br2 mb4">
     <!-- Professional life section -->
     <section class="mb4">
-        <h2 class="f4 fw6 mb3 near-black">In my professional life...</h2>
+        <h2 class="f5 fw6 mb3 near-black">In my professional life...</h2>
         <p class="lh-copy gray">
-            TK
+            I am a senior designer at The New York Times, where I help build platforms and technical products for our development team. I also am a founding member of the Generative Design team, where I help advance our GenAI practice and workflows.
         </p>
     </section>
-
+</div>
+<div class="pa4 bg-white br2 mb4">
     <!-- Creative life section -->
-    <section class="mb4">
-        <h2 class="f4 fw6 mb3 near-black">In my creative life...</h2>
-        <p class="lh-copy gray">
-            TK
-        </p>
-    </section>
-
-    <!-- Personal life section -->
     <section class="mb0">
-        <h2 class="f4 fw6 mb3 near-black">In my personal life...</h2>
+        <h2 class="f5 fw6 mb3 near-black">In my creative life...</h2>
         <p class="lh-copy gray">
-            TK
+            I 
         </p>
     </section>
+</div>
+
+<style>
+/* Custom slider styling */
+.luis-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #357edd;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.luis-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #357edd;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.luis-slider:hover::-webkit-slider-thumb {
+    background: #2c5aa0;
+}
+
+.luis-slider:hover::-moz-range-thumb {
+    background: #2c5aa0;
+}
+</style>
+
+<script>
+function initializeMorphSlider() {
+    const video = document.getElementById('morphVideo');
+    const slider = document.querySelector('.luis-slider');
+    
+    if (!video || !slider) return; // Exit if elements don't exist
+    
+    // Wait for video metadata to load to get duration
+    video.addEventListener('loadedmetadata', function() {
+        // Initialize video to start position (0%)
+        video.currentTime = 0;
+    });
+    
+    // Update video time when slider changes
+    slider.addEventListener('input', function() {
+        const percentage = this.value / 100;
+        video.currentTime = video.duration * percentage;
+    });
+    
+    // Prevent video from playing on its own
+    video.addEventListener('timeupdate', function() {
+        // Pause if video is somehow playing
+        if (!video.paused) {
+            video.pause();
+        }
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initializeMorphSlider);
+
+// Re-initialize when HTMX swaps content
+document.addEventListener('htmx:afterSwap', function(event) {
+    // Only reinitialize if the swapped content contains our video
+    if (event.detail.target.querySelector('#morphVideo')) {
+        initializeMorphSlider();
+    }
+});
+</script>
 </div> 
