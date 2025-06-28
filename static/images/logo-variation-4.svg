@@ -1,40 +1,40 @@
 <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Default gradient -->
-    <linearGradient id="grad_1751058184" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#d9ded3;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#bdcfaf;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#9ac486;stop-opacity:1" />
+    <linearGradient id="grad_1751091640" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ded3d7;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#cfafb8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c48690;stop-opacity:1" />
     </linearGradient>
     
     <!-- Hover gradient -->
-    <linearGradient id="grad_hover_1751058184" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#aebaa0;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#95b47c;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#73b255;stop-opacity:1" />
+    <linearGradient id="grad_hover_1751091640" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#baa0a9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b47c8c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b25564;stop-opacity:1" />
     </linearGradient>
     
     <!-- Active gradient -->
-    <linearGradient id="grad_active_1751058184" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#7a9062;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#668d47;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#4d8532;stop-opacity:1" />
+    <linearGradient id="grad_active_1751091640" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#906272;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8d475b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#85323f;stop-opacity:1" />
     </linearGradient>
   </defs>
   
   <style>
     .logo-circle {
-      fill: url(#grad_1751058184);
+      fill: url(#grad_1751091640);
       transition: fill 0.2s ease, transform 0.1s ease;
       cursor: pointer;
     }
     
     .logo-circle:hover {
-      fill: url(#grad_hover_1751058184);
+      fill: url(#grad_hover_1751091640);
     }
     
     .logo-circle:active {
-      fill: url(#grad_active_1751058184);
+      fill: url(#grad_active_1751091640);
       transform: translateY(2px);
     }
   </style>
