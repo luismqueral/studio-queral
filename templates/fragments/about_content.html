@@ -91,11 +91,14 @@
 <style>
 /* Interactive WebGL Canvas */
 .webgl-canvas {
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, outline 0.15s ease;
+    outline: 4px solid transparent;
+    outline-offset: 0px;
 }
 
 .webgl-canvas:hover {
     cursor: pointer;
+    outline: 4px solid #d0d0d0;
 }
 
 .webgl-canvas:active {
@@ -129,7 +132,7 @@
 
 /* Smooth transition when WebGL loads */
 .webgl-loaded {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
