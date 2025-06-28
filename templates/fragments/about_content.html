@@ -1040,11 +1040,46 @@ function initializeMorphSlider() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', initializeWebGLMorpher);
 
-// Re-initialize when HTMX swaps content
+// Re-initialize when HTMX swaps content - with multiple safeguards
 document.addEventListener('htmx:afterSwap', function(event) {
+    console.log('🔄 HTMX afterSwap triggered');
+    
     // Only reinitialize if the swapped content contains our canvas
-    if (event.detail.target.querySelector('#morphCanvas')) {
-        initializeWebGLMorpher();
+    const canvas = event.detail.target.querySelector('#morphCanvas');
+    if (canvas) {
+        console.log('✅ Found morphCanvas in swapped content, reinitializing...');
+        
+        // Add a small delay to ensure DOM is fully ready
+        setTimeout(() => {
+            initializeWebGLMorpher();
+        }, 100);
+    } else {
+        console.log('❌ No morphCanvas found in swapped content');
+    }
+});
+
+// Also listen for htmx:load event as backup
+document.addEventListener('htmx:load', function(event) {
+    const canvas = document.getElementById('morphCanvas');
+    if (canvas && !morpher) {
+        console.log('🔄 HTMX load event - initializing WebGL morpher');
+        setTimeout(() => {
+            initializeWebGLMorpher();
+        }, 150);
+    }
+});
+
+// Listen for when the about content specifically loads
+document.addEventListener('htmx:afterRequest', function(event) {
+    if (event.detail.xhr.responseURL && event.detail.xhr.responseURL.includes('/about')) {
+        console.log('🔄 About page loaded via HTMX');
+        setTimeout(() => {
+            const canvas = document.getElementById('morphCanvas');
+            if (canvas && (!morpher || !morpher.initialized)) {
+                console.log('🎯 Reinitializing WebGL for about page');
+                initializeWebGLMorpher();
+            }
+        }, 200);
     }
 });
 </script>
