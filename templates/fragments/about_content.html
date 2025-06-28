@@ -156,21 +156,21 @@ class WebGLMorpher {
         this.initialized = false;
         this.animationId = null;
         
-        // EXTREME RANDOMIZATION for testing - Should be very obvious!
+        // DIVERSE RANDOMIZATION - Each combination creates different anchor patterns!
         this.randomParams = {
-            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Either slow or fast waves
-            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Either slow or fast waves  
-            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
-            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
-            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Either big or tiny ripples
-            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Either slow or fast ripples
-            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Clockwise or counter-clockwise
-            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Either very slow or very fast
-            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Either gentle or chaotic
-            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Either gentle or chaotic
-            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
-            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Either subtle or intense
+            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Determines corner anchoring
+            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Determines corner anchoring
+            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
+            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
+            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Multi-point ripple frequency
+            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Multi-point ripple speed
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Edge anchor selection + rotation
+            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Corner swirl speed + anchor choice
+            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Diagonal flow frequency + edge anchoring
+            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
+            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
+            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Overall effect intensity
         };
         
         console.log('Random distortion parameters:', this.randomParams);
@@ -190,30 +190,67 @@ class WebGLMorpher {
     }
     
     randomizeEffects() {
-        console.log('🎲 Randomizing effects...');
-        // EXTREME RANDOMIZATION for testing - Should be very obvious!
+        console.log('🎲 Randomizing effects with diverse anchor points...');
+        // DIVERSE RANDOMIZATION - Each combination creates different anchor patterns!
         this.randomParams = {
-            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Either slow or fast waves
-            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Either slow or fast waves  
-            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
-            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Either very slow or very fast
-            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Either big or tiny ripples
-            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Either slow or fast ripples
-            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Clockwise or counter-clockwise
-            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Either very slow or very fast
-            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Either gentle or chaotic
-            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Either gentle or chaotic
-            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
-            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Either slow or fast
-            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Either subtle or intense
+            waveFreqX: Math.random() > 0.5 ? 4.0 : 20.0,    // Determines corner anchoring
+            waveFreqY: Math.random() > 0.5 ? 3.0 : 18.0,    // Determines corner anchoring
+            waveSpeedX: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
+            waveSpeedY: Math.random() > 0.5 ? 0.5 : 4.0,    // Flow wave speed
+            rippleFreq: Math.random() > 0.5 ? 8.0 : 30.0,   // Multi-point ripple frequency
+            rippleSpeed: Math.random() > 0.5 ? 1.0 : 6.0,   // Multi-point ripple speed
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0, // Edge anchor selection + rotation
+            swirlSpeed: Math.random() > 0.5 ? 0.3 : 3.0,     // Corner swirl speed + anchor choice
+            turbulenceX: Math.random() > 0.5 ? 6.0 : 30.0,   // Diagonal flow frequency + edge anchoring
+            turbulenceY: Math.random() > 0.5 ? 5.0 : 25.0,   // Diagonal flow frequency
+            turbulenceSpeedX: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
+            turbulenceSpeedY: Math.random() > 0.5 ? 0.5 : 5.0, // Diagonal flow speed
+            intensityMultiplier: Math.random() > 0.5 ? 0.5 : 2.0 // Overall effect intensity
         };
         
+        // Log anchor pattern for this randomization
+        const anchorPattern = this.getAnchorPattern();
+        console.log('🎯 Anchor pattern:', anchorPattern);
         console.log('🎲 New random parameters:', this.randomParams);
         
         // Re-render with new parameters
         if (this.initialized) {
             this.render();
         }
+    }
+    
+    getAnchorPattern() {
+        // Decode which anchors are being used based on current parameters - NO CENTER!
+        const anchor1 = this.randomParams.waveFreqX > 15.0 ? 'TOP-LEFT' : 
+                       (this.randomParams.waveFreqX > 10.0 ? 'TOP-RIGHT' :
+                       (this.randomParams.waveFreqY > 15.0 ? 'BOTTOM-LEFT' : 
+                       (this.randomParams.waveFreqY > 10.0 ? 'BOTTOM-RIGHT' : 'TOP-LEFT-QUARTER')));
+                       
+        const anchor2 = this.randomParams.swirlDirection > 0.0 ? 
+                       (this.randomParams.rippleSpeed > 3.0 ? 'LEFT-EDGE' : 'LEFT-QUARTER') :
+                       (this.randomParams.rippleSpeed > 3.0 ? 'RIGHT-EDGE' : 'RIGHT-QUARTER');
+                       
+        const anchor3 = this.randomParams.turbulenceX > 20.0 ? 'TOP-EDGE' :
+                       (this.randomParams.turbulenceX > 15.0 ? 'BOTTOM-EDGE' :
+                       (this.randomParams.turbulenceY > 20.0 ? 'TOP-QUARTER' : 'BOTTOM-QUARTER'));
+                       
+        const swirlCorner1 = this.randomParams.swirlSpeed > 2.5 ? 'TOP-LEFT' : 
+                            (this.randomParams.swirlSpeed > 2.0 ? 'TOP-RIGHT' :
+                            (this.randomParams.swirlSpeed > 1.5 ? 'BOTTOM-LEFT' :
+                            (this.randomParams.swirlSpeed > 1.0 ? 'BOTTOM-RIGHT' : 'QUARTER-ANCHOR')));
+                            
+        const swirlCorner2 = this.randomParams.intensityMultiplier > 1.5 ? 'TOP-RIGHT-QUARTER' :
+                            (this.randomParams.intensityMultiplier > 1.0 ? 'BOTTOM-LEFT-QUARTER' : 'VARIED-QUARTER');
+                            
+        const edgeAnchor = this.randomParams.turbulenceSpeedX > 2.5 ? 'LEFT-EDGE' : 'RIGHT-EDGE';
+        
+        return {
+            rippleAnchors: [anchor1, anchor2, anchor3],
+            flowTypes: ['HORIZONTAL', 'VERTICAL', 'DIAGONAL', 'CURVED', 'EDGE-TO-EDGE'],
+            swirlAnchors: [swirlCorner1, swirlCorner2, edgeAnchor],
+            quarterAnchors: ['TOP-LEFT-Q', 'TOP-RIGHT-Q', 'BOTTOM-LEFT-Q', 'BOTTOM-RIGHT-Q'],
+            totalAnchors: 5
+        };
     }
     
     initShaders() {
@@ -345,39 +382,110 @@ class WebGLMorpher {
                 // INTENSE warp strength that peaks in middle (now randomized!)
                 float warpPower = sin(u_morphValue * 3.14159) * 0.4 * u_intensityMultiplier;
                 
-                // RANDOMIZED ripple effect from center
-                vec2 center = vec2(0.5, 0.5);
-                float dist = length(uv - center);
-                float ripple = sin(dist * u_rippleFreq - u_time * u_rippleSpeed) * warpPower * 0.08;
+                // DIVERSE ANCHOR POINTS - NO CENTER! All effects from edges/corners
+                vec2 topLeft = vec2(0.0, 0.0);
+                vec2 topRight = vec2(1.0, 0.0);
+                vec2 bottomLeft = vec2(0.0, 1.0);
+                vec2 bottomRight = vec2(1.0, 1.0);
+                vec2 leftEdge = vec2(0.0, 0.5);
+                vec2 rightEdge = vec2(1.0, 0.5);
+                vec2 topEdge = vec2(0.5, 0.0);
+                vec2 bottomEdge = vec2(0.5, 1.0);
                 
-                // RANDOMIZED wave distortions
-                float waveX = sin(uv.y * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.06;
-                float waveY = cos(uv.x * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.05;
+                // NEW: Quarter positions for more variety
+                vec2 topLeftQuarter = vec2(0.25, 0.25);
+                vec2 topRightQuarter = vec2(0.75, 0.25);
+                vec2 bottomLeftQuarter = vec2(0.25, 0.75);
+                vec2 bottomRightQuarter = vec2(0.75, 0.75);
+                vec2 leftQuarter = vec2(0.0, 0.25);
+                vec2 rightQuarter = vec2(1.0, 0.75);
+                vec2 topQuarter = vec2(0.25, 0.0);
+                vec2 bottomQuarter = vec2(0.75, 1.0);
                 
-                // RANDOMIZED turbulent waves
-                float turbulentX = sin(uv.y * u_turbulenceX - u_time * u_turbulenceSpeedX) * cos(uv.x * 8.0 + u_time * 1.8) * warpPower * 0.04;
-                float turbulentY = cos(uv.x * u_turbulenceY + u_time * u_turbulenceSpeedY) * sin(uv.y * 6.0 - u_time * 2.1) * warpPower * 0.035;
+                // COMPLEX ANCHOR SELECTION - Multiple conditions, no center fallback
+                vec2 anchor1 = u_waveFreqX > 15.0 ? topLeft : 
+                              (u_waveFreqX > 10.0 ? topRight :
+                              (u_waveFreqY > 15.0 ? bottomLeft : 
+                              (u_waveFreqY > 10.0 ? bottomRight : topLeftQuarter)));
+                              
+                vec2 anchor2 = u_swirlDirection > 0.0 ? 
+                              (u_rippleSpeed > 3.0 ? leftEdge : leftQuarter) :
+                              (u_rippleSpeed > 3.0 ? rightEdge : rightQuarter);
+                              
+                vec2 anchor3 = u_turbulenceX > 20.0 ? topEdge :
+                              (u_turbulenceX > 15.0 ? bottomEdge :
+                              (u_turbulenceY > 20.0 ? topQuarter : bottomQuarter));
+                              
+                // Additional varied anchors for more complex effects
+                vec2 anchor4 = u_intensityMultiplier > 1.0 ? topRightQuarter : bottomLeftQuarter;
+                vec2 anchor5 = u_waveSpeedX > 2.0 ? bottomRightQuarter : topLeftQuarter;
                 
-                // RANDOMIZED swirl effect (can go clockwise or counter-clockwise!)
-                float angle = atan(uv.y - 0.5, uv.x - 0.5);
-                float swirl = sin(angle * 4.0 * u_swirlDirection + u_time * u_swirlSpeed + dist * 15.0) * warpPower * 0.07;
+                // MULTI-ANCHOR RIPPLES - 3 simultaneous ripple sources
+                float dist1 = length(uv - anchor1);
+                float dist2 = length(uv - anchor2);
+                float dist3 = length(uv - anchor3);
+                float ripple1 = sin(dist1 * u_rippleFreq - u_time * u_rippleSpeed) * warpPower * 0.08;
+                float ripple2 = cos(dist2 * u_rippleFreq * 0.7 + u_time * u_rippleSpeed * 1.3) * warpPower * 0.05;
+                float ripple3 = sin(dist3 * u_rippleFreq * 1.2 - u_time * u_rippleSpeed * 0.8) * warpPower * 0.04;
                 
-                // Secondary swirl layer (opposite direction for chaos)
-                float swirl2 = cos(angle * 2.0 * -u_swirlDirection - u_time * u_swirlSpeed * 1.3 + dist * 12.0) * warpPower * 0.04;
+                // VARIED DIRECTIONAL FLOWS - Multiple flow patterns
+                float flowX = sin(uv.x * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.06;
+                float flowY = cos(uv.y * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.05;
                 
-                // Apply INTENSE warping to both textures differently
+                // DIAGONAL FLOWS with variation
+                float diagonalFlow1 = sin((uv.x + uv.y) * u_turbulenceX * 0.5 - u_time * u_turbulenceSpeedX) * warpPower * 0.04;
+                float diagonalFlow2 = cos((uv.x - uv.y) * u_turbulenceY * 0.5 + u_time * u_turbulenceSpeedY) * warpPower * 0.035;
+                
+                // NEW: CURVED FLOWS - Following anchor-to-anchor paths
+                vec2 flow1Direction = normalize(anchor2 - anchor1);
+                vec2 flow2Direction = normalize(anchor4 - anchor5);
+                float curvedFlow1 = sin(dot(uv, flow1Direction) * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.05;
+                float curvedFlow2 = cos(dot(uv, flow2Direction) * u_waveFreqY - u_time * u_waveSpeedY) * warpPower * 0.04;
+                
+                // EDGE-TO-EDGE WAVES - Waves that travel from one edge to opposite
+                float edgeWave1 = sin(uv.x * u_turbulenceX + u_time * u_turbulenceSpeedX) * 
+                                 cos(uv.y * u_turbulenceY - u_time * u_turbulenceSpeedY) * warpPower * 0.03;
+                float edgeWave2 = cos(uv.y * u_waveFreqX - u_time * u_waveSpeedX) * 
+                                 sin(uv.x * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.025;
+                
+                // MULTIPLE CORNER SWIRLS - More variety, more anchors
+                vec2 swirlAnchor1 = u_swirlSpeed > 2.5 ? topLeft : 
+                                   (u_swirlSpeed > 2.0 ? topRight :
+                                   (u_swirlSpeed > 1.5 ? bottomLeft :
+                                   (u_swirlSpeed > 1.0 ? bottomRight : anchor4)));
+                                   
+                vec2 swirlAnchor2 = u_intensityMultiplier > 1.5 ? topRightQuarter :
+                                   (u_intensityMultiplier > 1.0 ? bottomLeftQuarter : anchor5);
+                
+                vec2 toAnchor1 = uv - swirlAnchor1;
+                vec2 toAnchor2 = uv - swirlAnchor2;
+                float swirlDist1 = length(toAnchor1);
+                float swirlDist2 = length(toAnchor2);
+                float swirlAngle1 = atan(toAnchor1.y, toAnchor1.x);
+                float swirlAngle2 = atan(toAnchor2.y, toAnchor2.x);
+                
+                float swirl1 = sin(swirlAngle1 * 4.0 * u_swirlDirection + u_time * u_swirlSpeed + swirlDist1 * 15.0) * warpPower * 0.07;
+                float swirl2 = cos(swirlAngle2 * 3.0 * -u_swirlDirection - u_time * u_swirlSpeed * 1.3 + swirlDist2 * 12.0) * warpPower * 0.04;
+                
+                // EDGE-BASED ROTATIONAL EFFECTS
+                vec2 edgeAnchor = u_turbulenceSpeedX > 2.5 ? leftEdge : rightEdge;
+                vec2 toEdge = uv - edgeAnchor;
+                float edgeAngle = atan(toEdge.y, toEdge.x);
+                float edgeSwirl = sin(edgeAngle * 6.0 * u_swirlDirection + u_time * u_swirlSpeed * 1.5) * warpPower * 0.05;
+                
+                // Apply DIVERSE warping to both textures differently
                 vec2 warpedUV1 = uv;
                 vec2 warpedUV2 = uv;
                 
-                // Luis gets INTENSE wavy distortion
-                warpedUV1.x += waveX + ripple + turbulentX + swirl2;
-                warpedUV1.y += waveY + swirl + turbulentY;
+                // Luis gets COMPLEX MULTI-ANCHOR distortion
+                warpedUV1.x += flowX + ripple1 + diagonalFlow1 + swirl2 + curvedFlow1 + edgeWave1;
+                warpedUV1.y += flowY + swirl1 + diagonalFlow2 + edgeSwirl + curvedFlow2 + edgeWave2;
                 
-                // Pelican gets strong distortion during transition (but clean at end)
+                // Pelican gets different multi-anchor distortion during transition (but clean at end)
                 if (u_morphValue < 0.9) {
                     float pelicanWarp = warpPower * (1.0 - smoothstep(0.85, 1.0, u_morphValue));
-                    warpedUV2.x += (swirl + turbulentX * 0.8) * pelicanWarp / warpPower;
-                    warpedUV2.y += (ripple + turbulentY * 0.6) * pelicanWarp / warpPower;
+                    warpedUV2.x += (swirl1 + diagonalFlow1 * 0.8 + ripple2 + curvedFlow2 + edgeWave2 * 0.7) * pelicanWarp / warpPower;
+                    warpedUV2.y += (ripple3 + diagonalFlow2 * 0.6 + flowY * 0.5 + edgeSwirl * 0.6 + curvedFlow1 * 0.8) * pelicanWarp / warpPower;
                 }
                 
                 // Keep coordinates in bounds
@@ -1000,6 +1108,7 @@ function initializeWebGLMorpher() {
         console.log('=== WEBGL STATUS CHECK ===');
         if (morpher && morpher.initialized) {
             console.log('✅ WebGL is working!');
+            console.log('🎯 Current anchor pattern:', morpher.getAnchorPattern());
             console.log('Random parameters being used:', morpher.randomParams);
         } else {
             console.log('❌ WebGL failed to initialize');
