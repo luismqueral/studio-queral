@@ -237,6 +237,14 @@ html {
 }
 
 
+  /* Custom Colors */
+  
+  .bg-custom-gray { background-color: #e4e4e4; }
+  .custom-gray { color: #e4e4e4; }
+  .b--custom-gray { border-color: #e4e4e4; }
+  .hover-bg-custom-gray:hover { background-color: #e4e4e4; }
+  .hover-custom-gray:hover { color: #e4e4e4; }
+  
   /* other settings */
   
   .sans-serif {

@@ -218,6 +218,15 @@
         a:focus:not(:focus-visible) {
             outline: none;
         }
+        
+        /* Navigation click animation - bump down effect */
+        .main-site-nav nav a {
+            transition: transform 0.1s ease;
+        }
+        
+        .main-site-nav nav a:active {
+            transform: translateY(2px);
+        }
 
         /* Markdown content styling */
         .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {

@@ -1,43 +1,111 @@
 <!-- Projects page uses unique mw9 container -->
 <div class="mw9 center">
+    <!-- Tag Filter Pills -->
+    <div class="tc mb4">
+        <div class="tags-background extended-grid br2 pa3 mb3">
+            <div class="flex flex-wrap justify-center">
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="scripts-utilities">
+                scripts &amp; utilities
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="design-tools">
+                design tools
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="writing">
+                writing
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="experimental">
+                experimental
+            </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Projects grid container -->
-    <div class="grid-container">
+    <div class="grid-container extended-grid">
         <!-- Project Card: Generative Strategies -->
         <a href="https://strategy.garden" 
            target="_blank" 
-           class="project-card pa3 bg-white br2 ba b--light-gray mb4 tc link">
-            <div class="pa3" style="margin-bottom: -0.5rem;">
+           class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
+           data-tags="design-tools">
+            <div class="mb2">
                 <img src="{{ url_for('static', filename='images/generative-strategies.png') }}" 
                      alt="Generative Strategies" 
                      class="mw-100 h-auto" 
                      style="max-height: 120px;">
             </div>
-            <span class="f6 gray project-link-text"
+            <p class="f5 lh-copy gray ma0 mb4" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
+                A collection of lateral prompts for LLM's.
+            </p>
+            <span class="f6 near-black project-link-text"
                   style="font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;">
                 strategy.garden
             </span>
         </a>
 
         <!-- Project Card: Split Triple Diamond Method -->
-        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
-            <h2 class="f6 fw6 mb3 near-black mt0">Split Triple Diamond Method</h2>
-            <p class="f6 lh-copy gray">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="design-tools">
+            <h2 class="f5 fw6 mb1 near-black mt0">Split Triple Diamond Method</h2>
+            <p class="f6 lh-copy gray mb3">
                 Design methodology framework for complex problem solving
             </p>
+            <div>
+                <svg viewBox="0 0 140 80" class="w-100 h-auto">
+                    <!-- Phase labels -->
+                    <text x="25" y="8" text-anchor="middle" fill="#777" style="font-size: 5px; font-family: monospace;">DISCOVERY</text>
+                    <text x="70" y="8" text-anchor="middle" fill="#777" style="font-size: 5px; font-family: monospace;">CONCEPTING</text>
+                    <text x="115" y="8" text-anchor="middle" fill="#777" style="font-size: 5px; font-family: monospace;">PRODUCTION</text>
+                    
+                    <!-- First Diamond -->
+                    <g>
+                        <!-- Top triangle (Design) -->
+                        <polygon points="25,12 45,38 5,38" fill="#e8a5a5" stroke="none"/>
+                        <text x="25" y="29" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">DES</text>
+                        <!-- Bottom triangle (Engineering) -->
+                        <polygon points="5,40 45,40 25,66" fill="#a5c5e8" stroke="none"/>
+                        <text x="25" y="51" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">ENG</text>
+                    </g>
+                    
+                    <!-- Second Diamond -->
+                    <g>
+                        <!-- Top triangle (Design) -->
+                        <polygon points="70,12 90,38 50,38" fill="#e8a5a5" stroke="none"/>
+                        <text x="70" y="29" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">DES</text>
+                        <!-- Bottom triangle (Engineering) -->
+                        <polygon points="50,40 90,40 70,66" fill="#a5c5e8" stroke="none"/>
+                        <text x="70" y="51" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">ENG</text>
+                    </g>
+                    
+                    <!-- Third Diamond -->
+                    <g>
+                        <!-- Top triangle (Design) -->
+                        <polygon points="115,12 135,38 95,38" fill="#e8a5a5" stroke="none"/>
+                        <text x="115" y="29" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">DES</text>
+                        <!-- Bottom triangle (Engineering) -->
+                        <polygon points="95,40 135,40 115,66" fill="#a5c5e8" stroke="none"/>
+                        <text x="115" y="51" text-anchor="middle" fill="white" style="font-size: 4px; font-family: monospace;">ENG</text>
+                    </g>
+                </svg>
+            </div>
         </div>
 
         <!-- Project Card: Spooky Looper -->
-        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
-            <h2 class="f6 fw6 mb3 near-black mt0">Spooky Looper</h2>
-            <p class="f6 lh-copy gray">
-                Interactive audio looping application
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="scripts-utilities">
+            <h2 class="f2 fw6 mb3 near-black mt0 font-hobo tc">Spooky Looper</h2>
+            <div class="mb3 tc">
+                <img src="{{ url_for('static', filename='images/spooky-looper-crisp.png') }}" 
+                     alt="Spooky Looper Interface" 
+                     class="w-70 h-auto">
+            </div>
+            <p class="f6 lh-copy gray tc ma0">
+                An offbeat, browser-based audio looper.
             </p>
         </div>
 
         <!-- Project Card: Happybirthdaybridget.biz -->
         <a href="https://happybirthdaybridget.biz" 
            target="_blank" 
-           class="project-card pa3 br2 ba b--light-gray mb4 tc link birthday-card"
+           class="project-card pa4 br2 ba b--light-gray tc link birthday-card" 
+           data-tags="experimental"
            style="font-family: 'Comic Sans MS', cursive, sans-serif; background: linear-gradient(135deg, #fff5a5, #ffeb3b, #ffc107);">
             <div class="f3 mb2">🎈🎈🎈</div>
             <h2 class="f4 fw6 mb0 near-black mt0 pa3 br2" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)); font-family: 'Lucida Blackletter', serif;">happy birthday bridget .biz</h2>
@@ -47,24 +115,105 @@
         </a>
 
         <!-- Project Card: PR Detective -->
-        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
-            <h2 class="f6 fw6 mb3 near-black mt0">PR Detective</h2>
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="scripts-utilities">
+            <h2 class="f5 fw6 mb1 near-black mt0">PR Detective</h2>
             <p class="f6 lh-copy gray">
                 Tool for analyzing and tracking pull request activity
             </p>
         </div>
 
         <!-- Project Card: Jump City Records -->
-        <div class="project-card pa3 bg-white br2 ba b--light-gray mb4">
-            <h2 class="f6 fw6 mb3 near-black mt0">Jump City Records</h2>
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+            <h2 class="f5 fw6 mb1 near-black mt0">Jump City Records</h2>
             <p class="f6 lh-copy gray">
                 Music label and artist collective platform
             </p>
+        </div>
+
+        <!-- Project Card: Sample Card with Image -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+            <div class="flex items-start h-100">
+                <div class="flex-auto pr3">
+                    <h2 class="f5 fw6 mb1 near-black mt0">Sample Project</h2>
+                    <p class="f6 lh-copy gray">
+                        Example project with a square image on the right side
+                    </p>
+                </div>
+                <div class="flex-none">
+                    <div class="square-image bg-light-gray br2" style="background-color: #f0f0f0;">
+                        <!-- Placeholder square image -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Card: Noice Network -->
+        <a href="https://noice.network" 
+           target="_blank" 
+           class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
+           data-tags="experimental">
+            <div class="mb2">
+                <div class="bg-light-gray br2" style="width: 120px; height: 120px; margin: 0 auto; background-color: #f0f0f0;">
+                    <!-- Placeholder image -->
+                </div>
+            </div>
+            <p class="f5 lh-copy gray ma0 mb4" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
+                Placeholder subtitle for noice network.
+            </p>
+            <span class="f6 near-black project-link-text"
+                  style="font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;">
+                noice.network
+            </span>
+        </a>
+
+        <!-- Project Card: Large Image Example -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+            <div class="flex items-start h-100">
+                <div class="flex-auto pr3">
+                    <h2 class="f5 fw6 mb1 near-black mt0">Large Image Project</h2>
+                    <p class="f6 lh-copy gray">
+                        Project featuring a much larger square image placeholder
+                    </p>
+                </div>
+                <div class="flex-none">
+                    <div class="large-square-image bg-light-gray br2" style="background-color: #e0e0e0;">
+                        <!-- Large placeholder square image -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
+/* Tags background container */
+.tags-background {
+    background-color: #e4e4e4;
+}
+
+/* Filter pill styles */
+.filter-pill {
+    transition: all 0.2s ease;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+.filter-pill:hover {
+    transform: translateY(-1px);
+}
+
+.filter-pill:active {
+    transform: translateY(1px);
+}
+
+.filter-pill.inactive {
+    opacity: 0.4;
+}
+
+.filter-pill.active {
+    background-color: #d0d0d0;
+    color: #333;
+}
+
 /* Grid layout for projects - Two columns */
 .grid-container {
     display: grid;
@@ -73,16 +222,52 @@
     max-width: 900px;
 }
 
-/* Ensure consistent card heights */
+/* Extended grid that goes beyond container */
+.extended-grid {
+    width: min(800px, calc(100vw - 2rem));
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Ensure consistent card heights and aspect ratio */
 .project-card {
     display: flex;
     flex-direction: column;
     height: auto;
-    min-height: 200px;
-    justify-content: center;
+    aspect-ratio: 4 / 3;
+    justify-content: flex-start;
     transition: all 0.2s ease;
     cursor: pointer;
     text-decoration: none;
+    overflow: hidden;
+}
+
+/* Hide projects when filtered */
+.project-card.hidden {
+    display: none !important;
+}
+
+/* Square image sizing for cards with right-side images */
+.square-image {
+    width: calc(75% / 4 * 3 - 1.5rem);
+    height: calc(75% / 4 * 3 - 1.5rem);
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+/* Large square image sizing for cards with prominent images */
+.large-square-image {
+    width: calc(75% / 4 * 3 - 1rem);
+    height: calc(75% / 4 * 3 - 1rem);
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 120px;
+    max-height: 120px;
 }
 
 .project-card:hover {
@@ -110,16 +295,78 @@
 }
 
 /* Responsive adjustments */
-@media screen and (max-width: 60em) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 30em) {
+@media screen and (max-width: 48em) {
     .grid-container {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+    }
+    
+    .project-card {
+        width: 100%;
+        aspect-ratio: unset;
+        height: auto;
+        min-height: unset;
+    }
+    
+    .filter-pill {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
     }
 }
-</style> 
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all filter pills and project cards
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Add click event listeners to filter pills
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Toggle this pill's active state
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+            } else {
+                this.classList.add('active');
+            }
+            
+            // Get all currently active filters
+            const activeFilters = Array.from(filterPills)
+                .filter(p => p.classList.contains('active'))
+                .map(p => p.getAttribute('data-filter'));
+            
+            // Update inactive state for visual feedback
+            filterPills.forEach(p => {
+                if (p.classList.contains('active')) {
+                    p.classList.remove('inactive');
+                } else {
+                    p.classList.add('inactive');
+                }
+            });
+            
+            // If no filters are active, remove inactive class from all (show all as available)
+            if (activeFilters.length === 0) {
+                filterPills.forEach(p => p.classList.remove('inactive'));
+            }
+            
+            // Filter project cards
+            projectCards.forEach(card => {
+                const cardTags = card.getAttribute('data-tags') || '';
+                
+                // Show card if no filters are active OR if card matches any active filter
+                if (activeFilters.length === 0 || activeFilters.some(filter => cardTags.includes(filter))) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+});
+</script> 
