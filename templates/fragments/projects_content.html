@@ -46,10 +46,10 @@
         <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="design-tools">
             <h2 class="f5 fw6 mb1 near-black mt0">Split Triple Diamond Method</h2>
             <p class="f6 lh-copy gray mb3">
-                Design methodology framework for complex problem solving
+                A working process to improve designer / engineer friction.
             </p>
-            <div>
-                <svg viewBox="0 0 140 80" class="w-100 h-auto">
+            <div class="tc">
+                <svg viewBox="0 0 140 80" class="w-80 h-auto">
                     <!-- Phase labels -->
                     <text x="25" y="8" text-anchor="middle" fill="#777" style="font-size: 5px; font-family: monospace;">DISCOVERY</text>
                     <text x="70" y="8" text-anchor="middle" fill="#777" style="font-size: 5px; font-family: monospace;">CONCEPTING</text>
@@ -152,17 +152,35 @@
            target="_blank" 
            class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
            data-tags="experimental">
-            <div class="mb2">
-                <div class="bg-light-gray br2" style="width: 120px; height: 120px; margin: 0 auto; background-color: #f0f0f0;">
-                    <!-- Placeholder image -->
-                </div>
+            <div class="mb3 tc">
+                <img src="{{ url_for('static', filename='images/noice-crisp.gif') }}" 
+                     alt="Noice Network" 
+                     class="w-30 h-auto"
+                     style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
             </div>
-            <p class="f5 lh-copy gray ma0 mb4" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
-                Placeholder subtitle for noice network.
-            </p>
+            <div class="f5 lh-copy gray ma0 mb4 tc" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
+                <div style="white-space: nowrap;">Network of Interconnected</div>
+                <div style="white-space: nowrap;">Content Engines</div>
+            </div>
             <span class="f6 near-black project-link-text"
                   style="font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;">
                 noice.network
+            </span>
+        </a>
+
+        <!-- Project Card: Product Design Portfolio -->
+        <a href="mailto:hey@queral.studio?subject=hey%20luis&body=i%20am%20interested%20in%20learning%20more%20about%20your%20product%20design%20work%2C%20would%20you%20be%20interested%20in%20chatting%3F" 
+           target="_blank"
+           class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
+           data-tags="design-tools">
+            <div class="f1 mb3">🔒😤👌</div>
+            <h2 class="f5 fw6 mb1 near-black mt0">Product Design Portfolio</h2>
+            <p class="f6 lh-copy gray mb4">
+                A collection of client work and internal-facing projects. By special request only.
+            </p>
+            <span class="f6 near-black project-link-text"
+                  style="font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;">
+                View Portfolio
             </span>
         </a>
 
