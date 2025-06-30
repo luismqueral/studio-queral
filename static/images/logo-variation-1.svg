@@ -1,40 +1,40 @@
 <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Default gradient -->
-    <linearGradient id="grad_1751301834" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad_1751302770" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#d6ded3;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#b4cfaf;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#88c486;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b5cfaf;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8bc486;stop-opacity:1" />
     </linearGradient>
     
     <!-- Hover gradient -->
-    <linearGradient id="grad_hover_1751301834" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad_hover_1751302770" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#a7baa0;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#85b47c;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#58b255;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#87b47c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5cb255;stop-opacity:1" />
     </linearGradient>
     
     <!-- Active gradient -->
-    <linearGradient id="grad_active_1751301834" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad_active_1751302770" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#6e9062;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#528d47;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#358532;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#558d47;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388532;stop-opacity:1" />
     </linearGradient>
   </defs>
   
   <style>
     .logo-circle {
-      fill: url(#grad_1751301834);
+      fill: url(#grad_1751302770);
       transition: fill 0.2s ease, transform 0.1s ease;
       cursor: pointer;
     }
     
     .logo-circle:hover {
-      fill: url(#grad_hover_1751301834);
+      fill: url(#grad_hover_1751302770);
     }
     
     .logo-circle:active {
-      fill: url(#grad_active_1751301834);
+      fill: url(#grad_active_1751302770);
       transform: translateY(2px);
     }
   </style>
