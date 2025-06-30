@@ -698,17 +698,12 @@ class WebGLMorpher {
                 float luisBrightness = dot(luisSample.rgb, vec3(0.299, 0.587, 0.114));
                 float pelicanBrightness = dot(pelicanSample.rgb, vec3(0.299, 0.587, 0.114));
                 
-                // Luis strength decreases with morph
-                float luisSortStrength = u_pixelSortIntensity * warpPower * 0.15 * (1.0 - u_morphValue * 0.5); // Luis fades more aggressively
+                // Both images get equal treatment - consistent effects throughout
+                float luisSortStrength = u_pixelSortIntensity * warpPower * 0.2;
                 
-                // Pelican: DRAMATIC entry at 55%, intense until 75%, then exponentially static
-                float pelicanEntry = smoothstep(0.55, 0.65, u_morphValue); // Faster, stronger appearance 55%-65%
-                float pelicanStaticDecay = 1.0 - pow(smoothstep(0.75, 1.0, u_morphValue), 3.0); // Exponential decay 75%-100%
-                
-                // MUCH STRONGER time-based movement that decays exponentially after 75%
-                float pelicanTimeMovement = (1.0 + sin(u_time * 1.3) * 0.8 + cos(u_time * 0.7) * 0.6) * pelicanStaticDecay; // BIGGER amplitude
-                float pelicanTimeStrength = u_pixelSortIntensity * warpPower * 0.25 * pelicanTimeMovement; // MUCH stronger base (0.25 vs 0.12)
-                float pelicanSortStrength = pelicanTimeStrength * pelicanEntry;
+                // Pelican gets same base strength as luis with consistent time-based movement
+                float pelicanTimeMovement = (1.0 + sin(u_time * 1.3) * 0.8 + cos(u_time * 0.7) * 0.6); // Consistent amplitude
+                float pelicanSortStrength = u_pixelSortIntensity * warpPower * 0.2 * pelicanTimeMovement;
                 
                 // BASIC BAND SORTING - Horizontal/Vertical strips
                 if (u_pixelSortIntensity > 0.5) {
@@ -728,17 +723,17 @@ class WebGLMorpher {
                         }
                         luisPixelSort.x += sin(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
                         
-                        // Pelican horizontal sorting - INTENSE until 75%, then exponentially static
-                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.8) * 0.3 * pelicanStaticDecay; // BIGGER threshold swing
+                        // Pelican horizontal sorting - consistent effects like luis
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.8) * 0.3; // Same threshold swing as luis
                         float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
                         if (pelicanBrightness < pelicanThreshold) {
-                            pelicanPixelSort.x += pelicanSortOffset * cos(uv.y * (18.0 + sin(u_time * 0.4) * 12.0 * pelicanStaticDecay) - u_time * 1.3); // BIGGER frequency shift
+                            pelicanPixelSort.x += pelicanSortOffset * cos(uv.y * (18.0 + sin(u_time * 0.4) * 12.0) - u_time * 1.3); // Consistent frequency shift
                         }
-                        // STRONGER secondary waves that decay exponentially
-                        pelicanPixelSort.x += cos(pelicanBandIndex * 2.5 + pelicanBandOffset * 4.0) * pelicanSortStrength * 0.8; // Stronger
-                        pelicanPixelSort.x += sin(uv.y * 12.0 + u_time * 2.1) * pelicanSortStrength * 0.7 * pelicanStaticDecay; // Stronger
-                        // Third wave layer that becomes still - MUCH stronger
-                        pelicanPixelSort.x += cos(uv.y * 8.0 - u_time * 3.2) * pelicanTimeStrength * 0.6;
+                        // Consistent secondary waves
+                        pelicanPixelSort.x += cos(pelicanBandIndex * 2.5 + pelicanBandOffset * 4.0) * pelicanSortStrength * 0.8;
+                        pelicanPixelSort.x += sin(uv.y * 12.0 + u_time * 2.1) * pelicanSortStrength * 0.7;
+                        // Third wave layer - consistent movement
+                        pelicanPixelSort.x += cos(uv.y * 8.0 - u_time * 3.2) * pelicanSortStrength * 0.6;
                     }
                     else {
                         // VERTICAL SORTING
@@ -756,17 +751,17 @@ class WebGLMorpher {
                         }
                         luisPixelSort.y += cos(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
                         
-                        // Pelican vertical sorting - INTENSE until 75%, then exponentially static
-                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 0.6) * 0.3 * pelicanStaticDecay; // BIGGER threshold swing
+                        // Pelican vertical sorting - consistent effects like luis
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 0.6) * 0.3; // Same threshold swing as luis
                         float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
                         if (pelicanBrightness < pelicanThreshold) {
-                            pelicanPixelSort.y += pelicanSortOffset * sin(uv.x * (16.0 + cos(u_time * 0.5) * 10.0 * pelicanStaticDecay) - u_time * 1.1); // BIGGER frequency shift
+                            pelicanPixelSort.y += pelicanSortOffset * sin(uv.x * (16.0 + cos(u_time * 0.5) * 10.0) - u_time * 1.1); // Consistent frequency shift
                         }
-                        // STRONGER secondary waves that decay exponentially
-                        pelicanPixelSort.y += sin(pelicanBandIndex * 2.8 + pelicanBandOffset * 5.0) * pelicanSortStrength * 0.8; // Stronger
-                        pelicanPixelSort.y += cos(uv.x * 14.0 - u_time * 1.8) * pelicanSortStrength * 0.7 * pelicanStaticDecay; // Stronger
-                        // Third wave layer that becomes still - MUCH stronger
-                        pelicanPixelSort.y += sin(uv.x * 10.0 + u_time * 2.8) * pelicanTimeStrength * 0.6;
+                        // Consistent secondary waves
+                        pelicanPixelSort.y += sin(pelicanBandIndex * 2.8 + pelicanBandOffset * 5.0) * pelicanSortStrength * 0.8;
+                        pelicanPixelSort.y += cos(uv.x * 14.0 - u_time * 1.8) * pelicanSortStrength * 0.7;
+                        // Third wave layer - consistent movement
+                        pelicanPixelSort.y += sin(uv.x * 10.0 + u_time * 2.8) * pelicanSortStrength * 0.6;
                     }
                 }
                 
@@ -784,10 +779,10 @@ class WebGLMorpher {
                         luisPixelSort += luisSortDirection * luisStreakDisplace * sin(luisSortBand * 12.0 + u_time * 2.0);
                     }
                     
-                    // Pelican: DRAMATIC sort with rotation that slows down
+                    // Pelican: Consistent diagonal sort with rotation like luis
                     vec2 pelicanSortDirection = normalize(anchor5 - anchor2);
-                    // BIGGER rotation that slows exponentially after 75%
-                    float rotationAngle = sin(u_time * 0.3) * 0.4 * pelicanStaticDecay; // DOUBLE the rotation
+                    // Consistent rotation like luis
+                    float rotationAngle = sin(u_time * 0.3) * 0.4; // Same rotation as luis
                     vec2 rotatedDirection = vec2(
                         pelicanSortDirection.x * cos(rotationAngle) - pelicanSortDirection.y * sin(rotationAngle),
                         pelicanSortDirection.x * sin(rotationAngle) + pelicanSortDirection.y * cos(rotationAngle)
@@ -796,11 +791,11 @@ class WebGLMorpher {
                     float pelicanSortProjection = dot(uv - anchor2, rotatedDirection);
                     float pelicanSortBand = floor(pelicanSortProjection * (15.0 + sin(u_time * 0.4) * 3.0)) / 15.0;
                     
-                    float dynamicThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.9) * 0.3 * pelicanStaticDecay; // BIGGER threshold variation
-                    float pelicanStreakDisplace = (pelicanBrightness - dynamicThreshold) * diagonalStrength * pelicanTimeStrength;
+                    float dynamicThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.9) * 0.3; // Same threshold variation as luis
+                    float pelicanStreakDisplace = (pelicanBrightness - dynamicThreshold) * diagonalStrength * pelicanSortStrength;
                     if (pelicanBrightness < dynamicThreshold) {
                         pelicanPixelSort += rotatedDirection * pelicanStreakDisplace * cos(pelicanSortBand * 8.0 - u_time * 1.5) * 
-                                           (0.8 + sin(u_time * 2.2) * 1.2 * pelicanStaticDecay); // MUCH stronger intensity
+                                           (0.8 + sin(u_time * 2.2) * 1.2); // Consistent intensity
                     }
                 }
                 
@@ -818,17 +813,17 @@ class WebGLMorpher {
                                        sin(luisRadialBand * 15.0 + u_time * 3.0);
                     }
                     
-                    // Pelican: DRAMATIC radial sort with focal point that slows to stillness
-                    vec2 dynamicAnchor3 = anchor3 + vec2(sin(u_time * 0.6) * 0.2 * pelicanStaticDecay, cos(u_time * 0.8) * 0.2 * pelicanStaticDecay); // BIGGER movement
+                    // Pelican: Consistent radial sort like luis
+                    vec2 dynamicAnchor3 = anchor3 + vec2(sin(u_time * 0.6) * 0.2, cos(u_time * 0.8) * 0.2); // Same movement as luis
                     vec2 pelicanRadialDir = normalize(uv - dynamicAnchor3);
                     float pelicanRadialDist = length(uv - dynamicAnchor3);
-                    float pelicanRadialBand = floor(pelicanRadialDist * (20.0 + cos(u_time * 0.5) * 8.0 * pelicanStaticDecay)) / 20.0; // BIGGER band variation
+                    float pelicanRadialBand = floor(pelicanRadialDist * (20.0 + cos(u_time * 0.5) * 8.0)) / 20.0; // Same band variation as luis
                     
-                    float dynamicRadialThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 1.1) * 0.25 * pelicanStaticDecay; // BIGGER threshold swing
+                    float dynamicRadialThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 1.1) * 0.25; // Same threshold swing as luis
                     if (pelicanBrightness < dynamicRadialThreshold) {
-                        float radialIntensity = (0.6 + sin(u_time * 1.7) * 1.0 * pelicanStaticDecay); // MUCH stronger pulsing
+                        float radialIntensity = (0.6 + sin(u_time * 1.7) * 1.0); // Consistent pulsing
                         pelicanPixelSort += pelicanRadialDir * (dynamicRadialThreshold - pelicanBrightness) * 
-                                           radialStrength * pelicanTimeStrength * radialIntensity * 
+                                           radialStrength * pelicanSortStrength * radialIntensity * 
                                            cos(pelicanRadialBand * 10.0 - u_time * 2.2);
                     }
                 }
@@ -866,19 +861,16 @@ class WebGLMorpher {
                 warpedUV1.x += flowX + ripple1 + diagonalFlow1 + swirl2 + curvedFlow1 + edgeWave1 + luisPixelSort.x;
                 warpedUV1.y += flowY + swirl1 + diagonalFlow2 + edgeSwirl + curvedFlow2 + edgeWave2 + luisPixelSort.y;
                 
-                // Pelican: DRAMATIC entry, intense effects, then exponential stillness
-                float pelicanWarp = warpPower * pelicanEntry * 1.5; // 50% STRONGER warp strength
+                // Pelican: Consistent effects like luis throughout the entire transition
+                float pelicanWarp = warpPower * 1.2; // Same base strength as luis with slight boost for visual variety
                 
-                // MUCH STRONGER time-based variation that exponentially decays to stillness
-                float pelicanTimeVariation = (1.0 + sin(u_time * 0.9) * 0.8 + cos(u_time * 1.4) * 0.6) * pelicanStaticDecay; // BIGGER variation
-                
-                // Clean end - pelican becomes perfectly static at 100%
-                float pelicanMovementMultiplier = pelicanTimeVariation * (1.0 - smoothstep(0.98, 1.0, u_morphValue));
+                // Consistent time-based variation like luis
+                float pelicanTimeVariation = (1.0 + sin(u_time * 0.9) * 0.8 + cos(u_time * 1.4) * 0.6); // Same variation as luis
                 
                 warpedUV2.x += (swirl1 + diagonalFlow1 * 0.8 + ripple2 + curvedFlow2 + edgeWave2 * 0.7 + pelicanPixelSort.x) * 
-                               pelicanWarp * pelicanMovementMultiplier;
+                               pelicanWarp * pelicanTimeVariation;
                 warpedUV2.y += (ripple3 + diagonalFlow2 * 0.6 + flowY * 0.5 + edgeSwirl * 0.6 + curvedFlow1 * 0.8 + pelicanPixelSort.y) * 
-                               pelicanWarp * pelicanMovementMultiplier;
+                               pelicanWarp * pelicanTimeVariation;
                 
                 // Keep coordinates in bounds
                 warpedUV1 = clamp(warpedUV1, 0.0, 1.0);
