@@ -45,7 +45,7 @@
         <!-- Project Card: Split Triple Diamond Method -->
         <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="design-tools">
             <h2 class="f5 fw6 mb1 near-black mt0">Split Triple Diamond Method</h2>
-            <p class="f6 lh-copy gray mb3">
+            <p class="f6 lh-copy gray ma0 mb3">
                 A working process to improve designer / engineer friction.
             </p>
             <div class="tc">
@@ -104,11 +104,13 @@
         <!-- Project Card: Happybirthdaybridget.biz -->
         <a href="https://happybirthdaybridget.biz" 
            target="_blank" 
-           class="project-card pa4 br2 ba b--light-gray tc link birthday-card" 
+           class="project-card pa4 bg-white br2 ba b--light-gray tc link birthday-card" 
            data-tags="experimental"
-           style="font-family: 'Comic Sans MS', cursive, sans-serif; background: linear-gradient(135deg, #fff5a5, #ffeb3b, #ffc107);">
+           style="font-family: 'Comic Sans MS', cursive, sans-serif;">
             <div class="f3 mb2">🎈🎈🎈</div>
-            <h2 class="f4 fw6 mb0 near-black mt0 pa3 br2" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)); font-family: 'Lucida Blackletter', serif;">happy birthday bridget .biz</h2>
+            <div class="pa3 br2 mb2" style="background: linear-gradient(135deg, #fff5a5, #ffeb3b, #ffc107);">
+                <h2 class="f2 fw6 mb0 near-black mt0" style="font-family: 'Lucida Blackletter', serif; line-height: 1.1;">Happy Birthday<br>Bridget<br><span class="f5 fw4" style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-decoration: none !important; margin-top: -0.2rem; display: inline-block;">(.biz)</span></h2>
+            </div>
             <p class="f6 lh-copy near-black">
                 the official website for bridgets birthday
             </p>
@@ -117,16 +119,58 @@
         <!-- Project Card: PR Detective -->
         <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="scripts-utilities">
             <h2 class="f5 fw6 mb1 near-black mt0">PR Detective</h2>
-            <p class="f6 lh-copy gray">
+            <p class="f6 lh-copy gray ma0 mb3">
                 Tool for analyzing and tracking pull request activity
             </p>
         </div>
 
         <!-- Project Card: Jump City Records -->
-        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="experimental">
             <h2 class="f5 fw6 mb1 near-black mt0">Jump City Records</h2>
-            <p class="f6 lh-copy gray">
-                Music label and artist collective platform
+            <p class="f6 lh-copy gray ma0 mb3">
+                an experimental, generative music label bot (2013)
+            </p>
+            <div class="tc">
+                <img src="{{ url_for('static', filename='images/jump-city.png') }}" 
+                     alt="Jump City Records" 
+                     class="w-60 h-auto">
+            </div>
+        </div>
+
+        <!-- Project Card: Hamburger Music -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="experimental">
+            <h2 class="f5 fw6 mb1 near-black mt0">Hamburger Music</h2>
+            <p class="f6 lh-copy gray ma0 mb3">
+                TK
+            </p>
+            <div class="tc">
+                <img src="{{ url_for('static', filename='images/hamburger-music.png') }}" 
+                     alt="Hamburger Music" 
+                     class="w-60 h-auto">
+            </div>
+        </div>
+
+        <!-- Project Card: SVG Bricolage -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="design-tools">
+            <h2 class="f5 fw6 mb1 near-black mt0">SVG Bricolage</h2>
+            <p class="f6 lh-copy gray ma0 mb3">
+                TK
+            </p>
+        </div>
+
+        <!-- Project Card: Generative Design Thinking -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="design-tools">
+            <h2 class="f2 fw6 mb1 near-black mt0 tc" style="font-family: 'Times New Roman', Times, serif;">Generative Design<br>Thinking</h2>
+            <p class="f6 lh-copy gray ma0 mb3">
+                an (in progress) book about the art, process, and spirit of generative creativity.
+            </p>
+        </div>
+
+        <!-- Project Card: Happyfood -->
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+            <h2 class="f5 fw6 mb1 near-black mt0">Happyfood</h2>
+            <p class="f6 lh-copy gray ma0 mb3">
+                Pictures of food with face on them
             </p>
         </div>
 
@@ -135,7 +179,7 @@
             <div class="flex items-start h-100">
                 <div class="flex-auto pr3">
                     <h2 class="f5 fw6 mb1 near-black mt0">Sample Project</h2>
-                    <p class="f6 lh-copy gray">
+                    <p class="f6 lh-copy gray ma0 mb3">
                         Example project with a square image on the right side
                     </p>
                 </div>
@@ -158,7 +202,8 @@
                      class="w-30 h-auto"
                      style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
             </div>
-            <div class="f5 lh-copy gray ma0 mb4 tc" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
+            <h2 class="f5 fw6 mb1 near-black tc mt0">N.O.I.C.E Network</h2>
+            <div class="f6 lh-copy gray ma0 mb3 tc" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
                 <div style="white-space: nowrap;">Network of Interconnected</div>
                 <div style="white-space: nowrap;">Content Engines</div>
             </div>
@@ -189,7 +234,7 @@
             <div class="flex items-start h-100">
                 <div class="flex-auto pr3">
                     <h2 class="f5 fw6 mb1 near-black mt0">Large Image Project</h2>
-                    <p class="f6 lh-copy gray">
+                    <p class="f6 lh-copy gray ma0 mb3">
                         Project featuring a much larger square image placeholder
                     </p>
                 </div>

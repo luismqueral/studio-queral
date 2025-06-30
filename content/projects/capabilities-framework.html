@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capabilities as a Novel Alternative to System Recommendations</title>
+    
+    <!-- Tachyons CSS Framework -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+    <link rel="stylesheet" href="/static/css/tachyons-ext.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
+    
+    <!-- Computer Modern Font -->
+    <link href="https://cdn.jsdelivr.net/gh/vsalvino/computer-modern@main/fonts/serif.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", serif;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+        
+        .content-container {
+            max-width: 8.5in;
+            padding: 1in;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+        }
+        
+        .authors {
+            text-align: center;
+            font-size: 11pt;
+            margin-bottom: 10px;
+        }
+        
+        .affiliation {
+            text-align: center;
+            font-size: 10pt;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .abstract {
+            margin: 30px 0;
+            font-size: 10pt;
+        }
+        
+        .abstract-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .abstract-content {
+            text-align: justify;
+            margin: 0 40px;
+            text-indent: 0;
+        }
+        
+        h1 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            font-style: italic;
+        }
+        
+        h3 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            display: inline;
+        }
+        
+        h3 + p {
+            display: inline;
+        }
+        
+        p {
+            text-align: justify;
+            margin: 10px 0;
+            text-indent: 15px;
+        }
+        
+        .no-indent {
+            text-indent: 0;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 5px 0;
+            text-align: justify;
+        }
+        
+        .equation {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 10pt;
+        }
+        
+        th, td {
+            padding: 8px 15px;
+            text-align: left;
+            border-bottom: 1px solid #000;
+        }
+        
+        th {
+            font-weight: bold;
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+        }
+        
+        .table-bottom {
+            border-bottom: 2px solid #000;
+        }
+        
+        .table-caption {
+            text-align: center;
+            font-size: 10pt;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .references {
+            font-size: 10pt;
+        }
+        
+        .references h1 {
+            font-size: 12pt;
+            text-transform: uppercase;
+        }
+        
+        .ref-item {
+            margin: 8px 0;
+            text-indent: -30px;
+            padding-left: 30px;
+        }
+        
+        .citation {
+            font-size: 9pt;
+            vertical-align: super;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+        }
+    </style>
+</head>
+<body class="ma0 pa0 bg-near-white near-black min-vh-100">
+    <div class="content-container center bg-white min-vh-100 shadow-2">
+        <div class="title">
+        "Capabilities" as a Method for Structuring the Design and Architecture of Software Platform Experiences
+    </div>
+    
+    <div class="authors">
+        Tina Ye, Meghna Dholakia, Jane Dobkin, Luis Queral, <br> Yvonne Tran, Olivia Cheng, Tracie Lee
+    </div>
+    
+    <div class="affiliation">
+        The New York Times, New York, NY
+    </div>
+    
+    <div class="abstract">
+        <div class="abstract-title">ABSTRACT</div>
+        <div class="abstract-content">
+            Traditional recommendation systems rely heavily on collaborative filtering and content-based approaches that optimize for engagement metrics, often leading to filter bubbles and algorithmic bias. This paper introduces a capabilities-based framework that shifts focus from predicting user preferences to empowering users with enhanced discovery and control mechanisms. We present a novel architecture that surfaces content based on user-defined capabilities and goals rather than historical behavior patterns. Through extensive evaluation on real-world datasets from news consumption patterns, we demonstrate that capability-driven recommendations increase content diversity by 34% while maintaining user satisfaction scores comparable to traditional approaches. Our framework offers a promising alternative for platforms seeking to balance engagement with editorial responsibility and user agency.
+        </div>
+    </div>
+    
+    <h1>1. Introduction</h1>
+    
+    <p>The proliferation of digital content has made recommendation systems indispensable for modern media platforms. However, traditional approaches—primarily collaborative filtering and content-based methods—face increasing scrutiny for their role in creating echo chambers and amplifying algorithmic bias. These systems optimize primarily for engagement metrics, often at the expense of content diversity and user autonomy.</p>
+    
+    <p>This paper proposes a fundamental shift from prediction-based to capability-based recommendation systems. Rather than inferring what users might want based on past behavior, our approach empowers users to explicitly define their information consumption goals and provides them with tools to achieve these objectives. We argue that this paradigm shift addresses several critical limitations of existing systems while maintaining practical feasibility for large-scale deployment.</p>
+    
+    <h1>2. Background and Related Work</h1>
+    
+    <h2>2.1 Traditional Recommendation Approaches</h2>
+    
+    <p>Collaborative filtering methods leverage user-item interaction patterns to identify similar users or items, while content-based approaches focus on item features and user profiles. Hybrid systems combine both approaches but inherit their fundamental limitation: they optimize for predicted preference rather than actual user needs or goals.</p>
+    
+    <h2>2.2 Limitations of Current Systems</h2>
+    
+    <p>Recent research has highlighted several critical issues with traditional recommendation systems:</p>
+    
+    <ul>
+        <li><strong>Filter bubbles</strong>: Users receive increasingly narrow content selections</li>
+        <li><strong>Algorithmic bias</strong>: Historical patterns perpetuate demographic and ideological biases</li>
+        <li><strong>Lack of transparency</strong>: Users cannot understand or control recommendation logic</li>
+        <li><strong>Engagement optimization</strong>: Systems prioritize time-on-site over information quality or user satisfaction</li>
+    </ul>
+    
+    <h1>3. Capabilities-Based Framework</h1>
+    
+    <h2>3.1 Core Principles</h2>
+    
+    <p>Our capabilities-based approach rests on three fundamental principles:</p>
+    
+    <ol>
+        <li><strong>User Agency</strong>: Users explicitly define their information consumption goals and preferences for how content should be discovered and presented.</li>
+        <li><strong>Capability Mapping</strong>: The system maps available content to user-defined capabilities rather than predicted preferences.</li>
+        <li><strong>Transparent Control</strong>: Users can inspect, modify, and override system behavior at any point in the recommendation process.</li>
+    </ol>
+    
+    <h2>3.2 Architecture Overview</h2>
+    
+    <p>The capabilities framework consists of four primary components:</p>
+    
+    <h3>Capability Definition Layer.</h3> <p>Users specify their information consumption goals through structured interfaces. Examples include "staying informed about local politics," "exploring diverse perspectives on climate policy," or "discovering emerging artists in jazz."</p>
+    
+    <h3>Content Analysis Engine.</h3> <p>Articles, multimedia, and other content are analyzed not just for topical relevance but for their potential to fulfill specific user capabilities. This includes factors such as perspective diversity, information depth, and credibility scoring.</p>
+    
+    <h3>Matching Algorithm.</h3> <p>Rather than predicting preference scores, our algorithm identifies content that best enables users to achieve their stated capabilities, incorporating constraints such as time availability, complexity preferences, and source diversity requirements.</p>
+    
+    <h3>Feedback Integration.</h3> <p>User interactions are interpreted within the context of capability fulfillment rather than simple engagement metrics, enabling more nuanced understanding of recommendation effectiveness.</p>
+    
+    <h2>3.3 Mathematical Formulation</h2>
+    
+    <p>Let <em>U</em> = {<em>u</em><sub>1</sub>, <em>u</em><sub>2</sub>, ..., <em>u<sub>n</sub></em>} represent the set of users and <em>I</em> = {<em>i</em><sub>1</sub>, <em>i</em><sub>2</sub>, ..., <em>i<sub>m</sub></em>} the set of content items. For each user <em>u</em>, we define a capability set <em>C<sub>u</sub></em> = {<em>c</em><sub>1</sub>, <em>c</em><sub>2</sub>, ..., <em>c<sub>k</sub></em>} where each capability <em>c<sub>j</sub></em> is associated with specific goals and constraints.</p>
+    
+    <p class="no-indent">The recommendation score for item <em>i</em> given user <em>u</em> is computed as:</p>
+    
+    <div class="equation">
+        <em>R</em>(<em>u</em>, <em>i</em>) = Σ<sub><em>c</em> ∈ <em>C<sub>u</sub></em></sub> <em>w<sub>c</sub></em> · <em>φ</em>(<em>i</em>, <em>c</em>) · <em>ψ</em>(<em>u</em>, <em>c</em>, <em>t</em>)
+    </div>
+    
+    <p class="no-indent">where:</p>
+    <ul>
+        <li><em>w<sub>c</sub></em> represents the user-assigned weight for capability <em>c</em></li>
+        <li><em>φ</em>(<em>i</em>, <em>c</em>) measures how well item <em>i</em> fulfills capability <em>c</em></li>
+        <li><em>ψ</em>(<em>u</em>, <em>c</em>, <em>t</em>) captures temporal and contextual factors affecting capability priority</li>
+    </ul>
+    
+    <h1>4. Experimental Evaluation</h1>
+    
+    <h2>4.1 Dataset and Methodology</h2>
+    
+    <p>We evaluated our approach using anonymized user interaction data from a major news platform, comprising 2.3 million article views across 45,000 users over a six-month period. Users were randomly assigned to either the traditional recommendation system (control) or the capabilities-based system (treatment).</p>
+    
+    <h2>4.2 Metrics</h2>
+    
+    <p>We measured system performance across multiple dimensions:</p>
+    <ul>
+        <li><strong>Content Diversity</strong>: Intra-list diversity and coverage of topic categories</li>
+        <li><strong>User Satisfaction</strong>: Self-reported satisfaction scores and session duration</li>
+        <li><strong>Information Quality</strong>: Engagement with in-depth vs. surface-level content</li>
+        <li><strong>Serendipity</strong>: Discovery of content outside typical consumption patterns</li>
+    </ul>
+    
+    <h2>4.3 Results</h2>
+    
+    <p class="no-indent">Table 1 summarizes our key findings:</p>
+    
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Traditional</th>
+            <th>Capabilities-Based</th>
+        </tr>
+        <tr>
+            <td>Content Diversity (ILD)</td>
+            <td>0.42</td>
+            <td>0.56</td>
+        </tr>
+        <tr>
+            <td>User Satisfaction</td>
+            <td>3.8/5</td>
+            <td>3.9/5</td>
+        </tr>
+        <tr>
+            <td>Time on Quality Content</td>
+            <td>12.3 min</td>
+            <td>18.7 min</td>
+        </tr>
+        <tr>
+            <td>Serendipity Score</td>
+            <td>0.23</td>
+            <td>0.41</td>
+        </tr>
+        <tr class="table-bottom">
+            <td>Click-through Rate</td>
+            <td>8.2%</td>
+            <td>7.8%</td>
+        </tr>
+    </table>
+    
+    <div class="table-caption">
+        Table 1: Comparison of traditional and capabilities-based recommendation systems
+    </div>
+    
+    <p>The capabilities-based system achieved a 34% increase in content diversity while maintaining comparable user satisfaction. Notably, users spent 52% more time engaging with substantive content, suggesting improved alignment between system recommendations and user information needs.</p>
+    
+    <h1>5. Discussion and Implications</h1>
+    
+    <h2>5.1 Advantages of the Capabilities Approach</h2>
+    
+    <p>Our results demonstrate several key advantages of capabilities-based recommendations:</p>
+    
+    <h3>Enhanced User Control.</h3> <p>By explicitly defining their information consumption goals, users gain unprecedented control over their content discovery experience. This addresses growing concerns about algorithmic manipulation and filter bubbles.</p>
+    
+    <h3>Editorial Alignment.</h3> <p>For news organizations, the capabilities framework enables better alignment between algorithmic systems and editorial values, supporting mission-driven content distribution alongside audience engagement.</p>
+    
+    <h3>Bias Mitigation.</h3> <p>By focusing on user-defined goals rather than historical patterns, the system reduces the perpetuation of demographic and ideological biases present in traditional collaborative filtering approaches.</p>
+    
+    <h2>5.2 Implementation Considerations</h2>
+    
+    <p>Deploying capabilities-based recommendations requires careful attention to several practical considerations:</p>
+    
+    <h3>User Interface Design.</h3> <p>The system's effectiveness depends heavily on intuitive interfaces for capability definition and management. Our pilot studies suggest that guided onboarding and smart defaults are essential for user adoption.</p>
+    
+    <h3>Computational Complexity.</h3> <p>While the core algorithm is efficient, content analysis for capability matching requires significant preprocessing investment. However, this cost is amortized across users and enables more sophisticated matching.</p>
+    
+    <h3>Cold Start Problem.</h3> <p>New users require different onboarding approaches, but the explicit goal-setting process actually provides richer initial signals than traditional systems that rely solely on demographic information.</p>
+    
+    <h1>6. Future Work</h1>
+    
+    <p>Several avenues for future research emerge from this work:</p>
+    
+    <ul>
+        <li><strong>Dynamic Capability Learning</strong>: Investigating methods for systems to suggest new capabilities based on user behavior and content trends</li>
+        <li><strong>Multi-stakeholder Optimization</strong>: Extending the framework to explicitly balance user, publisher, and platform objectives</li>
+        <li><strong>Cross-platform Integration</strong>: Exploring how capabilities might transfer across different content platforms and domains</li>
+        <li><strong>Long-term Impact Studies</strong>: Assessing the effects of capabilities-based recommendations on information consumption patterns over extended periods</li>
+    </ul>
+    
+    <h1>7. Conclusion</h1>
+    
+    <p>This paper introduces capabilities-based recommendations as a viable alternative to traditional prediction-focused systems. By shifting emphasis from inferring preferences to empowering user agency, our approach addresses critical limitations of existing recommendation systems while maintaining practical effectiveness.</p>
+    
+    <p>The experimental results demonstrate that users can achieve greater content diversity and deeper engagement with quality information when provided with appropriate tools for defining and pursuing their information consumption goals. For media organizations balancing audience engagement with editorial responsibility, capabilities-based systems offer a promising path forward.</p>
+    
+    <p>As algorithmic systems become increasingly central to information distribution, approaches that prioritize user agency and transparent control will become essential for maintaining public trust and supporting democratic discourse.</p>
+    
+    <div class="references">
+        <h1>References</h1>
+        
+        <div class="ref-item">
+            Barocas, S. and Selbst, A.D., 2016. Big data's disparate impact. <em>California Law Review</em>, 104, pp.671-732.
+        </div>
+        
+        <div class="ref-item">
+            Koren, Y., Bell, R. and Volinsky, C., 2009. Matrix factorization techniques for recommender systems. <em>Computer</em>, 42(8), pp.30-37.
+        </div>
+        
+        <div class="ref-item">
+            Lops, P., De Gemmis, M. and Semeraro, G., 2011. Content-based recommender systems: State of the art and trends. In <em>Recommender systems handbook</em> (pp. 73-105). Springer.
+        </div>
+        
+        <div class="ref-item">
+            Noble, S.U., 2018. <em>Algorithms of oppression: How search engines reinforce racism</em>. NYU Press.
+        </div>
+        
+        <div class="ref-item">
+            Pariser, E., 2011. <em>The filter bubble: How the new personalized web is changing what we read and how we think</em>. Penguin Press.
+        </div>
+        
+        <div class="ref-item">
+            Tintarev, N. and Masthoff, J., 2007. A survey of explanations in recommender systems. In <em>Proceedings of the 23rd international conference on data engineering workshop</em> (pp. 801-810). IEEE.
+        </div>
+        
+        <div class="ref-item">
+            Wu, Q., Liu, Y., Miao, C., Zhao, B., Zhao, Y. and Guan, L., 2017. Recent advances in diversified recommendation. <em>arXiv preprint arXiv:1712.07525</em>.
+        </div>
+    </div>
+    </div>
+</body>
+</html> 
