@@ -2,13 +2,22 @@
 <div class="mw9 center">
     <!-- Tag Filter Pills -->
     <div class="tc mb4">
-        <div class="tags-background extended-grid br2 pa3 mb3">
+        <div class="extended-grid pa3 mb3">
             <div class="flex flex-wrap justify-center">
-            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="scripts-utilities">
-                scripts &amp; utilities
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray active" data-filter="featured">
+                featured
             </button>
             <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="design-tools">
                 design tools
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="scripts-utilities">
+                scripts &amp; utilities
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="music">
+                music
+            </button>
+            <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="film">
+                film
             </button>
             <button class="filter-pill f6 br-pill ph3 pv2 ma1 bn pointer bg-near-white gray hover-bg-light-gray" data-filter="writing">
                 writing
@@ -26,7 +35,7 @@
         <a href="https://strategy.garden" 
            target="_blank" 
            class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
-           data-tags="design-tools">
+           data-tags="design-tools featured">
             <div class="mb2">
                 <img src="{{ url_for('static', filename='images/generative-strategies.png') }}" 
                      alt="Generative Strategies" 
@@ -89,7 +98,7 @@
         </div>
 
         <!-- Project Card: Spooky Looper -->
-        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="scripts-utilities">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="music">
             <h2 class="f2 fw6 mb3 near-black mt0 font-hobo tc">Spooky Looper</h2>
             <div class="mb3 tc">
                 <img src="{{ url_for('static', filename='images/spooky-looper-crisp.png') }}" 
@@ -109,7 +118,7 @@
            style="font-family: 'Comic Sans MS', cursive, sans-serif;">
             <div class="f3 mb2">🎈🎈🎈</div>
             <div class="pa3 br2 mb2" style="background: linear-gradient(135deg, #fff5a5, #ffeb3b, #ffc107);">
-                <h2 class="f2 fw6 mb0 near-black mt0" style="font-family: 'Lucida Blackletter', serif; line-height: 1.1;">Happy Birthday<br>Bridget<br><span class="f5 fw4" style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-decoration: none !important; margin-top: -0.2rem; display: inline-block;">(.biz)</span></h2>
+                <h2 class="f2 fw6 mb0 near-black mt0" style="font-family: 'Lucida Blackletter', serif; line-height: 1.1;">Happy Birthday<br>Bridget<br><span class="f4 fw4 font-comic-sans" style="text-decoration: none !important; margin-top: -0.2rem; display: inline-block;">(dot biz)</span></h2>
             </div>
             <p class="f6 lh-copy near-black">
                 the official website for bridgets birthday
@@ -125,7 +134,7 @@
         </div>
 
         <!-- Project Card: Jump City Records -->
-        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="experimental">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="music">
             <h2 class="f5 fw6 mb1 near-black mt0">Jump City Records</h2>
             <p class="f6 lh-copy gray ma0 mb3">
                 an experimental, generative music label bot (2013)
@@ -138,7 +147,7 @@
         </div>
 
         <!-- Project Card: Hamburger Music -->
-        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="experimental">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray tc" data-tags="music">
             <h2 class="f5 fw6 mb1 near-black mt0">Hamburger Music</h2>
             <p class="f6 lh-copy gray ma0 mb3">
                 TK
@@ -195,14 +204,14 @@
         <a href="https://noice.network" 
            target="_blank" 
            class="project-card pa4 bg-white br2 ba b--light-gray tc link" 
-           data-tags="experimental">
+           data-tags="experimental featured">
             <div class="mb3 tc">
                 <img src="{{ url_for('static', filename='images/noice-crisp.gif') }}" 
                      alt="Noice Network" 
                      class="w-30 h-auto"
                      style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
             </div>
-            <h2 class="f5 fw6 mb1 near-black tc mt0">N.O.I.C.E Network</h2>
+            <h2 class="f5 fw6 mb1 near-black tc mt0">N.O.I.C.E</h2>
             <div class="f6 lh-copy gray ma0 mb3 tc" style="font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;">
                 <div style="white-space: nowrap;">Network of Interconnected</div>
                 <div style="white-space: nowrap;">Content Engines</div>
@@ -230,7 +239,7 @@
         </a>
 
         <!-- Project Card: Large Image Example -->
-        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="experimental">
+        <div class="project-card pa4 bg-white br2 ba b--light-gray" data-tags="film">
             <div class="flex items-start h-100">
                 <div class="flex-auto pr3">
                     <h2 class="f5 fw6 mb1 near-black mt0">Large Image Project</h2>
@@ -249,11 +258,6 @@
 </div>
 
 <style>
-/* Tags background container */
-.tags-background {
-    background-color: #e4e4e4;
-}
-
 /* Filter pill styles */
 .filter-pill {
     transition: all 0.2s ease;
@@ -273,8 +277,9 @@
 }
 
 .filter-pill.active {
-    background-color: #d0d0d0;
-    color: #333;
+    background-color: #333 !important;
+    color: white !important;
+    font-weight: 600;
 }
 
 /* Grid layout for projects - Two columns */
@@ -387,48 +392,68 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterPills = document.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
     
+    // Initialize with featured filter active
+    const featuredFilter = document.querySelector('[data-filter="featured"]');
+    if (featuredFilter && featuredFilter.classList.contains('active')) {
+        // Set visual state for pills
+        filterPills.forEach(p => {
+            if (p !== featuredFilter) {
+                p.classList.add('inactive');
+            }
+        });
+        
+        // Filter project cards to show only featured ones
+        projectCards.forEach(card => {
+            const cardTags = card.getAttribute('data-tags') || '';
+            if (cardTags.includes('featured')) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+    
     // Add click event listeners to filter pills
     filterPills.forEach(pill => {
         pill.addEventListener('click', function() {
             const filterValue = this.getAttribute('data-filter');
             
-            // Toggle this pill's active state
-            if (this.classList.contains('active')) {
-                this.classList.remove('active');
-            } else {
-                this.classList.add('active');
-            }
+            // Check if this pill is currently active
+            const isCurrentlyActive = this.classList.contains('active');
             
-            // Get all currently active filters
-            const activeFilters = Array.from(filterPills)
-                .filter(p => p.classList.contains('active'))
-                .map(p => p.getAttribute('data-filter'));
-            
-            // Update inactive state for visual feedback
+            // Remove active class from all pills
             filterPills.forEach(p => {
-                if (p.classList.contains('active')) {
-                    p.classList.remove('inactive');
-                } else {
-                    p.classList.add('inactive');
-                }
+                p.classList.remove('active');
+                p.classList.remove('inactive');
             });
             
-            // If no filters are active, remove inactive class from all (show all as available)
-            if (activeFilters.length === 0) {
-                filterPills.forEach(p => p.classList.remove('inactive'));
-            }
-            
-            // Filter project cards
-            projectCards.forEach(card => {
-                const cardTags = card.getAttribute('data-tags') || '';
+            // If the clicked pill wasn't active, make it active
+            if (!isCurrentlyActive) {
+                this.classList.add('active');
                 
-                // Show card if no filters are active OR if card matches any active filter
-                if (activeFilters.length === 0 || activeFilters.some(filter => cardTags.includes(filter))) {
+                // Set all other pills as inactive for visual feedback
+                filterPills.forEach(p => {
+                    if (p !== this) {
+                        p.classList.add('inactive');
+                    }
+                });
+                
+                // Filter project cards to show only matching ones
+                projectCards.forEach(card => {
+                    const cardTags = card.getAttribute('data-tags') || '';
+                    
+                    if (cardTags.includes(filterValue)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            } else {
+                // If clicking the active pill, deactivate it and show all projects
+                projectCards.forEach(card => {
                     card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
+                });
+            }
         });
     });
 });
