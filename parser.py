@@ -119,6 +119,13 @@ class ContentParser:
             if not asset_path.startswith(('http://', 'https://')):
                 assets.add(asset_path)
         
+        # Find audio references: <audio src="path">
+        audio_pattern = r'<audio[^>]+src=["\']([^"\']+)["\']'
+        for match in re.finditer(audio_pattern, content):
+            asset_path = match.group(1)
+            if not asset_path.startswith(('http://', 'https://')):
+                assets.add(asset_path)
+        
         return assets
     
     def extract_hashtags(self, content: str) -> List[str]:

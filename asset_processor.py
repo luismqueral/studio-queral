@@ -173,6 +173,90 @@ class AssetProcessor:
             shutil.copy2(input_path, output_path)
             return output_path
     
+    def compress_audio(self, input_path: Path, output_path: Path) -> Path:
+        """Compress audio using ffmpeg"""
+        try:
+            print(f"    🔍 Checking for ffmpeg...")
+            subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
+            print(f"    ✅ ffmpeg found and ready")
+            
+            original_size = os.path.getsize(input_path)
+            print(f"    📊 Original audio size: {original_size/1024:.1f}KB")
+            
+            # Determine best output format and settings
+            input_ext = input_path.suffix.lower()
+            
+            if input_ext in ['.wav', '.flac', '.aiff']:
+                # Compress lossless formats to AAC
+                output_format = 'aac'
+                output_ext = '.aac'
+                print(f"    🎵 Compressing lossless audio to AAC...")
+                print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+            elif input_ext in ['.mp3', '.aac', '.ogg']:
+                # Keep compressed formats but normalize quality
+                if input_ext == '.mp3':
+                    output_format = 'mp3'
+                    output_ext = '.mp3'
+                    print(f"    🎵 Optimizing MP3 quality...")
+                    print(f"    ⚙️  Settings: MP3 192kbps, 44.1kHz")
+                else:
+                    output_format = 'aac'
+                    output_ext = '.aac'
+                    print(f"    🎵 Converting to AAC for better compatibility...")
+                    print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+            else:
+                # Default to AAC for unknown formats
+                output_format = 'aac'
+                output_ext = '.aac'
+                print(f"    🎵 Converting unknown format to AAC...")
+                print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+            
+            # Set output path with correct extension
+            final_output_path = output_path.with_suffix(output_ext)
+            
+            # Build ffmpeg command
+            if output_format == 'mp3':
+                cmd = [
+                    'ffmpeg', '-i', str(input_path),
+                    '-codec:a', 'libmp3lame',
+                    '-b:a', '192k',
+                    '-ar', '44100',
+                    '-y',
+                    str(final_output_path)
+                ]
+            else:  # AAC
+                cmd = [
+                    'ffmpeg', '-i', str(input_path),
+                    '-codec:a', 'aac',
+                    '-b:a', '192k',
+                    '-ar', '44100',
+                    '-y',
+                    str(final_output_path)
+                ]
+            
+            print(f"    ⚙️  Running ffmpeg compression...")
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            
+            if result.returncode == 0 and final_output_path.exists():
+                compressed_size = os.path.getsize(final_output_path)
+                compression_ratio = (1 - compressed_size / original_size) * 100
+                print(f"    🎉 Audio compression complete!")
+                print(f"    🎵 Final: {original_size/1024:.1f}KB → {compressed_size/1024:.1f}KB ({compression_ratio:.1f}% smaller)")
+                return final_output_path
+            else:
+                print(f"    ❌ Audio compression failed!")
+                print(f"    📝 Error: {result.stderr}")
+                print(f"    📄 Copying original file instead")
+                import shutil
+                shutil.copy2(input_path, output_path)
+                return output_path
+                
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            print(f"    ⚠️  ffmpeg not available - copying original audio")
+            import shutil
+            shutil.copy2(input_path, output_path)
+            return output_path
+    
     def upload_to_blob(self, file_path: Path, filename: str = None) -> str:
         """Upload file to Vercel Blob"""
         if not self.blob_token:
@@ -251,7 +335,18 @@ class AssetProcessor:
         temp_output = self.temp_dir / asset_path.name
         
         print(f"📦 Processing asset: {asset_path.name}")
-        print(f"    📁 Type: {ext} ({'image' if ext in ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'] else 'video' if ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm'] else 'other'})")
+        
+        # Determine file type for display
+        if ext in ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff']:
+            file_type = 'image'
+        elif ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm']:
+            file_type = 'video'
+        elif ext in ['.wav', '.mp3', '.aac', '.ogg', '.flac', '.m4a', '.aiff']:
+            file_type = 'audio'
+        else:
+            file_type = 'other'
+            
+        print(f"    📁 Type: {ext} ({file_type})")
         
         # Compress based on file type
         if ext in ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff']:
@@ -260,6 +355,9 @@ class AssetProcessor:
         elif ext in ['.mp4', '.mov', '.avi', '.mkv', '.webm']:
             print(f"    🎥 Starting video compression...")
             compressed_path = self.compress_video(asset_path, temp_output.with_suffix('.mp4'))
+        elif ext in ['.wav', '.mp3', '.aac', '.ogg', '.flac', '.m4a', '.aiff']:
+            print(f"    🎵 Starting audio compression...")
+            compressed_path = self.compress_audio(asset_path, temp_output)
         else:
             print(f"    📄 Unknown type - copying as-is: {asset_path.name}")
             import shutil
@@ -331,6 +429,7 @@ class AssetProcessor:
             (r'!\[([^\]]*)\]\(([^)]+)\)', 'markdown_image'),  # ![alt](path)
             (r'<img[^>]+src="([^"]+)"[^>]*>', 'html_image'),   # <img src="path">
             (r'<video[^>]+src="([^"]+)"[^>]*>', 'html_video'), # <video src="path">
+            (r'<audio[^>]+src="([^"]+)"[^>]*>', 'html_audio'), # <audio src="path">
         ]
         
         for pattern, pattern_type in patterns:
@@ -340,7 +439,7 @@ class AssetProcessor:
                 if pattern_type == 'markdown_image':
                     alt_text, asset_path = match.groups()
                     full_match = match.group(0)
-                elif pattern_type in ['html_image', 'html_video']:
+                elif pattern_type in ['html_image', 'html_video', 'html_audio']:
                     asset_path = match.group(1)
                     full_match = match.group(0)
                 else:
