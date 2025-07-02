@@ -187,52 +187,39 @@ class AssetProcessor:
             input_ext = input_path.suffix.lower()
             
             if input_ext in ['.wav', '.flac', '.aiff']:
-                # Compress lossless formats to AAC
-                output_format = 'aac'
-                output_ext = '.aac'
-                print(f"    🎵 Compressing lossless audio to AAC...")
-                print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+                # Compress lossless formats to MP3 for better Vercel Blob compatibility
+                output_format = 'mp3'
+                output_ext = '.mp3'
+                print(f"    🎵 Compressing lossless audio to MP3...")
+                print(f"    ⚙️  Settings: MP3 192kbps, 44.1kHz")
             elif input_ext in ['.mp3', '.aac', '.ogg']:
-                # Keep compressed formats but normalize quality
+                # Convert all compressed formats to MP3 for consistency
+                output_format = 'mp3'
+                output_ext = '.mp3'
                 if input_ext == '.mp3':
-                    output_format = 'mp3'
-                    output_ext = '.mp3'
                     print(f"    🎵 Optimizing MP3 quality...")
-                    print(f"    ⚙️  Settings: MP3 192kbps, 44.1kHz")
                 else:
-                    output_format = 'aac'
-                    output_ext = '.aac'
-                    print(f"    🎵 Converting to AAC for better compatibility...")
-                    print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+                    print(f"    🎵 Converting to MP3 for Vercel Blob compatibility...")
+                print(f"    ⚙️  Settings: MP3 192kbps, 44.1kHz")
             else:
-                # Default to AAC for unknown formats
-                output_format = 'aac'
-                output_ext = '.aac'
-                print(f"    🎵 Converting unknown format to AAC...")
-                print(f"    ⚙️  Settings: AAC 192kbps, 44.1kHz")
+                # Default to MP3 for unknown formats (better Vercel Blob support)
+                output_format = 'mp3'
+                output_ext = '.mp3'
+                print(f"    🎵 Converting unknown format to MP3...")
+                print(f"    ⚙️  Settings: MP3 192kbps, 44.1kHz")
             
             # Set output path with correct extension
             final_output_path = output_path.with_suffix(output_ext)
             
-            # Build ffmpeg command
-            if output_format == 'mp3':
-                cmd = [
-                    'ffmpeg', '-i', str(input_path),
-                    '-codec:a', 'libmp3lame',
-                    '-b:a', '192k',
-                    '-ar', '44100',
-                    '-y',
-                    str(final_output_path)
-                ]
-            else:  # AAC
-                cmd = [
-                    'ffmpeg', '-i', str(input_path),
-                    '-codec:a', 'aac',
-                    '-b:a', '192k',
-                    '-ar', '44100',
-                    '-y',
-                    str(final_output_path)
-                ]
+            # Build ffmpeg command (always MP3 now for Vercel Blob compatibility)
+            cmd = [
+                'ffmpeg', '-i', str(input_path),
+                '-codec:a', 'libmp3lame',
+                '-b:a', '192k',
+                '-ar', '44100',
+                '-y',
+                str(final_output_path)
+            ]
             
             print(f"    ⚙️  Running ffmpeg compression...")
             result = subprocess.run(cmd, capture_output=True, text=True)
