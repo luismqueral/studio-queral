@@ -21,9 +21,9 @@
     </nav>
 </header>
 
-<!-- Large Logo Header (matching original) -->
+<!-- Large Logo Header -->
 <header class="logo-header tc mw7 center mb3 br2" id="logo-header">
-    <h1 class="ma0 lh-solid f-homepage-logo">
+    <h1 class="ma0 lh-solid f-homepage-logo" id="actual-logo">
         <span class="link no-underline" id="homepage-logo">
             <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><br><span>Q</span><span>u</span><span>e</span><span>r</span><span>A</span><span>l</span>
         </span>
@@ -65,16 +65,21 @@ header nav a:active {
 
 /* Homepage-specific logo styles */
 .logo-header {
-    border: 6px solid #000;
+    border: 6px solid transparent; /* Start with transparent border to prevent FOUC */
     cursor: pointer;
     transition: opacity 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    opacity: 0; /* Hide initially */
+    opacity: 1;
     padding: 3rem 2rem;
     overflow: hidden; /* Prevent text from extending beyond border */
+}
+
+/* Show border only when logo is ready */
+.logo-ready .logo-header {
+    border-color: #000; /* Default border color, will be overridden by randomization */
 }
 
 /* Custom homepage logo font size class */
@@ -114,9 +119,20 @@ header nav a:active {
     }
 }
 
-/* Show homepage logo after fonts are loaded */
-.fonts-loaded .logo-header {
-    opacity: 1;
+/* Logo fade-in animation */
+.logo-ready #actual-logo {
+    animation: fadeInLogo 0.4s ease-out;
+}
+
+@keyframes fadeInLogo {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .logo-header:hover {
@@ -130,8 +146,13 @@ header nav a:active {
 
 #homepage-logo {
     outline: none !important;
-    color: transparent; /* Hide text by default to prevent FOUC */
-    transition: color 0.4s ease; /* Smoothly fade color in once applied */
+    color: transparent !important; /* Hide text by default to prevent FOUC */
+    transition: color 0.2s ease; /* Smooth color transition */
+}
+
+/* Show text color when logo is ready */
+.logo-ready #homepage-logo {
+    color: inherit !important; /* Override the transparent color */
 }
 
 #homepage-logo:focus {
@@ -338,12 +359,13 @@ header nav a:active {
         }
         
         header.style.borderColor = colors.borderColor;
-        logo.style.color = colors.textColor;
+        logo.style.setProperty('color', colors.textColor, 'important'); // Force color override
         document.documentElement.style.setProperty('--hover-border-color', colors.hoverBorderColor);
         document.documentElement.style.setProperty('--active-border-color', colors.activeBorderColor);
 
         // Force browser to apply styles immediately
         header.offsetHeight; 
+        logo.offsetHeight; // Force reflow on logo as well
 
         // Re-enable transitions for the next hover
         header.classList.remove('no-transition');
@@ -368,15 +390,17 @@ header nav a:active {
             }
         });
 
-        // Apply randomization and make the logo interactive
+        // Apply randomization immediately
         applyHomepageRandomization();
+        
+        // Show the logo with fade-in animation
+        document.body.classList.add('logo-ready');
+        
+        // Make the logo interactive
         const logoHeader = document.getElementById('logo-header');
         if (logoHeader) {
             logoHeader.onclick = applyHomepageRandomization;
         }
-
-        // Make the logo visible
-        document.body.classList.add('fonts-loaded');
     }
 
     // --- Event Listeners ---
