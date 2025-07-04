@@ -19,7 +19,7 @@ I've used Notion for close to 8 years now and dumped a *lot* of thoughts into th
 I've finally settled on a solution that I'm somewhat happy with and seems to be helping (evidenced by the amount through which I am actually writing).
 
 <figure>
-<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750439125895-qzml4caRnDblJ9T50CON78uX8TGZod.webp" width="auto">
+<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750439125895-nwIuX6cPKuLK6IQCtjUrhMQAW08v2q.webp" width="auto">
 <figcaption></figcaption>
 </figure>
 At some point I'll try and capture my Obsidian setup in more detail, along with my thoughts on over-complicating systems, but this seems to really be working and sticking for me personally at least.
@@ -27,6 +27,6 @@ At some point I'll try and capture my Obsidian setup in more detail, along with 
 _Writing_ is one thing, _sharing_ is another, which I think is also handled well by a new system that I was able to cobble together with _Cursor_ and _Next.js_ — which resulted in an app / deployment process that preps all of this and sends it to Vercel. The biggest blocker there has always been storage, which was also figured out with "Blobs" (again something else I can get into another time).
 
 <figure>
-<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750825287046-E6HPOmIk9vYYbU7FaoHXI7rJlVb8yx.webp" width="auto">
+<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750825287046-LWAvpiOj2t39mVFZQV4pCmrcYhUakt.webp" width="auto">
 <figcaption></figcaption>
 </figure>

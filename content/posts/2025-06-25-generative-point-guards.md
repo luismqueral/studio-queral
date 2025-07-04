@@ -17,6 +17,6 @@ Been thinking a lot about basketball lately and how an internal effort to upskil
 
 **The one I feel most comfortable sharing is this one:**
 <figure>
-<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750712949384-Z3IuWptDuqmrIl08nPFDlfVblGBYrW.webp" class="ba b--light-gray bw2" width="auto">
+<img src="https://mp1ewwuojwmnpxpy.public.blob.vercel-storage.com/image_1750712949384-JG6ukuLPhMpNy0PHsKJP8ynltZSztc.webp" class="ba b--light-gray bw2" width="auto">
 <figcaption></figcaption>
 </figure>
