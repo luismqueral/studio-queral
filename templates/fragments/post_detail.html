@@ -21,4 +21,22 @@
         <!-- Use processed HTML content with proper markdown rendering -->
         {{ post.html_content | safe }}
     </div>
+
+    {% if post.tags %}
+    <footer class="mt3">
+        <div class="flex items-center flex-wrap">
+            {% for tag in post.tags %}
+            <button 
+                hx-get="/posts?tag={{ tag }}" 
+                hx-target="main"
+                hx-push-url="/posts?tag={{ tag }}"
+                hx-swap="innerHTML"
+                hx-on:htmx:afterSwap="window.scrollTo({top: 0, behavior: 'instant'})"
+                class="f6 bg-near-white hover-bg-light-gray br2 pa2 link gray hover-blue mr3 mb2 bn pointer">
+                #{{ tag }}
+            </button>
+            {% endfor %}
+        </div>
+    </footer>
+    {% endif %}
 </article> 

@@ -1,5 +1,18 @@
 <!-- Scratch book posts list -->
 
+<!-- Scratch Book Description Callout -->
+<div class="mb4 pa3 pa4-ns bg-near-white br2 ba b--light-gray">
+    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
+        This is a collection of out-of-context research artifacts and references.
+    </p>
+    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
+        Quick captures, visual notes, and interesting discoveries that don't fit neatly into the main journal flow.
+    </p>
+    <p class="f6 f5-ns lh-copy ma0 gray">
+        See the <a href="/log" class="link gray hover-near-black underline-hover" hx-get="/log" hx-target="main" hx-push-url="/log">Studio Log</a> for more structured thoughts and experiments.
+    </p>
+</div>
+
 <div class="scratch-book-list">
     {% set current_date = none %}
     {% for post in posts %}
@@ -7,9 +20,9 @@
             {% set current_date = post.date_formatted %}
             <!-- Sticky Date Header -->
             <div class="sticky-date-header f7 f6-ns gray bg-white pv3 ph3 ph4-ns bb b--light-gray">
-                <a href="/scratch-book" 
+                <a href="/scratch-book/{{ post.slug }}" 
                    class="link gray hover-near-black underline-hover"
-                   hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
+                   hx-get="/scratch-book/{{ post.slug }}" hx-target="main" hx-push-url="/scratch-book/{{ post.slug }}">
                     <time class="post-date" datetime="{{ post.date }}">
                         {{ post.date_formatted }}
                     </time>

@@ -3,17 +3,9 @@
 {% block title %}{{ post.title }} - Scratch Book{% endblock %}
 
 {% block content %}
-<article class="mb5 pa4 bg-white br2">
-    <header class="mb4">
-        <div class="mb3">
-            <a href="/scratch-book" 
-               class="f6 link blue hover-dark-blue"
-               hx-get="/scratch-book-posts" hx-target="main" hx-push-url="/scratch-book">
-                ← Back to scratch book
-            </a>
-        </div>
-        
-        <div class="f5 gray mb3">
+<article class="mb4 mb5-ns pa3 pa4-ns bg-white br2">
+    <header class="mb3 mb3-ns">
+        <div class="f7 f6-ns gray mb3 mb3-ns">
             <a href="/scratch-book" 
                class="link gray hover-near-black underline-hover"
                hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
@@ -24,26 +16,27 @@
         </div>
         
         {% if post.has_title %}
-        <h1 class="f2 f1-ns lh-title ma0 mb4">
+        <h1 class="f3 f2-ns lh-title ma0 mt3">
             {{ post.title }}
         </h1>
         {% endif %}
     </header>
     
-    <div class="lh-copy f5 content">
+    <div class="f6 f5-ns lh-copy content">
         <!-- Use processed HTML content with proper markdown rendering -->
         {{ post.html_content | safe }}
     </div>
 
     {% if post.tags %}
-    <footer class="mt5 pt4 bt b--light-gray">
+    <footer class="mt3">
         <div class="flex items-center flex-wrap">
-            <span class="f6 gray mr3 mb2">Tagged:</span>
             {% for tag in post.tags %}
             <button 
                 hx-get="/scratch-book-posts?tag={{ tag }}" 
                 hx-target="main"
                 hx-push-url="/scratch-book-posts?tag={{ tag }}"
+                hx-swap="innerHTML"
+                hx-on:htmx:afterSwap="window.scrollTo({top: 0, behavior: 'instant'})"
                 class="f6 bg-near-white hover-bg-light-gray br2 pa2 link gray hover-blue mr3 mb2 bn pointer">
                 #{{ tag }}
             </button>

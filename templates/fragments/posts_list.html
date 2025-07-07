@@ -1,41 +1,80 @@
 <!-- Tag filter removed for demo -->
 
+<!-- Studio Log Description Callout -->
+<div class="mb4 pa3 pa4-ns bg-near-white br2 ba b--light-gray">
+    {% if active_tag %}
+    <p class="f6 f5-ns lh-copy ma0 gray">
+        <strong>Viewing "{{ active_tag }}" posts</strong>
+    </p>
+    {% else %}
+    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
+        This is my personal journal of experiments and fleeting thoughts.
+    </p>
+    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
+        It is a real, working design notebook scraped from my local Obsidian vault. I don't write chronologically, so you might notice that posts are frequently updated after publishing.
+    </p>
+    <p class="f6 f5-ns lh-copy ma0 gray">
+        See the <a href="/scratch-book" class="link gray hover-near-black underline-hover" hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">Scratch Book</a> for out-of-context research artifacts and references.
+    </p>
+    {% endif %}
+</div>
+
 <div class="posts-list">
+    {% set current_date = none %}
     {% for post in posts %}
-    <article class="mb4 mb5-ns pa3 pa4-ns bg-white br2">
-        <header class="mb3 mb3-ns">
-            <div class="f7 f6-ns gray mb3 mb3-ns">
+        {% if current_date != post.date_formatted %}
+            {% set current_date = post.date_formatted %}
+            <!-- Sticky Date Header -->
+            <div class="sticky-date-header f7 f6-ns gray bg-white pv3 ph3 ph4-ns bb b--light-gray">
                 <a href="/log/{{ post.slug }}" 
                    class="link gray hover-near-black underline-hover"
-                   hx-get="/log/{{ post.slug }}" 
-                   hx-target="main" 
-                   hx-push-url="/log/{{ post.slug }}">
-                                         <time class="post-date" datetime="{{ post.date }}">
-                          {{ post.date_formatted }}
-                      </time>
+                   hx-get="/log/{{ post.slug }}" hx-target="main" hx-push-url="/log/{{ post.slug }}">
+                    <time class="post-date" datetime="{{ post.date }}">
+                        {{ post.date_formatted }}
+                    </time>
                 </a>
             </div>
+        {% endif %}
+        
+        <article class="mb4 mb5-ns pt1 pa3 pa4-ns bg-white">
             {% if post.has_title %}
-            <h2 class="f4 f3-ns lh-title ma0">
-                <a href="/log/{{ post.slug }}" 
-                   class="link black underline-hover"
-                   hx-get="/log/{{ post.slug }}" 
-                   hx-target="main" 
-                   hx-push-url="/log/{{ post.slug }}">
-                    {{ post.title }}
-                </a>
-            </h2>
+            <header class="mb3 mb3-ns">
+                <h2 class="f4 f3-ns lh-title ma0">
+                    <a href="/log/{{ post.slug }}" 
+                       class="link black underline-hover"
+                       hx-get="/log/{{ post.slug }}" 
+                       hx-target="main" 
+                       hx-push-url="/log/{{ post.slug }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+            </header>
             {% endif %}
-        </header>
-        
-        <div class="f6 f5-ns lh-copy content">
-            <!-- Show full article content -->
-            {{ post.html_content | safe }}
-        </div>
+            
+            <div class="f6 f5-ns lh-copy content">
+                <!-- Show full article content -->
+                {{ post.html_content | safe }}
+            </div>
 
-        <!-- Tags removed for demo -->
-        
-    </article>
+            {% if post.tags %}
+            <footer class="mt3">
+                <div class="flex items-center flex-wrap">
+                    {% for tag in post.tags %}
+                    <button 
+                        hx-get="/posts?tag={{ tag }}" 
+                        hx-target="main"
+                        hx-push-url="/posts?tag={{ tag }}"
+                        hx-swap="innerHTML"
+                        hx-on:htmx:afterSwap="window.scrollTo({top: 0, behavior: 'instant'})"
+                        class="f6 bg-near-white hover-bg-light-gray br2 pa2 link gray hover-blue mr3 mb2 bn pointer">
+                        #{{ tag }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </footer>
+            {% endif %}
+            
+        </article>
     {% endfor %}
     
     {% if not posts %}
@@ -43,4 +82,24 @@
         <p class="f5 gray">No posts found{% if active_tag %} for tag "{{ active_tag }}"{% endif %}.</p>
     </div>
     {% endif %}
-</div> 
+</div>
+
+<style>
+/* Only add sticky positioning to date headers */
+.sticky-date-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Make date headers flush with cards below */
+.sticky-date-header + .mb4 {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.sticky-date-header {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+</style> 

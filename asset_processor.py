@@ -58,6 +58,23 @@ class AssetProcessor:
                 hash_md5.update(chunk)
         return hash_md5.hexdigest()
     
+    def is_animated_gif(self, input_path: Path) -> bool:
+        """Check if a GIF file is animated"""
+        if not Image or input_path.suffix.lower() != '.gif':
+            return False
+        
+        try:
+            with Image.open(input_path) as img:
+                # Try to seek to the second frame
+                img.seek(1)
+                return True
+        except EOFError:
+            # Only one frame, not animated
+            return False
+        except Exception:
+            # Any other error, assume not animated
+            return False
+
     def compress_image(self, input_path: Path, output_path: Path) -> Path:
         """Compress image using Pillow"""
         if not Image:
@@ -65,6 +82,16 @@ class AssetProcessor:
             print(f"    📄 PIL not available - copying original file")
             import shutil
             shutil.copy2(input_path, output_path)
+            return output_path
+        
+        # Special handling for animated GIFs
+        if input_path.suffix.lower() == '.gif' and self.is_animated_gif(input_path):
+            print(f"    🎬 Detected animated GIF - preserving animation")
+            print(f"    📁 Copying original file to maintain animation")
+            import shutil
+            shutil.copy2(input_path, output_path)
+            original_size = os.path.getsize(input_path)
+            print(f"    📊 Preserved animated GIF: {original_size/1024:.1f}KB")
             return output_path
             
         try:
