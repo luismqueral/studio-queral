@@ -50,38 +50,39 @@ def parse_markdown_file(file_path: Path) -> Dict:
         'file_path': str(file_path)
     }
 
-def load_projects():
-    """Load projects from HTML files"""
-    global projects_data
-    
-    current_dir = Path(__file__).parent
-    projects_dir = current_dir / "content" / "projects"
-    
-    projects_data = []
-    if projects_dir.exists():
-        for html_file in projects_dir.glob("*.html"):
-            try:
-                # Read the HTML file content
-                with open(html_file, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # Extract title from HTML title tag or filename
-                title = html_file.stem.replace('-', ' ').title()
-                if '<title>' in content:
-                    start = content.find('<title>') + 7
-                    end = content.find('</title>')
-                    if end > start:
-                        title = content[start:end]
-                
-                project = {
-                    'slug': html_file.stem,
-                    'title': title,
-                    'content': content,
-                    'file_path': str(html_file)
-                }
-                projects_data.append(project)
-            except Exception as e:
-                print(f"⚠️  Error loading project {html_file.name}: {e}")
+# ARCHIVED: Projects functionality temporarily disabled
+# def load_projects():
+#     """Load projects from HTML files"""
+#     global projects_data
+#     
+#     current_dir = Path(__file__).parent
+#     projects_dir = current_dir / "content" / "projects"
+#     
+#     projects_data = []
+#     if projects_dir.exists():
+#         for html_file in projects_dir.glob("*.html"):
+#             try:
+#                 # Read the HTML file content
+#                 with open(html_file, 'r', encoding='utf-8') as f:
+#                     content = f.read()
+#                 
+#                 # Extract title from HTML title tag or filename
+#                 title = html_file.stem.replace('-', ' ').title()
+#                 if '<title>' in content:
+#                     start = content.find('<title>') + 7
+#                     end = content.find('</title>')
+#                     if end > start:
+#                         title = content[start:end]
+#                 
+#                 project = {
+#                     'slug': html_file.stem,
+#                     'title': title,
+#                     'content': content,
+#                     'file_path': str(html_file)
+#                 }
+#                 projects_data.append(project)
+#             except Exception as e:
+#                 print(f"⚠️  Error loading project {html_file.name}: {e}")
 
 def load_content():
     """Load content from markdown files"""
@@ -233,45 +234,8 @@ def tags_index():
     
     return render_template('tags.html', tags=all_tags, tag_counts=tag_counts)
 
-@app.route('/about')
-def about_page():
-    """About page - handles full page and HTMX fragment loads."""
-    if request.headers.get('HX-Request'):
-        return render_template('fragments/about_content.html')
-    return render_template('about.html')
 
-@app.route('/projects')
-def projects_page():
-    """Projects page - handles full page and HTMX fragment loads."""
-    if request.headers.get('HX-Request'):
-        return render_template('fragments/projects_content.html')
-    return render_template('projects.html')
 
-@app.route('/projects/<project_slug>')
-def project_detail(project_slug):
-    """Individual project page - serves HTML content directly"""
-    # For development, read the file directly to always get the latest content
-    current_dir = Path(__file__).parent
-    projects_dir = current_dir / "content" / "projects"
-    
-    # Map clean URLs to actual file names
-    project_files = {
-        'capabilities': 'capabilities-framework.html'
-    }
-    
-    filename = project_files.get(project_slug, f"{project_slug}.html")
-    project_file = projects_dir / filename
-    
-    if not project_file.exists():
-        return "Project not found", 404
-    
-    # Read the HTML file content directly
-    try:
-        with open(project_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        return content
-    except Exception as e:
-        return f"Error loading project: {e}", 500
 
 @app.route('/scratch-book')
 def scratch_book_index():
@@ -402,16 +366,16 @@ def debug_info():
 
 # Load content at startup
 load_content()
-load_projects()
+# load_projects()  # ARCHIVED: Projects temporarily disabled
 
 if __name__ == '__main__':
     print("🚀 Starting Markdown-based HTMX Studio Site")
-    print(f"📊 Loaded {len(posts_data)} posts, {len(projects_data)} projects, and {len(tags_data.get('tags', []))} tags")
+    print(f"📊 Loaded {len(posts_data)} posts and {len(tags_data.get('tags', []))} tags")
     print()
     print("🌐 URLs:")
     print("   http://localhost:5002/                   - Homepage")
     print("   http://localhost:5002/log                - Studio log")
-    print("   http://localhost:5002/projects/capabilities - Capabilities Framework")
+    print("   http://localhost:5002/scratch-book       - Scratch book")
     print("   http://localhost:5002/debug              - Debug info")
     print()
     app.run(debug=True, port=5002) 

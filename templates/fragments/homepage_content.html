@@ -1,130 +1,180 @@
-<!-- Homepage-specific navigation (overrides base nav) -->
-<header class="mb3 flex justify-center">
-    <nav class="flex flex-wrap justify-center">
-        <a href="/log" 
-           class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-           hx-get="/log" hx-target="main" hx-push-url="/log">
-            studio log
-        </a>
-        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-           hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
-            scratch book
-        </a>
-        <a href="/projects" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-           hx-get="/projects" hx-target="main" hx-push-url="/projects">
-            projects
-        </a>
-        <a href="/about" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
-           hx-get="/about" hx-target="main" hx-push-url="/about">
-            about
-        </a>
-    </nav>
-</header>
+<!-- Introduction Card - Full width -->
+<div class="mw7 center">
+<div class="pa4 bg-white br2 mb4 ba b--light-gray">
+    <!-- Small intro, no heading -->
+    <p class="f5 lh-copy mb2 near-black tc">
+        Hello, my name is Luis Queral.
+    </p>
 
-<!-- Large Logo Header -->
-<header class="logo-header tc mw7 center mb3 br2" id="logo-header">
-    <h1 class="ma0 lh-solid f-homepage-logo" id="actual-logo">
-        <span class="link no-underline" id="homepage-logo">
-            <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><br><span>Q</span><span>u</span><span>e</span><span>r</span><span>A</span><span>l</span>
-        </span>
-    </h1>
-</header>
+    <!-- WebGL Morphing Canvas and slider container -->
+    <div class="pa4 br2 center" style="max-width: 400px;">
+        <!-- WebGL Morphing Canvas with Skeleton Loader -->
+        <div class="tc mb4 relative">
+            <!-- Skeleton Loader -->
+            <div id="webglSkeleton" class="webgl-skeleton br2 w-50 center" style="width: 100%; height: 300px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;">
+            </div>
+            
+            <!-- WebGL Canvas (initially hidden) -->
+            <canvas id="morphCanvas" 
+                    width="300" 
+                    height="300" 
+                    style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; background-color: #f5f5f5; display: none;" 
+                    class="br2 w-50 webgl-canvas">
+                Your browser does not support WebGL.
+            </canvas>
+        </div>
 
-<!-- Bio Content (matching original) -->
-<main class="tc">
-    <div class="ph5 tl center tl center">
-        <p class="f6 f4-ns near-black lh-copy mb4 mb3-ns">
-            This is the personal website of <a href="#" class="link gray hover-near-black underline-hover">Luis Queral</a>.
-        </p>
+        <!-- Commented out video version for reference -->
+        <!--
+        <div class="tc mb4">
+            <video id="morphVideo" 
+                   style="width: 100%; height: 100%;; object-fit: cover;" 
+                   class="br2 ba b--silver w-50"
+                   muted 
+                   preload="metadata">
+                <source src="{{ url_for('static', filename='images/morph.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        -->
 
-        <p class="f6 f4-ns near-black lh-copy">
-            He is a <a href="#" class="link gray hover-near-black underline-hover">software designer</a>, <a href="#" class="link gray hover-near-black underline-hover">hypermedia artist</a>, and <a href="#" class="link gray hover-near-black underline-hover">generative design researcher</a> at The New York Times.
-        </p>
+        <!-- Luis / Not Luis slider -->
+        <div class="center" style="max-width: 300px;">
+            <div class="flex items-center justify-between mb2">
+                <span class="f6 gray">luis</span>
+                <span class="f6 gray">not luis</span>
+            </div>
+            <div class="relative">
+                <input type="range" 
+                       min="0" 
+                       max="100" 
+                       value="50" 
+                       class="w-100 luis-slider"
+                       style="appearance: none; height: 6px; border-radius: 3px; background: #e5e5e5; outline: none;">
+            </div>
+        </div>
     </div>
-</main>
+</div>
+
+<!-- Content Sections - Regular width -->
+<div class="mw6 center">
+<div class="pa4 bg-white br2 mb4">
+
+    
+    
+    <section class="mb4 lh-copy">
+        <p class="mb2 fw6">I am a software designer, hypermedia artist, and researcher based in Baltimore, Maryland.</p>
+        <p>I work for <em>The New York Times</em> as a senior product designer, where I help build developer tools and guide our team's <a href="#">generative design</a> process.</p>
+        <p>This website is where I publish my work, write about my process, and share scraps of inspiration.</p>
+    </section>
+</div>
+<div class="pa4 bg-white br2 mb4">
+    <!-- Design work section -->
+    <section class="mb4">
+        <h2 class="f5 fw6 mb3 near-black">What kind of design work do you do?</h2>
+        <p class="lh-copy near-black">
+            I design tools and software platforms.
+        </p>
+        <p class="lh-copy near-black">
+            I've had the priviledge to work on a wide range projects in this space throughout my career:
+        </p>
+        <ul class="lh-copy near-black">
+            <li class="mb3">I worked on the floor at Goldman Sachs building a commodities trading platform.</li>
+            <li class="mb3">I've worked for the MTA, helping them build a new subway communication platform.</li>
+            <li class="mb3">At the New York Times, I've worked on various surfaces: a customer management system, our chat experience, and a suite of developer tools.</li>
+        </ul>
+        <p class="lh-copy near-black">
+            These platforms require a lot of research and strategy work, which I consider the most important part of my practice...TK
+        </p>
+       </div>
+<div class="pa4 bg-white br2 mb4">
+    <!-- Hypermedia art section -->
+    <section class="mb4">
+        <h2 class="f5 fw6 mb3 near-black">What do you mean by hypermedia art?</h2>
+        <p class="lh-copy near-black">
+            TK
+        </p>
+    </section>
+</div>
+<div class="pa4 bg-white br2 mb4">
+    <!-- Contact section -->
+    <section class="mb4">
+        <h2 class="f5 fw6 mb3 near-black">How can I get in touch?</h2>
+        <p class="lh-copy near-black">
+            TK
+        </p>
+    </section>
+</div>
+<div class="pa4 bg-white br2 mb4">
+    <!-- Website tech section -->
+    <section class="mb0">
+        <h2 class="f5 fw6 mb3 near-black">What did you make this website with?</h2>
+        <p class="lh-copy near-black mb3">
+            This website is mostly HTML using a combination of <a href="https://tachyons.io/" class="link blue hover-dark-blue">Tachyons</a> for styling and <a href="https://htmx.org/" class="link blue hover-dark-blue">HTMX</a> for rendering, all wrapped in a <a href="https://flask.palletsprojects.com/" class="link blue hover-dark-blue">Flask</a> app.
+        </p>
+        <p class="lh-copy near-black mb3">
+            <a href="https://github.com/luismqueral/studio-queral/blob/main/templates/fragments/homepage_content.html#L221-L1295" class="link blue hover-dark-blue">The morphing photo effect</a> uses <a href="https://en.wikipedia.org/wiki/WebGL" class="link blue hover-dark-blue">WebGL</a> fragment shaders with a randomized set of parameters on each load.
+        </p>
+        <p class="lh-copy near-black mb3">
+            I write everything in <a href="https://obsidian.md/" class="link blue hover-dark-blue">Obsidian</a>.
+        </p>
+        <p class="lh-copy near-black mb3">
+            A <a href="https://github.com/luismqueral/studio-queral/blob/main/parser.py" class="link blue hover-dark-blue">python script</a> periodically parses my notes to update the <a href="/" class="link blue hover-dark-blue">studio log</a> and <a href="/scratch-book" class="link blue hover-dark-blue">scratch book</a> sections. It then gets sent to <a href="https://github.com/luismqueral/studio-queral" class="link blue hover-dark-blue">GitHub</a> and deployed to <a href="https://vercel.com/" class="link blue hover-dark-blue">Vercel</a>.
+        </p>
+        <p class="lh-copy near-black">
+            The goal is for this site to be lightweight, modular, and custom tailored to a writing style that has worked for me over the years.
+        </p>
+    </section>
+</div>
 
 <style>
-/* Hide base template navigation on homepage */
-.homepage-hide-nav .mw7 > header.mb4.tc {
-    display: none !important;
+/* Interactive WebGL Canvas */
+.webgl-canvas {
+    transition: transform 0.1s ease, outline 0.15s ease;
+    outline: 4px solid transparent;
+    outline-offset: 0px;
 }
 
-/* Also hide via direct targeting of nav elements */
-.homepage-hide-nav .nav-logo-container {
-    display: none !important;
+.webgl-canvas:hover {
+    cursor: pointer;
+    outline: 4px solid #d0d0d0;
 }
 
-/* Homepage navigation click animation - bump down effect */
-header nav a {
-    transition: transform 0.1s ease;
-}
-
-header nav a:active {
+.webgl-canvas:active {
     transform: translateY(2px);
 }
 
-/* Homepage-specific logo styles */
-.logo-header {
-    border: 6px solid transparent; /* Start with transparent border to prevent FOUC */
-    cursor: pointer;
-    transition: opacity 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    opacity: 1;
-    padding: 3rem 2rem;
-    overflow: hidden; /* Prevent text from extending beyond border */
+/* WebGL Skeleton Loader */
+.webgl-skeleton {
+    position: relative;
+    overflow: hidden;
 }
 
-/* Show border only when logo is ready */
-.logo-ready .logo-header {
-    border-color: #000; /* Default border color, will be overridden by randomization */
+.webgl-skeleton-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin: 0 auto;
 }
 
-/* Custom homepage logo font size class */
-.f-homepage-logo {
-    font-size: 10vw;
-    min-height: 0.9em; /* Ensure consistent height regardless of font */
-}
-
-/* Ensure line break is always respected */
-#homepage-logo {
-    white-space: normal !important;
-}
-
-#homepage-logo br {
-    display: block !important;
-    content: "";
-    clear: both;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 37.5em) {
-    .logo-header {
-        padding: 2rem 1rem;
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
     }
-    .f-homepage-logo {
-        font-size: 17vw;
+    100% {
+        background-position: 200% 0;
     }
 }
 
-@media screen and (min-width: 62.5em) {
-    .logo-header {
-        padding: 4rem 3rem;
-    }
-    .f-homepage-logo {
-        font-size: 8rem;
-        max-width: 100%;
-    }
+/* Smooth transition when WebGL loads */
+.webgl-loaded {
+    animation: fadeIn 0.2s ease-out;
 }
 
-/* Logo fade-in animation */
-.logo-ready #actual-logo {
-    animation: fadeInLogo 0.4s ease-out;
-}
-
-@keyframes fadeInLogo {
+@keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(10px);
@@ -134,288 +184,1100 @@ header nav a:active {
         transform: translateY(0);
     }
 }
+</style>
 
-.logo-header:hover {
-    border-color: var(--hover-border-color, #000);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+<style>
+/* Custom slider styling */
+.luis-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #357edd;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.logo-header:active {
-    border-color: var(--active-border-color, #000);
+.luis-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #357edd;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-#homepage-logo {
-    outline: none !important;
-    color: transparent !important; /* Hide text by default to prevent FOUC */
-    transition: color 0.2s ease; /* Smooth color transition */
+.luis-slider:hover::-webkit-slider-thumb {
+    background: #2c5aa0;
 }
 
-/* Show text color when logo is ready */
-.logo-ready #homepage-logo {
-    color: inherit !important; /* Override the transparent color */
-}
-
-#homepage-logo:focus {
-    outline: none !important;
-}
-
-/* Utility to disable transitions for instant style changes */
-.logo-header.no-transition,
-.logo-header.no-transition * {
-    transition: none !important;
-}
-
-/* Animated gradient animation - OBVIOUS but not too fast */
-.homepage-gradient-animation {
-    animation: homepage-gradient-shift 10s ease infinite;
-}
-
-@keyframes homepage-gradient-shift {
-    0% {
-        background-position: 0% 50%;
-    }
-    25% {
-        background-position: 100% 50%;
-    }
-    50% {
-        background-position: 50% 100%;
-    }
-    75% {
-        background-position: 100% 0%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+.luis-slider:hover::-moz-range-thumb {
+    background: #2c5aa0;
 }
 </style>
 
 <script>
-    // Homepage-specific logo randomization
-    function generateHomepageColors() {
-        // 33% each chance of solid, static gradient, or animated gradient
-        const rand = Math.random();
-        const useAnimatedGradient = rand < 0.33;
-        const useStaticGradient = rand >= 0.33 && rand < 0.66;
+// WebGL Morphing Implementation with Wavy Distortion
+class WebGLMorpher {
+    constructor(canvasId) {
+        console.log('Initializing WebGL morpher for canvas:', canvasId);
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) {
+            console.error('Canvas not found:', canvasId);
+            return;
+        }
         
-        if (useAnimatedGradient) {
-            // Generate animated gradient with 4 VERY different colors for obvious animation
-            const hues = [
-                Math.floor(Math.random() * 360),
-                (Math.floor(Math.random() * 360) + 90) % 360,  // Force different hue
-                (Math.floor(Math.random() * 360) + 180) % 360, // Force different hue  
-                (Math.floor(Math.random() * 360) + 270) % 360  // Force different hue
-            ];
-            
-            // Higher saturation and more lightness variation for dramatic effect
-            const saturations = hues.map(() => Math.floor(Math.random() * 40) + 20); // 20-60%
-            const lightnesses = hues.map(() => Math.floor(Math.random() * 20) + 75); // 75-95%
-            
-            const colors = hues.map((hue, i) => `hsl(${hue}, ${saturations[i]}%, ${lightnesses[i]}%)`);
-            
-            // Create animated gradient with more colors for smoother animation
-            const backgroundColor = `linear-gradient(-45deg, ${colors.join(', ')}, ${colors[0]})`;
-            
-            console.log('🌈 ANIMATED GRADIENT APPLIED:', colors);
-            
-            // Use average hue for borders
-            const avgHue = hues.reduce((sum, hue) => sum + hue, 0) / hues.length;
-            const avgSaturation = saturations.reduce((sum, sat) => sum + sat, 0) / saturations.length;
-            const avgLightness = lightnesses.reduce((sum, light) => sum + light, 0) / lightnesses.length;
-            
-            const borderColor = `hsl(${avgHue}, ${avgSaturation + 15}%, ${avgLightness - 15}%)`;
-            const hoverBorderColor = `hsl(${avgHue}, ${avgSaturation + 20}%, ${avgLightness - 25}%)`;
-            const activeBorderColor = `hsl(${avgHue}, ${avgSaturation + 30}%, ${avgLightness - 35}%)`;
-            const textLightness = avgLightness > 85 ? 20 : 30;
-            const textColor = `hsl(${avgHue}, ${avgSaturation + 10}%, ${textLightness}%)`;
-            
-            return { 
-                backgroundColor, 
-                borderColor, 
-                hoverBorderColor, 
-                activeBorderColor, 
-                textColor,
-                isGradient: true,
-                isAnimated: true
-            };
-        } else if (useStaticGradient) {
-            // Generate static gradient with two colors (original logic)
-            const hue1 = Math.floor(Math.random() * 360);
-            const hue2 = Math.floor(Math.random() * 360);
-            const saturation1 = Math.floor(Math.random() * 30) + 10;
-            const saturation2 = Math.floor(Math.random() * 30) + 10;
-            const lightness1 = Math.floor(Math.random() * 15) + 85;
-            const lightness2 = Math.floor(Math.random() * 15) + 85;
-            
-            const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
-            const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
-            
-            // Random gradient direction
-            const directions = ['45deg', '135deg', '90deg', '180deg', '0deg'];
-            const direction = directions[Math.floor(Math.random() * directions.length)];
-            
-            const backgroundColor = `linear-gradient(${direction}, ${color1}, ${color2})`;
-            
-            // Use average hue for border colors
-            const avgHue = (hue1 + hue2) / 2;
-            const avgSaturation = (saturation1 + saturation2) / 2;
-            const avgLightness = (lightness1 + lightness2) / 2;
-            
-            const borderColor = `hsl(${avgHue}, ${avgSaturation + 15}%, ${avgLightness - 15}%)`;
-            const hoverBorderColor = `hsl(${avgHue}, ${avgSaturation + 20}%, ${avgLightness - 25}%)`;
-            const activeBorderColor = `hsl(${avgHue}, ${avgSaturation + 30}%, ${avgLightness - 35}%)`;
-            const textLightness = avgLightness > 90 ? 20 : 30;
-            const textColor = `hsl(${avgHue}, ${avgSaturation + 10}%, ${textLightness}%)`;
-            
-            return { 
-                backgroundColor, 
-                borderColor, 
-                hoverBorderColor, 
-                activeBorderColor, 
-                textColor,
-                isGradient: true,
-                isAnimated: false
-            };
-        } else {
-            // Generate solid color (original logic)
-            const hue = Math.floor(Math.random() * 360);
-            const saturation = Math.floor(Math.random() * 30) + 10;
-            const lightness = Math.floor(Math.random() * 15) + 85;
-            const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-            const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
-            const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
-            const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
-            const textLightness = lightness > 90 ? 20 : 30;
-            const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
-            return { 
-                backgroundColor, 
-                borderColor, 
-                hoverBorderColor, 
-                activeBorderColor, 
-                textColor,
-                isGradient: false,
-                isAnimated: false
-            };
+        console.log('Canvas found, getting WebGL context...');
+        this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+        if (!this.gl) {
+            console.error('WebGL not supported on this device');
+            return;
+        }
+        
+        console.log('WebGL context created successfully');
+        this.morphValue = 0.0;
+        this.time = 0.0;
+        this.textures = {};
+        this.program = null;
+        this.initialized = false;
+        this.animationId = null;
+        
+        // STATISTICALLY WEIGHTED RANDOMIZATION - Subtle effects more likely than extreme!
+        this.randomParams = this.generateWeightedRandomParams();
+        
+        console.log('Random distortion parameters:', this.randomParams);
+        
+        console.log('Initializing shaders...');
+        this.initShaders();
+        console.log('Loading images...');
+        this.loadImages();
+        console.log('Starting animation loop...');
+        this.startAnimation();
+        
+        // Add click listener for effect randomization
+        this.canvas.addEventListener('click', () => {
+            console.log('🖱️ Canvas clicked! Randomizing effects...');
+            this.randomizeEffects();
+        });
+    }
+    
+    randomizeEffects() {
+        console.log('🎲 Randomizing effects with statistically weighted probabilities...');
+        // STATISTICALLY WEIGHTED RANDOMIZATION - Subtle effects more likely than extreme!
+        this.randomParams = this.generateWeightedRandomParams();
+        
+        // Log anchor pattern, pixel sort info, and statistical distribution
+        const anchorPattern = this.getAnchorPattern();
+        const pixelSortInfo = this.getPixelSortInfo();
+        const distortionLevel = this.getDistortionLevel();
+        console.log('🎯 Anchor pattern:', anchorPattern);
+        console.log('🔀 Pixel sort pattern:', pixelSortInfo);
+        console.log('📊 Distortion level:', distortionLevel);
+        console.log('🎲 New weighted parameters:', this.randomParams);
+        
+        // Re-render with new parameters
+        if (this.initialized) {
+            this.render();
         }
     }
-
-    function applyHomepageRandomization() {
-        const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
-        const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
-        const fonts = ['font-comic-sans', 'font-lucida-blackletter', 'font-times', 'font-inter', selectedGalapagos];
-        const logoSpans = document.querySelectorAll('#homepage-logo span');
-        logoSpans.forEach((span, index) => {
-            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-            span.className = randomFont;
+    
+    // Generate statistically weighted random parameters that favor subtle effects over extreme ones
+    generateWeightedRandomParams() {
+        // Helper function: Weighted choice between two values with bias toward the first (subtle) option
+        const biasedChoice = (subtleValue, extremeValue, subtleBias = 0.75) => {
+            return Math.random() < subtleBias ? subtleValue : extremeValue;
+        };
+        
+        // Helper function: Power curve distribution (favors lower values)
+        const powerCurveRandom = (min, max, power = 2) => {
+            return min + (max - min) * Math.pow(Math.random(), power);
+        };
+        
+        // Helper function: Exponential decay distribution (heavily favors lower values)
+        const exponentialRandom = (min, max, decay = 3) => {
+            return min + (max - min) * (1 - Math.pow(Math.random(), 1/decay));
+        };
+        
+        console.log('🎲 Generating statistically weighted parameters (75% subtle, 25% extreme)...');
+        
+        return {
+            // Wave frequencies: 75% chance for lower (subtle) frequencies
+            waveFreqX: biasedChoice(4.0, 20.0, 0.75),
+            waveFreqY: biasedChoice(3.0, 18.0, 0.75),
             
-            // Add random rotation to each letter with three categories: none, subtle, or strong
-            const rotationType = Math.floor(Math.random() * 3); // 0, 1, or 2
-            let rotation = 0;
+            // Wave speeds: 80% chance for slower (subtle) speeds  
+            waveSpeedX: biasedChoice(0.5, 4.0, 0.8),
+            waveSpeedY: biasedChoice(0.5, 4.0, 0.8),
             
-            if (rotationType === 0) {
-                // None: 0 degrees
-                rotation = 0;
-            } else if (rotationType === 1) {
-                // Subtle: ±5 degrees
-                rotation = (Math.random() - 0.5) * 10; // -5 to +5 degrees
-            } else {
-                // Strong: ±15 degrees
-                rotation = (Math.random() - 0.5) * 30; // -15 to +15 degrees
+            // Ripple frequencies: 70% chance for lower (subtle) frequencies
+            rippleFreq: biasedChoice(8.0, 30.0, 0.7),
+            
+            // Ripple speeds: 75% chance for slower (subtle) speeds
+            rippleSpeed: biasedChoice(1.0, 6.0, 0.75),
+            
+            // Swirl direction: Keep 50/50 for variety
+            swirlDirection: Math.random() > 0.5 ? 1.0 : -1.0,
+            
+            // Swirl speed: 80% chance for slower (subtle) speeds
+            swirlSpeed: biasedChoice(0.3, 3.0, 0.8),
+            
+            // Turbulence frequencies: 70% chance for lower (subtle) frequencies
+            turbulenceX: biasedChoice(6.0, 30.0, 0.7),
+            turbulenceY: biasedChoice(5.0, 25.0, 0.7),
+            
+            // Turbulence speeds: 80% chance for slower (subtle) speeds
+            turbulenceSpeedX: biasedChoice(0.5, 5.0, 0.8),
+            turbulenceSpeedY: biasedChoice(0.5, 5.0, 0.8),
+            
+            // INTENSITY MULTIPLIER: Most important for controlling extremeness
+            // Power curve heavily favors 0.5-1.0 range (subtle to moderate)
+            // Only 15% chance of getting extreme 1.5-2.0 values
+            intensityMultiplier: (() => {
+                const rand = Math.random();
+                if (rand < 0.5) {
+                    // 50% chance: Subtle range 0.5-0.75
+                    return 0.5 + (Math.random() * 0.25);
+                } else if (rand < 0.85) {
+                    // 35% chance: Moderate range 0.75-1.25
+                    return 0.75 + (Math.random() * 0.5);
+                } else {
+                    // 15% chance: Extreme range 1.25-2.0  
+                    return 1.25 + (Math.random() * 0.75);
+                }
+            })(),
+            
+            // Pixel sorting direction: Keep 50/50 for variety
+            pixelSortDirection: Math.random() > 0.5 ? 1.0 : -1.0,
+            
+            // PIXEL SORTING INTENSITY: Power curve heavily favors lower intensities
+            // 0.0-1.0 = subtle effects (75% probability)
+            // 1.0-2.0 = extreme effects (25% probability)
+            pixelSortIntensity: powerCurveRandom(0.0, 2.0, 3.0), // Power of 3 heavily favors low values
+            
+            // Pixel sorting threshold: Slight bias toward middle values for better visibility
+            pixelSortThreshold: (() => {
+                const rand = Math.random();
+                if (rand < 0.6) {
+                    // 60% chance: Sweet spot range 0.3-0.7
+                    return 0.3 + (Math.random() * 0.4);
+                } else {
+                    // 40% chance: Full range 0.1-0.9
+                    return 0.1 + (Math.random() * 0.8);
+                }
+            })()
+        };
+    }
+    
+    getAnchorPattern() {
+        // Decode which anchors are being used based on current parameters - NO CENTER!
+        const anchor1 = this.randomParams.waveFreqX > 15.0 ? 'TOP-LEFT' : 
+                       (this.randomParams.waveFreqX > 10.0 ? 'TOP-RIGHT' :
+                       (this.randomParams.waveFreqY > 15.0 ? 'BOTTOM-LEFT' : 
+                       (this.randomParams.waveFreqY > 10.0 ? 'BOTTOM-RIGHT' : 'TOP-LEFT-QUARTER')));
+                       
+        const anchor2 = this.randomParams.swirlDirection > 0.0 ? 
+                       (this.randomParams.rippleSpeed > 3.0 ? 'LEFT-EDGE' : 'LEFT-QUARTER') :
+                       (this.randomParams.rippleSpeed > 3.0 ? 'RIGHT-EDGE' : 'RIGHT-QUARTER');
+                       
+        const anchor3 = this.randomParams.turbulenceX > 20.0 ? 'TOP-EDGE' :
+                       (this.randomParams.turbulenceX > 15.0 ? 'BOTTOM-EDGE' :
+                       (this.randomParams.turbulenceY > 20.0 ? 'TOP-QUARTER' : 'BOTTOM-QUARTER'));
+                       
+        const swirlCorner1 = this.randomParams.swirlSpeed > 2.5 ? 'TOP-LEFT' : 
+                            (this.randomParams.swirlSpeed > 2.0 ? 'TOP-RIGHT' :
+                            (this.randomParams.swirlSpeed > 1.5 ? 'BOTTOM-LEFT' :
+                            (this.randomParams.swirlSpeed > 1.0 ? 'BOTTOM-RIGHT' : 'QUARTER-ANCHOR')));
+                            
+        const swirlCorner2 = this.randomParams.intensityMultiplier > 1.5 ? 'TOP-RIGHT-QUARTER' :
+                            (this.randomParams.intensityMultiplier > 1.0 ? 'BOTTOM-LEFT-QUARTER' : 'VARIED-QUARTER');
+                            
+        const edgeAnchor = this.randomParams.turbulenceSpeedX > 2.5 ? 'LEFT-EDGE' : 'RIGHT-EDGE';
+        
+        return {
+            rippleAnchors: [anchor1, anchor2, anchor3],
+            flowTypes: ['HORIZONTAL', 'VERTICAL', 'DIAGONAL', 'CURVED', 'EDGE-TO-EDGE'],
+            swirlAnchors: [swirlCorner1, swirlCorner2, edgeAnchor],
+            quarterAnchors: ['TOP-LEFT-Q', 'TOP-RIGHT-Q', 'BOTTOM-LEFT-Q', 'BOTTOM-RIGHT-Q'],
+            totalAnchors: 5
+        };
+    }
+    
+    getPixelSortInfo() {
+        // Decode pixel sorting configuration
+        const direction = this.randomParams.pixelSortDirection > 0.0 ? 'HORIZONTAL' : 'VERTICAL';
+        const intensity = this.randomParams.pixelSortIntensity;
+        const threshold = (this.randomParams.pixelSortThreshold * 100).toFixed(0) + '%';
+        
+        let sortType = 'NONE';
+        let features = [];
+        
+        if (intensity > 1.5) {
+            sortType = 'FULL_PROGRESSIVE';
+            features = ['BANDS', 'DIAGONAL', 'RADIAL', 'DUAL_TEXTURE'];
+        } else if (intensity > 1.0) {
+            sortType = 'DIAGONAL_PROGRESSIVE'; 
+            features = ['BANDS', 'DIAGONAL', 'DUAL_TEXTURE'];
+        } else if (intensity > 0.5) {
+            sortType = 'BANDS_PROGRESSIVE';
+            features = ['BANDS', 'DUAL_TEXTURE'];
+        }
+        
+        return {
+            primaryDirection: direction,
+            sortType: sortType,
+            luisThreshold: threshold,
+            pelicanThreshold: (100 - parseInt(threshold)).toString() + '%', // Inverted
+            features: features,
+            progressiveMode: 'PELICAN_INCREASES_WITH_MORPH',
+            intensityLevel: intensity.toFixed(2)
+        };
+    }
+    
+    getDistortionLevel() {
+        // Analyze current parameters to determine overall distortion level
+        const params = this.randomParams;
+        
+        // Count extreme values (parameters that create high distortion)
+        let extremeCount = 0;
+        let subtleCount = 0;
+        let moderateCount = 0;
+        
+        // Intensity multiplier analysis (most important)
+        if (params.intensityMultiplier >= 1.5) extremeCount += 3; // Weighted heavily
+        else if (params.intensityMultiplier >= 1.0) moderateCount += 2;
+        else subtleCount += 2;
+        
+        // Pixel sorting intensity analysis
+        if (params.pixelSortIntensity >= 1.5) extremeCount += 2;
+        else if (params.pixelSortIntensity >= 1.0) moderateCount += 1;
+        else subtleCount += 1;
+        
+        // Wave frequency analysis
+        if (params.waveFreqX >= 15.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.waveFreqY >= 15.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Speed analysis
+        if (params.waveSpeedX >= 3.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.waveSpeedY >= 3.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Ripple analysis
+        if (params.rippleFreq >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.rippleSpeed >= 4.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Swirl speed analysis
+        if (params.swirlSpeed >= 2.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Turbulence analysis
+        if (params.turbulenceX >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        if (params.turbulenceY >= 20.0) extremeCount += 1;
+        else subtleCount += 1;
+        
+        // Calculate overall level
+        const totalParams = extremeCount + moderateCount + subtleCount;
+        const extremeRatio = extremeCount / totalParams;
+        const subtleRatio = subtleCount / totalParams;
+        
+        let overallLevel = 'SUBTLE';
+        let confidence = 'HIGH';
+        
+        if (extremeRatio >= 0.4) {
+            overallLevel = 'EXTREME';
+            confidence = extremeRatio >= 0.6 ? 'VERY_HIGH' : 'HIGH';
+        } else if (extremeRatio >= 0.25 || subtleRatio < 0.5) {
+            overallLevel = 'MODERATE';
+            confidence = 'MEDIUM';
+        } else {
+            overallLevel = 'SUBTLE';
+            confidence = subtleRatio >= 0.7 ? 'VERY_HIGH' : 'HIGH';
+        }
+        
+        return {
+            level: overallLevel,
+            confidence: confidence,
+            extremeRatio: Math.round(extremeRatio * 100) + '%',
+            subtleRatio: Math.round(subtleRatio * 100) + '%',
+            breakdown: {
+                extremeCount: extremeCount,
+                moderateCount: moderateCount,
+                subtleCount: subtleCount
+            },
+            keyFactors: {
+                intensityMultiplier: params.intensityMultiplier.toFixed(2),
+                pixelSortIntensity: params.pixelSortIntensity.toFixed(2),
+                frequencyLevel: params.waveFreqX >= 15.0 || params.waveFreqY >= 15.0 ? 'HIGH' : 'LOW',
+                speedLevel: params.waveSpeedX >= 3.0 || params.waveSpeedY >= 3.0 ? 'FAST' : 'SLOW'
+            },
+            probability: 'This result had ~' + (overallLevel === 'EXTREME' ? '15-25%' : 
+                                               overallLevel === 'MODERATE' ? '25-35%' : 
+                                               '60-75%') + ' chance of occurring'
+        };
+    }
+    
+    initShaders() {
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            attribute vec2 a_texCoord;
+            varying vec2 v_texCoord;
+            
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+                v_texCoord = a_texCoord;
             }
+        `;
+        
+        // VARIATION 5: Fast Efficient Warping with RANDOMIZATION (ACTIVE)
+        const fragmentShaderSource = `
+            precision mediump float;
             
-            span.style.transform = `rotate(${rotation}deg)`;
-            span.style.display = 'inline-block'; // Required for transforms to work properly
-            span.style.transformOrigin = 'center center'; // Rotate around center
+            uniform sampler2D u_texture1;
+            uniform sampler2D u_texture2;
+            uniform float u_morphValue;
+            uniform float u_time;
             
-            if (index === 0) {
-                span.textContent = Math.random() < 0.5 ? 'S' : 's';
+            // RANDOMIZED PARAMETERS - Different every load!
+            uniform float u_waveFreqX;
+            uniform float u_waveFreqY;
+            uniform float u_waveSpeedX;
+            uniform float u_waveSpeedY;
+            uniform float u_rippleFreq;
+            uniform float u_rippleSpeed;
+            uniform float u_swirlDirection;
+            uniform float u_swirlSpeed;
+            uniform float u_turbulenceX;
+            uniform float u_turbulenceY;
+            uniform float u_turbulenceSpeedX;
+            uniform float u_turbulenceSpeedY;
+            uniform float u_intensityMultiplier;
+            
+            // NEW: Pixel sorting parameters
+            uniform float u_pixelSortDirection;
+            uniform float u_pixelSortIntensity;
+            uniform float u_pixelSortThreshold;
+            
+            varying vec2 v_texCoord;
+            
+            void main() {
+                vec2 uv = v_texCoord;
+                
+                // INTENSE warp strength that peaks in middle (now randomized!)
+                float warpPower = sin(u_morphValue * 3.14159) * 0.4 * u_intensityMultiplier;
+                
+                // DIVERSE ANCHOR POINTS - NO CENTER! All effects from edges/corners
+                vec2 topLeft = vec2(0.0, 0.0);
+                vec2 topRight = vec2(1.0, 0.0);
+                vec2 bottomLeft = vec2(0.0, 1.0);
+                vec2 bottomRight = vec2(1.0, 1.0);
+                vec2 leftEdge = vec2(0.0, 0.5);
+                vec2 rightEdge = vec2(1.0, 0.5);
+                vec2 topEdge = vec2(0.5, 0.0);
+                vec2 bottomEdge = vec2(0.5, 1.0);
+                
+                // NEW: Quarter positions for more variety
+                vec2 topLeftQuarter = vec2(0.25, 0.25);
+                vec2 topRightQuarter = vec2(0.75, 0.25);
+                vec2 bottomLeftQuarter = vec2(0.25, 0.75);
+                vec2 bottomRightQuarter = vec2(0.75, 0.75);
+                vec2 leftQuarter = vec2(0.0, 0.25);
+                vec2 rightQuarter = vec2(1.0, 0.75);
+                vec2 topQuarter = vec2(0.25, 0.0);
+                vec2 bottomQuarter = vec2(0.75, 1.0);
+                
+                // COMPLEX ANCHOR SELECTION - Multiple conditions, no center fallback
+                vec2 anchor1 = u_waveFreqX > 15.0 ? topLeft : 
+                              (u_waveFreqX > 10.0 ? topRight :
+                              (u_waveFreqY > 15.0 ? bottomLeft : 
+                              (u_waveFreqY > 10.0 ? bottomRight : topLeftQuarter)));
+                              
+                vec2 anchor2 = u_swirlDirection > 0.0 ? 
+                              (u_rippleSpeed > 3.0 ? leftEdge : leftQuarter) :
+                              (u_rippleSpeed > 3.0 ? rightEdge : rightQuarter);
+                              
+                vec2 anchor3 = u_turbulenceX > 20.0 ? topEdge :
+                              (u_turbulenceX > 15.0 ? bottomEdge :
+                              (u_turbulenceY > 20.0 ? topQuarter : bottomQuarter));
+                              
+                // Additional varied anchors for more complex effects
+                vec2 anchor4 = u_intensityMultiplier > 1.0 ? topRightQuarter : bottomLeftQuarter;
+                vec2 anchor5 = u_waveSpeedX > 2.0 ? bottomRightQuarter : topLeftQuarter;
+                
+                // MULTI-ANCHOR RIPPLES - 3 simultaneous ripple sources
+                float dist1 = length(uv - anchor1);
+                float dist2 = length(uv - anchor2);
+                float dist3 = length(uv - anchor3);
+                float ripple1 = sin(dist1 * u_rippleFreq - u_time * u_rippleSpeed) * warpPower * 0.08;
+                float ripple2 = cos(dist2 * u_rippleFreq * 0.7 + u_time * u_rippleSpeed * 1.3) * warpPower * 0.05;
+                float ripple3 = sin(dist3 * u_rippleFreq * 1.2 - u_time * u_rippleSpeed * 0.8) * warpPower * 0.04;
+                
+                // VARIED DIRECTIONAL FLOWS - Multiple flow patterns
+                float flowX = sin(uv.x * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.06;
+                float flowY = cos(uv.y * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.05;
+                
+                // DIAGONAL FLOWS with variation
+                float diagonalFlow1 = sin((uv.x + uv.y) * u_turbulenceX * 0.5 - u_time * u_turbulenceSpeedX) * warpPower * 0.04;
+                float diagonalFlow2 = cos((uv.x - uv.y) * u_turbulenceY * 0.5 + u_time * u_turbulenceSpeedY) * warpPower * 0.035;
+                
+                // NEW: CURVED FLOWS - Following anchor-to-anchor paths
+                vec2 flow1Direction = normalize(anchor2 - anchor1);
+                vec2 flow2Direction = normalize(anchor4 - anchor5);
+                float curvedFlow1 = sin(dot(uv, flow1Direction) * u_waveFreqX + u_time * u_waveSpeedX) * warpPower * 0.05;
+                float curvedFlow2 = cos(dot(uv, flow2Direction) * u_waveFreqY - u_time * u_waveSpeedY) * warpPower * 0.04;
+                
+                // EDGE-TO-EDGE WAVES - Waves that travel from one edge to opposite
+                float edgeWave1 = sin(uv.x * u_turbulenceX + u_time * u_turbulenceSpeedX) * 
+                                 cos(uv.y * u_turbulenceY - u_time * u_turbulenceSpeedY) * warpPower * 0.03;
+                float edgeWave2 = cos(uv.y * u_waveFreqX - u_time * u_waveSpeedX) * 
+                                 sin(uv.x * u_waveFreqY + u_time * u_waveSpeedY) * warpPower * 0.025;
+                
+                // ENHANCED PIXEL SORTING EFFECTS - Progressive for both textures
+                vec2 luisPixelSort = vec2(0.0, 0.0);
+                vec2 pelicanPixelSort = vec2(0.0, 0.0);
+                
+                // Sample both textures for brightness-based sorting
+                vec4 luisSample = texture2D(u_texture1, uv);
+                vec4 pelicanSample = texture2D(u_texture2, uv);
+                float luisBrightness = dot(luisSample.rgb, vec3(0.299, 0.587, 0.114));
+                float pelicanBrightness = dot(pelicanSample.rgb, vec3(0.299, 0.587, 0.114));
+                
+                // Both images get equal treatment - consistent effects throughout
+                float luisSortStrength = u_pixelSortIntensity * warpPower * 0.2;
+                
+                // Pelican gets same base strength as luis with consistent time-based movement
+                float pelicanTimeMovement = (1.0 + sin(u_time * 1.3) * 0.8 + cos(u_time * 0.7) * 0.6); // Consistent amplitude
+                float pelicanSortStrength = u_pixelSortIntensity * warpPower * 0.2 * pelicanTimeMovement;
+                
+                // BASIC BAND SORTING - Horizontal/Vertical strips
+                if (u_pixelSortIntensity > 0.5) {
+                    if (u_pixelSortDirection > 0.0) {
+                        // HORIZONTAL SORTING
+                        float bandHeight = 0.04 + sin(u_time * 0.5) * 0.01; // Dynamic band size
+                        float luisBandIndex = floor(uv.y / bandHeight);
+                        float pelicanBandIndex = floor((uv.y + u_morphValue * 0.1) / bandHeight); // Offset for pelican
+                        
+                        float luisBandOffset = sin(luisBandIndex * 2.0 + u_time * u_rippleSpeed) * 0.5 + 0.5;
+                        float pelicanBandOffset = cos(pelicanBandIndex * 2.5 - u_time * u_rippleSpeed * 1.2) * 0.5 + 0.5;
+                        
+                        // Luis horizontal sorting
+                        float luisSortOffset = (luisBrightness - u_pixelSortThreshold) * luisSortStrength;
+                        if (luisBrightness > u_pixelSortThreshold) {
+                            luisPixelSort.x += luisSortOffset * sin(uv.y * 25.0 + u_time);
+                        }
+                        luisPixelSort.x += sin(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
+                        
+                        // Pelican horizontal sorting - consistent effects like luis
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.8) * 0.3; // Same threshold swing as luis
+                        float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
+                        if (pelicanBrightness < pelicanThreshold) {
+                            pelicanPixelSort.x += pelicanSortOffset * cos(uv.y * (18.0 + sin(u_time * 0.4) * 12.0) - u_time * 1.3); // Consistent frequency shift
+                        }
+                        // Consistent secondary waves
+                        pelicanPixelSort.x += cos(pelicanBandIndex * 2.5 + pelicanBandOffset * 4.0) * pelicanSortStrength * 0.8;
+                        pelicanPixelSort.x += sin(uv.y * 12.0 + u_time * 2.1) * pelicanSortStrength * 0.7;
+                        // Third wave layer - consistent movement
+                        pelicanPixelSort.x += cos(uv.y * 8.0 - u_time * 3.2) * pelicanSortStrength * 0.6;
+                    }
+                    else {
+                        // VERTICAL SORTING
+                        float bandWidth = 0.03 + cos(u_time * 0.7) * 0.01; // Dynamic band size
+                        float luisBandIndex = floor(uv.x / bandWidth);
+                        float pelicanBandIndex = floor((uv.x + u_morphValue * 0.15) / bandWidth);
+                        
+                        float luisBandOffset = cos(luisBandIndex * 1.8 + u_time * u_rippleSpeed) * 0.5 + 0.5;
+                        float pelicanBandOffset = sin(pelicanBandIndex * 2.2 - u_time * u_rippleSpeed * 0.8) * 0.5 + 0.5;
+                        
+                        // Luis vertical sorting
+                        float luisSortOffset = (luisBrightness - u_pixelSortThreshold) * luisSortStrength;
+                        if (luisBrightness > u_pixelSortThreshold) {
+                            luisPixelSort.y += luisSortOffset * cos(uv.x * 22.0 + u_time * 0.8);
+                        }
+                        luisPixelSort.y += cos(luisBandIndex * 3.14159 + luisBandOffset * 6.28) * luisSortStrength * 0.4;
+                        
+                        // Pelican vertical sorting - consistent effects like luis
+                        float pelicanThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 0.6) * 0.3; // Same threshold swing as luis
+                        float pelicanSortOffset = (pelicanBrightness - pelicanThreshold) * pelicanSortStrength;
+                        if (pelicanBrightness < pelicanThreshold) {
+                            pelicanPixelSort.y += pelicanSortOffset * sin(uv.x * (16.0 + cos(u_time * 0.5) * 10.0) - u_time * 1.1); // Consistent frequency shift
+                        }
+                        // Consistent secondary waves
+                        pelicanPixelSort.y += sin(pelicanBandIndex * 2.8 + pelicanBandOffset * 5.0) * pelicanSortStrength * 0.8;
+                        pelicanPixelSort.y += cos(uv.x * 14.0 - u_time * 1.8) * pelicanSortStrength * 0.7;
+                        // Third wave layer - consistent movement
+                        pelicanPixelSort.y += sin(uv.x * 10.0 + u_time * 2.8) * pelicanSortStrength * 0.6;
+                    }
+                }
+                
+                // DIAGONAL ANCHOR-BASED SORTING - More sophisticated
+                if (u_pixelSortIntensity > 1.0) {
+                    float diagonalStrength = (u_pixelSortIntensity - 1.0) * warpPower * 0.12;
+                    
+                    // Luis: Sort along anchor1 to anchor4 direction
+                    vec2 luisSortDirection = normalize(anchor4 - anchor1);
+                    float luisSortProjection = dot(uv - anchor1, luisSortDirection);
+                    float luisSortBand = floor(luisSortProjection * 18.0) / 18.0;
+                    
+                    float luisStreakDisplace = (luisBrightness - u_pixelSortThreshold) * diagonalStrength;
+                    if (luisBrightness > u_pixelSortThreshold) {
+                        luisPixelSort += luisSortDirection * luisStreakDisplace * sin(luisSortBand * 12.0 + u_time * 2.0);
+                    }
+                    
+                    // Pelican: Consistent diagonal sort with rotation like luis
+                    vec2 pelicanSortDirection = normalize(anchor5 - anchor2);
+                    // Consistent rotation like luis
+                    float rotationAngle = sin(u_time * 0.3) * 0.4; // Same rotation as luis
+                    vec2 rotatedDirection = vec2(
+                        pelicanSortDirection.x * cos(rotationAngle) - pelicanSortDirection.y * sin(rotationAngle),
+                        pelicanSortDirection.x * sin(rotationAngle) + pelicanSortDirection.y * cos(rotationAngle)
+                    );
+                    
+                    float pelicanSortProjection = dot(uv - anchor2, rotatedDirection);
+                    float pelicanSortBand = floor(pelicanSortProjection * (15.0 + sin(u_time * 0.4) * 3.0)) / 15.0;
+                    
+                    float dynamicThreshold = 1.0 - u_pixelSortThreshold + sin(u_time * 0.9) * 0.3; // Same threshold variation as luis
+                    float pelicanStreakDisplace = (pelicanBrightness - dynamicThreshold) * diagonalStrength * pelicanSortStrength;
+                    if (pelicanBrightness < dynamicThreshold) {
+                        pelicanPixelSort += rotatedDirection * pelicanStreakDisplace * cos(pelicanSortBand * 8.0 - u_time * 1.5) * 
+                                           (0.8 + sin(u_time * 2.2) * 1.2); // Consistent intensity
+                    }
+                }
+                
+                // RADIAL SORTING - Sort from anchor points outward (inspired by webgl-shaders.com)
+                if (u_pixelSortIntensity > 1.5) {
+                    float radialStrength = (u_pixelSortIntensity - 1.5) * warpPower * 0.08;
+                    
+                    // Luis: Radial sort from anchor1
+                    vec2 luisRadialDir = normalize(uv - anchor1);
+                    float luisRadialDist = length(uv - anchor1);
+                    float luisRadialBand = floor(luisRadialDist * 25.0) / 25.0;
+                    
+                    if (luisBrightness > u_pixelSortThreshold) {
+                        luisPixelSort += luisRadialDir * (luisBrightness - u_pixelSortThreshold) * radialStrength * 
+                                       sin(luisRadialBand * 15.0 + u_time * 3.0);
+                    }
+                    
+                    // Pelican: Consistent radial sort like luis
+                    vec2 dynamicAnchor3 = anchor3 + vec2(sin(u_time * 0.6) * 0.2, cos(u_time * 0.8) * 0.2); // Same movement as luis
+                    vec2 pelicanRadialDir = normalize(uv - dynamicAnchor3);
+                    float pelicanRadialDist = length(uv - dynamicAnchor3);
+                    float pelicanRadialBand = floor(pelicanRadialDist * (20.0 + cos(u_time * 0.5) * 8.0)) / 20.0; // Same band variation as luis
+                    
+                    float dynamicRadialThreshold = 1.0 - u_pixelSortThreshold + cos(u_time * 1.1) * 0.25; // Same threshold swing as luis
+                    if (pelicanBrightness < dynamicRadialThreshold) {
+                        float radialIntensity = (0.6 + sin(u_time * 1.7) * 1.0); // Consistent pulsing
+                        pelicanPixelSort += pelicanRadialDir * (dynamicRadialThreshold - pelicanBrightness) * 
+                                           radialStrength * pelicanSortStrength * radialIntensity * 
+                                           cos(pelicanRadialBand * 10.0 - u_time * 2.2);
+                    }
+                }
+                
+                // MULTIPLE CORNER SWIRLS - More variety, more anchors
+                vec2 swirlAnchor1 = u_swirlSpeed > 2.5 ? topLeft : 
+                                   (u_swirlSpeed > 2.0 ? topRight :
+                                   (u_swirlSpeed > 1.5 ? bottomLeft :
+                                   (u_swirlSpeed > 1.0 ? bottomRight : anchor4)));
+                                   
+                vec2 swirlAnchor2 = u_intensityMultiplier > 1.5 ? topRightQuarter :
+                                   (u_intensityMultiplier > 1.0 ? bottomLeftQuarter : anchor5);
+                
+                vec2 toAnchor1 = uv - swirlAnchor1;
+                vec2 toAnchor2 = uv - swirlAnchor2;
+                float swirlDist1 = length(toAnchor1);
+                float swirlDist2 = length(toAnchor2);
+                float swirlAngle1 = atan(toAnchor1.y, toAnchor1.x);
+                float swirlAngle2 = atan(toAnchor2.y, toAnchor2.x);
+                
+                float swirl1 = sin(swirlAngle1 * 4.0 * u_swirlDirection + u_time * u_swirlSpeed + swirlDist1 * 15.0) * warpPower * 0.07;
+                float swirl2 = cos(swirlAngle2 * 3.0 * -u_swirlDirection - u_time * u_swirlSpeed * 1.3 + swirlDist2 * 12.0) * warpPower * 0.04;
+                
+                // EDGE-BASED ROTATIONAL EFFECTS
+                vec2 edgeAnchor = u_turbulenceSpeedX > 2.5 ? leftEdge : rightEdge;
+                vec2 toEdge = uv - edgeAnchor;
+                float edgeAngle = atan(toEdge.y, toEdge.x);
+                float edgeSwirl = sin(edgeAngle * 6.0 * u_swirlDirection + u_time * u_swirlSpeed * 1.5) * warpPower * 0.05;
+                
+                // Apply DIVERSE warping to both textures differently
+                vec2 warpedUV1 = uv;
+                vec2 warpedUV2 = uv;
+                
+                // Luis gets COMPLEX MULTI-ANCHOR distortion + PROGRESSIVE PIXEL SORTING
+                warpedUV1.x += flowX + ripple1 + diagonalFlow1 + swirl2 + curvedFlow1 + edgeWave1 + luisPixelSort.x;
+                warpedUV1.y += flowY + swirl1 + diagonalFlow2 + edgeSwirl + curvedFlow2 + edgeWave2 + luisPixelSort.y;
+                
+                // Pelican: Consistent effects like luis throughout the entire transition
+                float pelicanWarp = warpPower * 1.2; // Same base strength as luis with slight boost for visual variety
+                
+                // Consistent time-based variation like luis
+                float pelicanTimeVariation = (1.0 + sin(u_time * 0.9) * 0.8 + cos(u_time * 1.4) * 0.6); // Same variation as luis
+                
+                warpedUV2.x += (swirl1 + diagonalFlow1 * 0.8 + ripple2 + curvedFlow2 + edgeWave2 * 0.7 + pelicanPixelSort.x) * 
+                               pelicanWarp * pelicanTimeVariation;
+                warpedUV2.y += (ripple3 + diagonalFlow2 * 0.6 + flowY * 0.5 + edgeSwirl * 0.6 + curvedFlow1 * 0.8 + pelicanPixelSort.y) * 
+                               pelicanWarp * pelicanTimeVariation;
+                
+                // Keep coordinates in bounds
+                warpedUV1 = clamp(warpedUV1, 0.0, 1.0);
+                warpedUV2 = clamp(warpedUV2, 0.0, 1.0);
+                
+                // Sample textures
+                vec4 color1 = texture2D(u_texture1, warpedUV1);
+                vec4 color2 = texture2D(u_texture2, warpedUV2);
+                
+                // GRADUAL PELICAN EMERGENCE - starts at 55%, smooth transition
+                float pelicanBlend = smoothstep(0.55, 0.85, u_morphValue); // Gradual transition 55%-85%
+                gl_FragColor = mix(color1, color2, pelicanBlend);
+            }
+        `;
+        
+        const vertexShader = this.createShader(this.gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
+        
+        this.program = this.createProgram(vertexShader, fragmentShader);
+        
+        // Set up geometry
+        const positions = new Float32Array([
+            -1, -1,  0, 1,
+             1, -1,  1, 1,
+            -1,  1,  0, 0,
+             1,  1,  1, 0,
+        ]);
+        
+        const positionBuffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
+        
+        const positionLocation = this.gl.getAttribLocation(this.program, 'a_position');
+        const texCoordLocation = this.gl.getAttribLocation(this.program, 'a_texCoord');
+        
+        this.gl.enableVertexAttribArray(positionLocation);
+        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 16, 0);
+        
+        this.gl.enableVertexAttribArray(texCoordLocation);
+        this.gl.vertexAttribPointer(texCoordLocation, 2, this.gl.FLOAT, false, 16, 8);
+    }
+    
+    createShader(type, source) {
+        const shader = this.gl.createShader(type);
+        this.gl.shaderSource(shader, source);
+        this.gl.compileShader(shader);
+        
+        if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+            const errorLog = this.gl.getShaderInfoLog(shader);
+            console.error('❌ Shader compilation failed!');
+            console.error('Shader type:', type === this.gl.VERTEX_SHADER ? 'VERTEX' : 'FRAGMENT');
+            console.error('Error log:', errorLog);
+            console.error('Shader source:', source);
+            this.gl.deleteShader(shader);
+            return null;
+        }
+        
+        console.log('✅ Shader compiled successfully:', type === this.gl.VERTEX_SHADER ? 'VERTEX' : 'FRAGMENT');
+        return shader;
+    }
+    
+    createProgram(vertexShader, fragmentShader) {
+        const program = this.gl.createProgram();
+        this.gl.attachShader(program, vertexShader);
+        this.gl.attachShader(program, fragmentShader);
+        this.gl.linkProgram(program);
+        
+        if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
+            console.error('Program linking error:', this.gl.getProgramInfoLog(program));
+            this.gl.deleteProgram(program);
+            return null;
+        }
+        
+        return program;
+    }
+    
+    loadImages() {
+        // Debug: Show what URLs we're trying to load
+        const imageUrls = [
+            '{{ url_for("static", filename="images/luis.png") }}',
+            '{{ url_for("static", filename="images/pelican.png") }}'
+        ];
+        
+        console.log('🖼️ Loading images:', imageUrls);
+        
+        let loadedCount = 0;
+        
+        // Pre-create fallback textures in case images fail
+        console.log('🔧 Creating initial fallback textures...');
+        this.textures.texture1 = this.createFallbackTexture(0);
+        this.textures.texture2 = this.createFallbackTexture(1);
+        
+        // Initialize with fallbacks immediately so something shows
+        this.initialized = true;
+        
+        // Then try to load real images and replace fallbacks
+        imageUrls.forEach((url, index) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            
+            img.onload = () => {
+                console.log(`✅ Image ${index + 1} loaded successfully:`, url.substring(0, 50) + '...');
+                this.textures[`texture${index + 1}`] = this.createTexture(img);
+                loadedCount++;
+                
+                console.log(`🔄 Replacing fallback texture ${index + 1} with real image`);
+                this.render(); // Re-render with real image
+                
+                if (loadedCount === 2) {
+                    console.log('🎉 All real images loaded!');
+                    this.hideSkeletonLoader();
+                }
+            };
+            
+            img.onerror = (error) => {
+                console.error(`❌ Failed to load image ${index + 1}:`, url);
+                console.error('Error details:', error);
+                console.log('🔧 Keeping fallback texture for image', index + 1);
+                loadedCount++;
+                
+                if (loadedCount === 2) {
+                    console.log('⚠️ Using all fallback textures - check image URLs');
+                    this.showSkeletonError();
+                }
+            };
+            
+            // Add timeout for image loading
+            setTimeout(() => {
+                if (img.complete === false) {
+                    console.warn(`⏰ Image ${index + 1} taking too long to load, using fallback`);
+                    img.src = ''; // Cancel loading
+                    loadedCount++;
+                    
+                    if (loadedCount === 2) {
+                        this.showSkeletonError();
+                    }
+                }
+            }, 3000); // 3 second timeout
+            
+            img.src = url;
+        });
+        
+        // Hide skeleton immediately if we already have textures and can render
+        this.render();
+        setTimeout(() => {
+            if (this.initialized) {
+                this.hideSkeletonLoader();
+            }
+        }, 500); // Small delay to show the skeleton briefly
+    }
+    
+    hideSkeletonLoader() {
+        console.log('🎭 Hiding skeleton loader, showing WebGL canvas...');
+        const skeleton = document.getElementById('webglSkeleton');
+        const canvas = document.getElementById('morphCanvas');
+        
+        if (skeleton && canvas) {
+            // Fade out skeleton
+            skeleton.style.transition = 'opacity 0.3s ease-out';
+            skeleton.style.opacity = '0';
+            
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                canvas.style.display = 'block';
+                canvas.classList.add('webgl-loaded');
+                console.log('✨ WebGL canvas revealed with fade-in animation');
+            }, 300);
+        }
+    }
+    
+    showSkeletonError() {
+        console.log('❌ Showing skeleton error state...');
+        const skeleton = document.getElementById('webglSkeleton');
+        
+        if (skeleton) {
+            skeleton.innerHTML = `
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px;">⚠️</div>
+            `;
+            skeleton.style.background = '#f8f8f8';
+            skeleton.style.animation = 'none';
+            skeleton.style.position = 'relative';
+        }
+    }
+    
+    createTexture(img) {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, img);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
+        return texture;
+    }
+    
+    createDefaultTexture() {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        // Create a 1x1 gray pixel as fallback
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([128, 128, 128, 255]));
+        return texture;
+    }
+    
+    createFallbackTexture(index) {
+        const texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        
+        // Create a simple 2x2 pattern for more visible fallback
+        const size = 64; // 64x64 texture
+        const data = new Uint8Array(size * size * 4);
+        
+        // Generate a simple pattern so we can see something is working
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                const idx = (i * size + j) * 4;
+                if (index === 0) {
+                    // Luis fallback - red with pattern
+                    data[idx] = 255;     // R
+                    data[idx + 1] = (i + j) % 32 < 16 ? 100 : 150; // G
+                    data[idx + 2] = 100; // B
+                    data[idx + 3] = 255; // A
+                } else {
+                    // Pelican fallback - blue with pattern
+                    data[idx] = 100;     // R
+                    data[idx + 1] = 100; // G
+                    data[idx + 2] = (i + j) % 32 < 16 ? 200 : 255; // B
+                    data[idx + 3] = 255; // A
+                }
+            }
+        }
+        
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, size, size, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, data);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
+        
+        console.log(`🎨 Created ${index === 0 ? 'red' : 'blue'} fallback texture ${index + 1}`);
+        return texture;
+    }
+    
+    startAnimation() {
+        const animate = () => {
+            this.time += 0.016; // ~60fps
+            if (this.initialized) {
+                this.render();
+            }
+            this.animationId = requestAnimationFrame(animate);
+        };
+        animate();
+    }
+    
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    }
+    
+    setMorphValue(value) {
+        this.morphValue = Math.max(0, Math.min(1, value));
+        console.log('Morph value set to:', this.morphValue);
+        if (this.initialized) {
+            this.render();
+        } else {
+            console.log('WebGL not initialized yet, cannot render');
+        }
+    }
+    
+    render() {
+        if (!this.initialized || !this.program) {
+            console.log('❌ Cannot render - initialized:', this.initialized, 'program:', !!this.program);
+            return;
+        }
+        
+        if (!this.textures.texture1 || !this.textures.texture2) {
+            console.log('❌ Cannot render - missing textures');
+            return;
+        }
+        
+        // Only log occasionally to avoid spam
+        if (this.time < 1.0 || Math.floor(this.time) % 5 === 0) {
+            console.log('🎬 Rendering with morph value:', this.morphValue, 'time:', this.time.toFixed(2));
+        }
+        
+        this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        this.gl.clearColor(0.96, 0.96, 0.96, 1.0); // Light gray background matching CSS (#f5f5f5)
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        
+        this.gl.useProgram(this.program);
+        
+        // Bind textures with error checking
+        this.gl.activeTexture(this.gl.TEXTURE0);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, this.textures.texture1);
+        this.gl.uniform1i(this.gl.getUniformLocation(this.program, 'u_texture1'), 0);
+        
+        this.gl.activeTexture(this.gl.TEXTURE1);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, this.textures.texture2);
+        this.gl.uniform1i(this.gl.getUniformLocation(this.program, 'u_texture2'), 1);
+        
+        // Set uniforms
+        this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_morphValue'), this.morphValue);
+        this.gl.uniform1f(this.gl.getUniformLocation(this.program, 'u_time'), this.time);
+        
+        // Set RANDOMIZED parameters including pixel sorting
+        const uniforms = [
+            'u_waveFreqX', 'u_waveFreqY', 'u_waveSpeedX', 'u_waveSpeedY',
+            'u_rippleFreq', 'u_rippleSpeed', 'u_swirlDirection', 'u_swirlSpeed',
+            'u_turbulenceX', 'u_turbulenceY', 'u_turbulenceSpeedX', 'u_turbulenceSpeedY',
+            'u_intensityMultiplier', 'u_pixelSortDirection', 'u_pixelSortIntensity', 'u_pixelSortThreshold'
+        ];
+        
+        const paramKeys = [
+            'waveFreqX', 'waveFreqY', 'waveSpeedX', 'waveSpeedY',
+            'rippleFreq', 'rippleSpeed', 'swirlDirection', 'swirlSpeed',
+            'turbulenceX', 'turbulenceY', 'turbulenceSpeedX', 'turbulenceSpeedY',
+            'intensityMultiplier', 'pixelSortDirection', 'pixelSortIntensity', 'pixelSortThreshold'
+        ];
+        
+        uniforms.forEach((uniformName, index) => {
+            const location = this.gl.getUniformLocation(this.program, uniformName);
+            const value = this.randomParams[paramKeys[index]];
+            
+            if (location === null) {
+                if (this.time < 1.0) console.error(`❌ Uniform location not found: ${uniformName}`);
+            } else {
+                this.gl.uniform1f(location, value);
             }
         });
-
-        const header = document.getElementById('logo-header');
-        const logo = document.getElementById('homepage-logo');
-
-        // Temporarily disable transitions for an instant change
-        header.classList.add('no-transition');
         
-        const colors = generateHomepageColors();
-        
-        // Clear any existing background styles and animations
-        header.classList.remove('homepage-gradient-animation');
-        header.style.background = '';
-        header.style.backgroundColor = '';
-        
-        // Apply background based on type
-        if (colors.isAnimated) {
-            header.style.background = colors.backgroundColor;
-            header.style.backgroundSize = '600% 600%'; // Even bigger for more dramatic movement
-            header.classList.add('homepage-gradient-animation');
-            console.log('🎬 Animation class added, should be moving!');
-        } else if (colors.isGradient) {
-            header.style.background = colors.backgroundColor;
-            console.log('🎨 Static gradient applied');
-        } else {
-            header.style.backgroundColor = colors.backgroundColor;
-            console.log('🎯 Solid color applied');
+        // Check for WebGL errors
+        const error = this.gl.getError();
+        if (error !== this.gl.NO_ERROR) {
+            console.error('🚨 WebGL error before drawing:', error);
         }
         
-        header.style.borderColor = colors.borderColor;
-        logo.style.setProperty('color', colors.textColor, 'important'); // Force color override
-        document.documentElement.style.setProperty('--hover-border-color', colors.hoverBorderColor);
-        document.documentElement.style.setProperty('--active-border-color', colors.activeBorderColor);
-
-        // Force browser to apply styles immediately
-        header.offsetHeight; 
-        logo.offsetHeight; // Force reflow on logo as well
-
-        // Re-enable transitions for the next hover
-        header.classList.remove('no-transition');
+        // Draw
+        this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+        
+        // Check for errors after drawing
+        const drawError = this.gl.getError();
+        if (drawError !== this.gl.NO_ERROR) {
+            console.error('🚨 WebGL error after drawing:', drawError);
+        }
     }
-
-    // Single initialization function for the homepage.
-    async function initializeHomepage() {
-        // Wait for fonts to be ready
-        await new Promise((resolve) => {
-            if ('fonts' in document) {
-                Promise.all([
-                    document.fonts.load('1em "galapagos-a"'),
-                    document.fonts.load('1em "galapagos-ab"'),
-                    document.fonts.load('1em "galapagos-abc"'),
-                    document.fonts.load('1em "Comic Sans MS"'),
-                    document.fonts.load('1em "Lucida Blackletter"'),
-                    document.fonts.load('1em "Inter"'),
-                    document.fonts.load('1em "InterVariable"')
-                ]).then(resolve).catch(() => setTimeout(resolve, 100));
-            } else {
-                setTimeout(resolve, 100);
+    
+    destroy() {
+        this.stopAnimation();
+        if (this.gl) {
+            // Clean up WebGL resources
+            Object.values(this.textures).forEach(texture => {
+                this.gl.deleteTexture(texture);
+            });
+            if (this.program) {
+                this.gl.deleteProgram(this.program);
             }
-        });
-
-        // Apply randomization immediately
-        applyHomepageRandomization();
-        
-        // Show the logo with fade-in animation
-        document.body.classList.add('logo-ready');
-        
-        // Make the logo interactive
-        const logoHeader = document.getElementById('logo-header');
-        if (logoHeader) {
-            logoHeader.onclick = applyHomepageRandomization;
         }
     }
+}
 
-    // --- Event Listeners ---
+// Initialize WebGL morpher
+let morpher = null;
 
-    // Run for initial load
-    if (document.readyState !== 'loading') {
-        initializeHomepage();
-    } else {
-        document.addEventListener('DOMContentLoaded', initializeHomepage);
+function initializeWebGLMorpher() {
+    console.log('=== INITIALIZING WEBGL MORPHER ===');
+    const canvas = document.getElementById('morphCanvas');
+    const slider = document.querySelector('.luis-slider');
+    
+    if (!canvas) {
+        console.error('Canvas not found!');
+        return;
     }
-
-    // Run when navigating back to the page from browser cache
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            initializeHomepage();
+    if (!slider) {
+        console.error('Slider not found!');
+        return;
+    }
+    
+    console.log('Canvas and slider found successfully');
+    
+    // Clean up existing morpher
+    if (morpher) {
+        console.log('Cleaning up existing morpher');
+        morpher.destroy();
+    }
+    
+    console.log('Creating new WebGL morpher...');
+    morpher = new WebGLMorpher('morphCanvas');
+    
+    // Update morph value when slider changes
+    slider.addEventListener('input', function() {
+        const percentage = this.value / 100;
+        console.log('Slider moved to:', percentage);
+        if (morpher) {
+            morpher.setMorphValue(percentage);
+        } else {
+            console.error('Morpher not initialized!');
         }
     });
-</script> 
+    
+    // Set initial morph value from slider
+    const initialValue = slider.value / 100;
+    console.log('Setting initial morph value to:', initialValue);
+    if (morpher) {
+        morpher.setMorphValue(initialValue);
+    }
+    
+    // Test if WebGL is working after 2 seconds
+    setTimeout(() => {
+        console.log('=== WEBGL STATUS CHECK ===');
+        if (morpher && morpher.initialized) {
+            console.log('✅ WebGL is working!');
+            console.log('🎯 Current anchor pattern:', morpher.getAnchorPattern());
+            console.log('🔀 Current pixel sort pattern:', morpher.getPixelSortInfo());
+            console.log('Random parameters being used:', morpher.randomParams);
+        } else {
+            console.log('❌ WebGL failed to initialize');
+        }
+    }, 2000);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initializeWebGLMorpher);
+
+// Re-initialize when HTMX swaps content - with multiple safeguards
+document.addEventListener('htmx:afterSwap', function(event) {
+    console.log('🔄 HTMX afterSwap triggered');
+    
+    // Only reinitialize if the swapped content contains our canvas
+    const canvas = event.detail.target.querySelector('#morphCanvas');
+    if (canvas) {
+        console.log('✅ Found morphCanvas in swapped content, reinitializing...');
+        
+        // Add a small delay to ensure DOM is fully ready
+        setTimeout(() => {
+        initializeWebGLMorpher();
+        }, 100);
+    } else {
+        console.log('❌ No morphCanvas found in swapped content');
+    }
+});
+
+// Also listen for htmx:load event as backup
+document.addEventListener('htmx:load', function(event) {
+    const canvas = document.getElementById('morphCanvas');
+    if (canvas && !morpher) {
+        console.log('🔄 HTMX load event - initializing WebGL morpher');
+        setTimeout(() => {
+            initializeWebGLMorpher();
+        }, 150);
+    }
+});
+
+
+</script>
+</div>
+</div> 

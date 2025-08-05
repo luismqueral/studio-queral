@@ -387,17 +387,9 @@
                            hx-get="/log" hx-target="main" hx-push-url="/log">
                             studio log
                         </a>
-                        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
                            hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
                             scratch book
-                        </a>
-                        <a href="/projects" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
-                           hx-get="/projects" hx-target="main" hx-push-url="/projects">
-                            projects
-                        </a>
-                        <a href="/about" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
-                           hx-get="/about" hx-target="main" hx-push-url="/about">
-                            about
                         </a>
                     </nav>
                 </div>
@@ -453,10 +445,6 @@
                 activeLink = document.querySelector('nav a[href="/log"]');
             } else if (currentPath.startsWith('/scratch-book')) {
                 activeLink = document.querySelector('nav a[href="/scratch-book"]');
-            } else if (currentPath.startsWith('/projects')) {
-                activeLink = document.querySelector('nav a[href="/projects"]');
-            } else if (currentPath.startsWith('/about')) {
-                activeLink = document.querySelector('nav a[href="/about"]');
             }
             
             if (activeLink) {

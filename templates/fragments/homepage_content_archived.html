@@ -1,0 +1,425 @@
+<!-- ARCHIVED HOMEPAGE CONTENT - Original homepage with animated logo and randomization -->
+<!-- Archived on: Current Date -->
+<!-- Reason: Replacing homepage with about page content as requested -->
+
+<!-- Homepage-specific navigation (overrides base nav) -->
+<header class="mb3 flex justify-center">
+    <nav class="flex flex-wrap justify-center">
+        <a href="/log" 
+           class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/log" hx-target="main" hx-push-url="/log">
+            studio log
+        </a>
+        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
+            scratch book
+        </a>
+        <a href="/projects" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+           hx-get="/projects" hx-target="main" hx-push-url="/projects">
+            projects
+        </a>
+        <a href="/about" class="link gray hover-near-black underline-hover f6 f4-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
+           hx-get="/about" hx-target="main" hx-push-url="/about">
+            about
+        </a>
+    </nav>
+</header>
+
+<!-- Large Logo Header -->
+<header class="logo-header tc mw7 center mb3 br2" id="logo-header">
+    <h1 class="ma0 lh-solid f-homepage-logo" id="actual-logo">
+        <span class="link no-underline" id="homepage-logo">
+            <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span><br><span>Q</span><span>u</span><span>e</span><span>r</span><span>A</span><span>l</span>
+        </span>
+    </h1>
+</header>
+
+<!-- Bio Content (matching original) -->
+<main class="tc">
+    <div class="ph5 tl center tl center">
+        <p class="f6 f4-ns near-black lh-copy mb4 mb3-ns">
+            This is the personal website of <a href="#" class="link gray hover-near-black underline-hover">Luis Queral</a>.
+        </p>
+
+        <p class="f6 f4-ns near-black lh-copy">
+            He is a <a href="#" class="link gray hover-near-black underline-hover">software designer</a>, <a href="#" class="link gray hover-near-black underline-hover">hypermedia artist</a>, and <a href="#" class="link gray hover-near-black underline-hover">generative design researcher</a> at The New York Times.
+        </p>
+    </div>
+</main>
+
+<style>
+/* Hide base template navigation on homepage */
+.homepage-hide-nav .mw7 > header.mb4.tc {
+    display: none !important;
+}
+
+/* Also hide via direct targeting of nav elements */
+.homepage-hide-nav .nav-logo-container {
+    display: none !important;
+}
+
+/* Homepage navigation click animation - bump down effect */
+header nav a {
+    transition: transform 0.1s ease;
+}
+
+header nav a:active {
+    transform: translateY(2px);
+}
+
+/* Homepage-specific logo styles */
+.logo-header {
+    border: 6px solid transparent; /* Start with transparent border to prevent FOUC */
+    cursor: pointer;
+    transition: opacity 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    opacity: 1;
+    padding: 3rem 2rem;
+    overflow: hidden; /* Prevent text from extending beyond border */
+}
+
+/* Show border only when logo is ready */
+.logo-ready .logo-header {
+    border-color: #000; /* Default border color, will be overridden by randomization */
+}
+
+/* Custom homepage logo font size class */
+.f-homepage-logo {
+    font-size: 10vw;
+    min-height: 0.9em; /* Ensure consistent height regardless of font */
+}
+
+/* Ensure line break is always respected */
+#homepage-logo {
+    white-space: normal !important;
+}
+
+#homepage-logo br {
+    display: block !important;
+    content: "";
+    clear: both;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 37.5em) {
+    .logo-header {
+        padding: 2rem 1rem;
+    }
+    .f-homepage-logo {
+        font-size: 17vw;
+    }
+}
+
+@media screen and (min-width: 62.5em) {
+    .logo-header {
+        padding: 4rem 3rem;
+    }
+    .f-homepage-logo {
+        font-size: 8rem;
+        max-width: 100%;
+    }
+}
+
+/* Logo fade-in animation */
+.logo-ready #actual-logo {
+    animation: fadeInLogo 0.4s ease-out;
+}
+
+@keyframes fadeInLogo {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-header:hover {
+    border-color: var(--hover-border-color, #000);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-header:active {
+    border-color: var(--active-border-color, #000);
+}
+
+#homepage-logo {
+    outline: none !important;
+    color: transparent !important; /* Hide text by default to prevent FOUC */
+    transition: color 0.2s ease; /* Smooth color transition */
+}
+
+/* Show text color when logo is ready */
+.logo-ready #homepage-logo {
+    color: inherit !important; /* Override the transparent color */
+}
+
+#homepage-logo:focus {
+    outline: none !important;
+}
+
+/* Utility to disable transitions for instant style changes */
+.logo-header.no-transition,
+.logo-header.no-transition * {
+    transition: none !important;
+}
+
+/* Animated gradient animation - OBVIOUS but not too fast */
+.homepage-gradient-animation {
+    animation: homepage-gradient-shift 10s ease infinite;
+}
+
+@keyframes homepage-gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 50% 100%;
+    }
+    75% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+</style>
+
+<script>
+    // Homepage-specific logo randomization
+    function generateHomepageColors() {
+        // 33% each chance of solid, static gradient, or animated gradient
+        const rand = Math.random();
+        const useAnimatedGradient = rand < 0.33;
+        const useStaticGradient = rand >= 0.33 && rand < 0.66;
+        
+        if (useAnimatedGradient) {
+            // Generate animated gradient with 4 VERY different colors for obvious animation
+            const hues = [
+                Math.floor(Math.random() * 360),
+                (Math.floor(Math.random() * 360) + 90) % 360,  // Force different hue
+                (Math.floor(Math.random() * 360) + 180) % 360, // Force different hue  
+                (Math.floor(Math.random() * 360) + 270) % 360  // Force different hue
+            ];
+            
+            // Higher saturation and more lightness variation for dramatic effect
+            const saturations = hues.map(() => Math.floor(Math.random() * 40) + 20); // 20-60%
+            const lightnesses = hues.map(() => Math.floor(Math.random() * 20) + 75); // 75-95%
+            
+            const colors = hues.map((hue, i) => `hsl(${hue}, ${saturations[i]}%, ${lightnesses[i]}%)`);
+            
+            // Create animated gradient with more colors for smoother animation
+            const backgroundColor = `linear-gradient(-45deg, ${colors.join(', ')}, ${colors[0]})`;
+            
+            console.log('🌈 ANIMATED GRADIENT APPLIED:', colors);
+            
+            // Use average hue for borders
+            const avgHue = hues.reduce((sum, hue) => sum + hue, 0) / hues.length;
+            const avgSaturation = saturations.reduce((sum, sat) => sum + sat, 0) / saturations.length;
+            const avgLightness = lightnesses.reduce((sum, light) => sum + light, 0) / lightnesses.length;
+            
+            const borderColor = `hsl(${avgHue}, ${avgSaturation + 15}%, ${avgLightness - 15}%)`;
+            const hoverBorderColor = `hsl(${avgHue}, ${avgSaturation + 20}%, ${avgLightness - 25}%)`;
+            const activeBorderColor = `hsl(${avgHue}, ${avgSaturation + 30}%, ${avgLightness - 35}%)`;
+            const textLightness = avgLightness > 85 ? 20 : 30;
+            const textColor = `hsl(${avgHue}, ${avgSaturation + 10}%, ${textLightness}%)`;
+            
+            return { 
+                backgroundColor, 
+                borderColor, 
+                hoverBorderColor, 
+                activeBorderColor, 
+                textColor,
+                isGradient: true,
+                isAnimated: true
+            };
+        } else if (useStaticGradient) {
+            // Generate static gradient with two colors (original logic)
+            const hue1 = Math.floor(Math.random() * 360);
+            const hue2 = Math.floor(Math.random() * 360);
+            const saturation1 = Math.floor(Math.random() * 30) + 10;
+            const saturation2 = Math.floor(Math.random() * 30) + 10;
+            const lightness1 = Math.floor(Math.random() * 15) + 85;
+            const lightness2 = Math.floor(Math.random() * 15) + 85;
+            
+            const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
+            const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
+            
+            // Random gradient direction
+            const directions = ['45deg', '135deg', '90deg', '180deg', '0deg'];
+            const direction = directions[Math.floor(Math.random() * directions.length)];
+            
+            const backgroundColor = `linear-gradient(${direction}, ${color1}, ${color2})`;
+            
+            // Use average hue for border colors
+            const avgHue = (hue1 + hue2) / 2;
+            const avgSaturation = (saturation1 + saturation2) / 2;
+            const avgLightness = (lightness1 + lightness2) / 2;
+            
+            const borderColor = `hsl(${avgHue}, ${avgSaturation + 15}%, ${avgLightness - 15}%)`;
+            const hoverBorderColor = `hsl(${avgHue}, ${avgSaturation + 20}%, ${avgLightness - 25}%)`;
+            const activeBorderColor = `hsl(${avgHue}, ${avgSaturation + 30}%, ${avgLightness - 35}%)`;
+            const textLightness = avgLightness > 90 ? 20 : 30;
+            const textColor = `hsl(${avgHue}, ${avgSaturation + 10}%, ${textLightness}%)`;
+            
+            return { 
+                backgroundColor, 
+                borderColor, 
+                hoverBorderColor, 
+                activeBorderColor, 
+                textColor,
+                isGradient: true,
+                isAnimated: false
+            };
+        } else {
+            // Generate solid color (original logic)
+            const hue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 30) + 10;
+            const lightness = Math.floor(Math.random() * 15) + 85;
+            const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const borderColor = `hsl(${hue}, ${saturation + 15}%, ${lightness - 15}%)`;
+            const hoverBorderColor = `hsl(${hue}, ${saturation + 20}%, ${lightness - 25}%)`;
+            const activeBorderColor = `hsl(${hue}, ${saturation + 30}%, ${lightness - 35}%)`;
+            const textLightness = lightness > 90 ? 20 : 30;
+            const textColor = `hsl(${hue}, ${saturation + 10}%, ${textLightness}%)`;
+            return { 
+                backgroundColor, 
+                borderColor, 
+                hoverBorderColor, 
+                activeBorderColor, 
+                textColor,
+                isGradient: false,
+                isAnimated: false
+            };
+        }
+    }
+
+    function applyHomepageRandomization() {
+        const galapagosVariations = ['font-galapagos-a', 'font-galapagos-ab', 'font-galapagos-abc'];
+        const selectedGalapagos = galapagosVariations[Math.floor(Math.random() * galapagosVariations.length)];
+        const fonts = ['font-comic-sans', 'font-lucida-blackletter', 'font-times', 'font-inter', selectedGalapagos];
+        const logoSpans = document.querySelectorAll('#homepage-logo span');
+        logoSpans.forEach((span, index) => {
+            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            span.className = randomFont;
+            
+            // Add random rotation to each letter with three categories: none, subtle, or strong
+            const rotationType = Math.floor(Math.random() * 3); // 0, 1, or 2
+            let rotation = 0;
+            
+            if (rotationType === 0) {
+                // None: 0 degrees
+                rotation = 0;
+            } else if (rotationType === 1) {
+                // Subtle: ±5 degrees
+                rotation = (Math.random() - 0.5) * 10; // -5 to +5 degrees
+            } else {
+                // Strong: ±15 degrees
+                rotation = (Math.random() - 0.5) * 30; // -15 to +15 degrees
+            }
+            
+            span.style.transform = `rotate(${rotation}deg)`;
+            span.style.display = 'inline-block'; // Required for transforms to work properly
+            span.style.transformOrigin = 'center center'; // Rotate around center
+            
+            if (index === 0) {
+                span.textContent = Math.random() < 0.5 ? 'S' : 's';
+            }
+        });
+
+        const header = document.getElementById('logo-header');
+        const logo = document.getElementById('homepage-logo');
+
+        // Temporarily disable transitions for an instant change
+        header.classList.add('no-transition');
+        
+        const colors = generateHomepageColors();
+        
+        // Clear any existing background styles and animations
+        header.classList.remove('homepage-gradient-animation');
+        header.style.background = '';
+        header.style.backgroundColor = '';
+        
+        // Apply background based on type
+        if (colors.isAnimated) {
+            header.style.background = colors.backgroundColor;
+            header.style.backgroundSize = '600% 600%'; // Even bigger for more dramatic movement
+            header.classList.add('homepage-gradient-animation');
+            console.log('🎬 Animation class added, should be moving!');
+        } else if (colors.isGradient) {
+            header.style.background = colors.backgroundColor;
+            console.log('🎨 Static gradient applied');
+        } else {
+            header.style.backgroundColor = colors.backgroundColor;
+            console.log('🎯 Solid color applied');
+        }
+        
+        header.style.borderColor = colors.borderColor;
+        logo.style.setProperty('color', colors.textColor, 'important'); // Force color override
+        document.documentElement.style.setProperty('--hover-border-color', colors.hoverBorderColor);
+        document.documentElement.style.setProperty('--active-border-color', colors.activeBorderColor);
+
+        // Force browser to apply styles immediately
+        header.offsetHeight; 
+        logo.offsetHeight; // Force reflow on logo as well
+
+        // Re-enable transitions for the next hover
+        header.classList.remove('no-transition');
+    }
+
+    // Single initialization function for the homepage.
+    async function initializeHomepage() {
+        // Wait for fonts to be ready
+        await new Promise((resolve) => {
+            if ('fonts' in document) {
+                Promise.all([
+                    document.fonts.load('1em "galapagos-a"'),
+                    document.fonts.load('1em "galapagos-ab"'),
+                    document.fonts.load('1em "galapagos-abc"'),
+                    document.fonts.load('1em "Comic Sans MS"'),
+                    document.fonts.load('1em "Lucida Blackletter"'),
+                    document.fonts.load('1em "Inter"'),
+                    document.fonts.load('1em "InterVariable"')
+                ]).then(resolve).catch(() => setTimeout(resolve, 100));
+            } else {
+                setTimeout(resolve, 100);
+            }
+        });
+
+        // Apply randomization immediately
+        applyHomepageRandomization();
+        
+        // Show the logo with fade-in animation
+        document.body.classList.add('logo-ready');
+        
+        // Make the logo interactive
+        const logoHeader = document.getElementById('logo-header');
+        if (logoHeader) {
+            logoHeader.onclick = applyHomepageRandomization;
+        }
+    }
+
+    // --- Event Listeners ---
+
+    // Run for initial load
+    if (document.readyState !== 'loading') {
+        initializeHomepage();
+    } else {
+        document.addEventListener('DOMContentLoaded', initializeHomepage);
+    }
+
+    // Run when navigating back to the page from browser cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            initializeHomepage();
+        }
+    });
+</script> 

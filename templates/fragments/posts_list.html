@@ -1,24 +1,5 @@
 <!-- Tag filter removed for demo -->
 
-<!-- Studio Log Description Callout -->
-<div class="mb4 pa3 pa4-ns bg-near-white br2 ba b--light-gray">
-    {% if active_tag %}
-    <p class="f6 f5-ns lh-copy ma0 gray">
-        <strong>Viewing "{{ active_tag }}" posts</strong>
-    </p>
-    {% else %}
-    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
-        This is my personal journal of experiments and fleeting thoughts.
-    </p>
-    <p class="f6 f5-ns lh-copy ma0 mb3 gray">
-        It is a real, working design notebook scraped from my local Obsidian vault. I don't write chronologically, so you might notice that posts are frequently updated after publishing.
-    </p>
-    <p class="f6 f5-ns lh-copy ma0 gray">
-        See the <a href="/scratch-book" class="link gray hover-near-black underline-hover" hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">Scratch Book</a> for out-of-context research artifacts and references.
-    </p>
-    {% endif %}
-</div>
-
 <div class="posts-list">
     {% set current_date = none %}
     {% for post in posts %}
