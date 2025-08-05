@@ -115,18 +115,20 @@
             transform: scale(1.1) translateY(2px);
         }
 
-        /* Header layout - starts vertical on small screens */
+        /* Header layout - horizontal on all screen sizes */
         .header-with-circle {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
             width: 100%;
+            gap: 1rem;
         }
 
         .header-circle-container {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
         
         .header-nav-container {
@@ -135,25 +137,32 @@
             flex: 1;
         }
 
-        /* At 600px+, switch to horizontal layout with circle on left */
+        /* Keep nav items from wrapping on small screens */
+        .header-nav-container nav {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Ensure navigation text doesn't get too small on mobile */
+        @media screen and (max-width: 30em) {
+            .header-nav-container nav a {
+                font-size: 0.875rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                white-space: nowrap;
+            }
+        }
+
+        /* At 600px+, add more spacing */
         @media screen and (min-width: 37.5em) {
             .header-with-circle {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                gap: 0;
+                gap: 2rem;
             }
             
-            .header-circle-container {
-                position: absolute;
-                left: 1rem;
-                top: 43%;
-                transform: translateY(-50%);
-            }
-            
-            .header-nav-container {
-                width: auto;
+            .header-nav-container nav {
+                gap: 1rem;
             }
         }
         
@@ -381,13 +390,13 @@
                 
                 <!-- Right-aligned navigation -->
                 <div class="header-nav-container">
-                    <nav class="flex flex-wrap">
+                    <nav class="flex">
                         <a href="/log"
-                           class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns mb2"
+                           class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr2 mr3-ns"
                            hx-get="/log" hx-target="main" hx-push-url="/log">
                             studio log
                         </a>
-                        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3 mr0 mb2"
+                        <a href="/scratch-book" class="link gray hover-near-black underline-hover f6 f5-ns ph2 ph3-ns pv1 pv2-ns br3"
                            hx-get="/scratch-book" hx-target="main" hx-push-url="/scratch-book">
                             scratch book
                         </a>
