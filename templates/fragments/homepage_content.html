@@ -5,14 +5,30 @@
     <p class="lh-copy mb2 near-black tc">
         Hello, my name is <strong>Luis Queral</strong>.
     </p>
-    <p class="f5 lh-copy mb4 near-black tc">
+    <p class="f5 lh-copy mb4 near-black tc mw5 center">
         I am a researcher and product design lead at <em style="white-space: nowrap;">The New York Times</em> specializing in GenAI tooling.
     </p>
 
-    <!-- WebGL Morphing Canvas and slider container -->
+    <!-- Luis / Not Luis slider -->
+    <div class="center mb4" style="max-width: 400px;">
+        <div class="flex items-center justify-between mb3">
+            <span class="f6 gray">luis</span>
+            <span class="f6 gray">not luis</span>
+        </div>
+        <div class="relative">
+            <input type="range" 
+                   min="0" 
+                   max="100" 
+                   value="50" 
+                   class="w-100 luis-slider"
+                   style="appearance: none; height: 6px; border-radius: 3px; background: #e5e5e5; outline: none;">
+        </div>
+    </div>
+
+    <!-- WebGL Morphing Canvas container -->
     <div class="pv4 center" style="max-width: 320px;">
         <!-- WebGL Morphing Canvas with Skeleton Loader -->
-        <div class="tc mb5 relative">
+        <div class="tc mb3 relative">
             <!-- Skeleton Loader -->
             <div id="webglSkeleton" class="webgl-skeleton br2 w-50 center" style="width: 100%; height: 250px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;">
             </div>
@@ -41,21 +57,7 @@
         </div>
         -->
 
-        <!-- Luis / Not Luis slider -->
-        <div class="center" style="max-width: 250px;">
-            <div class="flex items-center justify-between mb3">
-                <span class="f6 gray">luis</span>
-                <span class="f6 gray">not luis</span>
-            </div>
-            <div class="relative">
-                <input type="range" 
-                       min="0" 
-                       max="100" 
-                       value="50" 
-                       class="w-100 luis-slider"
-                       style="appearance: none; height: 6px; border-radius: 3px; background: #e5e5e5; outline: none;">
-            </div>
-        </div>
+
     </div>
 </div>
 
