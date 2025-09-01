@@ -245,10 +245,14 @@ html {
   .hover-bg-custom-gray:hover { background-color: #e4e4e4; }
   .hover-custom-gray:hover { color: #e4e4e4; }
   
+  /* Semi-transparent black background for card styling */
+  .bg-black-10 { background-color: rgba(0, 0, 0, 0.1); }
+  .bg-black-05 { background-color: rgba(0, 0, 0, 0.05); }
+  
   /* other settings */
   
   .sans-serif {
-    font-family: arial, sans-serif;
+    font-family: helvetica, arial, sans-serif;
   }
   
   .f-heading-main {
