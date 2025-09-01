@@ -739,6 +739,17 @@ html {
   animation-direction: reverse !important;
 }
 
+/* ===== BASE FONT SIZE OVERRIDES ===== */
+
+/* Override base Tachyons font sizes to match our improved type scale */
+.f1 { font-size: 3.75rem; }
+.f2 { font-size: 2.8rem; }
+.f3 { font-size: 1.875rem; }
+.f4 { font-size: 1.5rem; }
+.f5 { font-size: 1.25rem; }
+.f6 { font-size: 1.125rem; }
+.f7 { font-size: 1rem; }
+
 /* ===== CUSTOM TACHYONS BREAKPOINT OVERRIDES ===== */
 
 /* Override Tachyons -ns breakpoint to kick in later (35em = 560px instead of default 30em = 480px) */
