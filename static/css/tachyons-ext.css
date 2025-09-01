@@ -252,16 +252,16 @@ html {
   }
   
   .f-heading-main {
-    font-size:3.9vw;
+    font-size:4.8vw;
     opacity:.9;
   }
   
   .logo {
-    font-size: 6vw;
+    font-size: 7.2vw;
   }
   
   .f-heading-secondary {
-    font-size:2.9vw;
+    font-size:3.6vw;
       opacity:.9;
   }
 
@@ -311,7 +311,7 @@ html {
     max-width: 60vw;
   }
   
-  .f1-logo {font-size: 5.4vw}
+  .f1-logo {font-size: 6.5vw}
   
   /* smallest screen */
   @media only screen and (max-width: 45em) {
@@ -320,11 +320,11 @@ html {
     }
     
     .logo{
-      font-size: 10vw;
+      font-size: 12vw;
     }
     
     .f-heading-main{
-      font-size: 8vw;
+      font-size: 9.6vw;
     }
     
     br {
@@ -744,13 +744,13 @@ html {
 /* Override Tachyons -ns breakpoint to kick in later (35em = 560px instead of default 30em = 480px) */
 @media screen and (min-width: 35em) {
   /* Font sizes */
-  .f1-ns { font-size: 3rem; }
-  .f2-ns { font-size: 2.25rem; }
-  .f3-ns { font-size: 1.5rem; }
-  .f4-ns { font-size: 1.25rem; }
-  .f5-ns { font-size: 1rem; }
-  .f6-ns { font-size: .875rem; }
-  .f7-ns { font-size: .75rem; }
+  .f1-ns { font-size: 3.75rem; }
+  .f2-ns { font-size: 2.8rem; }
+  .f3-ns { font-size: 1.875rem; }
+  .f4-ns { font-size: 1.5rem; }
+  .f5-ns { font-size: 1.25rem; }
+  .f6-ns { font-size: 1.125rem; }
+  .f7-ns { font-size: 1rem; }
   
   /* Padding horizontal */
   .ph1-ns { padding-left: .25rem; padding-right: .25rem; }
