@@ -739,29 +739,18 @@ html {
   animation-direction: reverse !important;
 }
 
-/* ===== BASE FONT SIZE OVERRIDES ===== */
+/* ===== BASE FONT SIZE OVERRIDE ===== */
 
-/* Override base Tachyons font sizes to match our improved type scale */
-.f1 { font-size: 3.75rem; }
-.f2 { font-size: 2.8rem; }
-.f3 { font-size: 1.875rem; }
-.f4 { font-size: 1.5rem; }
-.f5 { font-size: 1.25rem; }
-.f6 { font-size: 1.125rem; }
-.f7 { font-size: 1rem; }
+/* Increase base font size to scale entire type system proportionally */
+html {
+  font-size: 1.25rem; /* 25% increase from default 1rem (16px) */
+}
 
 /* ===== CUSTOM TACHYONS BREAKPOINT OVERRIDES ===== */
 
 /* Override Tachyons -ns breakpoint to kick in later (35em = 560px instead of default 30em = 480px) */
 @media screen and (min-width: 35em) {
-  /* Font sizes */
-  .f1-ns { font-size: 3.75rem; }
-  .f2-ns { font-size: 2.8rem; }
-  .f3-ns { font-size: 1.875rem; }
-  .f4-ns { font-size: 1.5rem; }
-  .f5-ns { font-size: 1.25rem; }
-  .f6-ns { font-size: 1.125rem; }
-  .f7-ns { font-size: 1rem; }
+  /* Font sizes - now handled by base font size scaling */
   
   /* Padding horizontal */
   .ph1-ns { padding-left: .25rem; padding-right: .25rem; }
