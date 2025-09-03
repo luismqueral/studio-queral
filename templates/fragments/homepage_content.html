@@ -1,5 +1,5 @@
 <!-- Introduction Section - Clean layout -->
-<div class="mw7 center" id="logo-header">
+<div class="mw7 center bg-washed-yellow" id="logo-header">
 <div class="pv4">
     <!-- Small intro, no heading -->
     <p class="lh-copy mb4 near-black tc">
@@ -8,7 +8,7 @@
 
 
     <!-- WebGL Morphing Canvas and slider container -->
-    <div class="pa3 center bg-white br2 shadow-2" style="max-width: 360px;">
+    <div class="pa4 center bg-white br2 shadow-2" style="max-width: 360px;">
         <!-- WebGL Morphing Canvas with Skeleton Loader -->
         <div class="tc mb4 relative">
             <!-- Skeleton Loader -->
@@ -56,10 +56,11 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- Content Section - Clean layout -->
 <div class="mw6 center">
-<div class="pb3">
+<div class="pt3 pb3">
     <section class="lh-copy">
         <p class="mb3 f5">I work for <em style="white-space: nowrap;">The New York Times</em> as a product design lead and researcher specializing in generative AI tooling.</p>
         <p class="mb3 f5">This website is where I publish my work, write about my process, and share scraps of inspiration.</p>
@@ -161,14 +162,59 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Mobile: Keep white background, make wider but contained */
+/* Mobile: Full-width backgrounds using Tachyons classes */
 @media screen and (max-width: 45em) {
-    .webgl-container {
+    /* Prevent horizontal scroll from full-width backgrounds */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    /* Make top section background extend full-width */
+    .bg-washed-yellow {
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        padding-left: calc(50vw - 50%) !important;
+        padding-right: calc(50vw - 50%) !important;
+    }
+    
+    /* Add white background to content section only on mobile */
+    .mw6 {
         background: white !important;
-        border-radius: 0.5rem !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-        width: 85vw !important;
-        max-width: 85vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        padding-left: calc(50vw - 50%) !important;
+        padding-right: calc(50vw - 50%) !important;
+    }
+    
+    /* Reduce spacing in header section on mobile */
+    #logo-header .pv4 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    /* Reduce margin between intro text and WebGL card - target only the intro paragraph */
+    #logo-header p.mb4 {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Remove card styling on mobile */
+    #logo-header .shadow-2 {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    #logo-header .br2 {
+        border-radius: 0 !important;
+    }
+    
+    /* Fix WebGL card centering and spacing on mobile */
+    #logo-header .pa4 {
+        padding: 1rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 90% !important;
+        max-width: 90% !important;
     }
 }
 
