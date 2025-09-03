@@ -8,7 +8,7 @@
 
 
     <!-- WebGL Morphing Canvas and slider container -->
-    <div class="pv4 ph4 center bg-white br3 shadow-4" style="max-width: 400px; width: 90vw;">
+    <div class="pv4 ph4 center webgl-container" style="max-width: 400px; width: 90vw;">
         <!-- WebGL Morphing Canvas with Skeleton Loader -->
         <div class="tc mb4 relative">
             <!-- Skeleton Loader -->
@@ -154,6 +154,26 @@
 -->
 
 <style>
+/* WebGL Container Responsive Styling */
+.webgl-container {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Mobile: Remove card styling, make full-width */
+@media screen and (max-width: 45em) {
+    .webgl-container {
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+    }
+}
+
 /* Interactive WebGL Canvas */
 .webgl-canvas {
     transition: transform 0.1s ease, outline 0.15s ease;
