@@ -1,16 +1,15 @@
 <!-- Introduction Section - Clean layout -->
 <div class="mw7 center bg-washed-yellow" id="logo-header">
-<div class="pv4">
+<div class="pt4 pb2">
     <!-- Small intro, no heading -->
     <p class="lh-copy mb4 near-black tc">
         Hello, my name is <strong>Luis Queral</strong>.
     </p>
 
-
     <!-- WebGL Morphing Canvas and slider container -->
-    <div class="pa4 center bg-white br2 shadow-2" style="max-width: 360px;">
+    <div class="pa2 center" style="max-width: 360px;">
         <!-- WebGL Morphing Canvas with Skeleton Loader -->
-        <div class="tc mb4 relative">
+        <div class="tc mb3 relative">
             <!-- Skeleton Loader -->
             <div id="webglSkeleton" class="webgl-skeleton br2 w-50 center" style="width: 100%; height: 250px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;">
             </div>
@@ -41,7 +40,7 @@
 
         <!-- Luis / Not Luis slider -->
         <div class="center" style="max-width: 100%;">
-            <div class="flex items-center justify-between mb1">
+            <div class="flex items-center justify-between mb2" mt2>
                 <span class="f6 gray">luis</span>
                 <span class="f6 gray">not luis</span>
             </div>
@@ -60,7 +59,7 @@
 
 <!-- Content Section - Clean layout -->
 <div class="mw6 center">
-<div class="pt3 pb3">
+<div class="pt2 pb3">
     <section class="lh-copy">
         <p class="mb3 f5">I work for <em style="white-space: nowrap;">The New York Times</em> as a product design lead and researcher specializing in generative AI tooling.</p>
         <p class="mb3 f5">This website is where I publish my work, write about my process, and share scraps of inspiration.</p>
@@ -69,19 +68,27 @@
         <p class="mb4 tc font-comic-sans f3 gray">* * *</p>
         
         <p class="mb2 fw6 f5"><strong>writing</strong></p>
+        <p class="mb4 f6 gray">[coming soon]</p>
+        
+        <!-- 
         <ul class="list pl0 mb4">
             <li class="mb2"><span class="gray f6 dib" style="width: 3rem;">2025</span> <a href="/posts/vibecoding-software" class="link blue hover-dark-blue">things to consider when 'vibecoding' software</a></li>
             <li class="mb2"><span class="gray f6 dib" style="width: 3rem;">2025</span> <a href="/posts/6-7-2025" class="link blue hover-dark-blue">on creative confidence</a></li>
             <li class="mb0"><span class="gray f6 dib" style="width: 3rem;">2013</span> <a href="/posts/an-ode-to-interns" class="link blue hover-dark-blue">an ode to interns</a></li>
         </ul>
+        -->
         
         <p class="mb2 fw6 f5"><strong>projects</strong></p>
+        <p class="mb4 f6 gray">[coming soon]</p>
+        
+        <!-- 
         <ul class="list pl0 mb4">
             <li class="mb2"><span class="gray f6 dib" style="width: 3rem;">2025</span> <a href="/posts/happybirthdaybridgetbiz" class="link blue hover-dark-blue">happybirthdaybridget.biz</a></li>
             <li class="mb2"><span class="gray f6 dib" style="width: 3rem;">2025</span> <a href="/scratch-book/7-1-2025" class="link blue hover-dark-blue">beeps variations</a></li>
             <li class="mb2"><span class="gray f6 dib" style="width: 3rem;">2018</span> <a href="/posts/cards-against-the-machine" class="link blue hover-dark-blue">cards against the machine</a></li>
             <li class="mb0"><span class="gray f6 dib" style="width: 3rem;">2016</span> <a href="/posts/jump-city-records" class="link blue hover-dark-blue">jump city records</a></li>
         </ul>
+        -->
         
         <p class="mb2 fw6 f5"><strong>music</strong></p>
         <div class="flex gap-4 mb3">
@@ -162,55 +169,50 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Mobile: Full-width backgrounds using Tachyons classes */
+/* Split view design for all screen sizes */
+/* Prevent horizontal scroll from full-width backgrounds */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+}
+
+/* Make top section background extend full-width - target the header container */
+#logo-header {
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    padding-left: calc(50vw - 50%) !important;
+    padding-right: calc(50vw - 50%) !important;
+    max-width: none !important; /* Override Tachyons max-width */
+}
+
+/* Add white background to content section and extend full-width */
+.mw5.center {
+    background: white !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    padding-left: calc(50vw - 50%) !important;
+    padding-right: calc(50vw - 50%) !important;
+    max-width: none !important; /* Override Tachyons max-width */
+}
+
+/* Mobile-specific adjustments */
 @media screen and (max-width: 45em) {
-    /* Prevent horizontal scroll from full-width backgrounds */
-    html, body {
-        overflow-x: hidden !important;
-        max-width: 100vw !important;
-    }
-    
-    /* Make top section background extend full-width */
-    .bg-washed-yellow {
-        margin-left: calc(-50vw + 50%) !important;
-        margin-right: calc(-50vw + 50%) !important;
-        padding-left: calc(50vw - 50%) !important;
-        padding-right: calc(50vw - 50%) !important;
-    }
-    
-    /* Add white background to content section only on mobile */
-    .mw6 {
-        background: white !important;
-        margin-left: calc(-50vw + 50%) !important;
-        margin-right: calc(-50vw + 50%) !important;
-        padding-left: calc(50vw - 50%) !important;
-        padding-right: calc(50vw - 50%) !important;
-    }
-    
     /* Reduce spacing in header section on mobile */
-    #logo-header .pv4 {
-        padding-top: 1.5rem !important;
-        padding-bottom: 1rem !important;
+    #logo-header .pv3 {
+        padding-top: 1rem !important;
+        padding-bottom: 0.5rem !important;
     }
     
     /* Reduce margin between intro text and WebGL card - target only the intro paragraph */
-    #logo-header p.mb4 {
-        margin-bottom: 1rem !important;
+    #logo-header p.mb3 {
+        margin-bottom: 0.75rem !important;
     }
     
-    /* Remove card styling on mobile */
-    #logo-header .shadow-2 {
-        box-shadow: none !important;
-        background: transparent !important;
-    }
-    
-    #logo-header .br2 {
-        border-radius: 0 !important;
-    }
+    /* Card styling already removed from HTML */
     
     /* Fix WebGL card centering and spacing on mobile */
-    #logo-header .pa4 {
-        padding: 1rem !important;
+    #logo-header .pa2 {
+        padding: 0.5rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
         width: 90% !important;
