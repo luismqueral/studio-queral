@@ -24,20 +24,6 @@
             </canvas>
         </div>
 
-        <!-- Commented out video version for reference -->
-        <!--
-        <div class="tc mb4">
-            <video id="morphVideo" 
-                   style="width: 100%; height: 100%;; object-fit: cover;" 
-                   class="br2 ba b--silver w-50"
-                   muted 
-                   preload="metadata">
-                <source src="{{ url_for('static', filename='images/morph.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        -->
-
         <!-- Luis / Not Luis slider -->
         <div class="center" style="max-width: 100%;">
             <div class="flex items-center justify-between mb2" mt2>
@@ -54,18 +40,22 @@
             </div>
         </div>
     </div>
+    
+    <!-- Body content moved to header section -->
+    <div class="mw6 center pt3">
+        <section class="lh-copy">
+            <p class="mb3 f5">I work for <em style="white-space: nowrap;">The New York Times</em> as a researcher and <br> product design lead specializing in generative AI tooling.</p>
+            <p class="mb3 f5">This website is where I publish my work, write about my process, and share scraps of inspiration.</p>
+            <p class="mb4 near-black">I am based in Baltimore, Maryland. You can reach me at <a href="mailto:hey@queral.studio" class="link blue hover-dark-blue">hey@queral.studio</a></p>
+        </section>
+    </div>
 </div>
 </div>
 
 <!-- Content Section - Clean layout -->
-<div class="mw6 center">
-<div class="pt2 pb3">
+<div class="content-section">
+<div class="pt2 pb3 mw6 center">
     <section class="lh-copy">
-        <p class="mb3 f5">I work for <em style="white-space: nowrap;">The New York Times</em> as a product design lead and researcher specializing in generative AI tooling.</p>
-        <p class="mb3 f5">This website is where I publish my work, write about my process, and share scraps of inspiration.</p>
-        <p class="mb4 near-black">I am based in Baltimore, Maryland. You can reach me at <a href="mailto:hey@queral.studio" class="link blue hover-dark-blue">hey@queral.studio</a></p>
-        
-        <p class="mb4 tc font-comic-sans f3 gray">* * *</p>
         
         <p class="mb2 fw6 f5"><strong>writing</strong></p>
         <p class="mb4 f6 gray">[coming soon]</p>
@@ -176,23 +166,20 @@ html, body {
     max-width: 100vw !important;
 }
 
-/* Make top section background extend full-width - target the header container */
-#logo-header {
-    margin-left: calc(-50vw + 50%) !important;
-    margin-right: calc(-50vw + 50%) !important;
-    padding-left: calc(50vw - 50%) !important;
-    padding-right: calc(50vw - 50%) !important;
-    max-width: none !important; /* Override Tachyons max-width */
-}
 
 /* Add white background to content section and extend full-width */
-.mw5.center {
+.content-section {
     background: white !important;
     margin-left: calc(-50vw + 50%) !important;
     margin-right: calc(-50vw + 50%) !important;
     padding-left: calc(50vw - 50%) !important;
     padding-right: calc(50vw - 50%) !important;
-    max-width: none !important; /* Override Tachyons max-width */
+}
+
+/* Exception: Body content in header should not have white background */
+#logo-header .mw6.center {
+    background: transparent !important;
+    max-width: 32rem !important; /* Restore normal mw6 max-width */
 }
 
 /* Mobile-specific adjustments */

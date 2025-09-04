@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2025-01-04
+- restructured split view layout - moved intro body content (NYT, website purpose, contact) from white section into yellow header section and removed *** divider for cleaner visual hierarchy
 - added [coming soon] placeholders for writing and projects sections - commented out existing content links to prepare for clean launch with music section remaining visible
 - fine-tuned WebGL area spacing - increased spacing between intro text and WebGL graphic from mb2 to mb3, and between WebGL graphic and slider from mb2 to mb3 for better visual breathing room
 - adjusted text area width on desktop - settled on mw5 (max-width 28rem) for tighter, more focused reading experience on non-mobile screens
