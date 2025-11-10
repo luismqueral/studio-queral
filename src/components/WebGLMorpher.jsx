@@ -560,14 +560,14 @@ function WebGLMorpher({ image1Url, image2Url }) {
   }
 
   return (
-    <div className="pa2 center" style={{ maxWidth: '350px' }}>
+    <div className="pa2 center" style={{ maxWidth: '450px' }}>
       <div className="tc mb3 relative">
         {isLoading && (
           <div
             className="webgl-skeleton br2"
             style={{
               width: '100%',
-              height: '300px',
+              height: '450px',
               background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
               backgroundSize: '200% 100%',
               animation: 'shimmer 1.5s infinite',
@@ -577,8 +577,8 @@ function WebGLMorpher({ image1Url, image2Url }) {
 
         <canvas
           ref={canvasRef}
-          width="300"
-          height="300"
+          width="450"
+          height="450"
           onClick={handleCanvasClick}
           className="br2 webgl-canvas"
           style={{
@@ -594,8 +594,8 @@ function WebGLMorpher({ image1Url, image2Url }) {
 
       <div className="center" style={{ maxWidth: '100%' }}>
         <div className="flex items-center justify-between mb2">
-          <span className="f7 gray ibm-mono">luis</span>
-          <span className="f7 gray ibm-mono">not luis</span>
+          <span className="f5 gray ibm-mono">luis</span>
+          <span className="f5 gray ibm-mono">not luis</span>
         </div>
         <div className="relative">
           <input

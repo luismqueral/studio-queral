@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2025-11-10
+
+- added rza image to creative confidence project - updated On Creative Confidence project to use rza.png with standard display format in FeaturedSection.jsx
+- added waves vol 1 project image - moved waves.png to projects directory and updated project to use image-only display (fullImage, hideTitle, hideDescription) in FeaturedSection.jsx
+- removed white background from spooky looper image - used ImageMagick to make white pixels transparent with 10% fuzz tolerance for cleaner display in spooky-looper.png
+- updated spooky looper project text - changed title to lowercase "spooky looper" and description to "a playground for looping sounds", enabled title and description display in FeaturedSection.jsx
+- added spooky looper project - moved spooky-looper-crisp.png to projects directory and added new project entry with fullImage display in FeaturedSection.jsx
+- simplified crystal legs to image-only display - added hideTitle and hideDescription flags, changed image size to w-70, now showing only year and image for minimal presentation in FeaturedSection.jsx
+- enabled full image display for crystal legs - added fullImage flag to allow project to display complete image without container constraints, showing natural dimensions instead of 400x200 crop in FeaturedSection.jsx
+- added crystal legs project image - updated Crystal Legs project to use actual image file at /images/projects/crystal-legs.png in FeaturedSection.jsx
+- created projects image directory - added /public/images/projects/ directory to organize project thumbnail images
+- added underline on hover to project links - added hover-underline class to project links for better interactive feedback in FeaturedSection.jsx
+- fine-tuned project title alignment - adjusted negative left margin on year labels to -4rem for perfect flush alignment with "recent work" heading in FeaturedSection.jsx
+- increased slider label font size to f5 - changed "luis, not luis" labels from f7 to f5 for better readability in WebGLMorpher.jsx
+- aligned project titles flush left with heading - added negative left margin to year labels, pushing dates into left margin so project titles align with "recent work" heading in FeaturedSection.jsx
+- adjusted WebGL graphic size to 450x450 - refined canvas dimensions to 450x450 pixels and container max-width to 450px for better balance between visual prominence and page layout in WebGLMorpher.jsx
+
 ## 2025-11-09
 
 - changed image dimensions to 400px x 200px - updated container size and placeholder URLs from square (400x400) to rectangular 2:1 aspect ratio (400x200) in FeaturedSection.jsx

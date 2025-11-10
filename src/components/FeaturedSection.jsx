@@ -14,7 +14,7 @@ function FeaturedSection() {
       description: 'essay on building creative practice',
       url: '/on-creative-confidence',
       external: false,
-      image: 'https://via.placeholder.com/400x200/e5e5e5/e5e5e5',
+      image: '/images/projects/rza.png',
     },
     {
       year: '2025',
@@ -22,7 +22,19 @@ function FeaturedSection() {
       description: 'ambient music album',
       url: 'https://ieatthings.bandcamp.com/album/100',
       external: true,
-      image: 'https://via.placeholder.com/400x200/e5e5e5/e5e5e5',
+      image: '/images/projects/crystal-legs.png',
+      fullImage: true,
+      hideTitle: true,
+      hideDescription: true,
+    },
+    {
+      year: '2025',
+      title: 'spooky looper',
+      description: 'a playground for looping sounds',
+      url: '#',
+      external: false,
+      image: '/images/projects/spooky-looper.png',
+      fullImage: true,
     },
     {
       year: '2025',
@@ -30,7 +42,10 @@ function FeaturedSection() {
       description: 'experimental electronic music',
       url: 'https://ieatthings.bandcamp.com/album/waves-vol-1',
       external: true,
-      image: 'https://via.placeholder.com/400x200/e5e5e5/e5e5e5',
+      image: '/images/projects/waves.png',
+      fullImage: true,
+      hideTitle: true,
+      hideDescription: true,
     },
     {
       year: '2025',
@@ -53,28 +68,37 @@ function FeaturedSection() {
           <li key={index} className="mb4">
             <a
               href={item.url}
-              className="link blue hover-dark-blue db"
+              className="link blue hover-dark-blue hover-underline db"
               {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <div className="flex items-start">
-                <span className="gray f6 ibm-mono mr3 mt1" style={{ minWidth: '3rem' }}>
+                <span className="gray f6 ibm-mono mr3 mt1" style={{ minWidth: '3rem', marginLeft: '-4rem' }}>
                   {item.year}
                 </span>
                 <div className="flex-auto">
-                  <span className="f4 db mb1">{item.title}</span>
-                  <span className="f5 mid-gray db mb2">{item.description}</span>
+                  {!item.hideTitle && <span className="f4 db mb1">{item.title}</span>}
+                  {!item.hideDescription && <span className="f5 mid-gray db mb2">{item.description}</span>}
                   {item.image && (
-                    <div 
-                      className="br2 bg-light-gray"
-                      style={{ width: '400px', height: '200px' }}
-                    >
+                    item.fullImage ? (
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-100 h-100 br2"
-                        style={{ objectFit: 'cover' }}
+                        className="db br2 w-70"
+                        style={{ height: 'auto' }}
                       />
-                    </div>
+                    ) : (
+                      <div 
+                        className="br2 bg-light-gray"
+                        style={{ width: '400px', height: '200px' }}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-100 h-100 br2"
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                    )
                   )}
                 </div>
               </div>
