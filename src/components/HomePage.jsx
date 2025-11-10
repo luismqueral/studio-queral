@@ -1,5 +1,6 @@
 import WebGLMorpher from './WebGLMorpher'
 import FeaturedSection from './FeaturedSection'
+import NewsletterSignup from './NewsletterSignup'
 
 function HomePage() {
   return (
@@ -34,12 +35,15 @@ function HomePage() {
                   This website is where I publish my work, write about my process, and share
                   scraps of inspiration.
                 </p>
-                <p className="mb4 f4 near-black">
+                <p className="mb3 f4 near-black">
                   You can reach me at{' '}
                   <a href="mailto:hey@queral.studio" className="link blue hover-dark-blue">
                     hey@queral.studio
                   </a>
                 </p>
+                
+                {/* Newsletter Signup */}
+                <NewsletterSignup />
               </section>
             </div>
           </div>

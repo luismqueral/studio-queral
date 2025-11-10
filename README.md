@@ -1,114 +1,76 @@
-# Studio Queral - React Homepage
+# Studio Queral 2026
 
-A React recreation of the Studio Queral homepage featuring an interactive WebGL morphing canvas.
+A modern React + Vite personal website with WebGL graphics and newsletter integration.
 
-## Features
-
-- **WebGL Morphing Effect**: Interactive canvas that morphs between two images with complex distortion effects
-- **Statistically Weighted Randomization**: 75% subtle effects, 25% extreme effects for varied visual experiences
-- **Click to Randomize**: Click the canvas to generate new random distortion parameters
-- **Interactive Slider**: Control the morph transition between images
-- **Responsive Design**: Works on all screen sizes
-- **Tachyons CSS**: Utility-first CSS framework matching the original site
-
-## Tech Stack
-
-- **React 18** - UI library
-- **Vite** - Build tool and dev server
-- **Tachyons CSS** - Utility-first CSS framework
-- **WebGL** - For the morphing canvas effect
-- **Vanilla JavaScript** - No TypeScript for simplicity
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher recommended)
-- npm or yarn
-
-### Installation
+## Quick Start
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
-### Adding Images
+Visit http://localhost:3001
 
-Place your images in the `public/images/` directory:
+## Newsletter Setup
 
-- `public/images/luis.png` - First image for the morph
-- `public/images/pelican.png` - Second image for the morph
+This site uses Buttondown for newsletter subscriptions.
 
-The images should ideally be square (300x300px or larger) for best results.
+### Local Development
+
+1. Create a `.env.local` file in the project root:
+
+```env
+BUTTONDOWN_API_KEY=your_api_key_here
+```
+
+2. Get your API key from https://buttondown.email/settings/programming
+
+3. Paste your key into `.env.local`
+
+### Vercel Deployment
+
+1. Go to your Vercel project settings
+2. Navigate to **Environment Variables**
+3. Add a new variable:
+   - **Name**: `BUTTONDOWN_API_KEY`
+   - **Value**: Your Buttondown API key
+   - **Environment**: Production, Preview, Development (select all)
+4. Redeploy
 
 ## Project Structure
 
 ```
-studio-queral-react/
-├── public/
-│   └── images/          # Add your images here
+├── api/
+│   └── subscribe.js          # Vercel serverless function for newsletter
 ├── src/
 │   ├── components/
-│   │   ├── HomePage.jsx           # Main homepage component
-│   │   ├── WebGLMorpher.jsx       # WebGL canvas component
-│   │   └── FeaturedSection.jsx    # Featured work list
-│   ├── styles/
-│   │   ├── custom.css             # WebGL and animation styles
-│   │   └── tachyons-ext.css       # Tachyons extensions
-│   ├── App.jsx                     # Root component
-│   └── main.jsx                    # Entry point
-├── index.html
-├── package.json
-└── vite.config.js
+│   │   ├── HomePage.jsx      # Main page component
+│   │   ├── WebGLMorpher.jsx  # WebGL image morpher
+│   │   ├── NewsletterSignup.jsx  # Newsletter form component
+│   │   └── FeaturedSection.jsx   # Projects section
+│   └── main.jsx
+├── public/
+│   └── images/               # Static images
+└── package.json
 ```
 
-## WebGL Morpher Component
+## Tech Stack
 
-The WebGL morpher implements:
+- React 18
+- Vite 5
+- WebGL for graphics
+- Tachyons CSS
+- Buttondown API for newsletter
+- Vercel for hosting
 
-- **Multi-anchor distortion system** - Ripples, swirls, and flows from edges/corners (no center)
-- **Progressive pixel sorting** - Brightness-based sorting effects in horizontal, vertical, diagonal, and radial patterns
-- **Weighted randomization** - Parameters favor subtle effects (75%) over extreme ones (25%)
-- **Continuous animation** - Time-based shader effects that evolve
-- **Smooth morphing** - Gradual transition between two images
+## Available Scripts
 
-### Customization
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
 
-You can adjust the morph behavior by modifying the `WebGLMorpher.jsx` component:
+## Environment Variables
 
-- Change bias ratios in `generateRandomParams()` for different effect distributions
-- Modify shader uniforms for different visual styles
-- Adjust morph transition timing in the fragment shader's `pelicanBlend` calculation
-
-## Development
-
-The dev server runs on `http://localhost:3000` by default.
-
-All changes will hot-reload automatically.
-
-## Building for Production
-
-```bash
-npm run build
-```
-
-This creates an optimized build in the `dist/` directory ready for deployment.
-
-## License
-
-MIT
-
-## Author
-
-Luis Queral - [hey@queral.studio](mailto:hey@queral.studio)
-
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `BUTTONDOWN_API_KEY` | Buttondown newsletter API key | Yes |

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-11-10
 
+- connected newsletter to buttondown - updated form action to use actual Buttondown newsletter at studioqueral, form now functional and will add subscribers in HomePage.jsx
+- added newsletter signup form - added simple email subscription form below contact email with full-width input and subscribe button in HomePage.jsx
 - commented out recent work section - temporarily hidden FeaturedSection while gathering project content in HomePage.jsx
 - deployed to github and configured vercel - force pushed new React project to github.com/luismqueral/studio-queral, added vercel.json configuration for Vite deployment
 - added rza image to creative confidence project - updated On Creative Confidence project to use rza.png with standard display format in FeaturedSection.jsx
