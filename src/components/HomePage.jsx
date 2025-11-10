@@ -47,11 +47,11 @@ function HomePage() {
       </div>
 
       {/* Content Section */}
-      <div className="content-section">
+      {/* <div className="content-section">
         <div className="pt2 pb3 mw5-5 center">
           <FeaturedSection />
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
