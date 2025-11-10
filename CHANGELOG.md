@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-11-10
 
+- added random takes feature - displays random opinion/thought on homepage load, documented in README, first take about Fifth Element in HomePage.jsx
+- styled newsletter section - made label bold with colon, increased top margin to mt5, changed text to black in NewsletterSignup.jsx
+- simplified newsletter to buttondown embed - reverted to working Buttondown form embed after API integration issues in NewsletterSignup.jsx
+- updated homepage intro text - changed to work-in-progress message in HomePage.jsx
 - connected newsletter to buttondown - updated form action to use actual Buttondown newsletter at studioqueral, form now functional and will add subscribers in HomePage.jsx
 - added newsletter signup form - added simple email subscription form below contact email with full-width input and subscribe button in HomePage.jsx
 - commented out recent work section - temporarily hidden FeaturedSection while gathering project content in HomePage.jsx

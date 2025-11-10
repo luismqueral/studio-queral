@@ -1,8 +1,21 @@
+import { useState, useEffect } from 'react'
 import WebGLMorpher from './WebGLMorpher'
 import FeaturedSection from './FeaturedSection'
 import NewsletterSignup from './NewsletterSignup'
 
+// Random takes - add more here
+const takes = [
+  "The Fifth Element is the greatest sci-fi movie ever made.",
+]
+
 function HomePage() {
+  const [randomTake, setRandomTake] = useState('')
+
+  useEffect(() => {
+    // Pick a random take on component mount
+    const randomIndex = Math.floor(Math.random() * takes.length)
+    setRandomTake(takes[randomIndex])
+  }, [])
   return (
     <>
       {/* Introduction Section */}
@@ -32,9 +45,16 @@ function HomePage() {
             <div className="mw5-5 center">
               <section className="lh-copy">
                 <p className="mb3 f4">
-                  This website is where I publish my work, write about my process, and share
-                  scraps of inspiration.
+                  I'm still working on this site, will be posting projects and an about section soon.
                 </p>
+
+                {/* Random Take */}
+                {/* {randomTake && (
+                  <p className="mb3 f4 near-black">
+                    {randomTake}
+                  </p>
+                )} */}
+
                 <p className="mb3 f4 near-black">
                   You can reach me at{' '}
                   <a href="mailto:hey@queral.studio" className="link blue hover-dark-blue">
