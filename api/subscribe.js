@@ -11,6 +11,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' })
   }
 
+  // Check if API key is configured
+  if (!process.env.BUTTONDOWN_API_KEY) {
+    console.error('BUTTONDOWN_API_KEY is not configured')
+    return res.status(500).json({ 
+      error: 'Newsletter service is not configured. Please contact the site administrator.' 
+    })
+  }
+
   try {
     // Call Buttondown API
     const response = await fetch('https://api.buttondown.email/v1/subscribers', {
