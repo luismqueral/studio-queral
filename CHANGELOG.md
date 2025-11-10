@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-11-10
 
+- deployed to github and configured vercel - force pushed new React project to github.com/luismqueral/studio-queral, added vercel.json configuration for Vite deployment
 - added rza image to creative confidence project - updated On Creative Confidence project to use rza.png with standard display format in FeaturedSection.jsx
 - added waves vol 1 project image - moved waves.png to projects directory and updated project to use image-only display (fullImage, hideTitle, hideDescription) in FeaturedSection.jsx
 - removed white background from spooky looper image - used ImageMagick to make white pixels transparent with 10% fuzz tolerance for cleaner display in spooky-looper.png
