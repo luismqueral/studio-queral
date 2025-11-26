@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2025-11-26
+
+- created comprehensive project rules document - added .cursor/rules/project-rules.mdc establishing project philosophy, Tachyons styling approach (not Tailwind), React patterns, content patterns, and AI assistant guidance
+- updated bio description from "hypermedia artist" to "creative technologist" for more accurate professional positioning in HomePage.jsx
+- refined work-in-progress message with em dash formatting and added "writing" to planned content sections in HomePage.jsx
+
 ## 2025-11-10
 
 - added random takes feature - displays random opinion/thought on homepage load, documented in README, first take about Fifth Element in HomePage.jsx

@@ -1,0 +1,160 @@
+# Studio Queral 2026 - Project Rules
+
+## Project Philosophy
+
+This is a **personal portfolio site** built with simplicity, performance, and creative expression as core values. The site prioritizes:
+
+- **Minimalism with personality** - Clean design with moments of delight (WebGL morphing, random takes)
+- **Performance first** - Static site generation, minimal JavaScript, fast load times
+- **Readable, maintainable code** - Clear patterns, functional React, no unnecessary abstractions
+- **Creative experimentation** - Space for playful features (WebGL art, random thoughts, newsletter)
+
+## Technology Stack
+
+### Core Framework
+- **React 18** with Vite for development
+- Functional components with hooks (useState, useEffect, useRef)
+- No routing library needed - single page application with sections
+- No state management library - simple component-level state
+
+### Styling Architecture
+
+**CRITICAL: This project uses TACHYONS, NOT Tailwind CSS**
+
+#### Tachyons Approach
+- **Utility-first CSS framework** - compose designs with single-purpose classes
+- **Custom extensions** in `src/styles/tachyons-ext.css` for project-specific needs
+- **Base font size**: 18px (larger than default for better readability)
+- **Scale**: Typography uses Tachyons scale (f1-f7), spacing uses Tachyons spacing (pa1-7, ma1-7)
+
+#### Common Tachyons Classes Used in This Project
+```
+Typography: f4 (primary body), f5 (secondary), lh-copy (line height)
+Spacing: pa3 (padding), ma3 (margin), mb3 (margin-bottom), pt4 (padding-top)
+Layout: center (horizontal center), mw5-5 (custom max-width 30rem)
+Colors: near-black, blue, hover-dark-blue, bg-white-gray-gradient
+Utilities: link (reset link styles), hover-underline
+```
+
+#### Custom Tachyons Extensions (tachyons-ext.css)
+- `.mw5-5` - max-width: 30rem (custom container size for homepage)
+- `.font-*` classes - custom font family utilities
+- `.tag-pill` - styled tag/category pills with hover effects
+- `.inline-code` - inline code styling
+- Code block styling (pre, code elements)
+- Scrollbar gutter management
+
+#### When Adding Styles
+1. **Check Tachyons first** - most needs are covered by core classes
+2. **Use tachyons-ext.css** for project-specific utilities
+3. **Avoid inline styles** except for dynamic/JS-driven values (e.g., whiteSpace in JSX)
+4. **Never use Tailwind syntax** (e.g., `bg-gray-100`, `text-lg`, `hover:bg-blue-500`)
+5. **Follow Tachyons naming** - abbreviated, single-purpose class names
+
+### File Structure
+```
+src/
+  components/      # React components (HomePage, WebGLMorpher, FeaturedSection, etc.)
+  styles/          # CSS files (tachyons-ext.css, custom.css)
+  main.jsx         # Entry point
+  App.jsx          # Root component
+public/
+  images/          # Static images (luis.png, pelican.png, projects/)
+```
+
+## React Patterns
+
+### Component Guidelines
+- **Functional components only** - no class components
+- **Hooks for state** - useState, useEffect, useRef as needed
+- **Props destructuring** - clear component APIs
+- **Minimal prop drilling** - keep component tree flat when possible
+- **Comments for non-obvious logic** - especially WebGL, animations, random takes
+
+### WebGL Patterns (WebGLMorpher.jsx)
+- Use refs for WebGL context, canvas, animation frames
+- Proper cleanup in useEffect returns (stop animation loops, dispose resources)
+- Avoid stale closures - use refs for values read in animation loops
+- Initialize textures async with loading states
+
+### State Management
+- **Component-level state** for UI interactions (slider values, loading states)
+- **useEffect for side effects** (loading random takes, initializing WebGL)
+- **No global state** - props for component communication
+
+## Content Patterns
+
+### Random Takes Feature
+- Array of opinionated statements in HomePage.jsx
+- Selected randomly on mount with useEffect
+- Currently commented out but infrastructure in place
+- Add more takes to the `takes` array as desired
+
+### Newsletter Integration
+- Uses Buttondown email service
+- Simple form embed (not API integration)
+- Form action points to studioqueral Buttondown newsletter
+
+### Featured/Recent Work Section
+- Currently commented out while gathering project content
+- FeaturedSection.jsx ready to display projects with images
+- Project layout: year labels in left margin, titles flush with heading, images below
+
+## Development Workflow
+
+### Running the Project
+```bash
+npm install          # Install dependencies
+npm run dev          # Start dev server (Vite)
+npm run build        # Production build
+npm run preview      # Preview production build
+```
+
+### Making Changes
+1. Edit components in src/components/
+2. Style with Tachyons classes (check tachyons-ext.css for custom utilities)
+3. Test in browser at localhost:5173
+4. Commit with descriptive messages
+5. Update CHANGELOG.md (automated via user rules)
+
+### Deployment
+- GitHub repository: github.com/luismqueral/studio-queral
+- Deployed via Vercel
+- vercel.json configured for Vite static site
+
+## Code Quality Standards
+
+### What to Prioritize
+- **Readability** - clear variable names, logical organization
+- **Simplicity** - avoid over-engineering, prefer straightforward solutions
+- **Performance** - minimize re-renders, optimize WebGL, lazy load when beneficial
+- **Consistency** - follow existing patterns in the codebase
+
+### What to Avoid
+- Over-abstraction (unnecessary custom hooks, contexts)
+- Premature optimization
+- Mixing styling approaches (stick with Tachyons)
+- Large dependencies (evaluate bundle size impact)
+- Breaking changes without strong justification
+
+## AI Assistant Guidance
+
+When working on this project:
+
+1. **Always use Tachyons classes**, never Tailwind syntax
+2. **Check existing components** for patterns before creating new approaches
+3. **Maintain the minimal aesthetic** - add features thoughtfully
+4. **Keep bundle size small** - avoid heavy dependencies
+5. **Test interactive features** - especially WebGL, animations, forms
+6. **Update CHANGELOG.md** after significant changes (per user rules)
+7. **Preserve creative features** - random takes, WebGL morphing, newsletter
+
+## Future Considerations
+
+Planned but not yet implemented:
+- Projects/recent work section (FeaturedSection ready)
+- Writing/blog section
+- About page with more biographical info
+- More random takes
+
+Keep these in mind when making architectural decisions.
