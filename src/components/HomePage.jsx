@@ -28,7 +28,7 @@ function HomePage() {
               </p>
 
               <p className="f4 lh-copy">
-                I am a product designer and hypermedia artist based in Baltimore, Maryland.
+                I am a product designer and creative technologist based in Baltimore, Maryland.
               </p>
               <p className="f4">
                 I currently work for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
@@ -45,7 +45,7 @@ function HomePage() {
             <div className="mw5-5 center">
               <section className="lh-copy">
                 <p className="mb3 f4">
-                  I'm still working on this site, will be posting projects and an about section soon.
+                  I'm still working on this site — will be posting projects, writing and an about section soon.
                 </p>
 
                 {/* Random Take */}
