@@ -1,0 +1,121 @@
+---
+// src/pages/blog/[...slug].astro
+// Individual blog post page
+
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Generate static paths for all posts
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Format date
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={`${post.data.title} - Luis Queral`} description={post.data.description}>
+  <article class="mw7 center ph3 ph4-ns pv4">
+    <!-- Header -->
+    <header class="mb4 pb3 bb b--light-gray">
+      <time datetime={post.data.date.toISOString()} class="f6 gray db mb2">
+        {formattedDate}
+      </time>
+      <h1 class="f2 fw6 lh-title mb0">{post.data.title}</h1>
+    </header>
+    
+    <!-- Content -->
+    <div class="blog-content lh-copy f5">
+      <Content />
+    </div>
+    
+    <!-- Footer -->
+    <footer class="mt5 pt3 bt b--light-gray">
+      {post.data.tags && (
+        <div class="mb3">
+          {post.data.tags.map((tag) => (
+            <span class="tag-pill dib ph2 pv1 mr1 f7 bg-light-gray dark-gray br2">{tag}</span>
+          ))}
+        </div>
+      )}
+      <a href="/blog" class="link blue hover-dark-blue">&larr; Back to blog</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  /* Blog content styling */
+  .blog-content h1, .blog-content h2, .blog-content h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .blog-content h1 { font-size: 1.75rem; }
+  .blog-content h2 { font-size: 1.5rem; }
+  .blog-content h3 { font-size: 1.25rem; }
+  
+  .blog-content p {
+    margin-bottom: 1em;
+  }
+  
+  .blog-content ul, .blog-content ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+  }
+  
+  .blog-content li {
+    margin-bottom: 0.5em;
+  }
+  
+  .blog-content a {
+    color: #357edd;
+  }
+  
+  .blog-content a:hover {
+    color: #00449e;
+  }
+  
+  .blog-content pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+  
+  .blog-content code {
+    font-family: 'IBM Plex Mono', Monaco, Menlo, monospace;
+    font-size: 0.9em;
+  }
+  
+  .blog-content :not(pre) > code {
+    background: #f4f4f4;
+    padding: 0.125em 0.25em;
+    border-radius: 3px;
+  }
+  
+  .blog-content blockquote {
+    border-left: 3px solid #357edd;
+    margin: 1em 0;
+    padding-left: 1em;
+    color: #555;
+  }
+  
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+

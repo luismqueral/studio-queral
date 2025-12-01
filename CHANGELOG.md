@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2025-12-01
+
+- added "How To Attend Meetings" blog post - converted Brian Peterson's presentation deck to a full blog article with embedded slide images, covering meeting decision frameworks, red flags, flavor combinations, and real invite examples
+- added interactive StrategyCard component - React component that fetches from 186 strategy cards JSON, displays random prompts on click with theme/title/prompt, embedded in Strategy Cards blog post
+- updated Strategy Cards blog post - added Oblique Strategies/Brian Eno reference and lateral thinking context, converted to MDX for component embedding
+- added Jump City Records post with Asciinema player - detailed architecture breakdown of the generative noise label bot, embedded terminal recording with autoplay
+- added Data Synth and Media Tool Kit blog posts - project documentation posts with architecture details, Cursor rules philosophy, and GitHub links
+- added default table styling to tachyons-ext.css - clean borders, hover states, and proper padding for markdown tables across the site
+- migrated from Vite + React to Astro - complete framework migration for better content management and SEO, static HTML generation, and Content Collections for blog/logs
+- added blog with Astro Content Collections - new /blog route with listing page and individual post pages, sample "Hello World" post included
+- migrated cursor logs to Astro Content Collections - logs now use built-in markdown rendering with frontmatter schema validation, moved from public/logs to src/content/logs
+- cleaned up old Vite/React infrastructure - removed vite.config.js, main.jsx, App.jsx, index.html, react-router-dom, and old CursorLog components
+- created Astro layouts and pages - BaseLayout.astro for consistent structure, index.astro for homepage, blog/[...slug].astro and logs/[slug].astro for content pages
+- restructured documentation to follow docs/ folder pattern - created docs/HOW-IT-WORKS.md with plain-English explanations and ASCII diagrams, docs/ARCHITECTURE.md with technical design decisions, and docs/GLOSSARY.md with jargon definitions
+- removed redundant root-level documentation files - deleted CURSOR-LOG-IMPLEMENTATION.md and QUICK-START-LOG-VIEWER.md, consolidated content into new docs structure
+- streamlined README.md - shortened to focus on quick start with links to new docs folder for detailed explanations
+
+- updated response header to show model info - changed "Cursor Response" to "Response" with model info displayed below in gray IBM Plex Mono, removed hover underline from header
+- added ThinkingBlock component for AI thinking display - highlighted section with brain icon on left, gray background, consecutive thoughts merged into single section with bullet list
+- added SpecStory format parser support - CursorLogPage now handles both original Cursor export format and SpecStory format (with `_**User (timestamp)**_` and `_**Agent (model)**_` markers), extracts thinking blocks separately for dedicated UI display
+- added remark-gfm for table rendering - installed remark-gfm plugin and added to ReactMarkdown components to properly render markdown tables, also styled tables with borders and padding
+- switched cursor log page to system font - replaced IBM Plex Sans with system font stack (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, etc.)
+- improved cursor response header - changed "Cursor" to "Cursor Response", added Material Icons chevron_right that rotates on expand/collapse, moved Expand/Collapse text to right side, made entire header row clickable, added Material Icons font to index.html
+- switched to Atom One Dark theme for code blocks - applied inline theme in CursorLogPage.jsx with #282c34 background, #abb2bf text, purple keywords, green strings, blue functions, red tags
+- removed global pre/code styles from tachyons-ext.css - deleted the conflicting light-theme code block rules that were overriding cursor log dark theme
+- overhauled code block rendering in cursor log viewer - refactored ConversationBlock.jsx to use SyntaxHighlighter for ALL code blocks (with 'text' fallback for unspecified languages), added customStyle prop for consistent theming
+- wired up react router for cursor log viewer - updated App.jsx with Routes for / (HomePage) and /logs/:slug (CursorLogPage), added BrowserRouter wrapper and cursor-log.css import to main.jsx, log viewer now fully functional at /logs/scout-cursor-log
+- consolidated log viewer documentation into README.md - merged all documentation into main README, removed setup instructions since routing is now complete, streamlined QUICK-START-LOG-VIEWER.md to brief reference
+- built cursor conversation log viewer components - created infrastructure for displaying exported Cursor conversations with sticky question navigation, user/assistant message distinction, syntax-highlighted code blocks, and responsive styling in src/components/CursorLog/, src/pages/CursorLogPage.jsx, and src/styles/cursor-log.css
+- added markdown parser for cursor export format - implemented parseCursorLog utility that extracts conversation structure (title, metadata, user/cursor messages, questions for navigation) from Cursor's export format in src/utils/parseCursorLog.js
+- created sticky navigation component - built StickyNav that extracts user questions, tracks scroll position, highlights current section, and enables smooth scrolling to any question in the conversation
+- styled conversation blocks with visual distinction - user messages have green accent and border, cursor messages have blue accent and border, all with comfortable typography optimized for long-form reading
+- moved scout cursor log to public logs directory - relocated scout-cursor-log.md to public/logs/ and created manifest.json index system for managing multiple conversation logs
+- added log documentation - created README in public/logs/ explaining how to add new logs and what features the system provides, plus CURSOR-LOG-IMPLEMENTATION.md with complete technical overview
+- installed markdown rendering dependencies - added react-markdown and react-syntax-highlighter packages for parsing markdown and highlighting code blocks in conversation logs
+
 ## 2025-11-26
 
 - created comprehensive project rules document - added .cursor/rules/project-rules.mdc establishing project philosophy, Tachyons styling approach (not Tailwind), React patterns, content patterns, and AI assistant guidance

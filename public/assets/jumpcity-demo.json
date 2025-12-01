@@ -1,0 +1,802 @@
+{
+  "version": 1,
+  "width": 119,
+  "height": 34,
+  "duration": 282.383689,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/zsh"
+  },
+  "stdout": [
+    [
+      0.146357,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                                                      \r \r\u001b]2;luis@MBP-de-Luis: /Volumes/ext. hd/projects/jump city records/src\u0007"
+    ],
+    [
+      0.000103,
+      "\u001b]1;..y records/src\u0007"
+    ],
+    [
+      0.02399,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[01;32m➜  \u001b[36msrc\u001b[00m \u001b[01;34mgit:(\u001b[31mmaster\u001b[34m) \u001b[33m✗\u001b[00m \u001b[K"
+    ],
+    [
+      2.9e-05,
+      "\u001b[?1h\u001b=\u001b[?2004h"
+    ],
+    [
+      1.461793,
+      "p"
+    ],
+    [
+      0.246755,
+      "\bpy"
+    ],
+    [
+      0.404995,
+      "t"
+    ],
+    [
+      0.078742,
+      "h"
+    ],
+    [
+      0.090353,
+      "o"
+    ],
+    [
+      0.134629,
+      "n"
+    ],
+    [
+      0.202114,
+      " "
+    ],
+    [
+      1.069515,
+      "j"
+    ],
+    [
+      0.15752,
+      "u"
+    ],
+    [
+      0.202277,
+      "m"
+    ],
+    [
+      0.078289,
+      "p"
+    ],
+    [
+      0.14646,
+      "c"
+    ],
+    [
+      0.100625,
+      "i"
+    ],
+    [
+      0.124587,
+      "t"
+    ],
+    [
+      0.089831,
+      "y"
+    ],
+    [
+      0.090298,
+      "."
+    ],
+    [
+      0.191048,
+      "p"
+    ],
+    [
+      0.168446,
+      "y"
+    ],
+    [
+      0.697478,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      6.2e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000722,
+      "\u001b]2;python jumpcity.py\u0007\u001b]1;python\u0007"
+    ],
+    [
+      0.46946,
+      "\r\n     ____________        _..._\r\n     | ________ |  ___ .'     `. ____________\r\n     ||        || |   /`.  .-'  \\            |\r\n     ||        || |  ( O / O.   \"\\           |\r\n     ||        || |   | (_)     _/           |\r\n     ||________|| |   /((())) / \\_____       |\r\n     |        ] | |   \\______/  //    \\      |\r\n     |          | |   _..-)    //      \\     |\r\n     |          | |  / .\\_..-' \\       \\    |\r\n     |          | |_/    \\       `.      \\___|\r\n     |          |  /     |         \\     /\r\n_____|__________| /      /         /    / _______\r\n                  |    ./|        /    /\r\n                 _|____\\_|        |   /\r\n                 \\       /       _)   \\__\r\n                  \\     /       (_\\    \\()\r\n               ___|_____|____  / / \\_\\/\r\n            __/           |  |/ /___|\r\n    ..'`..'|  |           | _/_/    |       \r\n  .'(( ((( |__|           |(__()    |\r\n.'((( ((( .'__|           |  |______|________\r\n ((( (( ((`.  |           |  |              /\r\n(((((  (((((`.|           |  |      "
+    ],
+    [
+      9.8e-05,
+      "       /\r\n  ((( ((( ((.'|           | /             /\r\n`..-''-....'  |___________|/             /\r\n    \r\n\u001b[1m[ jump city records ]\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.019729,
+      "\u001b[1m\u001b[7m\r\n MAKING NEW ALBUM 'Bal des Ardents (2017-04-09 22.55.32)'\u001b[0m\r\n"
+    ],
+    [
+      1.178803,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:03:57 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.076383,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/50ankunftbern.mp3 (duration 00:02:02.980)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 237.0)\r\n"
+    ],
+    [
+      1.136276,
+      "    ...resulting duration: 00:02:02.960 \r\n\r\n"
+    ],
+    [
+      0.112393,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/AmsterdamLeidsegrachtKindergruppe.mp3 (duration 00:02:25.350)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 237.0)\r\n"
+    ],
+    [
+      1.648997,
+      "SUPPRESSED WARNINGS: ['sox WARN dither: dither clipped 471 samples; decrease volume?']\r\n"
+    ],
+    [
+      0.004498,
+      "    ...resulting duration: 00:02:25.350 \r\n\r\n"
+    ],
+    [
+      0.106766,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/sequencershort.wav (duration 00:01:59.440)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 237.0)\r\n"
+    ],
+    [
+      1.743179,
+      "    ...resulting duration: 00:01:59.440 \r\n\r\n"
+    ],
+    [
+      1.252047,
+      "Mixing to track-2017-04-09.22-55-38.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.018443,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.273087,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 01 Bal des Ardents - Triticum aestivum.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000314,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 1' asset, target duration 00:04:42 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.124722,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 1/RolandKayn-Simultan-05-Matrix-24-bit.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000276,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:04:42 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.028005,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/neoscenes20130507077amt.mp3 (duration 00:03:59.780)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 282.0)\r\n"
+    ],
+    [
+      2.523975,
+      "    ...resulting duration: 00:03:59.780 \r\n\r\n"
+    ],
+    [
+      0.111453,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/budbilikenpicnics02.mp3 (duration 00:09:31.670)\u001b[22m\r\n"
+    ],
+    [
+      3.2e-05,
+      "    ...excerpt from 00:04:26.848 to 00:09:08.848 (duration 00:04:42)\r\n    ...fade: fade 0 282 4\r\n"
+    ],
+    [
+      3.683782,
+      "    ...resulting duration: 00:04:42 \r\n\r\n"
+    ],
+    [
+      0.09884,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 2/vier3placedumarchedescapucins.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000275,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:04:42 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.028664,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/es-dc_2.mp3 (duration 00:07:56.810)\u001b[22m\r\n"
+    ],
+    [
+      2.9e-05,
+      "    ...excerpt from 00:02:50.132 to 00:07:32.132 (duration 00:04:42)\r\n    ...fade: fade 0 282 4\r\n"
+    ],
+    [
+      3.566077,
+      "    ...resulting duration: 00:04:42 \r\n\r\n"
+    ],
+    [
+      0.127615,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/neoscenes0506050office.mp3 (duration 00:04:00.610)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 282.0)\r\n"
+    ],
+    [
+      2.245425,
+      "    ...resulting duration: 00:04:00.590 \r\n\r\n"
+    ],
+    [
+      0.124175,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 2/20120408montagnanaosterglockenabends0dB.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000267,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 1' asset, target duration 00:04:42 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.00785,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 1/dc-frost_1.mp3 (duration 00:32:02.690)\u001b[22m\r\n    ...excerpt from 00:11:13.723 to 00:15:55.723 (duration 00:04:42)\r\n    ...fade: fade 0 282 4\r\n"
+    ],
+    [
+      4.570859,
+      "    ...resulting duration: 00:04:42 \r\n\r\n"
+    ],
+    [
+      0.004343,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 1/zo-fr_2.mp3 (duration 00:34:54.970)\u001b[22m\r\n    ...excerpt from 00:27:33.146 to 00:32:15.146 (duration 00:04:42)\r\n    ...fade: fade 0 282 4\r\n"
+    ],
+    [
+      7.521597,
+      "    ...resulting duration: 00:04:42 \r\n\r\n"
+    ],
+    [
+      0.004358,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 1/1 3.mp3 (duration 00:30:13.450)\u001b[22m\r\n    ...excerpt from 00:20:27.027 to 00:25:09.027 (duration 00:04:42)\r\n    ...fade: fade 0 282 4\r\n"
+    ],
+    [
+      6.782663,
+      "    ...resulting duration: 00:04:42 \r\n\r\n"
+    ],
+    [
+      4.870587,
+      "Mixing to track-2017-04-09.22-56-12.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.021783,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      2.304013,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 02 Bal des Ardents - Antigono I Monoftalmo.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000294,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:03:13 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.133984,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/dec1220127341.wav (duration 00:00:23.930)\u001b[22m\r\n    ...repeating, extra 7 times (for a total duration of 193.0)\r\n"
+    ],
+    [
+      1.767758,
+      "    ...resulting duration: 00:03:11.440 \r\n\r\n"
+    ],
+    [
+      0.111597,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/SoundMap201403175.mp3 (duration 00:06:04.060)\u001b[22m\r\n    ...excerpt from 00:01:56.859 to 00:05:09.859 (duration 00:03:13)\r\n    ...fade: fade 0 193 4\r\n"
+    ],
+    [
+      3.244008,
+      "    ...resulting duration: 00:03:13 \r\n\r\n"
+    ],
+    [
+      0.136529,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/SoundMap2014022442.mp3 (duration 00:05:52.060)\u001b[22m\r\n"
+    ],
+    [
+      3.6e-05,
+      "    ...excerpt from 00:01:56.207 to 00:05:09.207 (duration 00:03:13)\r\n    ...fade: fade 0 193 4\r\n"
+    ],
+    [
+      3.272912,
+      "    ...resulting duration: 00:03:13 \r\n\r\n"
+    ],
+    [
+      1.780716,
+      "Mixing to track-2017-04-09.22-56-27.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.010053,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.636173,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 03 Bal des Ardents - Temperamento (musica).flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000254,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:05:37 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.126887,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/GaredeLionWil.mp3 (duration 00:07:36.560)\u001b[22m\r\n"
+    ],
+    [
+      3.3e-05,
+      "    ...excerpt from 00:01:10.542 to 00:06:47.542 (duration 00:05:37)\r\n    ...fade: fade 0 337 4\r\n"
+    ],
+    [
+      4.332959,
+      "    ...resulting duration: 00:05:37 \r\n\r\n"
+    ],
+    [
+      0.11359,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/dl-arfh.mp3 (duration 00:26:33.700)\u001b[22m\r\n"
+    ],
+    [
+      4.1e-05,
+      "    ...excerpt from 00:07:12.548 to 00:12:49.548 (duration 00:05:37)\r\n    ...fade: fade 0 337 4\r\n"
+    ],
+    [
+      4.39282,
+      "    ...resulting duration: 00:05:37 \r\n\r\n"
+    ],
+    [
+      0.097651,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/hbfzuerichhalle.mp3 (duration 00:05:16.240)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 337.0)\r\n"
+    ],
+    [
+      3.290831,
+      "    ...resulting duration: 00:05:16.210 \r\n\r\n"
+    ],
+    [
+      6.216346,
+      "Mixing to track-2017-04-09.22-56-43.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.022542,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      2.741563,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 04 Bal des Ardents - Phil Brooks.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000285,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 1' asset, target duration 00:02:06 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.121521,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 1/phinmcg-skull_2.mp3 (duration 00:29:33.900)\u001b[22m\r\n"
+    ],
+    [
+      4.1e-05,
+      "    ...excerpt from 00:03:33.355 to 00:05:39.355 (duration 00:02:06)\r\n    ...fade: fade 0 126 4\r\n"
+    ],
+    [
+      1.8168,
+      "    ...resulting duration: 00:02:06 \r\n\r\n"
+    ],
+    [
+      0.110824,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 1/marsh-improv_1.mp3 (duration 00:31:48.860)\u001b[22m\r\n"
+    ],
+    [
+      3.9e-05,
+      "    ...excerpt from 00:18:11.525 to 00:20:17.525 (duration 00:02:06)\r\n    ...fade: fade 0 126 4\r\n"
+    ],
+    [
+      9.970245,
+      "    ...resulting duration: 00:02:06 \r\n\r\n"
+    ],
+    [
+      0.142647,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 1/Improvisation_02.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000281,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:02:06 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.029333,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 2/SoundMap2012110335.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000252,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 1' asset, target duration 00:02:06 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.035721,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 1/corrtap_1.mp3 (duration 00:45:42.470)\u001b[22m\r\n"
+    ],
+    [
+      3.6e-05,
+      "    ...excerpt from 00:00:56.728 to 00:03:02.728 (duration 00:02:06)\r\n    ...fade: fade 0 126 4\r\n"
+    ],
+    [
+      1.561092,
+      "    ...resulting duration: 00:02:06 \r\n\r\n"
+    ],
+    [
+      0.106969,
+      "ERROR: generate() can't determine the duration of '../_assets/sample-collection 1/Strasbourg04Shinohara.flac': soxi FAIL formats: no handler for detected file type `flac'\r\n\r\n"
+    ],
+    [
+      0.000189,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:02:06 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.025935,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/triesteViaGiacomoCiamicianWalk070913.mp3 (duration 00:04:00.110)\u001b[22m\r\n"
+    ],
+    [
+      3.8e-05,
+      "    ...excerpt from 00:01:45.460 to 00:03:51.460 (duration 00:02:06)\r\n    ...fade: fade 0 126 4\r\n"
+    ],
+    [
+      1.674846,
+      "    ...resulting duration: 00:02:06 \r\n\r\n"
+    ],
+    [
+      0.127051,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/SoundMap201310083.mp3 (duration 00:01:46.950)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 126.0)\r\n"
+    ],
+    [
+      1.392221,
+      "    ...resulting duration: 00:01:46.940 \r\n\r\n"
+    ],
+    [
+      0.114637,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/SoundMap201312201.mp3 (duration 00:07:20.160)\u001b[22m\r\n"
+    ],
+    [
+      4.3e-05,
+      "    ...excerpt from 00:03:40.793 to 00:05:46.793 (duration 00:02:06)\r\n    ...fade: fade 0 126 4\r\n"
+    ],
+    [
+      3.751326,
+      "    ...resulting duration: 00:02:06 \r\n\r\n"
+    ],
+    [
+      1.114405,
+      "Mixing to track-2017-04-09.22-57-13.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.00734,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.150488,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 05 Bal des Ardents - High-protein diet.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000311,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:04:28 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.130753,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/dbr-ton_2.mp3 (duration 00:09:09.460)\u001b[22m\r\n"
+    ],
+    [
+      3.3e-05,
+      "    ...excerpt from 00:02:23.580 to 00:06:51.580 (duration 00:04:28)\r\n    ...fade: fade 0 268 4\r\n"
+    ],
+    [
+      3.019456,
+      "    ...resulting duration: 00:04:28 \r\n\r\n"
+    ],
+    [
+      0.109549,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/SoundMap201402081055.mp3 (duration 00:08:16.060)\u001b[22m\r\n    ...excerpt from 00:03:06.322 to 00:07:34.322 (duration 00:04:28)\r\n    ...fade: fade 0 268 4\r\n"
+    ],
+    [
+      4.662386,
+      "    ...resulting duration: 00:04:28 \r\n\r\n"
+    ],
+    [
+      0.115177,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/AudressellesRosedesVentsGartenKlingel.mp3 (duration 00:02:21.250)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 268.0)\r\n"
+    ],
+    [
+      1.456162,
+      "    ...resulting duration: 00:02:21.240 \r\n\r\n"
+    ],
+    [
+      4.891185,
+      "Mixing to track-2017-04-09.22-57-25.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.018443,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      2.055265,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 06 Bal des Ardents - Tarta de Santiago.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000618,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:02:26 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.114943,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/SoundMap2013120311.mp3 (duration 00:05:04.060)\u001b[22m\r\n    ...excerpt from 00:01:55.230 to 00:04:21.230 (duration 00:02:26)\r\n"
+    ],
+    [
+      3.9e-05,
+      "    ...fade: fade 0 146 4\r\n"
+    ],
+    [
+      2.840899,
+      "    ...resulting duration: 00:02:26 \r\n\r\n"
+    ],
+    [
+      0.10752,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/SoundMap201311036.mp3 (duration 00:10:48.120)\u001b[22m\r\n"
+    ],
+    [
+      3.8e-05,
+      "    ...excerpt from 00:07:21.008 to 00:09:47.008 (duration 00:02:26)\r\n    ...fade: fade 0 146 4\r\n"
+    ],
+    [
+      5.534152,
+      "    ...resulting duration: 00:02:26 \r\n\r\n"
+    ],
+    [
+      0.125767,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/SlonecznyStokPromienistaStrumyk201302082330.mp3 (duration 00:02:17.640)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 146.0)\r\n"
+    ],
+    [
+      1.634034,
+      "    ...resulting duration: 00:02:17.640 \r\n\r\n"
+    ],
+    [
+      1.353235,
+      "Mixing to track-2017-04-09.22-57-42.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.008025,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.259496,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 07 Bal des Ardents - Huangtai railway station.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000309,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:04:02 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.134467,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/SoundMap2014012048.mp3 (duration 00:05:04.060)\u001b[22m\r\n"
+    ],
+    [
+      3.1e-05,
+      "    ...excerpt from 00:00:52.679 to 00:04:54.679 (duration 00:04:02)\r\n    ...fade: fade 0 242 4\r\n"
+    ],
+    [
+      3.300309,
+      "    ...resulting duration: 00:04:02 \r\n\r\n"
+    ],
+    [
+      0.120267,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/mariborNovaVasAmbient310512b.mp3 (duration 00:03:45.110)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 242.0)\r\n"
+    ],
+    [
+      2.26543,
+      "    ...resulting duration: 00:03:45.100 \r\n\r\n"
+    ],
+    [
+      0.095533,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/dam-aoag_1.mp3 (duration 00:30:53.300)\u001b[22m\r\n"
+    ],
+    [
+      3e-05,
+      "    ...excerpt from 00:13:26.304 to 00:17:28.304 (duration 00:04:02)\r\n    ...fade: fade 0 242 4\r\n"
+    ],
+    [
+      9.050377,
+      "    ...resulting duration: 00:04:02 \r\n\r\n"
+    ],
+    [
+      4.849621,
+      "Mixing to track-2017-04-09.22-58-00.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.020392,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.899587,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 08 Bal des Ardents - The United States of America.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000318,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:04:38 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.140864,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/neoscenes20120922194bubbles.mp3 (duration 00:04:00.640)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 278.0)\r\n"
+    ],
+    [
+      2.404969,
+      "    ...resulting duration: 00:04:00.640 \r\n\r\n"
+    ],
+    [
+      0.11722,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/bochumpause.mp3 (duration 00:04:19.560)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 278.0)\r\n"
+    ],
+    [
+      2.519702,
+      "    ...resulting duration: 00:04:19.530 \r\n\r\n"
+    ],
+    [
+      0.119345,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/SoundMap201308091.mp3 (duration 00:03:07.060)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 278.0)\r\n"
+    ],
+    [
+      2.452048,
+      "    ...resulting duration: 00:03:07.060 \r\n\r\n"
+    ],
+    [
+      3.369048,
+      "Mixing to track-2017-04-09.22-58-14.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.019964,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      2.049965,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 09 Bal des Ardents - Burton's Foods.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.00028,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 1' asset, target duration 00:02:54 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.158617,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 1/sonom_2.mp3 (duration 00:45:41.660)\u001b[22m\r\n"
+    ],
+    [
+      4e-05,
+      "    ...excerpt from 00:36:54.408 to 00:39:48.408 (duration 00:02:54)\r\n    ...fade: fade 0 174 4\r\n"
+    ],
+    [
+      8.53575,
+      "    ...resulting duration: 00:02:54 \r\n\r\n"
+    ],
+    [
+      0.004617,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 1/corrtap_1.mp3 (duration 00:45:42.470)\u001b[22m\r\n    ...excerpt from 00:32:06.780 to 00:35:00.780 (duration 00:02:54)\r\n    ...fade: fade 0 174 4\r\n"
+    ],
+    [
+      7.458531,
+      "    ...resulting duration: 00:02:54 \r\n\r\n"
+    ],
+    [
+      0.127835,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 1/ffial_2.mp3 (duration 00:30:22.870)\u001b[22m\r\n    ...excerpt from 00:09:40.534 to 00:12:34.534 (duration 00:02:54)\r\n    ...fade: fade 0 174 4\r\n"
+    ],
+    [
+      3.469633,
+      "    ...resulting duration: 00:02:54 \r\n\r\n"
+    ],
+    [
+      3.995311,
+      "Mixing to track-2017-04-09.22-58-40.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.018154,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      1.558204,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 10 Bal des Ardents - Sallow-skinned.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000317,
+      "\u001b[36m\u001b[1m\r\n Creating a track from '../_assets/sample-collection 2' asset, target duration 00:05:54 \r\n\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.136391,
+      "\u001b[1m    Source for layer0: ../_assets/sample-collection 2/dam-87_1.mp3 (duration 00:23:23.450)\u001b[22m\r\n"
+    ],
+    [
+      3.2e-05,
+      "    ...excerpt from 00:07:21.151 to 00:13:15.151 (duration 00:05:54)\r\n    ...fade: fade 0 354 4\r\n"
+    ],
+    [
+      4.570575,
+      "SUPPRESSED WARNINGS: ['sox WARN dither: dither clipped 1 samples; decrease volume?']\r\n"
+    ],
+    [
+      0.004617,
+      "    ...resulting duration: 00:05:54 \r\n\r\n"
+    ],
+    [
+      0.137959,
+      "\u001b[1m    Source for layer1: ../_assets/sample-collection 2/OsakaNambaShoppingStreet.mp3 (duration 00:03:06.020)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 354.0)\r\n"
+    ],
+    [
+      1.937181,
+      "    ...resulting duration: 00:03:06.020 \r\n\r\n"
+    ],
+    [
+      0.109252,
+      "\u001b[1m    Source for layer2: ../_assets/sample-collection 2/hildenparkhausnovemestro.mp3 (duration 00:03:02.290)\u001b[22m\r\n    ...repeating, extra 0 times (for a total duration of 354.0)\r\n"
+    ],
+    [
+      1.867486,
+      "    ...resulting duration: 00:03:02.280 \r\n\r\n"
+    ],
+    [
+      5.143599,
+      "Mixing to track-2017-04-09.22-58-54.wav... \r\n\u001b[92m\u001b[1mdone\u001b[22m\u001b[37m\r\n"
+    ],
+    [
+      0.017006,
+      "\r\nMaking flac...\r\n"
+    ],
+    [
+      2.665242,
+      "\u001b[92m\u001b[1mDESTNAME:\u001b[37m 11 Bal des Ardents - Gerola Alta.flac\u001b[22m\r\n\r\n ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\r\n"
+    ],
+    [
+      0.000234,
+      "\u001b[0m\r\n"
+    ],
+    [
+      0.0222,
+      "\u001b[1m\u001b[7m%\u001b[27m\u001b[1m\u001b[0m                                                                                                                      \r \r"
+    ],
+    [
+      0.000172,
+      "\u001b]2;luis@MBP-de-Luis: /Volumes/ext. hd/projects/jump city records/src\u0007"
+    ],
+    [
+      3.3e-05,
+      "\u001b]1;..y records/src\u0007"
+    ],
+    [
+      0.084844,
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\u001b[01;32m➜  \u001b[36msrc\u001b[00m \u001b[01;34mgit:(\u001b[31mmaster\u001b[34m) \u001b[33m✗\u001b[00m \u001b[K"
+    ],
+    [
+      3.8e-05,
+      "\u001b[?1h\u001b="
+    ],
+    [
+      2.4e-05,
+      "\u001b[?2004h"
+    ],
+    [
+      64.578974,
+      "e"
+    ],
+    [
+      0.213343,
+      "\bex"
+    ],
+    [
+      0.134958,
+      "i"
+    ],
+    [
+      0.134134,
+      "t"
+    ],
+    [
+      0.540595,
+      "\u001b[?1l\u001b>"
+    ],
+    [
+      3.2e-05,
+      "\u001b[?2004l\r\r\n"
+    ],
+    [
+      0.000683,
+      "\u001b]2;exit\u0007\u001b]1;exit\u0007"
+    ]
+  ]
+}

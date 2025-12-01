@@ -1,6 +1,6 @@
 # Studio Queral 2026
 
-A modern React + Vite personal website with WebGL graphics and newsletter integration.
+A personal website built with Astro, featuring WebGL graphics, a blog, and conversation log archives.
 
 ## Quick Start
 
@@ -9,86 +9,97 @@ npm install
 npm run dev
 ```
 
-Visit http://localhost:3001
+Visit http://localhost:3000
 
-## Newsletter Setup
+## Documentation
 
-This site uses Buttondown for newsletter subscriptions.
+| Doc | What It Covers |
+|-----|----------------|
+| [HOW-IT-WORKS.md](./docs/HOW-IT-WORKS.md) | Plain-English explanations with diagrams |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Technical design decisions |
+| [GLOSSARY.md](./docs/GLOSSARY.md) | Terms and jargon explained |
 
-### Local Development
+---
 
-1. Create a `.env.local` file in the project root:
+## Adding Content
 
-```env
-BUTTONDOWN_API_KEY=your_api_key_here
+### Blog Posts
+
+Create a new `.md` file in `src/content/blog/`:
+
+```markdown
+---
+title: "Your Post Title"
+description: "Brief description"
+date: 2025-12-01
+tags: ["topic1", "topic2"]
+draft: false
+---
+
+Your content here...
 ```
 
-2. Get your API key from https://buttondown.email/settings/programming
+View at: `http://localhost:3000/blog/your-post-title`
 
-3. Paste your key into `.env.local`
+### Cursor Logs
 
-### Vercel Deployment
+Add conversation exports to `src/content/logs/` with frontmatter:
 
-1. Go to your Vercel project settings
-2. Navigate to **Environment Variables**
-3. Add a new variable:
-   - **Name**: `BUTTONDOWN_API_KEY`
-   - **Value**: Your Buttondown API key
-   - **Environment**: Production, Preview, Development (select all)
-4. Redeploy
+```markdown
+---
+title: "Log Title"
+description: "What this conversation covers"
+date: 2025-12-01
+tags: ["topic"]
+---
 
-## Random Takes Feature
-
-The homepage displays a random "take" (opinion/thought) on each page load. 
-
-### Adding New Takes
-
-Edit `src/components/HomePage.jsx` and add to the `takes` array at the top:
-
-```javascript
-const takes = [
-  "The Fifth Element is the greatest sci-fi movie ever made.",
-  "Your next take here",
-  "Another take here",
-]
+...exported conversation content...
 ```
 
-Each page load will randomly select one take to display.
+View at: `http://localhost:3000/logs/your-log-slug`
+
+---
 
 ## Project Structure
 
 ```
-├── api/
-│   └── subscribe.js          # Vercel serverless function for newsletter
+├── astro.config.mjs              # Astro configuration
 ├── src/
-│   ├── components/
-│   │   ├── HomePage.jsx      # Main page component (includes random takes)
-│   │   ├── WebGLMorpher.jsx  # WebGL image morpher
-│   │   ├── NewsletterSignup.jsx  # Newsletter form component
-│   │   └── FeaturedSection.jsx   # Projects section
-│   └── main.jsx
+│   ├── content/
+│   │   ├── config.ts             # Content collection schemas
+│   │   ├── blog/                 # Blog posts (markdown)
+│   │   └── logs/                 # Cursor conversation logs
+│   ├── layouts/
+│   │   └── BaseLayout.astro      # Main HTML wrapper
+│   ├── pages/
+│   │   ├── index.astro           # Homepage
+│   │   ├── blog/
+│   │   │   ├── index.astro       # Blog listing
+│   │   │   └── [...slug].astro   # Individual posts
+│   │   └── logs/
+│   │       └── [slug].astro      # Log viewer
+│   ├── components/               # React components
+│   │   ├── WebGLMorpher.jsx
+│   │   └── NewsletterSignup.jsx
+│   └── styles/
 ├── public/
-│   └── images/               # Static images
+│   └── images/
+├── api/
+│   └── subscribe.js              # Newsletter (Vercel function)
 └── package.json
 ```
 
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview build |
+
 ## Tech Stack
 
-- React 18
-- Vite 5
-- WebGL for graphics
-- Tachyons CSS
-- Buttondown API for newsletter
-- Vercel for hosting
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-## Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `BUTTONDOWN_API_KEY` | Buttondown newsletter API key | Yes |
+- **Astro 4** - Static site generator with content collections
+- **React 18** - For interactive components (WebGL, forms)
+- **Tachyons CSS** - Functional CSS framework
+- **Vercel** - Hosting and serverless functions

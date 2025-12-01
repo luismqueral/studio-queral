@@ -1,0 +1,71 @@
+---
+// src/pages/index.astro
+// Homepage - mostly static content with interactive React islands
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WebGLMorpher from '../components/WebGLMorpher.jsx';
+import NewsletterSignup from '../components/NewsletterSignup.jsx';
+
+// Random takes - pick one at build time (changes on each deploy)
+// For per-visit randomness, move this to a client component
+const takes = [
+  "The Fifth Element is the greatest sci-fi movie ever made.",
+];
+const randomTake = takes[Math.floor(Math.random() * takes.length)];
+---
+
+<BaseLayout>
+  <div class="center ph3 ph4-ns">
+    <!-- Introduction Section -->
+    <div class="center bg-white-gray-gradient" id="logo-header">
+      <div class="pt4 pb2">
+        <div class="mw5-5 center">
+          <div class="mw5-5 center">
+            <p class="f4 lh-copy near-black">
+              Hello, my name is <strong>Luis Queral</strong>.
+            </p>
+
+            <p class="f4 lh-copy">
+              I am a product designer and creative technologist based in Baltimore, Maryland.
+            </p>
+            <p class="f4">
+              I currently work for <em style="white-space: nowrap;">The New York Times.</em>
+            </p>
+          </div>
+
+          <!-- WebGL Morphing Canvas - needs client-side JavaScript -->
+          <WebGLMorpher 
+            client:load
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+
+          <!-- Body content -->
+          <div class="mw5-5 center">
+            <section class="lh-copy">
+              <p class="mb3 f4">
+                I'm still working on this site — will be posting projects, writing and an about section soon.
+              </p>
+
+              <!-- Random Take (uncomment to enable) -->
+              <!-- <p class="mb3 f4 near-black">
+                {randomTake}
+              </p> -->
+
+              <p class="mb3 f4 near-black">
+                You can reach me at{' '}
+                <a href="mailto:hey@queral.studio" class="link blue hover-dark-blue">
+                  hey@queral.studio
+                </a>
+              </p>
+              
+              <!-- Newsletter Signup - needs client-side JavaScript for form -->
+              <NewsletterSignup client:load />
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+

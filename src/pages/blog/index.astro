@@ -1,0 +1,54 @@
+---
+// src/pages/blog/index.astro
+// Blog listing page - shows all published posts
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Get all non-draft posts, sorted by date (newest first)
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Blog - Luis Queral" description="Thoughts on design, code, and creative technology">
+  <div class="mw7 center ph3 ph4-ns pv4">
+    <header class="mb4">
+      <h1 class="f2 fw6 lh-title mb2">Blog</h1>
+      <p class="f5 gray">Thoughts on design, code, and creative technology</p>
+    </header>
+    
+    {posts.length === 0 ? (
+      <p class="f5 gray">No posts yet. Check back soon!</p>
+    ) : (
+      <ul class="list pl0">
+        {posts.map((post) => (
+          <li class="mb4 pb4 bb b--light-gray">
+            <article>
+              <time 
+                datetime={post.data.date.toISOString()} 
+                class="f6 gray db mb2"
+              >
+                {post.data.date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              <h2 class="f3 fw6 lh-title mb2">
+                <a href={`/blog/${post.slug}`} class="link near-black hover-blue">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="f5 gray lh-copy mb0">{post.data.description}</p>
+            </article>
+          </li>
+        ))}
+      </ul>
+    )}
+    
+    <footer class="mt4 pt3">
+      <a href="/" class="link blue hover-dark-blue">&larr; Back to home</a>
+    </footer>
+  </div>
+</BaseLayout>
+
