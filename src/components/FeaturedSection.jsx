@@ -72,7 +72,7 @@ function FeaturedSection() {
               {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <div className="flex items-start">
-                <span className="gray f6 ibm-mono mr3 mt1" style={{ minWidth: '3rem', marginLeft: '-4rem' }}>
+                <span className="gray f6 font-system-mono mr3 mt1" style={{ minWidth: '3rem', marginLeft: '-4rem' }}>
                   {item.year}
                 </span>
                 <div className="flex-auto">

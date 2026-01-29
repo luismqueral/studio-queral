@@ -560,7 +560,7 @@ function WebGLMorpher({ image1Url, image2Url }) {
   }
 
   return (
-    <div className="pa2 center" style={{ maxWidth: '450px' }}>
+    <div className="center" style={{ width: '100%' }}>
       <div className="tc mb3 relative">
         {isLoading && (
           <div
@@ -594,8 +594,8 @@ function WebGLMorpher({ image1Url, image2Url }) {
 
       <div className="center" style={{ maxWidth: '100%' }}>
         <div className="flex items-center justify-between mb2">
-          <span className="f5 gray ibm-mono">luis</span>
-          <span className="f5 gray ibm-mono">not luis</span>
+          <span className="f5 gray font-system-mono">luis</span>
+          <span className="f5 gray font-system-mono">not luis</span>
         </div>
         <div className="relative">
           <input

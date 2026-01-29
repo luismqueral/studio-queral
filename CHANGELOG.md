@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-01-28
+- switched to IBM Plex Sans font - added Google Fonts import and font-ibm-plex-sans class in index.html and tachyons-ext.css
+- inverted section colors: intro and notes now white, WebGL section now light gray in HomePage.jsx
+- fixed gaps around section backgrounds by removing horizontal padding from App container and resetting body margin in App.jsx and tachyons-ext.css
+- restructured homepage into three horizontal sections with alternating backgrounds: intro (light gray), WebGL applet (white), notes+newsletter (light gray) in HomePage.jsx
+- moved "still working on this site" and contact info above WebGL applet, increased Notes section text to f4 to match intro sizing in HomePage.jsx
+- set text content areas to 580px max-width while keeping WebGL applet at 540px for a slightly wider text measure in HomePage.jsx
+- increased base font size to 22px in tachyons-ext.css for larger overall typography
+- updated homepage intro to third person: "Luis Queral is a product designer..." and "He currently works for The New York Times."
+- adjusted homepage layout so main content matches WebGL applet width (450px), renamed "Writing" section to "Notes", and moved newsletter signup to a footer section at the bottom of the page in HomePage.jsx
+- switched site typography from IBM Plex to system default fonts - removed Google Fonts import from index.html, updated body class to use font-system, and replaced ibm-mono references with font-system-mono in components for faster load times and native feel
+
+2026-01-26
+- added basic blog post routing so homepage titles link to real post pages with a placeholder template
+- linked homepage blog titles to their asset folders for now so each entry has a working target in HomePage.jsx
+- added a test blog entry in the blog registry so it appears in the homepage list, with a placeholder media folder
+- set up a simple blog content registry and media folder conventions so posts can live in src/content/blog and assets in public/blog
+- added a minimal writing list below the newsletter signup so blog titles show up on the homepage in HomePage.jsx
+
+## 2025-12-01
+
+- built repeatable cursor conversation log viewer system - created complete infrastructure for displaying exported Cursor conversations with sticky question navigation, user/assistant message distinction, syntax-highlighted code blocks, and responsive styling in src/components/CursorLog/, src/pages/CursorLogPage.jsx, and src/styles/cursor-log.css
+- added markdown parser for cursor export format - implemented parseCursorLog utility that extracts conversation structure (title, metadata, user/cursor messages, questions for navigation) from Cursor's export format in src/utils/parseCursorLog.js
+- integrated react router for log navigation - added BrowserRouter to main.jsx and created route structure in App.jsx to support /logs/:logSlug pattern for dynamic log viewing
+- created sticky navigation component - built StickyNav that extracts user questions, tracks scroll position, highlights current section, and enables smooth scrolling to any question in the conversation
+- styled conversation blocks with visual distinction - user messages have green accent and border, cursor messages have blue accent and border, all with comfortable typography optimized for long-form reading
+- moved scout cursor log to public logs directory - relocated scout-cursor-log.md to public/logs/ and created manifest.json index system for managing multiple conversation logs
+- added log documentation - created README in public/logs/ explaining how to add new logs and what features the system provides, plus CURSOR-LOG-IMPLEMENTATION.md with complete technical overview
+- installed markdown rendering dependencies - added react-markdown and react-syntax-highlighter packages for parsing markdown and highlighting code blocks in conversation logs
+
 ## 2025-11-26
 
 - created comprehensive project rules document - added .cursor/rules/project-rules.mdc establishing project philosophy, Tachyons styling approach (not Tailwind), React patterns, content patterns, and AI assistant guidance
