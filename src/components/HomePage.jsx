@@ -49,7 +49,8 @@ function HomePage() {
       {/* Section 3: Notes + Newsletter - White */}
       <section className="bg-white pv4">
         <div className="center ph4" style={{ maxWidth: '580px' }}>
-          <p className="f4 mb3 near-black fw6">Notes</p>
+          <p className="f4 mb2 near-black fw6">Notes</p>
+          <p className="f5 mb3 near-black lh-copy">Essays and observations about art and technology.</p>
           <ul className="pl4 mt2 mb4">
             {blogPosts.map((post) => (
               <li key={post.slug} className="mb3 f4 near-black lh-copy">
