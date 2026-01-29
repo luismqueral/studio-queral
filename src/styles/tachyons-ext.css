@@ -96,6 +96,10 @@ pre code {
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.font-arimo {
+  font-family: 'Arimo', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .font-ibm-plex-sans {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
