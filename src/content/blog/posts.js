@@ -1,23 +1,63 @@
 const blogPosts = [
   {
-    title: 'Test blog',
-    slug: 'test-blog',
-    assetsPath: '/blog/test-blog'
+    title: 'how to get people to use AI? let them kind of fuck around',
+    slug: 'let-them-fuck-around',
+    assetsPath: '/blog/let-them-fuck-around'
   },
   {
-    title: 'Designing for signal over noise',
-    slug: 'designing-for-signal-over-noise',
-    assetsPath: '/blog/designing-for-signal-over-noise'
+    title: 'LLMs are making more work, not less',
+    slug: 'llms-more-work-not-less',
+    assetsPath: '/blog/llms-more-work-not-less'
   },
   {
-    title: 'Learning from constraints in WebGL experiments',
-    slug: 'learning-from-constraints-in-webgl',
-    assetsPath: '/blog/learning-from-constraints-in-webgl'
+    title: 'sorry, engineering is still hard',
+    slug: 'engineering-still-hard',
+    assetsPath: '/blog/engineering-still-hard'
   },
   {
-    title: 'Notes on taste, iteration, and keeping momentum',
-    slug: 'notes-on-taste-iteration-keeping-momentum',
-    assetsPath: '/blog/notes-on-taste-iteration-keeping-momentum'
+    title: 'transcripts are gold in the age of the LLM',
+    slug: 'transcripts-are-gold',
+    assetsPath: '/blog/transcripts-are-gold'
+  },
+  {
+    title: 'early thoughts on generative design thinking',
+    slug: 'generative-design-thinking',
+    assetsPath: '/blog/generative-design-thinking'
+  },
+  {
+    title: 'using Cursor for research (it's like NotebookLM but you can build things)',
+    slug: 'cursor-for-research',
+    assetsPath: '/blog/cursor-for-research'
+  },
+  {
+    title: 'a writing habit is a design superpower',
+    slug: 'writing-design-superpower',
+    assetsPath: '/blog/writing-design-superpower'
+  },
+  {
+    title: 'what would this dataset sound like?',
+    slug: 'what-would-this-dataset-sound-like',
+    assetsPath: '/blog/what-would-this-dataset-sound-like'
+  },
+  {
+    title: 'the "split triple diamond" — a method for making things that actually ship',
+    slug: 'split-triple-diamond',
+    assetsPath: '/blog/split-triple-diamond'
+  },
+  {
+    title: 'my media toolkit: a personal framework for manipulating audio and video',
+    slug: 'media-toolkit',
+    assetsPath: '/blog/media-toolkit'
+  },
+  {
+    title: 'prompts that actually help (debugging, unsticking, thinking bigger)',
+    slug: 'prompts-that-help',
+    assetsPath: '/blog/prompts-that-help'
+  },
+  {
+    title: 'introducing the generative design lab',
+    slug: 'generative-design-lab',
+    assetsPath: '/blog/generative-design-lab'
   }
 ]
 
