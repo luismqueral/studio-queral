@@ -24,16 +24,13 @@ function HomePage() {
       <section className="bg-white pv4">
         <div className="center ph4" style={{ maxWidth: '580px' }}>
           <p className="f4 lh-copy near-black">
-            <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, Maryland.
+            <strong>Luis Queral</strong> is a product designer and creative technologist currently working for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
-          <p className="f4 lh-copy">
-            He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
+          <p className="f4 lh-copy mb1">
+            <a href="#" className="blue underline hover-no-underline">More info</a>
           </p>
-          <p className="f4 lh-copy near-black">
-            <a href="#" className="near-black underline hover-no-underline">More info</a>
-          </p>
-          <p className="f4 lh-copy near-black mb0">
-            <a href="mailto:hey@queral.studio" className="near-black underline hover-no-underline">Contact</a>
+          <p className="f4 lh-copy mb0">
+            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
           </p>
         </div>
       </section>
