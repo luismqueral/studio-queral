@@ -29,13 +29,9 @@ function HomePage() {
           <p className="f4 lh-copy near-black">
             He lives in Baltimore and enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
-          <div className="ml3">
-            <p className="f4 lh-copy mb1">
-              <a href="#" className="blue underline hover-no-underline">More info</a>
-            </p>
-            <p className="f4 lh-copy mb0">
-              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
-            </p>
+          <div className="ml3 mt3">
+            <a href="#" className="blue underline hover-no-underline db f4">More info</a>
+            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline db f4">Contact</a>
           </div>
         </div>
       </section>
@@ -57,7 +53,7 @@ function HomePage() {
           <ul className="list pl0 mt2 mb4">
             {blogPosts.map((post) => (
               <li key={post.slug} className="mb2 f4 near-black">
-                <a href={`/blog/${post.slug}`} className="link blue hover-dark-blue">
+                <a href={`/blog/${post.slug}`} className="blue underline hover-no-underline">
                   {post.title}
                 </a>
               </li>
