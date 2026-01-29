@@ -27,10 +27,7 @@ function HomePage() {
             <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, Maryland.
           </p>
           <p className="f4">
-            He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
-          </p>
-          <p className="f4 lh-copy">
-            I'm still working on this site — will be posting projects, writing and an about section soon.
+            He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
           <p className="f4 near-black mb0">
             You can reach me at{' '}
