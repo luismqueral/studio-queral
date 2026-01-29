@@ -29,11 +29,11 @@ function HomePage() {
           <p className="f4 lh-copy">
             He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
+          <p className="f4 lh-copy near-black">
+            <a href="#" className="near-black underline hover-no-underline">More info</a>
+          </p>
           <p className="f4 lh-copy near-black mb0">
-            You can reach me at{' '}
-            <a href="mailto:hey@queral.studio" className="link blue hover-dark-blue">
-              hey@queral.studio
-            </a>
+            <a href="mailto:hey@queral.studio" className="near-black underline hover-no-underline">Contact</a>
           </p>
         </div>
       </section>

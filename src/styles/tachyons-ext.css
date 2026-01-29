@@ -84,6 +84,11 @@ pre code {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Link hover utility */
+.hover-no-underline:hover {
+  text-decoration: none;
+}
+
 .font-system-serif {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
