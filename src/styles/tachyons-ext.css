@@ -99,8 +99,9 @@ pre code {
   content: '*';
   position: absolute;
   margin-left: -1.5rem;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1.5em;
+  font-weight: normal;
+  color: #999;
 }
 
 .font-system-serif {
