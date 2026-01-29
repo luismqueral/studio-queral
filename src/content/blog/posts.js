@@ -25,7 +25,7 @@ const blogPosts = [
     assetsPath: '/blog/generative-design-thinking'
   },
   {
-    title: 'using Cursor for research (it's like NotebookLM but you can build things)',
+    title: "using Cursor for research (it's like NotebookLM but you can build things)",
     slug: 'cursor-for-research',
     assetsPath: '/blog/cursor-for-research'
   },
