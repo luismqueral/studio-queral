@@ -1,5 +1,20 @@
 const blogPosts = [
   {
+    title: 'mapping the generative arena',
+    slug: 'mapping-generative-arena',
+    assetsPath: '/blog/mapping-generative-arena'
+  },
+  {
+    title: 'things you should know if you're generating software',
+    slug: 'generating-software',
+    assetsPath: '/blog/generating-software'
+  },
+  {
+    title: 'a case for generative music making',
+    slug: 'generative-music-making',
+    assetsPath: '/blog/generative-music-making'
+  },
+  {
     title: 'how to get people to use AI? let them kind of fuck around',
     slug: 'let-them-fuck-around',
     assetsPath: '/blog/let-them-fuck-around'
