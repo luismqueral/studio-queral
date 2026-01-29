@@ -27,7 +27,7 @@ function HomePage() {
             <strong>Luis Queral</strong> is a product designer and creative technologist currently working for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
           <p className="f4 lh-copy near-black">
-            He lives in Baltimore and enjoys writing, experimenting with music and video, and hanging out with his kids :-).
+            He lives in Baltimore and enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
           <div className="ml3">
             <p className="f4 lh-copy mb1">

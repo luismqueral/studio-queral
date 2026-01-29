@@ -1958,3 +1958,19 @@ Done. Updated intro to single sentence with NYT, removed separate line, made lin
 
 ---
 
+_**User**_
+
+under first paragraph, "He lives in Baltimore and enjoys writing, experimenting with music and video, and hanging out with his kids :-). 
+
+"more info" and "contact" should be a little closer, also slightly indented
+
+---
+
+_**Agent (model claude-4.5-opus-high-thinking, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+The user wants:
+1. Add a new paragraph:</details></think>
+
+---
+
