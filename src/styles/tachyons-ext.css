@@ -6,10 +6,6 @@ html {
 
 body {
   margin: 0;
-  /* Modern approach - reserves space for scrollbar */
-  scrollbar-gutter: stable;
-  /* Fallback for older browsers - force scrollbar to always be visible */
-  overflow-y: scroll;
 }
 
 /* Code Block Styling */
