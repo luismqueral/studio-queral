@@ -3,7 +3,7 @@ function NewsletterSignup() {
     <div className="mt5 mb4">
       <p className="f4 mb2 near-black fw6">Newsletter</p>
       <p className="f5 mb3 near-black lh-copy">
-        You'll get occasional project / life updates straight to your inbox. <a href="#" className="blue underline hover-no-underline">See some older emails here.</a>
+        You'll get <a href="#" className="blue underline hover-no-underline">occasional project / life updates</a> straight to your inbox.
       </p>
       
       <form 
