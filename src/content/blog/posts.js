@@ -73,6 +73,41 @@ const blogPosts = [
     title: 'introducing the generative design lab',
     slug: 'generative-design-lab',
     assetsPath: '/blog/generative-design-lab'
+  },
+  {
+    title: 'my design advice so far',
+    slug: 'design-advice-so-far',
+    assetsPath: '/blog/design-advice-so-far'
+  },
+  {
+    title: "thoughts on 'happyfood'",
+    slug: 'thoughts-on-happyfood',
+    assetsPath: '/blog/thoughts-on-happyfood'
+  },
+  {
+    title: "designing a generative 'happyfood' engine",
+    slug: 'generative-happyfood-engine',
+    assetsPath: '/blog/generative-happyfood-engine'
+  },
+  {
+    title: 'jump city records, a generative music project from 2014',
+    slug: 'jump-city-records',
+    assetsPath: '/blog/jump-city-records'
+  },
+  {
+    title: 'hamburger music (2013)',
+    slug: 'hamburger-music',
+    assetsPath: '/blog/hamburger-music'
+  },
+  {
+    title: 'my favorite prints 2011-2014',
+    slug: 'favorite-prints-2011-2014',
+    assetsPath: '/blog/favorite-prints-2011-2014'
+  },
+  {
+    title: 'things I learned making showhaus',
+    slug: 'things-learned-showhaus',
+    assetsPath: '/blog/things-learned-showhaus'
   }
 ]
 
