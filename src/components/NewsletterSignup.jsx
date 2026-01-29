@@ -1,6 +1,6 @@
 function NewsletterSignup() {
   return (
-    <div className="mt5 mb4">
+    <div>
       <p className="f4 mb2 near-black fw6">Newsletter</p>
       <p className="f5 mb3 near-black lh-copy">
         You'll get <a href="#" className="blue underline hover-no-underline">occasional project / life updates</a> straight to your inbox.

@@ -46,12 +46,12 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Section 3: Notes + Newsletter - White */}
+      {/* Section 3: Notes - White */}
       <section className="bg-white pv4">
         <div className="center ph4" style={{ maxWidth: '580px' }}>
           <p className="f4 mb2 near-black fw6">Notes</p>
           <p className="f5 mb3 near-black lh-copy">Essays and observations about art and technology.</p>
-          <ul className="pl4 mt2 mb4">
+          <ul className="pl4 mt2 mb0">
             {blogPosts.map((post) => (
               <li key={post.slug} className="mb3 f4 near-black lh-copy">
                 <a href={`/blog/${post.slug}`} className="blue underline hover-no-underline">
@@ -60,6 +60,12 @@ function HomePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* Section 4: Newsletter - Light Gray */}
+      <section className="bg-near-white pv4">
+        <div className="center ph4" style={{ maxWidth: '580px' }}>
           <NewsletterSignup />
         </div>
       </section>
