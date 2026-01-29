@@ -80,6 +80,10 @@ pre code {
   font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
 }
 
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .font-ibm-plex-sans {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
