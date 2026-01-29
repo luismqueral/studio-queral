@@ -5,7 +5,7 @@ const blogPosts = [
     assetsPath: '/blog/mapping-generative-arena'
   },
   {
-    title: 'things you should know if you're generating software',
+    title: "things you should know if you're generating software",
     slug: 'generating-software',
     assetsPath: '/blog/generating-software'
   },
