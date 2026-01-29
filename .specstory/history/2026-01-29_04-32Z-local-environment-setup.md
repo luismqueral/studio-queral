@@ -1607,7 +1607,61 @@ Done. Changed `pa2` to `ph4` for more horizontal padding (2rem) on all container
 
 Done. Changed padding from `pa2` to `ph4` (2rem horizontal padding) on all content containers. Pushed to remote.
 
-📝 **Changelog updated**
+📝 **Changelog updated** - Added entry for mobile padding
+
+---
+
+_**User**_
+
+remove "I'm still working on this site — will be posting projects, writing and an about section soon." "luis
+not luis" should be in same font as rest of the site, "He currently works for The New York Times." shjould be "He works for The New York Times."
+
+---
+
+_**Agent (model claude-4.5-opus-high-thinking, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+The user wants me to:
+1. Remove "I'm still working on this site — will be posting projects, writing and an about section soon."
+2. Change "luis / not luis" to use the same font as the rest of the site (currently it's using font-system-mono)
+3. Change "He currently works for" to "He works for"
+
+Let me make these changes.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/WebGLMorpher.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Now let me update the changelog and push.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/CHANGELOG.md</summary>
+
+</details>
+
+</tool-use>
 
 ---
 

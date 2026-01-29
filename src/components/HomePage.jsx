@@ -26,10 +26,10 @@ function HomePage() {
           <p className="f4 lh-copy near-black">
             <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, Maryland.
           </p>
-          <p className="f4">
+          <p className="f4 lh-copy">
             He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
-          <p className="f4 near-black mb0">
+          <p className="f4 lh-copy near-black mb0">
             You can reach me at{' '}
             <a href="mailto:hey@queral.studio" className="link blue hover-dark-blue">
               hey@queral.studio
