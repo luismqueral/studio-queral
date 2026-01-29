@@ -30,8 +30,12 @@ function HomePage() {
             He lives in Baltimore and enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
           <div className="ml3 mt3">
-            <a href="#" className="blue underline hover-no-underline db f4">More info</a>
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline db f4">Contact</a>
+            <div className="mb2">
+              <a href="#" className="blue underline hover-no-underline f4">More info</a>
+            </div>
+            <div>
+              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline f4">Contact</a>
+            </div>
           </div>
         </div>
       </section>
