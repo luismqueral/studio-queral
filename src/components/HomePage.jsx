@@ -22,7 +22,7 @@ function HomePage() {
     <>
       {/* Section 1: Introduction - White */}
       <section className="bg-white pv4">
-        <div className="center ph4" style={{ maxWidth: '580px' }}>
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
           <p className="f4 lh-copy near-black">
             <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore.
           </p>
@@ -45,7 +45,7 @@ function HomePage() {
 
       {/* Section 2: WebGL Applet - Light Gray */}
       <section className="bg-near-white pv4">
-        <div className="center ph4" style={{ maxWidth: '540px' }}>
+        <div className="center ph3" style={{ maxWidth: '540px' }}>
           <WebGLMorpher
             image1Url="/images/luis.png"
             image2Url="/images/pelican.png"
@@ -55,7 +55,7 @@ function HomePage() {
 
       {/* Section 3: Notes - White */}
       <section className="bg-white pv4">
-        <div className="center ph4" style={{ maxWidth: '580px' }}>
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
           <p className="f4 mb2 near-black fw6">Notes</p>
           <p className="f5 mb3 near-black lh-copy">Essays and observations about art and technology.</p>
           <ul className="asterisk-list mt2 mb0">
@@ -72,7 +72,7 @@ function HomePage() {
 
       {/* Section 4: Newsletter - Light Gray */}
       <section className="bg-near-white pv4">
-        <div className="center ph4" style={{ maxWidth: '580px' }}>
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
           <NewsletterSignup />
         </div>
       </section>
