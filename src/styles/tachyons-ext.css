@@ -88,6 +88,10 @@ pre code {
   font-family: 'Recursive', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.font-roboto-mono {
+  font-family: 'Roboto Mono', monospace;
+}
+
 .font-ibm-plex-sans {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
