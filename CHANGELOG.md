@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-01-28
+- increased horizontal padding on content containers (pa2 to ph4) for better mobile readability in HomePage.jsx
 - switched back to system default font for faster load times - removed Google Fonts import in index.html
 - inverted section colors: intro and notes now white, WebGL section now light gray in HomePage.jsx
 - fixed gaps around section backgrounds by removing horizontal padding from App container and resetting body margin in App.jsx and tachyons-ext.css
