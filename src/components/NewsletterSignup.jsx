@@ -1,7 +1,10 @@
 function NewsletterSignup() {
   return (
     <div className="mt5 mb4">
-      <p className="f5 mb2 near-black fw6">Subscribe to occasional project / life updates:</p>
+      <p className="f4 mb2 near-black fw6">Newsletter</p>
+      <p className="f5 mb3 near-black lh-copy">
+        You'll get occasional project / life updates straight to your inbox. <a href="#" className="blue underline hover-no-underline">See some older emails here.</a>
+      </p>
       
       <form 
         action="https://buttondown.email/api/emails/embed-subscribe/studioqueral" 
