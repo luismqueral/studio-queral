@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-01-28
-- switched to IBM Plex Sans font - added Google Fonts import and font-ibm-plex-sans class in index.html and tachyons-ext.css
+- switched back to system default font for faster load times - removed Google Fonts import in index.html
 - inverted section colors: intro and notes now white, WebGL section now light gray in HomePage.jsx
 - fixed gaps around section backgrounds by removing horizontal padding from App container and resetting body margin in App.jsx and tachyons-ext.css
 - restructured homepage into three horizontal sections with alternating backgrounds: intro (light gray), WebGL applet (white), notes+newsletter (light gray) in HomePage.jsx
