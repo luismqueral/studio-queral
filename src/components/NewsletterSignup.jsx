@@ -11,18 +11,18 @@ function NewsletterSignup() {
         method="post" 
         target="popupwindow"
         onSubmit={() => window.open('https://buttondown.email/studioqueral', 'popupwindow', 'scrollbars=yes,width=800,height=600')}
-        className="flex items-center w-100"
+        className="flex-ns items-center w-100"
       >
         <input
           type="email"
           name="email"
           placeholder="your@email.com"
           required
-          className="input-reset ba b--moon-gray br2 pa2 flex-auto f5 mr2"
+          className="input-reset ba b--moon-gray br2 pa2 w-100 flex-auto-ns f5 mr2-ns mb2 mb0-ns"
         />
         <button
           type="submit"
-          className="input-reset bn br2 pa2 f6 fw6 pointer bg-blue white hover-bg-dark-blue"
+          className="input-reset bn br2 pa2 f6 fw6 pointer bg-blue white hover-bg-dark-blue w-100 w-auto-ns"
         >
           Subscribe
         </button>
