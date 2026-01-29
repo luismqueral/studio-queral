@@ -92,6 +92,10 @@ pre code {
   font-family: 'Roboto Mono', monospace;
 }
 
+.font-lato {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .font-ibm-plex-sans {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
