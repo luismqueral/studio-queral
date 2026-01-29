@@ -24,10 +24,10 @@ function HomePage() {
       <section className="bg-white pv4">
         <div className="center ph3" style={{ maxWidth: '580px' }}>
           <p className="f4 lh-copy near-black">
-            <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore.
+            <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, MD.
           </p>
           <p className="f4 lh-copy near-black">
-            He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> designing tools and workflows for platforms.
+            He works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> <br className="dn-ns" />designing tools and workflows for platforms.
           </p>
           <p className="f4 lh-copy near-black">
             In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
