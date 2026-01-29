@@ -24,7 +24,10 @@ function HomePage() {
       <section className="bg-white pv4">
         <div className="center ph4" style={{ maxWidth: '580px' }}>
           <p className="f4 lh-copy near-black">
-            <strong>Luis Queral</strong> is a product designer and creative technologist currently working for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
+            <strong>Luis Queral</strong> is a product designer and creative technologist.
+          </p>
+          <p className="f4 lh-copy near-black">
+            He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> where he designs tools and workflows for platforms.
           </p>
           <p className="f4 lh-copy near-black">
             He lives in Baltimore and enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
