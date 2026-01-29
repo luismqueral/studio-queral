@@ -26,12 +26,17 @@ function HomePage() {
           <p className="f4 lh-copy near-black">
             <strong>Luis Queral</strong> is a product designer and creative technologist currently working for <em style={{ whiteSpace: 'nowrap' }}>The New York Times.</em>
           </p>
-          <p className="f4 lh-copy mb1">
-            <a href="#" className="blue underline hover-no-underline">More info</a>
+          <p className="f4 lh-copy near-black">
+            He lives in Baltimore and enjoys writing, experimenting with music and video, and hanging out with his kids :-).
           </p>
-          <p className="f4 lh-copy mb0">
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
-          </p>
+          <div className="ml3">
+            <p className="f4 lh-copy mb1">
+              <a href="#" className="blue underline hover-no-underline">More info</a>
+            </p>
+            <p className="f4 lh-copy mb0">
+              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
+            </p>
+          </div>
         </div>
       </section>
 
