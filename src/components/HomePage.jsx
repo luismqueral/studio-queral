@@ -34,11 +34,11 @@ function HomePage() {
           </p>
           <div className="mt3">
             <div className="mb2 flex items-center">
-              <span className="mr2 gray f4">←</span>
+              <span className="mr2 gray f4">→</span>
               <a href="#" className="blue underline hover-no-underline f4">More info</a>
             </div>
             <div className="flex items-center">
-              <span className="mr2 gray f4">←</span>
+              <span className="mr2 gray f4">→</span>
               <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline f4">Contact</a>
             </div>
           </div>
