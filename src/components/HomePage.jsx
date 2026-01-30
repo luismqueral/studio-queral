@@ -62,14 +62,14 @@ function HomePage() {
           <p className="f5 mb3 near-black lh-copy">Essays and observations about art and technology.</p>
           <ul className="list pl0 mt2 mb0">
             {blogPosts.map((post, index) => {
-              // Wingdings star characters
-              const wingdingsStars = ['«', 'F', 'H', 'V', 'W', 'X', 'Y', 'Z']
-              const star = wingdingsStars[index % wingdingsStars.length]
+              // Unicode star characters (no religious symbols)
+              const stars = ['★', '✦', '✧', '✩', '✫', '✭', '✯', '⋆']
+              const star = stars[index % stars.length]
               return (
                 <li key={post.slug} className="mb3 f4 near-black lh-copy flex items-start">
                   <span 
                     className="mr2 gray" 
-                    style={{ fontFamily: 'Wingdings', fontSize: '1.2em', lineHeight: 1 }}
+                    style={{ fontSize: '0.9em', lineHeight: 1.6 }}
                   >
                     {star}
                   </span>
