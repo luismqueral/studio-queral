@@ -3,21 +3,21 @@ import WebGLMorpher from './WebGLMorpher'
 import FeaturedSection from './FeaturedSection'
 import NewsletterSignup from './NewsletterSignup'
 import blogPosts from '../content/blog/posts'
+import { LayoutA, LayoutB, LayoutC, LayoutD, LayoutE } from './HomePageLayouts'
+
+// =============================================================================
+// LAYOUT SWITCHER - Change this to try different layouts
+// Options: 'current', 'A', 'B', 'C', 'D', 'E'
+// =============================================================================
+const ACTIVE_LAYOUT = 'current'
 
 // Random takes - add more here
 const takes = [
   "The Fifth Element is the greatest sci-fi movie ever made.",
 ]
 
-
-function HomePage() {
-  const [randomTake, setRandomTake] = useState('')
-
-  useEffect(() => {
-    // Pick a random take on component mount
-    const randomIndex = Math.floor(Math.random() * takes.length)
-    setRandomTake(takes[randomIndex])
-  }, [])
+// Current layout (original)
+function CurrentLayout() {
   return (
     <>
       {/* Section 1: Introduction - White */}
@@ -33,10 +33,6 @@ function HomePage() {
             In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
           <div className="mt3">
-            {/* <div className="mb2 flex items-center">
-              <span className="mr2 gray f4">→</span>
-              <a href="#" className="blue underline hover-no-underline f4">More info</a>
-            </div> */}
             <div className="flex items-center">
               <span className="mr2 gray f4">→</span>
               <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline f4">Contact</a>
@@ -54,6 +50,34 @@ function HomePage() {
           />
         </div>
       </section>
+    </>
+  )
+}
+
+function HomePage() {
+  const [randomTake, setRandomTake] = useState('')
+
+  useEffect(() => {
+    // Pick a random take on component mount
+    const randomIndex = Math.floor(Math.random() * takes.length)
+    setRandomTake(takes[randomIndex])
+  }, [])
+
+  // Render the active layout
+  const renderLayout = () => {
+    switch (ACTIVE_LAYOUT) {
+      case 'A': return <LayoutA />
+      case 'B': return <LayoutB />
+      case 'C': return <LayoutC />
+      case 'D': return <LayoutD />
+      case 'E': return <LayoutE />
+      default: return <CurrentLayout />
+    }
+  }
+
+  return (
+    <>
+      {renderLayout()}
 
       {/* Section 3: Notes - White - COMMENTED OUT
       <section className="bg-white pv4">
