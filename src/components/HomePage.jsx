@@ -63,7 +63,7 @@ function HomePage() {
           <ul className="list pl0 mt2 mb0">
             {blogPosts.map((post, index) => {
               // Unicode star characters (no religious symbols)
-              const stars = ['★', '✦', '✧', '✩', '✫', '✭', '✯', '⋆']
+              const stars = ['★', '✦', '✧', '✩', '✫', '✭', '✯']
               const star = stars[index % stars.length]
               return (
                 <li key={post.slug} className="mb3 f4 near-black lh-copy flex items-start">
