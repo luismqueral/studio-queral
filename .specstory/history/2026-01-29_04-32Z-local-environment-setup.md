@@ -4507,11 +4507,128 @@ Looking up Wingdings character map:- 171 = 6-pointed star (filled)- 181 = 6-poin
 
 <details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
 
-Status: **loading**
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Now let me commit and push.</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: git add -A && git commit -m "Use Wingdings star characters for Notes bullets" && git push</summary>
+
+```bash
+git add -A && git commit -m "Use Wingdings star characters for Notes bullets" && git push
+```
+
+```
+[blog-test b1146a2] Use Wingdings star characters for Notes bullets
+ 2 files changed, 163 insertions(+), 8 deletions(-)
+git: 'credential-gh' is not a git command. See 'git --help'.
+
+The most similar command is
+	credential-cache
+To https://github.com/luismqueral/studio-queral.git
+   b42c75b..b1146a2  blog-test -&gt; blog-test
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. The Notes list now uses Wingdings font with various star-like characters cycling through the list. Note that Wingdings may not render on all devices/browsers - it's primarily a Windows system font. On Mac/Linux/mobile, it may fall back to default characters.</details></think>
+
+---
+
+Done. Notes bullets now use Wingdings font with cycling star characters (`«`, `F`, `H`, `V`, `W`, `X`, `Y`, `Z` in Wingdings render as various star/symbol shapes). 
+
+Note: Wingdings is a system font that may not render on all devices (mainly Windows). On Mac/mobile it might show as regular letters or fallback. Let me know if you want to try a web-safe alternative!
+
+---
+
+_**User**_
+
+no crosses please, no religious symbols
+
+---
+
+_**Agent (model claude-4.5-opus-high-thinking, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+The user doesn't want crosses or religious symbols. Let me update the Wingdings characters to only use non-religious star/shape symbols. I'll filter out any that might look like crosses or stars of David.
+
+In Wingdings, I should use only safe symbols. Let me pick characters that are clearly just decorative stars or shapes, avoiding anything that could be religious.
+
+Some safer options in Wingdings might be:- «- Other geometric shapes
+
+Actually, let me just use Unicode stars instead since they're safer and more cross-platform compatible:
+- ★ (black star)
+- ✦ (black four pointed star)
+- ✧ (white four pointed star)
+- ✩ (stress outlined white star)
+- ✪ (circled white star)
+- ✫ (open center black star)
+- ✬ (black center white star)
+- ✭ (outlined black star)
+- ✮ (heavy outlined black star)
+- ✯ (pinwheel star)
+- ✰ (shadowed white star)
+- ⋆ (star operator)
+
+Let me switch to Unicode stars which are guaranteed to render safely.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
 
 </details>
 
 </tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Switched to Unicode stars that don't have any religious connotations. Let me commit and push.</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: git add -A && git commit -m "Switch to Unicode stars, no religious symbols" && git push</summary>
+
+```bash
+git add -A && git commit -m "Switch to Unicode stars, no religious symbols" && git push
+```
+
+```
+[blog-test c36dba0] Switch to Unicode stars, no religious symbols
+ 2 files changed, 94 insertions(+), 4 deletions(-)
+git: 'credential-gh' is not a git command. See 'git --help'.
+
+The most similar command is
+	credential-cache
+To https://github.com/luismqueral/studio-queral.git
+   b1146a2..c36dba0  blog-test -&gt; blog-test
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Switched to Unicode stars: ★, ✦, ✧, ✩, ✫, ✭, ✯, ⋆ - all just decorative star shapes, no religious symbols.</details></think>
+
+---
+
+Done. Switched to Unicode stars only: ★, ✦, ✧, ✩, ✫, ✭, ✯, ⋆ — all decorative, no religious symbols. Pushed to remote.
 
 ---
 
