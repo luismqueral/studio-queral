@@ -5634,11 +5634,243 @@ I'll create a few alternative layout explorations. Let me build them as switchab
 
 <details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePageLayouts.jsx</summary>
 
-Status: **loading**
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me update the HomePage to have a simple way to switch between layouts.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
 
 </details>
 
 </tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me commit and push. Let me also provide a summary of the layouts for the user.</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: git add -A && git commit -m "Add 5 alternative homepage layout explorations with switcher" && git push -u origin homepage-explorations</summary>
+
+```bash
+git add -A && git commit -m "Add 5 alternative homepage layout explorations with switcher" && git push -u origin homepage-explorations
+```
+
+```
+[homepage-explorations c1b2602] Add 5 alternative homepage layout explorations with switcher
+ 3 files changed, 554 insertions(+), 13 deletions(-)
+ create mode 100644 src/components/HomePageLayouts.jsx
+branch 'homepage-explorations' set up to track 'origin/homepage-explorations'.
+git: 'credential-gh' is not a git command. See 'git --help'.
+
+The most similar command is
+	credential-cache
+remote: 
+remote: Create a pull request for 'homepage-explorations' on GitHub by visiting:        
+remote:      https://github.com/luismqueral/studio-queral/pull/new/homepage-explorations        
+remote: 
+To https://github.com/luismqueral/studio-queral.git
+ * [new branch]      homepage-explorations -&gt; homepage-explorations
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Let me give the user a summary of the layouts.</details></think>
+
+---
+
+Created 5 alternative layouts on `homepage-explorations` branch. To switch between them, change `ACTIVE_LAYOUT` in `HomePage.jsx`:
+
+**Layout A: "The Reveal"**
+- WebGL applet as hero at top, bio slides in below
+- Surprise: The morphing face greets you first
+
+**Layout B: "Side by Side"**  
+- Bio on left, WebGL on right (desktop) — gallery-like feel
+- Stacks on mobile, confident horizontal layout
+
+**Layout C: "The Business Card"**
+- Minimal, centered, everything condensed
+- WebGL becomes a small 200px avatar, very tight stack
+- Links in a row: Email · Work · Notes
+
+**Layout D: "The Wink"**
+- Playful rotating symbols (◈ ◉ ◎) appear before each paragraph
+- Random cheeky caption under WebGL ("that's me on the left", "← human · bird →")
+
+**Layout E: "Stacked Minimal"**
+- Big bold name at top, subtitle line
+- WebGL prominent in middle, first-person bio below
+- Very clean, editorial feel
+
+To try a layout, change line 11 in `HomePage.jsx`:
+```js
+const ACTIVE_LAYOUT = 'A'  // or 'B', 'C', 'D', 'E', 'current'
+```
+
+---
+
+_**User**_
+
+okay give me a few more. incorporate the notes section
+
+---
+
+_**Agent (model claude-4.5-opus-high-thinking, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+The user wants more layout explorations that also incorporate the Notes section. Let me add a few more layouts that include the notes/blog posts.</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePageLayouts.jsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me add more layouts that incorporate the Notes section. I'll add layouts F, G, H, I.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePageLayouts.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me add the new layouts at the end of the file.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePageLayouts.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me update the HomePage.jsx to include the new layouts in the switcher.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now update the switch statement.</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/luisqueral/Library/CloudStorage/GoogleDrive-luismqueral@gmail.com/My Drive/projects/studio-queral-2026/src/components/HomePage.jsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Now let me commit and push.</details></think>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2">
+<details><summary>Tool use: **run_terminal_command_v2** • Run command: git add -A && git commit -m "Add 4 more layouts (F-I) incorporating Notes section" && git push</summary>
+
+```bash
+git add -A && git commit -m "Add 4 more layouts (F-I) incorporating Notes section" && git push
+```
+
+```
+[homepage-explorations 79b4ff0] Add 4 more layouts (F-I) incorporating Notes section
+ 2 files changed, 213 insertions(+), 3 deletions(-)
+git: 'credential-gh' is not a git command. See 'git --help'.
+
+The most similar command is
+	credential-cache
+To https://github.com/luismqueral/studio-queral.git
+   c1b2602..79b4ff0  homepage-explorations -&gt; homepage-explorations
+
+```
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+Done. Let me summarize the new layouts.</details></think>
+
+---
+
+Added 4 more layouts with Notes section:
+
+**Layout F: "The Magazine"**
+- Two columns: Bio + small WebGL on left, Notes list on right
+- Editorial feel with a vertical divider between sections
+- Shows 5 recent posts
+
+**Layout G: "Notes First"**
+- Writing takes center stage at the top with numbered list (01, 02, 03...)
+- WebGL in the middle as a visual break
+- Minimal bio footer at bottom
+- For when the work speaks louder
+
+**Layout H: "The Stream"**
+- Everything flows in one continuous scroll
+- Bio → WebGL → More bio → Notes box (with gray background) → Contact
+- Casual, blog-like feel
+- Notes appear inline in a subtle card
+
+**Layout I: "The Grid"**
+- Minimal header with name + contact right-aligned
+- WebGL centered
+- Notes as 2-column clickable cards with random stars
+- Gallery/experimental feel
+
+To try: change `ACTIVE_LAYOUT` in `HomePage.jsx` to `'F'`, `'G'`, `'H'`, or `'I'`
+
+---
+
+_**User**_
+
+in all variations, incorporate the list of articles please
 
 ---
 

@@ -9,7 +9,7 @@ import { LayoutA, LayoutB, LayoutC, LayoutD, LayoutE, LayoutF, LayoutG, LayoutH,
 // LAYOUT SWITCHER - Change this to try different layouts
 // Options: 'current', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'
 // =============================================================================
-const ACTIVE_LAYOUT = 'E'
+const ACTIVE_LAYOUT = 'H'
 
 // Random takes - add more here
 const takes = [

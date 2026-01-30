@@ -7,6 +7,8 @@ import blogPosts from '../content/blog/posts'
 // Surprise: The morphing face greets you first
 // =============================================================================
 export function LayoutA() {
+  const recentPosts = blogPosts.slice(0, 6)
+  
   return (
     <>
       {/* Hero: WebGL first */}
@@ -36,6 +38,22 @@ export function LayoutA() {
           </p>
         </div>
       </section>
+      
+      {/* Notes */}
+      <section className="bg-near-white pv4">
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
+          <p className="f5 fw6 gray mb3">Notes</p>
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post) => (
+              <li key={post.slug} className="mb2">
+                <a href={`/blog/${post.slug}`} className="f4 blue underline hover-no-underline lh-copy">
+                  {post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </>
   )
 }
@@ -45,36 +63,56 @@ export function LayoutA() {
 // Confident, gallery-like feel
 // =============================================================================
 export function LayoutB() {
+  const recentPosts = blogPosts.slice(0, 5)
+  
   return (
-    <section className="bg-white min-vh-100 flex items-center">
-      <div className="center ph3 w-100" style={{ maxWidth: '1000px' }}>
-        <div className="flex-ns items-center-ns">
-          {/* Bio on left */}
-          <div className="w-100 w-50-ns pr4-ns mb4 mb0-ns">
-            <p className="f3 lh-title near-black mb3">
-              <strong>Luis Queral</strong>
-            </p>
-            <p className="f4 lh-copy near-black">
-              Product designer and creative technologist at <em>The New York Times</em>, designing tools and workflows for platforms.
-            </p>
-            <p className="f5 lh-copy gray mt3">
-              Writing, audio-visual experiments, hanging out with kids :-).
-            </p>
-            <p className="f5 mt4">
-              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact →</a>
-            </p>
-          </div>
-          
-          {/* WebGL on right */}
-          <div className="w-100 w-50-ns">
-            <WebGLMorpher
-              image1Url="/images/luis.png"
-              image2Url="/images/pelican.png"
-            />
+    <>
+      <section className="bg-white pv5">
+        <div className="center ph3 w-100" style={{ maxWidth: '1000px' }}>
+          <div className="flex-ns items-center-ns">
+            {/* Bio on left */}
+            <div className="w-100 w-50-ns pr4-ns mb4 mb0-ns">
+              <p className="f3 lh-title near-black mb3">
+                <strong>Luis Queral</strong>
+              </p>
+              <p className="f4 lh-copy near-black">
+                Product designer and creative technologist at <em>The New York Times</em>, designing tools and workflows for platforms.
+              </p>
+              <p className="f5 lh-copy gray mt3">
+                Writing, audio-visual experiments, hanging out with kids :-).
+              </p>
+              <p className="f5 mt4">
+                <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact →</a>
+              </p>
+            </div>
+            
+            {/* WebGL on right */}
+            <div className="w-100 w-50-ns">
+              <WebGLMorpher
+                image1Url="/images/luis.png"
+                image2Url="/images/pelican.png"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      
+      {/* Notes below */}
+      <section className="bg-near-white pv4">
+        <div className="center ph3" style={{ maxWidth: '1000px' }}>
+          <p className="f6 fw6 gray mb3 ttu tracked">Notes</p>
+          <div className="flex-ns flex-wrap">
+            {recentPosts.map((post) => (
+              <div key={post.slug} className="w-100 w-50-ns pr3-ns mb3">
+                <a href={`/blog/${post.slug}`} className="f5 blue underline hover-no-underline lh-copy">
+                  {post.title}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 
@@ -83,36 +121,52 @@ export function LayoutB() {
 // WebGL as small avatar, everything very condensed
 // =============================================================================
 export function LayoutC() {
+  const recentPosts = blogPosts.slice(0, 4)
+  
   return (
-    <section className="bg-white min-vh-100 flex items-center justify-center">
-      <div className="center ph3 tc" style={{ maxWidth: '400px' }}>
-        {/* Small WebGL avatar */}
-        <div className="center mb4" style={{ maxWidth: '200px' }}>
-          <WebGLMorpher
-            image1Url="/images/luis.png"
-            image2Url="/images/pelican.png"
-          />
+    <>
+      <section className="bg-white pv5 flex items-center justify-center" style={{ minHeight: '70vh' }}>
+        <div className="center ph3 tc" style={{ maxWidth: '400px' }}>
+          {/* Small WebGL avatar */}
+          <div className="center mb4" style={{ maxWidth: '200px' }}>
+            <WebGLMorpher
+              image1Url="/images/luis.png"
+              image2Url="/images/pelican.png"
+            />
+          </div>
+          
+          <p className="f3 lh-title near-black mb2">
+            <strong>Luis Queral</strong>
+          </p>
+          <p className="f5 lh-copy gray mb3">
+            Product Designer & Creative Technologist
+          </p>
+          <p className="f6 lh-copy gray mb4">
+            The New York Times · Baltimore
+          </p>
+          
+          <div className="flex justify-center">
+            <a href="mailto:hey@queral.studio" className="f6 blue underline hover-no-underline mh2">Email</a>
+            <span className="gray">·</span>
+            <a href="#notes" className="f6 blue underline hover-no-underline mh2">Notes ↓</a>
+          </div>
         </div>
-        
-        <p className="f3 lh-title near-black mb2">
-          <strong>Luis Queral</strong>
-        </p>
-        <p className="f5 lh-copy gray mb3">
-          Product Designer & Creative Technologist
-        </p>
-        <p className="f6 lh-copy gray mb4">
-          The New York Times · Baltimore
-        </p>
-        
-        <div className="flex justify-center">
-          <a href="mailto:hey@queral.studio" className="f6 blue underline hover-no-underline mh2">Email</a>
-          <span className="gray">·</span>
-          <a href="#" className="f6 blue underline hover-no-underline mh2">Work</a>
-          <span className="gray">·</span>
-          <a href="#" className="f6 blue underline hover-no-underline mh2">Notes</a>
+      </section>
+      
+      {/* Notes section */}
+      <section id="notes" className="bg-near-white pv4">
+        <div className="center ph3 tc" style={{ maxWidth: '500px' }}>
+          <p className="f6 fw6 gray mb4 ttu tracked">Recent Notes</p>
+          {recentPosts.map((post) => (
+            <p key={post.slug} className="mb3">
+              <a href={`/blog/${post.slug}`} className="f5 blue underline hover-no-underline lh-copy">
+                {post.title}
+              </a>
+            </p>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 
@@ -123,6 +177,7 @@ export function LayoutC() {
 export function LayoutD() {
   const [randomEmoji, setRandomEmoji] = useState('◈')
   const [caption, setCaption] = useState('')
+  const recentPosts = blogPosts.slice(0, 5)
   
   const emojis = ['◈', '◉', '◎', '●', '○', '◐', '◑', '◒', '◓']
   const captions = [
@@ -170,6 +225,23 @@ export function LayoutD() {
           <p className="f6 gray tc mt3 i">{caption}</p>
         </div>
       </section>
+      
+      {/* Notes with playful bullets */}
+      <section className="bg-white pv4">
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
+          <p className="f5 fw6 near-black mb3">Notes</p>
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post, index) => (
+              <li key={post.slug} className="mb2 flex items-start">
+                <span className="gray mr2">{emojis[index % emojis.length]}</span>
+                <a href={`/blog/${post.slug}`} className="f4 blue underline hover-no-underline lh-copy">
+                  {post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </>
   )
 }
@@ -179,6 +251,8 @@ export function LayoutD() {
 // Name big, details small, WebGL prominent
 // =============================================================================
 export function LayoutE() {
+  const recentPosts = blogPosts.slice(0, 6)
+  
   return (
     <>
       <section className="bg-white pv5">
@@ -203,6 +277,23 @@ export function LayoutE() {
           <p className="f5 mt4">
             <a href="mailto:hey@queral.studio" className="near-black underline hover-no-underline">hey@queral.studio</a>
           </p>
+        </div>
+      </section>
+      
+      {/* Notes - clean numbered list */}
+      <section className="bg-near-white pv4">
+        <div className="center ph3" style={{ maxWidth: '580px' }}>
+          <p className="f5 fw6 near-black mb4">Notes</p>
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post, index) => (
+              <li key={post.slug} className="mb3 flex items-baseline">
+                <span className="f6 gray mr3 fw5" style={{ minWidth: '1.5rem' }}>{String(index + 1).padStart(2, '0')}</span>
+                <a href={`/blog/${post.slug}`} className="f4 near-black underline hover-blue lh-title">
+                  {post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
