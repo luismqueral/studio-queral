@@ -13,7 +13,7 @@ import {
 // LAYOUT SWITCHER - Change this to try different layouts
 // Options: 'current', 'A'-'I' (standard), 'J'-'O' (experimental)
 // =============================================================================
-const ACTIVE_LAYOUT = 'J'
+const ACTIVE_LAYOUT = 'L'
 
 // Random takes - add more here
 const takes = [

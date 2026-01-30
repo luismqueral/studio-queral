@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 2026-01-28
+- added 6 experimental homepage layouts (J-O) with bolder form-making: "The Edge" (asymmetric left-aligned), "The Void" (dark cinematic), "The Overlap" (layered with giant type), "The Scroll" (ultra-narrow vertical), "The Split" (hard 50/50 divide), and "The Statement" (massive headline architecture) in HomePageLayouts.jsx
+- added Notes section to all standard layouts (A-E) to incorporate article list across all variations
 - removed WIP message, changed "He currently works" to "He works", updated slider labels to use site font instead of mono in HomePage.jsx and WebGLMorpher.jsx
 - increased horizontal padding on content containers (pa2 to ph4) for better mobile readability in HomePage.jsx
 - switched back to system default font for faster load times - removed Google Fonts import in index.html
