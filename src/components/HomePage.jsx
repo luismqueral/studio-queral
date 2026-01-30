@@ -33,10 +33,10 @@ function HomePage() {
             In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
           <div className="mt3">
-            <div className="mb2 flex items-center">
+            {/* <div className="mb2 flex items-center">
               <span className="mr2 gray f4">→</span>
               <a href="#" className="blue underline hover-no-underline f4">More info</a>
-            </div>
+            </div> */}
             <div className="flex items-center">
               <span className="mr2 gray f4">→</span>
               <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline f4">Contact</a>
@@ -55,7 +55,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Section 3: Notes - White */}
+      {/* Section 3: Notes - White - COMMENTED OUT
       <section className="bg-white pv4">
         <div className="center ph3" style={{ maxWidth: '580px' }}>
           <p className="f4 mb2 near-black fw6">Notes</p>
@@ -82,13 +82,15 @@ function HomePage() {
           </ul>
         </div>
       </section>
+      */}
 
-      {/* Section 4: Newsletter - Light Gray */}
+      {/* Section 4: Newsletter - Light Gray - COMMENTED OUT
       <section className="bg-near-white pv4">
         <div className="center ph3" style={{ maxWidth: '580px' }}>
           <NewsletterSignup />
         </div>
       </section>
+      */}
     </>
   )
 }
