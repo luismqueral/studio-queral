@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import WebGLMorpher from './WebGLMorpher'
+import blogPosts from '../content/blog/posts'
 
 // =============================================================================
 // LAYOUT A: "The Reveal" - WebGL hero at top, bio below
@@ -202,6 +203,211 @@ export function LayoutE() {
           <p className="f5 mt4">
             <a href="mailto:hey@queral.studio" className="near-black underline hover-no-underline">hey@queral.studio</a>
           </p>
+        </div>
+      </section>
+    </>
+  )
+}
+
+// =============================================================================
+// LAYOUT F: "The Magazine" - Bio + Notes side by side, WebGL as accent
+// Editorial feel, content-forward
+// =============================================================================
+export function LayoutF() {
+  const recentPosts = blogPosts.slice(0, 5)
+  
+  return (
+    <>
+      <section className="bg-white pv4">
+        <div className="center ph3" style={{ maxWidth: '900px' }}>
+          <div className="flex-ns">
+            {/* Left column: Bio + WebGL */}
+            <div className="w-100 w-40-ns pr4-ns mb4 mb0-ns">
+              <div className="mb4" style={{ maxWidth: '280px' }}>
+                <WebGLMorpher
+                  image1Url="/images/luis.png"
+                  image2Url="/images/pelican.png"
+                />
+              </div>
+              <p className="f4 lh-copy near-black">
+                <strong>Luis Queral</strong> is a product designer and creative technologist at The New York Times.
+              </p>
+              <p className="f5 lh-copy gray mt2">
+                Writing, experiments, kids :-).
+              </p>
+              <p className="f5 mt3">
+                <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
+              </p>
+            </div>
+            
+            {/* Right column: Notes */}
+            <div className="w-100 w-60-ns pl4-ns bl-ns b--light-gray">
+              <p className="f5 fw6 gray mb3 ttu tracked">Notes</p>
+              <ul className="list pl0 mt0 mb0">
+                {recentPosts.map((post) => (
+                  <li key={post.slug} className="mb3 pb3 bb b--light-gray">
+                    <a href={`/blog/${post.slug}`} className="f4 near-black link hover-blue lh-title db">
+                      {post.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+// =============================================================================
+// LAYOUT G: "Notes First" - Writing takes center stage, bio is secondary
+// For when the work speaks louder than the intro
+// =============================================================================
+export function LayoutG() {
+  const recentPosts = blogPosts.slice(0, 6)
+  
+  return (
+    <>
+      {/* Notes section first */}
+      <section className="bg-white pv4">
+        <div className="center ph3" style={{ maxWidth: '620px' }}>
+          <p className="f6 fw6 gray mb4 ttu tracked">Recent Writing</p>
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post, index) => (
+              <li key={post.slug} className="mb3 flex items-baseline">
+                <span className="f6 gray mr3" style={{ minWidth: '1.5rem' }}>{String(index + 1).padStart(2, '0')}</span>
+                <a href={`/blog/${post.slug}`} className="f4 near-black underline hover-no-underline lh-title">
+                  {post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      
+      {/* Divider with WebGL */}
+      <section className="bg-near-white pv4">
+        <div className="center ph3" style={{ maxWidth: '400px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+      </section>
+      
+      {/* Bio at bottom */}
+      <section className="bg-white pv4">
+        <div className="center ph3 tc" style={{ maxWidth: '500px' }}>
+          <p className="f5 lh-copy gray">
+            <strong className="near-black">Luis Queral</strong> · Product Designer at NYT · 
+            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline ml1">hey@queral.studio</a>
+          </p>
+        </div>
+      </section>
+    </>
+  )
+}
+
+// =============================================================================
+// LAYOUT H: "The Stream" - Everything flows in one continuous scroll
+// Notes interspersed, casual feel
+// =============================================================================
+export function LayoutH() {
+  const recentPosts = blogPosts.slice(0, 4)
+  
+  return (
+    <section className="bg-white pv4">
+      <div className="center ph3" style={{ maxWidth: '580px' }}>
+        {/* Intro */}
+        <p className="f4 lh-copy near-black mb4">
+          <strong>Luis Queral</strong> is a product designer and creative technologist 
+          at <em>The New York Times</em>. He designs tools and workflows for platforms.
+        </p>
+        
+        {/* WebGL inline */}
+        <div className="mv4" style={{ maxWidth: '450px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+        
+        {/* More about */}
+        <p className="f4 lh-copy near-black mb4">
+          In his spare time, he enjoys writing, making audio-visual experiments, 
+          and hanging out with his kids :-).
+        </p>
+        
+        {/* Notes inline */}
+        <div className="mv4 pa3 bg-near-white br2">
+          <p className="f6 fw6 gray mb3">Recent notes:</p>
+          {recentPosts.map((post) => (
+            <p key={post.slug} className="f5 mb2">
+              → <a href={`/blog/${post.slug}`} className="blue underline hover-no-underline">{post.title}</a>
+            </p>
+          ))}
+        </div>
+        
+        {/* Contact */}
+        <p className="f4 lh-copy near-black">
+          Say hi: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT I: "The Grid" - Notes as visual grid, bio minimal
+// More experimental, gallery-like
+// =============================================================================
+export function LayoutI() {
+  const recentPosts = blogPosts.slice(0, 8)
+  const stars = ['★', '✦', '✧', '✩', '✫', '✭', '✯', '◆']
+  
+  return (
+    <>
+      {/* Minimal header */}
+      <section className="bg-white pv4">
+        <div className="center ph3 flex-ns items-center-ns justify-between-ns" style={{ maxWidth: '900px' }}>
+          <div>
+            <p className="f3 fw6 near-black mb1">Luis Queral</p>
+            <p className="f5 gray">Product Designer · NYT</p>
+          </div>
+          <div className="mt3 mt0-ns">
+            <a href="mailto:hey@queral.studio" className="f5 blue underline hover-no-underline">Contact</a>
+          </div>
+        </div>
+      </section>
+      
+      {/* WebGL */}
+      <section className="bg-near-white pv4">
+        <div className="center ph3" style={{ maxWidth: '500px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+      </section>
+      
+      {/* Notes grid */}
+      <section className="bg-white pv4">
+        <div className="center ph3" style={{ maxWidth: '900px' }}>
+          <p className="f6 fw6 gray mb4 ttu tracked">Notes on art & technology</p>
+          <div className="flex flex-wrap" style={{ margin: '-0.5rem' }}>
+            {recentPosts.map((post, index) => (
+              <div key={post.slug} className="w-100 w-50-ns pa2">
+                <a 
+                  href={`/blog/${post.slug}`} 
+                  className="db pa3 bg-near-white hover-bg-light-gray br2 link near-black"
+                >
+                  <span className="f4 gray mr2">{stars[index % stars.length]}</span>
+                  <span className="f5 lh-title">{post.title}</span>
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

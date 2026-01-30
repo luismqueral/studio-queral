@@ -3,13 +3,13 @@ import WebGLMorpher from './WebGLMorpher'
 import FeaturedSection from './FeaturedSection'
 import NewsletterSignup from './NewsletterSignup'
 import blogPosts from '../content/blog/posts'
-import { LayoutA, LayoutB, LayoutC, LayoutD, LayoutE } from './HomePageLayouts'
+import { LayoutA, LayoutB, LayoutC, LayoutD, LayoutE, LayoutF, LayoutG, LayoutH, LayoutI } from './HomePageLayouts'
 
 // =============================================================================
 // LAYOUT SWITCHER - Change this to try different layouts
-// Options: 'current', 'A', 'B', 'C', 'D', 'E'
+// Options: 'current', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'
 // =============================================================================
-const ACTIVE_LAYOUT = 'current'
+const ACTIVE_LAYOUT = 'E'
 
 // Random takes - add more here
 const takes = [
@@ -71,6 +71,10 @@ function HomePage() {
       case 'C': return <LayoutC />
       case 'D': return <LayoutD />
       case 'E': return <LayoutE />
+      case 'F': return <LayoutF />
+      case 'G': return <LayoutG />
+      case 'H': return <LayoutH />
+      case 'I': return <LayoutI />
       default: return <CurrentLayout />
     }
   }
