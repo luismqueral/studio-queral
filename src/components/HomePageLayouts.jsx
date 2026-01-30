@@ -504,3 +504,386 @@ export function LayoutI() {
     </>
   )
 }
+
+// =============================================================================
+// LAYOUT J: "The Edge" - Content pushed hard left, massive negative space
+// Tension through asymmetry, brutalist influence
+// =============================================================================
+export function LayoutJ() {
+  const recentPosts = blogPosts.slice(0, 6)
+  
+  return (
+    <section className="bg-white min-vh-100 pa4">
+      <div style={{ maxWidth: '380px' }}>
+        {/* Name as statement */}
+        <p className="f2 fw7 near-black mb4 lh-solid" style={{ letterSpacing: '-0.02em' }}>
+          Luis<br/>Queral
+        </p>
+        
+        {/* WebGL - small, deliberate */}
+        <div className="mb4" style={{ maxWidth: '280px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+        
+        {/* Bio - terse */}
+        <p className="f5 lh-copy gray mb4">
+          Product designer, creative technologist.<br/>
+          The New York Times.<br/>
+          Baltimore.
+        </p>
+        
+        {/* Notes - numbered, clinical */}
+        <div className="mb4">
+          <p className="f7 ttu tracked gray mb3">Writing</p>
+          {recentPosts.map((post, i) => (
+            <p key={post.slug} className="f6 mb2">
+              <span className="gray mr2">{String(i + 1).padStart(2, '0')}</span>
+              <a href={`/blog/${post.slug}`} className="near-black link underline hover-no-underline">
+                {post.title}
+              </a>
+            </p>
+          ))}
+        </div>
+        
+        {/* Contact - minimal */}
+        <p className="f7 ttu tracked gray">
+          <a href="mailto:hey@queral.studio" className="gray link underline hover-near-black">hey@queral.studio</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT K: "The Void" - Dark mode, content floating in space
+// Mysterious, cinematic, the WebGL glows
+// =============================================================================
+export function LayoutK() {
+  const recentPosts = blogPosts.slice(0, 5)
+  
+  return (
+    <section 
+      className="min-vh-100 pa4 flex flex-column justify-center"
+      style={{ backgroundColor: '#0a0a0a' }}
+    >
+      <div className="center w-100" style={{ maxWidth: '600px' }}>
+        {/* WebGL as focal point */}
+        <div className="mb5 center" style={{ maxWidth: '400px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+        
+        {/* Name - glowing */}
+        <p className="f3 fw6 tc mb3" style={{ color: '#e0e0e0' }}>
+          Luis Queral
+        </p>
+        
+        {/* Role - dim */}
+        <p className="f5 tc mb5" style={{ color: '#666' }}>
+          Product Designer · Creative Technologist · NYT
+        </p>
+        
+        {/* Notes - subtle links */}
+        <div className="tc">
+          <p className="f7 ttu tracked mb3" style={{ color: '#444' }}>Notes</p>
+          {recentPosts.map((post) => (
+            <p key={post.slug} className="mb2">
+              <a 
+                href={`/blog/${post.slug}`} 
+                className="f5 link dim"
+                style={{ color: '#888' }}
+              >
+                {post.title}
+              </a>
+            </p>
+          ))}
+        </div>
+        
+        {/* Contact - bottom */}
+        <p className="f6 tc mt5">
+          <a href="mailto:hey@queral.studio" className="link dim" style={{ color: '#555' }}>
+            hey@queral.studio
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT L: "The Overlap" - Layers that intersect, broken expectations
+// Elements bleed into each other, depth through overlap
+// =============================================================================
+export function LayoutL() {
+  const recentPosts = blogPosts.slice(0, 5)
+  
+  return (
+    <section className="bg-white min-vh-100 relative overflow-hidden">
+      {/* Background accent bar */}
+      <div 
+        className="absolute bg-near-white"
+        style={{ 
+          top: '20%', 
+          left: 0, 
+          right: 0, 
+          height: '60%',
+          zIndex: 0 
+        }}
+      />
+      
+      <div className="relative pa4" style={{ zIndex: 1 }}>
+        {/* Name - overlapping the accent */}
+        <p 
+          className="f1 fw7 near-black mb0"
+          style={{ 
+            fontSize: 'clamp(3rem, 10vw, 6rem)',
+            lineHeight: 0.9,
+            letterSpacing: '-0.03em'
+          }}
+        >
+          Luis
+        </p>
+        <p 
+          className="f1 fw7 mb4"
+          style={{ 
+            fontSize: 'clamp(3rem, 10vw, 6rem)',
+            lineHeight: 0.9,
+            letterSpacing: '-0.03em',
+            color: '#bbb'
+          }}
+        >
+          Queral
+        </p>
+        
+        {/* Content grid - offset */}
+        <div className="flex-ns mt5">
+          {/* Left: Bio + Contact */}
+          <div className="w-100 w-40-ns pr4-ns mb4 mb0-ns">
+            <p className="f5 lh-copy gray mb4">
+              Product designer and creative technologist at The New York Times. 
+              Writing, experiments, kids.
+            </p>
+            <p className="f6">
+              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">
+                Contact →
+              </a>
+            </p>
+          </div>
+          
+          {/* Right: WebGL + Notes */}
+          <div className="w-100 w-60-ns">
+            <div className="mb4" style={{ maxWidth: '350px', marginLeft: 'auto' }}>
+              <WebGLMorpher
+                image1Url="/images/luis.png"
+                image2Url="/images/pelican.png"
+              />
+            </div>
+            
+            <div className="pl4-ns">
+              <p className="f7 ttu tracked gray mb3">Recent Notes</p>
+              {recentPosts.map((post) => (
+                <p key={post.slug} className="f5 mb2 lh-title">
+                  <a href={`/blog/${post.slug}`} className="near-black link underline hover-no-underline">
+                    {post.title}
+                  </a>
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT M: "The Scroll" - Ultra-narrow, vertical reading experience
+// Like an ancient scroll or mobile-first taken to extreme
+// =============================================================================
+export function LayoutM() {
+  const recentPosts = blogPosts.slice(0, 8)
+  
+  return (
+    <section className="bg-white min-vh-100 flex justify-center">
+      <div className="pa4" style={{ maxWidth: '320px' }}>
+        {/* WebGL - full width of narrow column */}
+        <div className="mb4">
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+        
+        {/* Divider */}
+        <div className="bb b--light-gray mb4" />
+        
+        {/* Name */}
+        <p className="f4 fw6 near-black mb2">Luis Queral</p>
+        <p className="f6 gray mb4">
+          Product designer and creative technologist at The New York Times.
+        </p>
+        
+        {/* Divider */}
+        <div className="bb b--light-gray mb4" />
+        
+        {/* Notes - each as a block */}
+        <p className="f7 ttu tracked gray mb3">Notes</p>
+        {recentPosts.map((post) => (
+          <div key={post.slug} className="mb3 pb3 bb b--light-gray">
+            <a 
+              href={`/blog/${post.slug}`} 
+              className="f5 near-black link lh-title db hover-blue"
+            >
+              {post.title}
+            </a>
+          </div>
+        ))}
+        
+        {/* Contact at bottom */}
+        <p className="f6 gray mt4">
+          <a href="mailto:hey@queral.studio" className="gray link underline hover-near-black">
+            hey@queral.studio
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT N: "The Split" - Hard vertical divide, two worlds
+// Bio and face on left, notes on right, no mixing
+// =============================================================================
+export function LayoutN() {
+  const recentPosts = blogPosts.slice(0, 7)
+  
+  return (
+    <div className="flex-ns min-vh-100">
+      {/* Left half - Identity */}
+      <div className="w-100 w-50-ns bg-near-white pa4 flex flex-column justify-center">
+        <div style={{ maxWidth: '320px' }}>
+          <div className="mb4">
+            <WebGLMorpher
+              image1Url="/images/luis.png"
+              image2Url="/images/pelican.png"
+            />
+          </div>
+          
+          <p className="f3 fw6 near-black mb2">Luis Queral</p>
+          <p className="f5 lh-copy gray mb3">
+            Product designer and creative technologist at The New York Times. Baltimore.
+          </p>
+          <p className="f6">
+            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">
+              hey@queral.studio
+            </a>
+          </p>
+        </div>
+      </div>
+      
+      {/* Right half - Notes */}
+      <div className="w-100 w-50-ns bg-white pa4 flex flex-column justify-center">
+        <div style={{ maxWidth: '400px' }}>
+          <p className="f7 ttu tracked gray mb4">Notes on art & technology</p>
+          
+          {recentPosts.map((post, i) => (
+            <div key={post.slug} className="mb3 flex items-baseline">
+              <span 
+                className="f5 gray mr3" 
+                style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic' }}
+              >
+                {i + 1}
+              </span>
+              <a 
+                href={`/blog/${post.slug}`} 
+                className="f4 near-black link lh-title hover-blue"
+              >
+                {post.title}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// =============================================================================
+// LAYOUT O: "The Statement" - One big headline, everything else secondary
+// Name as architecture, confidence through scale
+// =============================================================================
+export function LayoutO() {
+  const recentPosts = blogPosts.slice(0, 4)
+  
+  return (
+    <section className="bg-white min-vh-100 pa4 flex flex-column justify-between">
+      {/* Giant name at top */}
+      <div>
+        <p 
+          className="near-black fw7 mb0"
+          style={{ 
+            fontSize: 'clamp(4rem, 15vw, 12rem)',
+            lineHeight: 0.85,
+            letterSpacing: '-0.04em'
+          }}
+        >
+          LUIS
+        </p>
+        <p 
+          className="fw7 mb0"
+          style={{ 
+            fontSize: 'clamp(4rem, 15vw, 12rem)',
+            lineHeight: 0.85,
+            letterSpacing: '-0.04em',
+            color: '#ddd'
+          }}
+        >
+          QUERAL
+        </p>
+      </div>
+      
+      {/* Middle: WebGL small, off to the side */}
+      <div className="flex-ns items-end justify-between mv4">
+        <div style={{ maxWidth: '250px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+          />
+        </div>
+        
+        <div className="mt4 mt0-ns tr-ns" style={{ maxWidth: '350px' }}>
+          <p className="f5 lh-copy gray">
+            Product designer and creative technologist at The New York Times.
+          </p>
+        </div>
+      </div>
+      
+      {/* Bottom: Notes as inline list + contact */}
+      <div className="flex-ns items-end justify-between">
+        <div className="mb3 mb0-ns">
+          <p className="f7 ttu tracked gray mb2">Recent</p>
+          <div className="flex flex-wrap" style={{ gap: '0.5rem 1.5rem' }}>
+            {recentPosts.map((post) => (
+              <a 
+                key={post.slug}
+                href={`/blog/${post.slug}`} 
+                className="f6 near-black link underline hover-no-underline"
+              >
+                {post.title}
+              </a>
+            ))}
+          </div>
+        </div>
+        
+        <a href="mailto:hey@queral.studio" className="f6 blue underline hover-no-underline">
+          Contact
+        </a>
+      </div>
+    </section>
+  )
+}
