@@ -164,21 +164,35 @@ pre code {
 }
 
 /* WebGL effect - faded/blended by default, full color on hover */
-.webgl-grayscale {
-  filter: grayscale(100%);
-  opacity: 1;
-  mix-blend-mode: luminosity;
-  transition: filter 0.3s ease, opacity 0.3s ease, mix-blend-mode 0.3s ease;
-  outline: none;
-  border: none;
+/* On mobile (below 700px), show full color */
+@media screen and (max-width: 699px) {
+  .webgl-grayscale {
+    filter: none;
+    opacity: 1;
+    mix-blend-mode: normal;
+    outline: none;
+    border: none;
+  }
 }
 
-.webgl-grayscale:hover {
-  filter: grayscale(0%) saturate(80%);
-  opacity: 1;
-  mix-blend-mode: normal;
-  outline: none;
-  border: none;
+/* On desktop (700px+), grayscale with hover effect */
+@media screen and (min-width: 700px) {
+  .webgl-grayscale {
+    filter: grayscale(100%);
+    opacity: 1;
+    mix-blend-mode: luminosity;
+    transition: filter 0.3s ease, opacity 0.3s ease, mix-blend-mode 0.3s ease;
+    outline: none;
+    border: none;
+  }
+
+  .webgl-grayscale:hover {
+    filter: grayscale(0%) saturate(80%);
+    opacity: 1;
+    mix-blend-mode: normal;
+    outline: none;
+    border: none;
+  }
 }
 
 /* Custom 700px breakpoint utilities */

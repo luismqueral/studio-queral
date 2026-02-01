@@ -948,7 +948,7 @@ export function LayoutP() {
       <div className="db-md">
         <div className="pa4" style={{ backgroundColor: bgColor }}>
           <div className="center" style={{ maxWidth: '400px' }}>
-            <div className="mb3 center" style={{ maxWidth: '200px' }}>
+            <div className="mb3 center" style={{ maxWidth: '240px' }}>
               <WebGLMorpher
                 image1Url="/images/luis.png"
                 image2Url="/images/pelican.png"
