@@ -30,6 +30,11 @@ const blogPosts = [
     assetsPath: '/blog/diagramming-with-llms'
   },
   {
+    title: "a ux suggestion for customer service chat apps",
+    slug: 'ux-customer-service-chat',
+    assetsPath: '/blog/ux-customer-service-chat'
+  },
+  {
     title: 'a case for generative music making',
     slug: 'generative-music-making',
     assetsPath: '/blog/generative-music-making'

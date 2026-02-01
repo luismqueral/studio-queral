@@ -904,7 +904,35 @@ export function LayoutP() {
     '#f8f0f0', // light rose
   ]
   
-  const [bgColor] = useState(() => bgColors[Math.floor(Math.random() * bgColors.length)])
+  // Map light bg colors to their darker counterparts for asterisks
+  const colorPairs = [
+    { bg: '#faf8f0', accent: '#8b7355' }, // warm cream -> dark tan
+    { bg: '#f0f4f8', accent: '#4a6fa5' }, // light blue-gray -> dark blue
+    { bg: '#f5f0fa', accent: '#7b5aa6' }, // light lavender -> dark purple
+    { bg: '#f0faf5', accent: '#3d8b6e' }, // light mint -> dark green
+    { bg: '#faf5f0', accent: '#b5724c' }, // light peach -> dark orange
+    { bg: '#f8f8f0', accent: '#8b8b3d' }, // light yellow -> dark olive
+    { bg: '#f0f8f8', accent: '#3d7a7a' }, // light cyan -> dark teal
+    { bg: '#faf0f5', accent: '#a65580' }, // light pink -> dark magenta
+    { bg: '#f5faf0', accent: '#5a8b3d' }, // light lime -> dark green
+    { bg: '#f8f0f0', accent: '#a65555' }, // light rose -> dark red
+  ]
+  
+  const [selectedPair] = useState(() => colorPairs[Math.floor(Math.random() * colorPairs.length)])
+  const bgColor = selectedPair.bg
+  const asteriskColor = selectedPair.accent
+  
+  // Helper to darken a hex color by a percentage (0-100)
+  const darkenColor = (hex, percent) => {
+    const num = parseInt(hex.replace('#', ''), 16)
+    const amt = Math.round(2.55 * percent)
+    const R = Math.max((num >> 16) - amt, 0)
+    const G = Math.max((num >> 8 & 0x00FF) - amt, 0)
+    const B = Math.max((num & 0x0000FF) - amt, 0)
+    return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`
+  }
+  const asteriskBgColor = darkenColor(bgColor, 10) // slightly darker than bgColor
+  const titleColor = darkenColor(asteriskColor, 10) // slightly darker than accent
   
   return (
     <>
@@ -973,7 +1001,7 @@ export function LayoutP() {
         </div>
         <div className="bg-white pa4">
           <div className="center" style={{ maxWidth: '500px' }}>
-          <p className="f6 near-black mb4"><strong>selected thoughts</strong> on art and technology</p>
+          <p className="f6 near-black mb4">a few things I'm thinking about:</p>
           <ul className="list pl0 mt0 mb0">
             {recentPosts.map((post, index) => {
               const bullet = '*'
@@ -1024,7 +1052,7 @@ export function LayoutP() {
         style={{ marginLeft: `${sidebarWidth}px`, minHeight: '100vh' }}
       >
         <div style={{ maxWidth: '580px' }}>
-          <p className="f6 near-black mb4"><strong>selected thoughts</strong> on art and technology</p>
+          <p className="f6 near-black mb4">a few things I'm thinking about:</p>
           
           <ul className="list pl0 mt0 mb0">
             {recentPosts.map((post, index) => {
