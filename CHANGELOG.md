@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 2026-01-28
+- refined Layout P with fixed 400px left sidebar containing WebGL morpher, bio, and contact links that stays in place while notes scroll on the right
+- added custom 700px CSS breakpoint for mobile/desktop switching - mobile layout stacks content and centers it nicely
+- changed notes bullet points to large asterisks (*) in moon-gray color with proper vertical alignment to heading text
+- refactored subtitle system to use slug-based keys instead of numeric indices - subtitles no longer break when posts are reordered or added
+- added multiple new blog posts: "how to attend meetings", "how designers should talk about AI", "diagramming with LLMs", "my design journal from when I worked for the NYC subway", "what it's like to design software for trading floors"
+- made WebGL component grayscale by default with color on hover, smooth 0.3s transitions, and removed outline on hover
+- added newsletter signup at bottom of notes section with minimal styling: "if you like these, consider joining my mailing list"
+- fixed WebGL loading flash by using aspect-ratio instead of fixed height, added opacity fade-in transition
+- various title and subtitle content updates for blog posts including "generative design thinking", "the split triple diamond", "media tool kit", etc.
+
+2026-01-28
 - added 6 experimental homepage layouts (J-O) with bolder form-making: "The Edge" (asymmetric left-aligned), "The Void" (dark cinematic), "The Overlap" (layered with giant type), "The Scroll" (ultra-narrow vertical), "The Split" (hard 50/50 divide), and "The Statement" (massive headline architecture) in HomePageLayouts.jsx
 - added Notes section to all standard layouts (A-E) to incorporate article list across all variations
 - removed WIP message, changed "He currently works" to "He works", updated slider labels to use site font instead of mono in HomePage.jsx and WebGLMorpher.jsx
