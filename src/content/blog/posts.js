@@ -10,7 +10,7 @@ const blogPosts = [
     assetsPath: '/blog/how-to-attend-meetings'
   },
   {
-    title: "a few things to keep in mind when generating software",
+    title: "a guidebook for product cowboys",
     slug: 'generating-software',
     assetsPath: '/blog/generating-software'
   },

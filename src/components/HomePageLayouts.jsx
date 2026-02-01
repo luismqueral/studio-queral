@@ -979,6 +979,7 @@ export function LayoutP() {
               const bullet = '*'
               const subtitles = {
                 'mapping-generative-arena': 'breaking down emerging workflows in product design',
+                'generating-software': 'a few things to keep in mind when generating software',
                 'trading-floor-software-design': 'reflecting on my time at goldman sachs',
                 'diagramming-with-llms': 'advice for designers and engineers alike',
                 'generative-music-making': 'a framework for creative AI collaboration',
@@ -1030,6 +1031,7 @@ export function LayoutP() {
               const bullet = '*'
               const subtitles = {
                 'mapping-generative-arena': 'breaking down emerging workflows in product design',
+                'generating-software': 'a few things to keep in mind when generating software',
                 'trading-floor-software-design': 'reflecting on my time at goldman sachs',
                 'diagramming-with-llms': 'advice for designers and engineers alike',
                 'generative-music-making': 'a framework for creative AI collaboration',
