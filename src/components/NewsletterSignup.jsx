@@ -1,9 +1,9 @@
 function NewsletterSignup() {
   return (
     <div>
-      <p className="f6 mb1 near-black b">if you like these, consider joining my mailing list</p>
+      <p className="f6 mb1 near-black b">keep in touch!</p>
       <p className="f6 mb3 gray lh-copy">
-        you'll get occasional project / life updates whenever i feel like it.
+        sign up to receive project / life updates whenever I feel like sending them.
       </p>
       
       <form 
