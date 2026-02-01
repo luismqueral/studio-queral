@@ -45,14 +45,8 @@ html, body {
 
 /* Interactive WebGL Canvas */
 .webgl-canvas {
-  transition: transform 0.1s ease, outline 0.15s ease;
-  outline: 4px solid transparent;
-  outline-offset: 0px;
-}
-
-.webgl-canvas:hover {
   cursor: pointer;
-  outline: 4px solid #d0d0d0;
+  transition: transform 0.2s ease;
 }
 
 .webgl-canvas:active {

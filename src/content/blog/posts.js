@@ -5,9 +5,29 @@ const blogPosts = [
     assetsPath: '/blog/mapping-generative-arena'
   },
   {
-    title: "things you should know if you're generating software",
+    title: 'how to attend meetings',
+    slug: 'how-to-attend-meetings',
+    assetsPath: '/blog/how-to-attend-meetings'
+  },
+  {
+    title: "a few things to keep in mind when generating software",
     slug: 'generating-software',
     assetsPath: '/blog/generating-software'
+  },
+  {
+    title: 'my design journal from when I worked for the NYC subway',
+    slug: 'nyc-subway-design-journal',
+    assetsPath: '/blog/nyc-subway-design-journal'
+  },
+  {
+    title: "what it's like to design software for trading floors",
+    slug: 'trading-floor-software-design',
+    assetsPath: '/blog/trading-floor-software-design'
+  },
+  {
+    title: "diagramming with LLMs",
+    slug: 'diagramming-with-llms',
+    assetsPath: '/blog/diagramming-with-llms'
   },
   {
     title: 'a case for generative music making',
@@ -35,12 +55,17 @@ const blogPosts = [
     assetsPath: '/blog/transcripts-are-gold'
   },
   {
-    title: 'early thoughts on generative design thinking',
+    title: '"generative design thinking"',
     slug: 'generative-design-thinking',
     assetsPath: '/blog/generative-design-thinking'
   },
   {
-    title: "using Cursor for research (it's like NotebookLM but you can build things)",
+    title: 'how designers should talk about AI',
+    slug: 'how-designers-talk-about-ai',
+    assetsPath: '/blog/how-designers-talk-about-ai'
+  },
+  {
+    title: "how I use Cursor for design research",
     slug: 'cursor-for-research',
     assetsPath: '/blog/cursor-for-research'
   },
@@ -50,22 +75,22 @@ const blogPosts = [
     assetsPath: '/blog/writing-design-superpower'
   },
   {
-    title: 'what would this dataset sound like?',
-    slug: 'what-would-this-dataset-sound-like',
-    assetsPath: '/blog/what-would-this-dataset-sound-like'
+    title: 'Introducing Data Synth',
+    slug: 'introducing-data-synth',
+    assetsPath: '/blog/introducing-data-synth'
   },
   {
-    title: 'the "split triple diamond" — a method for making things that actually ship',
+    title: 'the "split triple diamond"',
     slug: 'split-triple-diamond',
     assetsPath: '/blog/split-triple-diamond'
   },
   {
-    title: 'my media toolkit: a personal framework for manipulating audio and video',
+    title: 'media tool kit',
     slug: 'media-toolkit',
     assetsPath: '/blog/media-toolkit'
   },
   {
-    title: 'prompts that actually help (debugging, unsticking, thinking bigger)',
+    title: 'LLM prompts and techniques',
     slug: 'prompts-that-help',
     assetsPath: '/blog/prompts-that-help'
   },
@@ -80,9 +105,9 @@ const blogPosts = [
     assetsPath: '/blog/design-advice-so-far'
   },
   {
-    title: "thoughts on 'happyfood'",
-    slug: 'thoughts-on-happyfood',
-    assetsPath: '/blog/thoughts-on-happyfood'
+    title: "reflections on Happyfood",
+    slug: 'reflections-on-happyfood',
+    assetsPath: '/blog/reflections-on-happyfood'
   },
   {
     title: "designing a generative 'happyfood' engine",
@@ -108,6 +133,46 @@ const blogPosts = [
     title: 'things I learned making showhaus',
     slug: 'things-learned-showhaus',
     assetsPath: '/blog/things-learned-showhaus'
+  },
+  {
+    title: 'on the joy of side projects',
+    slug: 'joy-of-side-projects',
+    assetsPath: '/blog/joy-of-side-projects'
+  },
+  {
+    title: 'why I still keep a paper notebook',
+    slug: 'paper-notebook',
+    assetsPath: '/blog/paper-notebook'
+  },
+  {
+    title: 'the tools I actually use every day',
+    slug: 'tools-i-use',
+    assetsPath: '/blog/tools-i-use'
+  },
+  {
+    title: 'some thoughts on creative constraints',
+    slug: 'creative-constraints',
+    assetsPath: '/blog/creative-constraints'
+  },
+  {
+    title: 'learning in public vs. learning in private',
+    slug: 'learning-in-public',
+    assetsPath: '/blog/learning-in-public'
+  },
+  {
+    title: 'how I think about prototyping',
+    slug: 'thinking-about-prototyping',
+    assetsPath: '/blog/thinking-about-prototyping'
+  },
+  {
+    title: 'the difference between taste and skill',
+    slug: 'taste-vs-skill',
+    assetsPath: '/blog/taste-vs-skill'
+  },
+  {
+    title: 'notes on working with engineers',
+    slug: 'working-with-engineers',
+    assetsPath: '/blog/working-with-engineers'
   }
 ]
 

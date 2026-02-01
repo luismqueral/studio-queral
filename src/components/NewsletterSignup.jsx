@@ -1,9 +1,9 @@
 function NewsletterSignup() {
   return (
     <div>
-      <p className="f4 mb2 near-black fw6">Newsletter</p>
-      <p className="f5 mb3 near-black lh-copy">
-        You'll get <a href="#" className="blue underline hover-no-underline">occasional project / life updates</a> straight to your inbox.
+      <p className="f6 mb1 near-black">if you like these, consider joining my mailing list</p>
+      <p className="f6 mb3 gray lh-copy">
+        I'll send you occasional project / life updates whenever I feel like it.
       </p>
       
       <form 
@@ -18,11 +18,11 @@ function NewsletterSignup() {
           name="email"
           placeholder="your@email.com"
           required
-          className="input-reset ba b--moon-gray br2 pa2 w-100 flex-auto-ns f5 mr2-ns mb2 mb0-ns"
+          className="input-reset ba b--moon-gray br2 pa2 w-100 flex-auto-ns f6 mr2-ns mb2 mb0-ns"
         />
         <button
           type="submit"
-          className="input-reset bn br2 pa2 f6 fw6 pointer bg-blue white hover-bg-dark-blue w-100 w-auto-ns"
+          className="input-reset bn br2 pa2 f6 pointer bg-blue white hover-bg-dark-blue w-100 w-auto-ns"
         >
           Subscribe
         </button>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import WebGLMorpher from './WebGLMorpher'
+import NewsletterSignup from './NewsletterSignup'
 import blogPosts from '../content/blog/posts'
 
 // =============================================================================
@@ -33,8 +34,8 @@ export function LayoutA() {
           <p className="f4 lh-copy near-black">
             In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
-          <p className="f4 lh-copy mt4">
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
+          <p className="f4 lh-copy mt4 near-black">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
           </p>
         </div>
       </section>
@@ -81,8 +82,8 @@ export function LayoutB() {
               <p className="f5 lh-copy gray mt3">
                 Writing, audio-visual experiments, hanging out with kids :-).
               </p>
-              <p className="f5 mt4">
-                <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact →</a>
+              <p className="f5 mt4 near-black">
+                contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
               </p>
             </div>
             
@@ -145,11 +146,9 @@ export function LayoutC() {
             The New York Times · Baltimore
           </p>
           
-          <div className="flex justify-center">
-            <a href="mailto:hey@queral.studio" className="f6 blue underline hover-no-underline mh2">Email</a>
-            <span className="gray">·</span>
-            <a href="#notes" className="f6 blue underline hover-no-underline mh2">Notes ↓</a>
-          </div>
+          <p className="f6 near-black">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
+          </p>
         </div>
       </section>
       
@@ -209,9 +208,8 @@ export function LayoutD() {
             <span className="gray mr2">{randomEmoji}</span>
             In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
           </p>
-          <p className="f4 lh-copy mt3">
-            <span className="gray mr2">→</span>
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
+          <p className="f4 lh-copy mt3 near-black">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
           </p>
         </div>
       </section>
@@ -274,8 +272,8 @@ export function LayoutE() {
             Outside of work, I write, make audio-visual experiments, and hang out with my kids.
           </p>
           
-          <p className="f5 mt4">
-            <a href="mailto:hey@queral.studio" className="near-black underline hover-no-underline">hey@queral.studio</a>
+          <p className="f5 mt4 near-black">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
           </p>
         </div>
       </section>
@@ -326,8 +324,8 @@ export function LayoutF() {
               <p className="f5 lh-copy gray mt2">
                 Writing, experiments, kids :-).
               </p>
-              <p className="f5 mt3">
-                <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">Contact</a>
+              <p className="f5 mt3 near-black">
+                contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
               </p>
             </div>
             
@@ -391,8 +389,10 @@ export function LayoutG() {
       <section className="bg-white pv4">
         <div className="center ph3 tc" style={{ maxWidth: '500px' }}>
           <p className="f5 lh-copy gray">
-            <strong className="near-black">Luis Queral</strong> · Product Designer at NYT · 
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline ml1">hey@queral.studio</a>
+            <strong className="near-black">Luis Queral</strong> · Product Designer at NYT
+          </p>
+          <p className="f5 lh-copy near-black mt2">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
           </p>
         </div>
       </section>
@@ -442,7 +442,7 @@ export function LayoutH() {
         
         {/* Contact */}
         <p className="f4 lh-copy near-black">
-          Say hi: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
+          contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
         </p>
       </div>
     </section>
@@ -467,7 +467,7 @@ export function LayoutI() {
             <p className="f5 gray">Product Designer · NYT</p>
           </div>
           <div className="mt3 mt0-ns">
-            <a href="mailto:hey@queral.studio" className="f5 blue underline hover-no-underline">Contact</a>
+            <span className="f5 near-black">contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a></span>
           </div>
         </div>
       </section>
@@ -548,9 +548,9 @@ export function LayoutJ() {
           ))}
         </div>
         
-        {/* Contact - minimal */}
-        <p className="f7 ttu tracked gray">
-          <a href="mailto:hey@queral.studio" className="gray link underline hover-near-black">hey@queral.studio</a>
+        {/* Contact */}
+        <p className="f6 near-black">
+          contact: <a href="mailto:hey@queral.studio" className="blue link underline hover-no-underline">hey@queral.studio</a>
         </p>
       </div>
     </section>
@@ -605,8 +605,8 @@ export function LayoutK() {
         </div>
         
         {/* Contact - bottom */}
-        <p className="f6 tc mt5">
-          <a href="mailto:hey@queral.studio" className="link dim" style={{ color: '#555' }}>
+        <p className="f6 tc mt5" style={{ color: '#e0e0e0' }}>
+          contact: <a href="mailto:hey@queral.studio" className="link dim" style={{ color: '#6699ff' }}>
             hey@queral.studio
           </a>
         </p>
@@ -668,10 +668,8 @@ export function LayoutL() {
               Product designer and creative technologist at The New York Times. 
               Writing, experiments, kids.
             </p>
-            <p className="f6">
-              <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">
-                Contact →
-              </a>
+            <p className="f6 near-black">
+              contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
             </p>
           </div>
           
@@ -745,10 +743,8 @@ export function LayoutM() {
         ))}
         
         {/* Contact at bottom */}
-        <p className="f6 gray mt4">
-          <a href="mailto:hey@queral.studio" className="gray link underline hover-near-black">
-            hey@queral.studio
-          </a>
+        <p className="f6 near-black mt4">
+          contact: <a href="mailto:hey@queral.studio" className="blue link underline hover-no-underline">hey@queral.studio</a>
         </p>
       </div>
     </section>
@@ -778,10 +774,8 @@ export function LayoutN() {
           <p className="f5 lh-copy gray mb3">
             Product designer and creative technologist at The New York Times. Baltimore.
           </p>
-          <p className="f6">
-            <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">
-              hey@queral.studio
-            </a>
+          <p className="f6 near-black">
+            contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
           </p>
         </div>
       </div>
@@ -880,10 +874,198 @@ export function LayoutO() {
           </div>
         </div>
         
-        <a href="mailto:hey@queral.studio" className="f6 blue underline hover-no-underline">
-          Contact
-        </a>
+        <span className="f6 near-black">
+          contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a>
+        </span>
       </div>
     </section>
+  )
+}
+
+// =============================================================================
+// LAYOUT P: "The Magazine Split" - Fixed left sidebar, scrollable right content
+// Clean two-column layout: bio stays put, notes scroll
+// =============================================================================
+export function LayoutP() {
+  const recentPosts = blogPosts.slice(0, 20)
+  const sidebarWidth = 400
+  
+  // Light/washed background colors
+  const bgColors = [
+    '#faf8f0', // warm cream
+    '#f0f4f8', // light blue-gray
+    '#f5f0fa', // light lavender
+    '#f0faf5', // light mint
+    '#faf5f0', // light peach
+    '#f8f8f0', // light yellow
+    '#f0f8f8', // light cyan
+    '#faf0f5', // light pink
+    '#f5faf0', // light lime
+    '#f8f0f0', // light rose
+  ]
+  
+  const [bgColor] = useState(() => bgColors[Math.floor(Math.random() * bgColors.length)])
+  
+  return (
+    <>
+      {/* Fixed left sidebar - only on desktop */}
+      <div 
+        className="dn-md pa4"
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: `${sidebarWidth}px`,
+          height: '100vh',
+          overflow: 'hidden',
+          backgroundColor: bgColor
+        }}
+      >
+        <div className="mb3 center" style={{ maxWidth: '250px' }}>
+          <WebGLMorpher
+            image1Url="/images/luis.png"
+            image2Url="/images/pelican.png"
+            hideSlider={true}
+          />
+        </div>
+        <p className="f6 lh-copy near-black">
+          <strong>Luis Queral</strong> is a product designer and creative technologist.
+        </p>
+        <p className="f6 lh-copy near-black">
+          He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> focusing on improving developer workflows and building our Generative Design Lab.
+        </p>
+        <p className="f6 lh-copy near-black">
+          In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
+        </p>
+        <ul className="f6 lh-copy mt3 near-black pl3">
+          <li className="mb1"><a href="#" className="blue underline hover-no-underline">about me</a></li>
+          <li className="mb1"><a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">contact</a></li>
+          <li><a href="https://instagram.com/studio.queral" className="blue underline hover-no-underline">instagram</a></li>
+        </ul>
+      </div>
+      
+      {/* Mobile: stacked layout (no fixed positioning) */}
+      <div className="db-md">
+        <div className="pa4" style={{ backgroundColor: bgColor }}>
+          <div className="center" style={{ maxWidth: '400px' }}>
+            <div className="mb3 center" style={{ maxWidth: '200px' }}>
+              <WebGLMorpher
+                image1Url="/images/luis.png"
+                image2Url="/images/pelican.png"
+                hideSlider={true}
+              />
+            </div>
+            <p className="f6 lh-copy near-black">
+              <strong>Luis Queral</strong> is a product designer and creative technologist.
+            </p>
+            <p className="f6 lh-copy near-black">
+              He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> focusing on improving developer workflows and building our Generative Design Lab.
+            </p>
+            <p className="f6 lh-copy near-black">
+              In his spare time, he enjoys writing, making audio-visual experiments, and hanging out with his kids :-).
+            </p>
+            <ul className="f6 lh-copy mt3 near-black pl3">
+              <li className="mb1"><a href="#" className="blue underline hover-no-underline">about me</a></li>
+              <li className="mb1"><a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">contact</a></li>
+              <li><a href="https://instagram.com/studio.queral" className="blue underline hover-no-underline">instagram</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="bg-white pa4">
+          <div className="center" style={{ maxWidth: '500px' }}>
+          <p className="f6 near-black mb4"><strong>selected thoughts</strong> on art and technology</p>
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post, index) => {
+              const bullet = '*'
+              const subtitles = {
+                'mapping-generative-arena': 'breaking down emerging workflows in product design',
+                'trading-floor-software-design': 'reflecting on my stint at goldman sachs',
+                'diagramming-with-llms': 'advice for designers and engineers alike',
+                'generative-music-making': 'a framework for creative AI collaboration',
+                'engineering-still-hard': 'practical advice from building with LLMs',
+                'transcripts-are-gold': 'was Plato onto something??',
+                'generative-design-thinking': 'product design in the age of the LLM',
+                'how-designers-talk-about-ai': 'communication standards from the Generative Design Lab',
+                'cursor-for-research': "it's more than just for prototypes!",
+                'writing-design-superpower': 'reflections on my writing practice over the years',
+                'introducing-data-synth': 'ever wondered what it would sound like to run a spreadsheet through a modular synth?',
+                'media-toolkit': 'my personal workflow for automated media manipulation',
+                'prompts-that-help': 'an ever growing, updated list of my personal favorites',
+                'reflections-on-happyfood': 'my personal introduction to making art on the internet',
+                'split-triple-diamond': 'a working model for design and engineering teams that block each other constantly.',
+              }
+              return (
+                <li key={post.slug} className="mb4 flex items-start">
+                  <span className="mr2 moon-gray" style={{ fontSize: '2em', lineHeight: '1', marginTop: '0.02em' }}>{bullet}</span>
+                  <div>
+                    <a href={`/blog/${post.slug}`} className="f5 blue underline hover-no-underline lh-title db">
+                      {post.title}
+                    </a>
+                    {subtitles[post.slug] && (
+                      <p className="f6 gray mt1 mb0 lh-copy">{subtitles[post.slug]}</p>
+                    )}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+          
+          <div className="mt5 pt4 bt b--light-gray">
+            <NewsletterSignup />
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Desktop: scrollable right content with margin offset */}
+      <div 
+        className="dn-md bg-white pa4"
+        style={{ marginLeft: `${sidebarWidth}px`, minHeight: '100vh' }}
+      >
+        <div style={{ maxWidth: '580px' }}>
+          <p className="f6 near-black mb4"><strong>selected thoughts</strong> on art and technology</p>
+          
+          <ul className="list pl0 mt0 mb0">
+            {recentPosts.map((post, index) => {
+              const bullet = '*'
+              const subtitles = {
+                'mapping-generative-arena': 'breaking down emerging workflows in product design',
+                'trading-floor-software-design': 'reflecting on my stint at goldman sachs',
+                'diagramming-with-llms': 'advice for designers and engineers alike',
+                'generative-music-making': 'a framework for creative AI collaboration',
+                'engineering-still-hard': 'practical advice from building with LLMs',
+                'transcripts-are-gold': 'was Plato onto something??',
+                'generative-design-thinking': 'product design in the age of the LLM',
+                'how-designers-talk-about-ai': 'communication standards from the Generative Design Lab',
+                'cursor-for-research': "it's more than just for prototypes!",
+                'writing-design-superpower': 'reflections on my writing practice over the years',
+                'introducing-data-synth': 'ever wondered what it would sound like to run a spreadsheet through a modular synth?',
+                'media-toolkit': 'my personal workflow for automated media manipulation',
+                'prompts-that-help': 'an ever growing, updated list of my personal favorites',
+                'reflections-on-happyfood': 'my personal introduction to making art on the internet',
+                'split-triple-diamond': 'a working model for design and engineering teams that block each other constantly.',
+              }
+              return (
+                <li key={post.slug} className="mb4 flex items-start">
+                  <span className="mr2 moon-gray" style={{ fontSize: '2em', lineHeight: '1', marginTop: '0.02em' }}>{bullet}</span>
+                  <div>
+                    <a href={`/blog/${post.slug}`} className="f5 blue underline hover-no-underline lh-title db">
+                      {post.title}
+                    </a>
+                    {subtitles[post.slug] && (
+                      <p className="f6 gray mt1 mb0 lh-copy">{subtitles[post.slug]}</p>
+                    )}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+          
+          <div className="mt5 pt4 bt b--light-gray">
+            <NewsletterSignup />
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
