@@ -1,6 +1,6 @@
 const blogPosts = [
   {
-    title: 'mapping the generative arena',
+    title: 'mapping the "generative arena"',
     slug: 'mapping-generative-arena',
     assetsPath: '/blog/mapping-generative-arena'
   },
@@ -20,7 +20,7 @@ const blogPosts = [
     assetsPath: '/blog/nyc-subway-design-journal'
   },
   {
-    title: "what it's like to design software for trading floors",
+    title: "designing software for trading floors",
     slug: 'trading-floor-software-design',
     assetsPath: '/blog/trading-floor-software-design'
   },

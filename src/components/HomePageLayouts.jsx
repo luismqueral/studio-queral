@@ -910,14 +910,14 @@ export function LayoutP() {
     <>
       {/* Fixed left sidebar - only on desktop */}
       <div 
-        className="dn-md pa4"
+        className="dn-md pa4 hide-scrollbar"
         style={{ 
           position: 'fixed',
           top: 0,
           left: 0,
           width: `${sidebarWidth}px`,
           height: '100vh',
-          overflow: 'hidden',
+          overflowY: 'auto',
           backgroundColor: bgColor
         }}
       >
@@ -979,7 +979,7 @@ export function LayoutP() {
               const bullet = '*'
               const subtitles = {
                 'mapping-generative-arena': 'breaking down emerging workflows in product design',
-                'trading-floor-software-design': 'reflecting on my stint at goldman sachs',
+                'trading-floor-software-design': 'reflecting on my time at goldman sachs',
                 'diagramming-with-llms': 'advice for designers and engineers alike',
                 'generative-music-making': 'a framework for creative AI collaboration',
                 'engineering-still-hard': 'practical advice from building with LLMs',
@@ -1030,7 +1030,7 @@ export function LayoutP() {
               const bullet = '*'
               const subtitles = {
                 'mapping-generative-arena': 'breaking down emerging workflows in product design',
-                'trading-floor-software-design': 'reflecting on my stint at goldman sachs',
+                'trading-floor-software-design': 'reflecting on my time at goldman sachs',
                 'diagramming-with-llms': 'advice for designers and engineers alike',
                 'generative-music-making': 'a framework for creative AI collaboration',
                 'engineering-still-hard': 'practical advice from building with LLMs',
