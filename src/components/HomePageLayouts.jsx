@@ -999,7 +999,7 @@ export function LayoutP() {
             </ul>
           </div>
         </div>
-        <div className="bg-white pa4">
+        <div className="pa4">
           <div className="center" style={{ maxWidth: '500px' }}>
           <p className="f6 near-black mb4">a few things I'm thinking about:</p>
           <ul className="list pl0 mt0 mb0">
@@ -1039,16 +1039,20 @@ export function LayoutP() {
             })}
           </ul>
           
-          <div className="mt5 pt4 bt b--light-gray">
-            <NewsletterSignup />
           </div>
+        </div>
+        
+        {/* Keep in touch section - full width, lightest gray */}
+        <div className="bg-near-white pt3 pb5">
+          <div className="center ph4" style={{ maxWidth: '500px' }}>
+            <NewsletterSignup />
           </div>
         </div>
       </div>
       
       {/* Desktop: scrollable right content with margin offset */}
       <div 
-        className="dn-md bg-white pa4"
+        className="dn-md pa4"
         style={{ marginLeft: `${sidebarWidth}px`, minHeight: '100vh' }}
       >
         <div style={{ maxWidth: '580px' }}>
@@ -1091,9 +1095,16 @@ export function LayoutP() {
             })}
           </ul>
           
-          <div className="mt5 pt4 bt b--light-gray">
-            <NewsletterSignup />
-          </div>
+        </div>
+      </div>
+      
+      {/* Desktop: Keep in touch section - full width, lightest gray */}
+      <div 
+        className="dn-md bg-near-white pt3 pb5"
+        style={{ marginLeft: `${sidebarWidth}px` }}
+      >
+        <div className="ph4" style={{ maxWidth: '580px' }}>
+          <NewsletterSignup />
         </div>
       </div>
     </>

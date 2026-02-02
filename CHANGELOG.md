@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-02-01
+- split newsletter heading into two lines: "thanks for reading!" (bold) and "consider joining my mailing list:" (gray) in NewsletterSignup.jsx
+- restructured newsletter form layout: moved subscribe button below description, made it full width (500px max), stacked vertically in NewsletterSignup.jsx
+- updated newsletter description to "you'll get updates on projects / writing / life a few times a year, that's it!" in NewsletterSignup.jsx
+- changed newsletter heading from "keep in touch!" to "thanks for reading" and moved description text below the input in NewsletterSignup.jsx
+- reduced top padding and changed newsletter section to lightest gray (bg-near-white) in HomePageLayouts.jsx
+- redesigned WebGL playground with brutalist aesthetic - black background, monospace typography, raw borders, no rounded corners, high contrast white/black UI in webgl-playground.css
+- improved responsive layout with CSS grid - stacks vertically on tablet, adapts control panel height, handles landscape mobile with side-by-side layout
+- added multiple breakpoints: 1024px (tablet stack), 640px (mobile compact), 400px (small screens), landscape detection for proper orientation handling
+- updated all parameter labels to uppercase with underscores (WAVE_FREQ_X, CENTER_POS, etc.) for raw industrial feel
+- simplified image thumbnails to grayscale by default, color on hover/selected
+- refactored section rendering with reusable Section component for cleaner collapsible headers in WebGLPlaygroundPage.jsx
+- created interactive WebGL playground page at /playground with comprehensive real-time parameter controls for exploring shader effects
+- added image selection from 7 preset images plus custom upload capability
+- implemented 6 effect presets (Default, Psychedelic, Glitch Art, Calm Waters, Vortex, Retro VHS) for quick exploration
+- built extensive control panel with sliders for waves, ripples, swirls, turbulence, pixel sorting, color adjustments, and post-effects
+- added XY pad controls for positioning ripple and swirl effect centers - can also click directly on canvas
+- created custom fragment shader supporting all parameters with real-time uniform updates
+- made "keep in touch" newsletter section full width with light gray background - moved it outside the constrained content areas in both mobile and desktop views of LayoutP in HomePageLayouts.jsx
+
 2026-01-28
 - refined Layout P with fixed 400px left sidebar containing WebGL morpher, bio, and contact links that stays in place while notes scroll on the right
 - added custom 700px CSS breakpoint for mobile/desktop switching - mobile layout stacks content and centers it nicely
