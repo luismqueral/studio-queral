@@ -14,6 +14,7 @@ const getContent = (slug) => {
 // Notes metadata - title is required, date is optional
 // Content is loaded from ./content/{slug}.md
 const notesMetadata = {
+  'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
   'mapping-generative-arena': { title: 'mapping the "generative arena"' },
   'how-to-attend-meetings': { title: 'how to attend meetings' },
