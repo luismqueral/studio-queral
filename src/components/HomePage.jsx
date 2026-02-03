@@ -5,7 +5,7 @@ import NewsletterSignup from './NewsletterSignup'
 // Hardcoded notes list
 const notes = [
   { title: 'how to make paella', slug: 'paella-recipe', subtitle: 'a family recipe from Málaga' },
-  { title: 'why i love the wu-tang clan', slug: 'wu-tang-final-tour', subtitle: 'thoughts on RZA, silliness, and creative leadership' },
+  { title: 'why i love the wu-tang clan', slug: 'wu-tang-final-tour', subtitle: 'and why the RZA is such a talented, silly goose' },
   { title: 'a guidebook for product cowboys', slug: 'generating-software', subtitle: 'a few things to keep in mind when generating software' },
   // { title: 'mapping the "generative arena"', slug: 'mapping-generative-arena', subtitle: 'breaking down emerging workflows in product design' },
   // { title: 'how to attend meetings', slug: 'how-to-attend-meetings' },
@@ -148,11 +148,11 @@ function HomePage() {
         </div>
         
         {/* Keep in touch section - full width, lightest gray */}
-        <div className="bg-near-white pt3 pb5">
+        {/* <div className="bg-near-white pt3 pb5">
           <div className="center ph4" style={{ maxWidth: '500px' }}>
             <NewsletterSignup />
           </div>
-        </div>
+        </div> */}
       </div>
       
       {/* Desktop: scrollable right content with margin offset */}
@@ -170,7 +170,7 @@ function HomePage() {
       </div>
       
       {/* Desktop: Keep in touch section - full width, lightest gray */}
-      <div 
+      {/* <div 
         className="dn-md bg-near-white pt3 pb5"
         style={{ 
           marginLeft: `${sidebarWidth}px`
@@ -179,7 +179,7 @@ function HomePage() {
         <div className="ph4" style={{ maxWidth: '580px' }}>
           <NewsletterSignup />
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

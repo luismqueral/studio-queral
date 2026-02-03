@@ -20,6 +20,7 @@ function NotePage() {
 
   return (
     <div className="pa4 mw7 center">
+      <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
       <article className="note-content">
         <h1 className="f3 near-black mb2 lh-title">{note.title}</h1>
         {note.date && <p className="f6 gray mb4">{note.date}</p>}
