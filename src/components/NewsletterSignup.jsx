@@ -1,8 +1,13 @@
-function NewsletterSignup() {
+function NewsletterSignup({ 
+  heading = "thanks for reading!", 
+  subtitle = "consider joining my mailing list",
+  showHeading = true,
+  showDescription = true
+}) {
   return (
     <div style={{ maxWidth: '500px' }}>
-      <p className="f6 mb1 near-black b">thanks for reading!</p>
-      <p className="f6 mb3 gray">consider joining my mailing list:</p>
+      {showHeading && heading && <p className="f6 mb1 near-black b">{heading}</p>}
+      {showHeading && subtitle && <p className="f6 mb3 gray">{subtitle}</p>}
       
       <form 
         action="https://buttondown.email/api/emails/embed-subscribe/studioqueral" 
@@ -19,9 +24,11 @@ function NewsletterSignup() {
           className="input-reset ba b--moon-gray br2 pa2 w-100 f6 mb2"
         />
         
-        <p className="f6 mt1 mb3 gray lh-copy">
-          you'll get updates on projects / writing / life a few times a year, that's it!
-        </p>
+        {showDescription && (
+          <p className="f6 mt1 mb3 gray lh-copy">
+            a few times a year, I gather my thoughts, share some projects, and re-connect with people I enjoy.
+          </p>
+        )}
         
         <button
           type="submit"
@@ -35,4 +42,3 @@ function NewsletterSignup() {
 }
 
 export default NewsletterSignup
-

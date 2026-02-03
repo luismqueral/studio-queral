@@ -302,6 +302,8 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
   const [isLoading, setIsLoading] = useState(true)
   const [sliderValue, setSliderValue] = useState(50)
   const [isInitialized, setIsInitialized] = useState(false)
+  const [clickCount, setClickCount] = useState(0)
+  const [showHiddenSlider, setShowHiddenSlider] = useState(false)
 
   // Generate weighted random parameters (75% subtle, 25% extreme)
   const generateRandomParams = () => {
@@ -431,7 +433,7 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
     if (!isInitialized) return
 
     const animate = () => {
-      timeRef.current += 0.016
+      timeRef.current += 0.008
       render()
       animationIdRef.current = requestAnimationFrame(animate)
     }
@@ -557,17 +559,27 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
     randomParamsRef.current = generateRandomParams()
     console.log('🎲 Randomized effects:', randomParamsRef.current)
     render()
+    
+    // Easter egg: show slider after 5 clicks
+    if (hideSlider && !showHiddenSlider) {
+      const newCount = clickCount + 1
+      setClickCount(newCount)
+      if (newCount >= 5) {
+        setShowHiddenSlider(true)
+        console.log('🎛️ Secret slider unlocked!')
+      }
+    }
   }
 
   return (
     <div className="center" style={{ width: '100%' }}>
       <div className="tc mb3 relative">
         <div
-          className="br2"
+          className="br2 webgl-skeleton-pulse"
           style={{
             width: '100%',
             aspectRatio: '1 / 1',
-            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            backgroundColor: 'rgba(0, 0, 0, 0.08)',
             position: 'absolute',
             top: 0,
             left: 0,
@@ -594,11 +606,11 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
         />
       </div>
 
-      {!hideSlider && (
+      {(!hideSlider || showHiddenSlider) && (
         <div className="center" style={{ maxWidth: '100%' }}>
           <div className="flex items-center justify-between mb2">
-            <span className="f5 gray">luis</span>
-            <span className="f5 gray">not luis</span>
+            <span className="f5 near-black">luis</span>
+            <span className="f5 near-black">not luis</span>
           </div>
           <div className="relative">
             <input

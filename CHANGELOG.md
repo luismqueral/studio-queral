@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-02-03
+- added remark-gfm plugin and table CSS styling to enable markdown table rendering in notes
+- added content for "a guidebook for product cowboys" note (generating-software.md) - covers criteria for "vibecoding" projects, example use cases, and red flags
+
 2026-02-01
+- created AboutPage stub with single-column layout, placeholder content, and entrance animation in src/pages/AboutPage.jsx
+- added animated page transition for "learn more" link: sidebar expands to full width while content fades out and slides left in HomePageLayouts.jsx
+- renamed "about me" to "learn more" and linked to /about route in HomePageLayouts.jsx
+- added /about route in App.jsx
+- changed sidebar link bullets from list dots to thick horizontal dashes (em dashes) in gray for about me, contact, instagram links in HomePageLayouts.jsx
 - split newsletter heading into two lines: "thanks for reading!" (bold) and "consider joining my mailing list:" (gray) in NewsletterSignup.jsx
 - restructured newsletter form layout: moved subscribe button below description, made it full width (500px max), stacked vertically in NewsletterSignup.jsx
 - updated newsletter description to "you'll get updates on projects / writing / life a few times a year, that's it!" in NewsletterSignup.jsx

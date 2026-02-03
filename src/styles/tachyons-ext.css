@@ -213,3 +213,129 @@ pre code {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
 }
+
+/* Pulsing skeleton loader for WebGL */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.webgl-skeleton-pulse {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* Note content (markdown) styling */
+.note-content h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.note-content h3 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.note-content p {
+  margin-bottom: 1rem;
+}
+
+.note-content ul, .note-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.note-content li {
+  margin-bottom: 0.5rem;
+}
+
+.note-content blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #ddd;
+  color: #555;
+  font-style: italic;
+}
+
+.note-content code {
+  background: #f5f5f5;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.note-content pre {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.note-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.note-content a {
+  color: #357edd;
+  text-decoration: underline;
+}
+
+.note-content a:hover {
+  text-decoration: none;
+}
+
+.note-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.note-content hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2rem 0;
+}
+
+.note-content figure {
+  margin: 1.5rem 0;
+}
+
+.note-content figure img,
+.note-content figure video {
+  max-width: 100%;
+  height: auto;
+}
+
+.note-content figcaption {
+  margin-top: 0.5rem;
+}
+
+.note-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.note-content th,
+.note-content td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.note-content th {
+  font-weight: 600;
+  background: #f9f9f9;
+}
+
+.note-content tr:last-child td {
+  border-bottom: none;
+}
