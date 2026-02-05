@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 2026-02-05
 - moved notes media off-repo by ignoring `public/notes/**` and adding a simple `VITE_NOTES_CDN_BASE_URL` rewrite so note images/videos can be served from a CDN/blob without changing markdown
 - added a small `public/notes/README.md` to document the new media hosting convention
+- documented the content/media publishing pipeline and current CDN setup status in `CONTENT_PIPELINE.md` so future notes can ship without bloating git
 
 2026-02-03
 - added remark-gfm plugin and table CSS styling to enable markdown table rendering in notes
