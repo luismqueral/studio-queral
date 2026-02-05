@@ -4,6 +4,29 @@ import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import { notes } from '../notes'
 
+const normalizeBaseUrl = (url) => {
+  if (!url) return ''
+  return url.replace(/\/+$/, '')
+}
+
+const rewriteNotesAssetUrls = (content) => {
+  const baseUrl = normalizeBaseUrl(import.meta.env.VITE_NOTES_CDN_BASE_URL)
+  if (!baseUrl) return content
+
+  const notesPrefix = `${baseUrl}/notes/`
+
+  return content
+    // html attrs
+    .replaceAll('src="/notes/', `src="${notesPrefix}`)
+    .replaceAll("src='/notes/", `src='${notesPrefix}`)
+    .replaceAll('href="/notes/', `href="${notesPrefix}`)
+    .replaceAll("href='/notes/", `href='${notesPrefix}`)
+    .replaceAll('poster="/notes/', `poster="${notesPrefix}`)
+    .replaceAll("poster='/notes/", `poster='${notesPrefix}`)
+    // markdown links/images
+    .replaceAll('](/notes/', `](${notesPrefix}`)
+}
+
 function NotePage() {
   const { slug } = useParams()
   const note = notes[slug]
@@ -18,6 +41,8 @@ function NotePage() {
     )
   }
 
+  const content = rewriteNotesAssetUrls(note.content)
+
   return (
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
@@ -26,7 +51,7 @@ function NotePage() {
         {note.date && <p className="f6 gray mb4">{note.date}</p>}
         
         <div className="f5 lh-copy near-black">
-          <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{note.content}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{content}</Markdown>
         </div>
       </article>
       

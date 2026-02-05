@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Notes media (keep out of git; serve via CDN/blob)
+public/notes/**
+!public/notes/README.md
