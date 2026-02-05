@@ -16,6 +16,8 @@ const getContent = (slug) => {
 const notesMetadata = {
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
+  'an-ode-to-interns': { title: 'an ode to interns', date: 'September 2013' },
+  'forget-grades': { title: 'forget grades, break rules, build things', date: 'November 2013' },
   'mapping-generative-arena': { title: 'mapping the "generative arena"' },
   'how-to-attend-meetings': { title: 'how to attend meetings' },
   'generating-software': { title: 'a guidebook for product cowboys' },

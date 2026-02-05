@@ -27,6 +27,12 @@ const rewriteNotesAssetUrls = (content) => {
     .replaceAll('](/notes/', `](${notesPrefix}`)
 }
 
+// Strip the first # heading from markdown (title is handled by metadata)
+const stripFirstHeading = (content) => {
+  // Match first line if it's a # heading (with optional leading whitespace/newlines)
+  return content.replace(/^\s*#\s+[^\n]+\n*/, '')
+}
+
 function NotePage() {
   const { slug } = useParams()
   const note = notes[slug]
@@ -41,21 +47,21 @@ function NotePage() {
     )
   }
 
-  const content = rewriteNotesAssetUrls(note.content)
+  const content = rewriteNotesAssetUrls(stripFirstHeading(note.content))
 
   return (
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
       <article className="note-content">
-        <h1 className="f3 near-black mb2 lh-title">{note.title}</h1>
-        {note.date && <p className="f6 gray mb4">{note.date}</p>}
+        <h1 className="f3 near-black mb4 lh-title">{note.title}</h1>
         
         <div className="f5 lh-copy near-black">
           <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{content}</Markdown>
         </div>
       </article>
       
-      <footer className="mt5 pt4 bt b--light-gray">
+      {note.date && <p className="f6 gray mt5 mb0">last updated: {note.date}</p>}
+      <footer className="mt4 pt4 bt b--light-gray">
         <Link to="/" className="f6 blue underline hover-no-underline">← back home</Link>
       </footer>
     </div>

@@ -23,18 +23,18 @@ Will be attempting a paella today. It will be based on a paella I made with my f
 ### Step 1
 Begin to heat the pan with the center burner only, add a little bit of olive oil.
 <figure class="content-figure">
-  <img src="/notes/paella-recipe/image_1756336342446.png" width="auto" class="ba b--light-gray bw2 br2">
+  <img src="/notes/paella-recipe/image_1756336342446.webp" width="auto" class="ba b--light-gray bw2 br2">
   <figcaption class="f6 gray tl"></figcaption>
 </figure>
 
 ### Step 2
 Pour in the chopped green and red peppers. Add a little bit of salt for taste.
 <figure class="content-figure">
-  <img src="/notes/paella-recipe/image_1756336354835.png" width="auto" class="ba b--light-gray bw2 br2">
+  <img src="/notes/paella-recipe/image_1756336354835.webp" width="auto" class="ba b--light-gray bw2 br2">
   <figcaption class="f6 gray tl"></figcaption>
 </figure>
 <figure class="content-figure">
-  <img src="/notes/paella-recipe/image_1756336413217.png" width="auto" class="ba b--light-gray bw2 br2">
+  <img src="/notes/paella-recipe/image_1756336413217.webp" width="auto" class="ba b--light-gray bw2 br2">
   <figcaption class="f6 gray tl">A little salt for taste.</figcaption>
 </figure>
 <figure class="content-figure">
@@ -58,7 +58,7 @@ Start adding the chicken, cook for a bit. Be liberal with more olive oil.
 </figure>
 After the chicken/meat is mostly cooked, mix the chicken with the peppers.
 <figure class="content-figure">
-  <img src="/notes/paella-recipe/image_1756336844217.png" width="auto" class="ba b--light-gray bw2 br2">
+  <img src="/notes/paella-recipe/image_1756336844217.webp" width="auto" class="ba b--light-gray bw2 br2">
   <figcaption class="f6 gray tl"></figcaption>
 </figure>
 <figure class="content-figure">
