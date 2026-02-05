@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-05
+- added ingredient card styling with full-width mobile breakout (`ingredient-card` class) and consistent padding
+- tightened list spacing (0.25rem between items) with nested list rules for consistent vertical rhythm
+- updated paella recipe: nested ingredient list with styled card wrapper, original recipe as blockquotes
+- switched syntax highlighting to solarizedlight theme, scoped inline code CSS to avoid theme conflicts
+- fixed 404 errors on production for article pages - added SPA fallback rewrite in vercel.json so direct navigation to routes like /notes/paella-recipe properly loads index.html instead of returning 404
+- cleaned up code block implementation: simplified CodeBlock component for reuse across notes
+- re-added syntax highlighting for code blocks using react-syntax-highlighter (without custom block types)
+- removed custom code block types (ingredients, note, tip, warning) - reverted to simple markdown styling for ingredients list
 - added password-protected /notes index page showing public vs draft status
 - added "an ode to interns" and "forget grades" essays from Figure 53 (2013)
 - migrated wu-tang assets to CDN with proper /notes/ paths

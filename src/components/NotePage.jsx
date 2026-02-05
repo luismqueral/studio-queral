@@ -2,7 +2,55 @@ import { useParams, Link } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { notes } from '../notes'
+
+/**
+ * CodeBlock - Renders fenced code blocks with syntax highlighting
+ * 
+ * Usage in markdown:
+ *   ```javascript
+ *   const x = 1;
+ *   ```
+ * 
+ * Supports all Prism languages (js, python, markdown, bash, etc.)
+ */
+const CodeBlock = ({ inline, className, children }) => {
+  const match = /language-(\w+)/.exec(className || '')
+  const language = match ? match[1] : ''
+  const code = String(children).replace(/\n$/, '')
+
+  // Fenced code block with language
+  if (!inline && language) {
+    return (
+      <SyntaxHighlighter
+        style={solarizedlight}
+        language={language}
+        PreTag="pre"
+        customStyle={{
+          margin: '1rem 0',
+          borderRadius: '6px',
+          fontSize: '14px',
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+    )
+  }
+
+  // Fenced code block without language
+  if (!inline) {
+    return (
+      <pre className="bg-near-white pa3 br2 overflow-auto f6" style={{ whiteSpace: 'pre-wrap' }}>
+        <code>{code}</code>
+      </pre>
+    )
+  }
+
+  // Inline code
+  return <code className="bg-light-gray ph1 br1 f6">{children}</code>
+}
 
 const normalizeBaseUrl = (url) => {
   if (!url) return ''
@@ -56,7 +104,16 @@ function NotePage() {
         <h1 className="f3 near-black mb4 lh-title">{note.title}</h1>
         
         <div className="f5 lh-copy near-black">
-          <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+          <Markdown 
+            remarkPlugins={[remarkGfm]} 
+            rehypePlugins={[rehypeRaw]}
+            components={{ 
+              code: CodeBlock,
+              pre: ({ children }) => <>{children}</>
+            }}
+          >
+            {content}
+          </Markdown>
         </div>
       </article>
       

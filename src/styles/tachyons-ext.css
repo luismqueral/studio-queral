@@ -30,42 +30,20 @@ body {
   margin: 0;
 }
 
-/* Code Block Styling */
-pre {
-  position: relative;
-  background-color: #f6f8fa !important;
-  border: 1px solid #d0d7de !important;
-  border-radius: 6px !important;
-  padding: 16px !important;
-  margin: 16px 0 !important;
+/* Code Block Styling - base styles for plain code blocks */
+.note-content pre {
   overflow-x: auto;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
-  font-size: 14px !important;
-  line-height: 1.45 !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  box-shadow: none !important;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
-pre code {
-  color: #24292f !important;
-  background: none !important;
-  padding: 0 !important;
-  font-family: inherit !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  text-shadow: none !important;
-}
-
-/* Inline code styles */
-.inline-code {
-  background-color: #f4f4f4;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.125rem;
-  font-size: 0.875rem;
-  font-family: Monaco, Menlo, "Ubuntu Mono", monospace;
+.note-content pre code {
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 /* Tag Pill Enhancement */
@@ -242,16 +220,44 @@ pre code {
 }
 
 .note-content p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .note-content ul, .note-content ol {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   padding-left: 1.5rem;
 }
 
+/* Nested lists: no extra bottom margin */
+.note-content li > ul,
+.note-content li > ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
 .note-content li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.note-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Remove bottom margin from last element inside cards/boxes */
+.note-content > div > *:last-child,
+.note-content > div > *:last-child > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Ingredient card - full width below large breakpoint (matches Tachyons -l at 60em) */
+@media screen and (max-width: 60em) {
+  .ingredient-card {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    border-radius: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .note-content blockquote {
@@ -269,18 +275,6 @@ pre code {
   font-size: 0.9em;
 }
 
-.note-content pre {
-  background: #f5f5f5;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  margin-bottom: 1rem;
-}
-
-.note-content pre code {
-  background: none;
-  padding: 0;
-}
 
 .note-content a {
   color: #357edd;
@@ -339,3 +333,4 @@ pre code {
 .note-content tr:last-child td {
   border-bottom: none;
 }
+
