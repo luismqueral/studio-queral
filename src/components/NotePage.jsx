@@ -90,7 +90,7 @@ function NotePage() {
       <div className="pa4 mw7 center">
         <h1 className="f4 near-black mb3">Note not found</h1>
         <p className="f5 gray mb4">The note "{slug}" doesn't exist yet.</p>
-        <Link to="/" className="f6 blue underline hover-no-underline">← back home</Link>
+        <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
       </div>
     )
   }
@@ -99,7 +99,7 @@ function NotePage() {
 
   return (
     <div className="pa4 mw7 center">
-      <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
+      <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back</Link></p>
       <article className="note-content">
         <h1 className="f3 near-black mb4 lh-title">{note.title}</h1>
         
@@ -119,7 +119,7 @@ function NotePage() {
       
       {note.date && <p className="f6 gray mt5 mb0">last updated: {note.date}</p>}
       <footer className="mt4 pt4 bt b--light-gray">
-        <Link to="/" className="f6 blue underline hover-no-underline">← back home</Link>
+        <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
       </footer>
     </div>
   )
