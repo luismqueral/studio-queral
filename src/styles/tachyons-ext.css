@@ -1,4 +1,109 @@
-/* Neue Haas Unica font */
+/* ========================================
+   CUSTOM COLORS - Extending Tachyons palette
+   ======================================== */
+
+/* Deep Purple */
+.deep-purple { color: #512da8; }
+.bg-deep-purple { background-color: #512da8; }
+.b--deep-purple { border-color: #512da8; }
+
+/* Washed Purple */
+.washed-purple { color: #ede7f6; }
+.bg-washed-purple { background-color: #ede7f6; }
+
+/* Teal */
+.teal { color: #009688; }
+.bg-teal { background-color: #009688; }
+.b--teal { border-color: #009688; }
+.hover-teal:hover { color: #009688; }
+.hover-bg-teal:hover { background-color: #009688; }
+
+/* Washed Teal */
+.washed-teal { color: #e0f2f1; }
+.bg-washed-teal { background-color: #e0f2f1; }
+
+/* Coral */
+.coral { color: #ff6f61; }
+.bg-coral { background-color: #ff6f61; }
+.b--coral { border-color: #ff6f61; }
+.hover-coral:hover { color: #ff6f61; }
+.hover-bg-coral:hover { background-color: #ff6f61; }
+
+/* Washed Coral */
+.washed-coral { color: #ffeae8; }
+.bg-washed-coral { background-color: #ffeae8; }
+
+/* Indigo */
+.indigo { color: #3f51b5; }
+.bg-indigo { background-color: #3f51b5; }
+.b--indigo { border-color: #3f51b5; }
+.hover-indigo:hover { color: #3f51b5; }
+.hover-bg-indigo:hover { background-color: #3f51b5; }
+
+/* Washed Indigo */
+.washed-indigo { color: #e8eaf6; }
+.bg-washed-indigo { background-color: #e8eaf6; }
+
+/* Amber */
+.amber { color: #ffb300; }
+.bg-amber { background-color: #ffb300; }
+.b--amber { border-color: #ffb300; }
+.hover-amber:hover { color: #ffb300; }
+.hover-bg-amber:hover { background-color: #ffb300; }
+
+/* Washed Amber */
+.washed-amber { color: #fff8e1; }
+.bg-washed-amber { background-color: #fff8e1; }
+
+/* Lime */
+.lime { color: #c0ca33; }
+.bg-lime { background-color: #c0ca33; }
+.b--lime { border-color: #c0ca33; }
+.hover-lime:hover { color: #c0ca33; }
+.hover-bg-lime:hover { background-color: #c0ca33; }
+
+/* Washed Lime */
+.washed-lime { color: #f9fbe7; }
+.bg-washed-lime { background-color: #f9fbe7; }
+
+/* Cyan */
+.cyan { color: #00bcd4; }
+.bg-cyan { background-color: #00bcd4; }
+.b--cyan { border-color: #00bcd4; }
+.hover-cyan:hover { color: #00bcd4; }
+.hover-bg-cyan:hover { background-color: #00bcd4; }
+
+/* Washed Cyan */
+.washed-cyan { color: #e0f7fa; }
+.bg-washed-cyan { background-color: #e0f7fa; }
+
+/* Rose */
+.rose { color: #e91e63; }
+.bg-rose { background-color: #e91e63; }
+.b--rose { border-color: #e91e63; }
+.hover-rose:hover { color: #e91e63; }
+.hover-bg-rose:hover { background-color: #e91e63; }
+
+/* Washed Rose */
+.washed-rose { color: #fce4ec; }
+.bg-washed-rose { background-color: #fce4ec; }
+
+/* Slate (nice neutral) */
+.slate { color: #607d8b; }
+.bg-slate { background-color: #607d8b; }
+.b--slate { border-color: #607d8b; }
+.hover-slate:hover { color: #607d8b; }
+.hover-bg-slate:hover { background-color: #607d8b; }
+
+/* Washed Slate */
+.washed-slate { color: #eceff1; }
+.bg-washed-slate { background-color: #eceff1; }
+
+/* ========================================
+   CUSTOM FONT FACES
+   ======================================== */
+
+/* Neue Haas Unica */
 @font-face {
   font-family: 'Neue Haas Unica';
   src: url('/fonts/neuehaasunicaw1g-regular.woff') format('woff');
@@ -18,6 +123,189 @@
   src: url('/fonts/neuehaasunicaw1g-bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
+}
+
+/* Galapagos variants */
+@font-face {
+  font-family: 'Galapagos A Grid';
+  src: url('/fonts/GalapagosAGrid-Bold.woff2') format('woff2'),
+       url('/fonts/GalapagosAGrid-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galapagos AB Grid';
+  src: url('/fonts/GalapagosABGrid-Bold.woff2') format('woff2'),
+       url('/fonts/GalapagosABGrid-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galapagos ABC Grid';
+  src: url('/fonts/GalapagosABCGrid-Bold.woff2') format('woff2'),
+       url('/fonts/GalapagosABCGrid-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Display & Decorative fonts */
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('/fonts/ComicSansMS.woff2') format('woff2'),
+       url('/fonts/ComicSansMS.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('/fonts/ComicSansMS-Bold.woff2') format('woff2'),
+       url('/fonts/ComicSansMS-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lucida Blackletter';
+  src: url('/fonts/LucidaBlackletter.woff2') format('woff2'),
+       url('/fonts/LucidaBlackletter.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Algerian';
+  src: url('/fonts/Algerian.woff2') format('woff2'),
+       url('/fonts/Algerian.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brush Script Std';
+  src: url('/fonts/BrushScriptStd.woff2') format('woff2'),
+       url('/fonts/BrushScriptStd.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Curlz MT';
+  src: url('/fonts/CurlzMT.woff2') format('woff2'),
+       url('/fonts/CurlzMT.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Davida Bold BT';
+  src: url('/fonts/DavidaBoldBT-Regular.woff2') format('woff2'),
+       url('/fonts/DavidaBoldBT-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hobo Std';
+  src: url('/fonts/HoboStd.woff2') format('woff2'),
+       url('/fonts/HoboStd.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Relinquish';
+  src: url('/fonts/Relinquish-Regular.woff2') format('woff2'),
+       url('/fonts/Relinquish-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* TeX Gyre fonts */
+@font-face {
+  font-family: 'TeX Gyre Heros';
+  src: url('/fonts/TeX Gyre/texgyreheros-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros';
+  src: url('/fonts/TeX Gyre/texgyreheros-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros';
+  src: url('/fonts/TeX Gyre/texgyreheros-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros';
+  src: url('/fonts/TeX Gyre/texgyreheros-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros Condensed';
+  src: url('/fonts/TeX Gyre/texgyreheroscn-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros Condensed';
+  src: url('/fonts/TeX Gyre/texgyreheroscn-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros Condensed';
+  src: url('/fonts/TeX Gyre/texgyreheroscn-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Heros Condensed';
+  src: url('/fonts/TeX Gyre/texgyreheroscn-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Termes';
+  src: url('/fonts/TeX Gyre/texgyretermes-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Termes';
+  src: url('/fonts/TeX Gyre/texgyretermes-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Termes';
+  src: url('/fonts/TeX Gyre/texgyretermes-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TeX Gyre Termes';
+  src: url('/fonts/TeX Gyre/texgyretermes-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
 }
 
 /* Prevent scrollbar jitter between pages */
@@ -63,50 +351,45 @@ body {
   text-decoration: none !important;
 }
 
-/* Random Logo Font Utilities */
+/* ========================================
+   FONT UTILITY CLASSES
+   ======================================== */
+
+/* Primary / System fonts */
+.font-system { font-family: Helvetica, "Helvetica Neue", Arial, sans-serif; }
+.font-system-serif { font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
+.font-system-mono { font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; }
+.font-times { font-family: 'Times New Roman', Times, serif; }
+
+/* Custom fonts (bundled WOFF) */
+.font-neue-haas-unica { font-family: 'Neue Haas Unica', Helvetica, Arial, sans-serif; }
+.font-galapagos-a { font-family: 'Galapagos A Grid', sans-serif; }
+.font-galapagos-ab { font-family: 'Galapagos AB Grid', sans-serif; }
+.font-galapagos-abc { font-family: 'Galapagos ABC Grid', sans-serif; }
+
+/* TeX Gyre fonts */
+.font-tex-heros { font-family: 'TeX Gyre Heros', sans-serif; }
+.font-tex-heros-cn { font-family: 'TeX Gyre Heros Condensed', sans-serif; }
+.font-tex-termes { font-family: 'TeX Gyre Termes', serif; }
+
+/* Display & Decorative fonts (bundled WOFF) */
 .font-comic { font-family: 'Comic Sans MS', cursive; }
 .font-blackletter { font-family: 'Lucida Blackletter', serif; }
-.font-times { font-family: 'Times New Roman', serif; font-size: 1.1em; }
+.font-algerian { font-family: 'Algerian', serif; }
+.font-brush-script { font-family: 'Brush Script Std', cursive; }
+.font-curlz { font-family: 'Curlz MT', cursive; }
+.font-davida { font-family: 'Davida Bold BT', serif; }
+.font-hobo { font-family: 'Hobo Std', sans-serif; }
+.font-relinquish { font-family: 'Relinquish', serif; }
 
-.font-galapagos { font-family: 'ABC Galapagos AB Grid Unlicensed Trial', sans-serif; }
-.font-inter { font-family: 'Inter', 'InterVariable', sans-serif; }
-
-/* System font classes */
-.font-system {
-  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
-}
-
-.font-inter {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-recursive {
-  font-family: 'Recursive', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-roboto-mono {
-  font-family: 'Roboto Mono', monospace;
-}
-
-.font-lato {
-  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-arimo {
-  font-family: 'Arimo', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-source-sans {
-  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-neue-haas-unica {
-  font-family: 'Neue Haas Unica', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-ibm-plex-sans {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-}
+/* Google Fonts (requires external link or import) */
+.font-inter { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-recursive { font-family: 'Recursive', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-roboto-mono { font-family: 'Roboto Mono', monospace; }
+.font-lato { font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-arimo { font-family: 'Arimo', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-source-sans { font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-ibm-plex-sans { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
 
 /* Link hover utility */
 .hover-no-underline:hover {
@@ -128,13 +411,6 @@ body {
   color: #999;
 }
 
-.font-system-serif {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.font-system-mono {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-}
 
 /* Custom max-width for homepage */
 .mw5-5 {
@@ -332,5 +608,42 @@ body {
 
 .note-content tr:last-child td {
   border-bottom: none;
+}
+
+/* Style guide tables - stack on mobile */
+@media screen and (max-width: 40em) {
+  .style-guide-table tr {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0;
+  }
+  
+  .style-guide-table td {
+    display: block;
+    width: 100% !important;
+    padding: 0.25rem 0;
+  }
+  
+  .style-guide-table td:first-child {
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Color palette - responsive columns */
+.color-palette-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+@media screen and (min-width: 30em) {
+  .color-palette-grid {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .color-palette-grid {
+    column-count: 3;
+  }
 }
 

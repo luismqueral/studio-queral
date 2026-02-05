@@ -3,6 +3,7 @@ import HomePage from './components/HomePage'
 import AboutPage from './pages/AboutPage'
 import NotePage from './components/NotePage'
 import NotesIndexPage from './pages/NotesIndexPage'
+import StyleGuidePage from './pages/StyleGuidePage'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/notes" element={<NotesIndexPage />} />
         <Route path="/notes/:slug" element={<NotePage />} />
+        <Route path="/styles" element={<StyleGuidePage />} />
       </Routes>
     </div>
   )

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-05
+- added "Custom Extensions" section to StyleGuidePage showing all the new colors with swatches
+- added custom color palette to tachyons-ext.css: purple, teal, coral, indigo, amber, lime, cyan, rose, and slate with text/bg/border/hover variants plus washed backgrounds for each
+- added TeX Gyre font family: Heros (.font-tex-heros), Heros Condensed (.font-tex-heros-cn), and Termes (.font-tex-termes) with full weight/style variants
+- updated style guide: aligned all typography tables to consistent 200px first column to fit longest class names, moved .font-neue-haas-unica to Other Fonts section, wider color swatches (96x48px) with reduced border radius
+- updated StyleGuidePage header to pale yellow background with personalized intro text explaining the style guide purpose and recommending Tachyons
+- added /styles route with StyleGuidePage documenting the custom Tachyons instance: color palette (grays, accents, semantic, washed), typography scale (f1-f7 with px values at 22px base), font weights, breakpoints, and custom utility classes
 - added ingredient card styling with full-width mobile breakout (`ingredient-card` class) and consistent padding
 - tightened list spacing (0.25rem between items) with nested list rules for consistent vertical rhythm
 - updated paella recipe: nested ingredient list with styled card wrapper, original recipe as blockquotes
