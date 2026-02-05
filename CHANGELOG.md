@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-02-04
+- added prerequisites section to README documenting Node.js requirement and installation, fixed localhost port from 3001 to 3000
+- installed Node.js via Homebrew and npm dependencies to enable local development on new machine
+
 2026-01-28
 - removed WIP message, changed "He currently works" to "He works", updated slider labels to use site font instead of mono in HomePage.jsx and WebGLMorpher.jsx
 - increased horizontal padding on content containers (pa2 to ph4) for better mobile readability in HomePage.jsx

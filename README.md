@@ -2,6 +2,17 @@
 
 A modern React + Vite personal website with WebGL graphics and newsletter integration.
 
+## Prerequisites
+
+- **Node.js** (v18 or higher recommended)
+  
+  On macOS with Homebrew:
+  ```bash
+  brew install node
+  ```
+
+  Or use a version manager like [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm).
+
 ## Quick Start
 
 ```bash
@@ -9,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Visit http://localhost:3001
+Visit http://localhost:3000
 
 ## Newsletter Setup
 
