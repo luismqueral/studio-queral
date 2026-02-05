@@ -25,7 +25,7 @@ function AboutPage() {
             <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, MD.
           </p>
           
-          <p className="f5 lh-copy near-black">
+          {/* <p className="f5 lh-copy near-black">
             He currently works for <em>The New York Times</em> focusing on improving developer workflows and building the Generative Design Lab — an initiative exploring how AI can augment creative and editorial processes.
           </p>
           
@@ -39,7 +39,7 @@ function AboutPage() {
           
           <p className="f5 lh-copy near-black">
             He graduated from UMBC's <em>Interdisciplinary Studies</em> program where he wrote a thesis using storytelling as a framing for designing interactive experiences.
-          </p>
+          </p> */}
           
           <p className="tc moon-gray mv4" style={{ fontSize: '2em', lineHeight: '1' }}>*&nbsp;*&nbsp;*</p>
           

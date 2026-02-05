@@ -91,10 +91,11 @@ function HomePage() {
         <strong>Luis Queral</strong> is a product designer and creative technologist.
       </p>
       <p className="f6 lh-copy near-black">
-        He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> focusing on improving developer workflows and building our Generative Design Lab.
+        He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> and focuses on infrastructure tooling.
       </p>
+      {/* and running the <em>Generative Design Lab</em>. */}
       <p className="f6 lh-copy near-black">
-        In his spare time, he enjoys writing, making video art, and generally hanging out. <a href="/about" className="blue underline hover-no-underline">Learn more</a>
+        In his spare time, he enjoys writing, making video art, and generally hanging out.
       </p>
       <div className="f6 mt3 near-black">
         <p className="mb2">contact: <a href="mailto:hey@queral.studio" className="blue underline hover-no-underline">hey@queral.studio</a></p>
