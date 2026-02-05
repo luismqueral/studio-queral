@@ -103,3 +103,4 @@ Each page load will randomly select one take to display.
 |----------|-------------|----------|
 | `BUTTONDOWN_API_KEY` | Buttondown newsletter API key | Yes |
 | `VITE_NOTES_CDN_BASE_URL` | base URL for note media (rewrites `/notes/...` urls) | No |
+| `BLOB_READ_WRITE_TOKEN` | vercel blob token (only needed to upload media) | No |
