@@ -26,6 +26,16 @@ Visit http://localhost:3000
 
 This site uses Buttondown for newsletter subscriptions.
 
+## Notes + media publishing (current approach)
+
+The **site/app code** lives in this repo. Notes are stored as **markdown** in-repo, but **note media is not**.
+
+- **Markdown (in git)**: `src/notes/content/<slug>.md`
+- **Media (not in git)**: hosted on a CDN/blob provider under `/notes/<slug>/...`
+- **Runtime rewrite**: the renderer will rewrite `"/notes/..."` URLs to `${VITE_NOTES_CDN_BASE_URL}/notes/...` when that env var is set
+
+See `CONTENT_PIPELINE.md` for the working mental model + a simple publishing pipeline.
+
 ### Local Development
 
 1. Create a `.env.local` file in the project root:
@@ -103,3 +113,5 @@ Each page load will randomly select one take to display.
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `BUTTONDOWN_API_KEY` | Buttondown newsletter API key | Yes |
+| `VITE_NOTES_CDN_BASE_URL` | base URL for note media (rewrites `/notes/...` urls) | No |
+| `BLOB_READ_WRITE_TOKEN` | vercel blob token (only needed to upload media) | No |

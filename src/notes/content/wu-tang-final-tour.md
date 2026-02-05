@@ -1,0 +1,45 @@
+I saw the Wu-Tang Clan last night, apparently for their final tour ever.
+
+<figure class="content-figure">
+<img src="/notes/wu-tang-final-tour/image_1750948644707.webp" width="auto" class=" ba b--light-gray bw2 br2 ib">
+<figcaption class="f6 gray tl">The boys, all grown-up.</figcaption>
+</figure>
+<figure class="content-figure">
+<img src="/notes/wu-tang-final-tour/image_1750948722379.webp" width="auto" class="ib ba b--light-gray bw2 br2">
+<figcaption class="f6 gray tl">Our Mayor, Brandon Scott, joined in on <em>Wu</em>-mania this past week as well.</figcaption>
+</figure>
+
+Today I have been on a Wu-kick and was listening to an interview with RZA on the [_Broken Record Podcast_](https://youtu.be/4FMDknbnKMg). There are so many good quotes from this interview, but here's one that stuck with me about his film influences:
+
+> My first movie I ever saw was a Tom Sawyer / Huckleberry Finn movie. Second movie was _Star Wars_. Third movie was _The Swarm_. Fourth movie was … a Bruce Lee movie called _Fury of the Dragon_… and _Black Samurai_ with Jim Kelly… Those are my first five movies… The force is my spirituality. The swarm, Killer Bees, kung fu movies… the writing of Mark Twain, that storytelling is all in my blood.
+
+<figure class="content-figure">
+<img src="/notes/wu-tang-final-tour/image_1750948241151.webp" width="auto" class="ba b--light-gray bw2 br2">
+<figcaption class="f6 gray tl">RZA himself — via <a href="https://www.gq.com/story/the-real-life-diet-rza">GQ</a></figcaption>
+</figure>
+
+RZA's genius is his ability to sample not just sounds, but also key pieces of his influences to generate entirely new works and concepts.
+
+What I also love about RZA is that he, at his core, is an unbelievable dork.
+
+He is certainly not afraid to be goofy or silly (he covered _Smells Like Teen Spirit_ last night to a crowd that was scratching their heads for a minute). That silliness suggests a certain kind of fearlessness. It takes extreme courage, especially in the conformist, often insecure world of hip-hop culture, to pull stuff like that off.
+
+But the thing about RZA (and _Andre 3000_ for that matter) that separates him from being merely eccentric, is that his comfort-level with silliness is combined with a few other dangerous characteristics: _ambition_, _work ethic_, and _vision_.
+
+<figure class="content-figure">
+<img src="/notes/wu-tang-final-tour/image_1750948350828.webp" width="auto" class="ba b--light-gray bw2 br2">
+<figcaption class="f6 gray tl">Andre 3000, showing off his flute to promote is New Age album <a href="https://www.youtube.com/watch?v=vRxGdKIuO20"><em>New Blue Sun</em></a>, photo by <a href="https://kairegan.com/">Kai Regan</a></figcaption>
+</figure>
+
+RZA is a true leader and is someone who, creatively speaking, I admire deeply.
+
+There are so many good <em>what-the-fuck-is-going-on</em> happening moments in _RZA_ history. I will leave you with a few of of my favorites:
+
+<figure class="content-figure">
+<video src="/notes/wu-tang-final-tour/media_1750947999847.mp4" width="auto" controls></video>
+<figcaption class="f6 gray tl">A beat only RZA can pull off and only Ghostface can conquer.</figcaption>
+</figure>
+<figure class="content-figure">
+<video src="/notes/wu-tang-final-tour/media_1750948095787.mp4" width="auto" controls></video>
+<figcaption class="f6 gray tl">RZA going full-send on easily one of the worst beasts I have ever heard.</figcaption>
+</figure>

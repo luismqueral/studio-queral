@@ -2,11 +2,61 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-02-05
+- added password-protected /notes index page showing public vs draft status
+- added "an ode to interns" and "forget grades" essays from Figure 53 (2013)
+- migrated wu-tang assets to CDN with proper /notes/ paths
+- updated NotePage to strip first # heading and show "last updated" in footer
+- moved notes media off-repo by ignoring `public/notes/**` and adding a simple `VITE_NOTES_CDN_BASE_URL` rewrite so note images/videos can be served from a CDN/blob without changing markdown
+- added a small `public/notes/README.md` to document the new media hosting convention
+- documented the content/media publishing pipeline and current CDN setup status in `CONTENT_PIPELINE.md` so future notes can ship without bloating git
+- added a simple `npm run upload:notes-media` script for uploading `notes-media/notes/**` to vercel blob and pinned `@vercel/blob` to a node 18 compatible version for local dev
+- made the uploader accept custom blob token env var prefixes (like `STUDIO_QUERAL_READ_WRITE_TOKEN`) so it works with vercel's advanced blob env naming
+
 2026-02-04
 - added prerequisites section to README documenting Node.js requirement and installation, fixed localhost port from 3001 to 3000
 - installed Node.js via Homebrew and npm dependencies to enable local development on new machine
 
+2026-02-03
+- added remark-gfm plugin and table CSS styling to enable markdown table rendering in notes
+- added content for "a guidebook for product cowboys" note (generating-software.md) - covers criteria for "vibecoding" projects, example use cases, and red flags
+
+2026-02-01
+- created AboutPage stub with single-column layout, placeholder content, and entrance animation in src/pages/AboutPage.jsx
+- added animated page transition for "learn more" link: sidebar expands to full width while content fades out and slides left in HomePageLayouts.jsx
+- renamed "about me" to "learn more" and linked to /about route in HomePageLayouts.jsx
+- added /about route in App.jsx
+- changed sidebar link bullets from list dots to thick horizontal dashes (em dashes) in gray for about me, contact, instagram links in HomePageLayouts.jsx
+- split newsletter heading into two lines: "thanks for reading!" (bold) and "consider joining my mailing list:" (gray) in NewsletterSignup.jsx
+- restructured newsletter form layout: moved subscribe button below description, made it full width (500px max), stacked vertically in NewsletterSignup.jsx
+- updated newsletter description to "you'll get updates on projects / writing / life a few times a year, that's it!" in NewsletterSignup.jsx
+- changed newsletter heading from "keep in touch!" to "thanks for reading" and moved description text below the input in NewsletterSignup.jsx
+- reduced top padding and changed newsletter section to lightest gray (bg-near-white) in HomePageLayouts.jsx
+- redesigned WebGL playground with brutalist aesthetic - black background, monospace typography, raw borders, no rounded corners, high contrast white/black UI in webgl-playground.css
+- improved responsive layout with CSS grid - stacks vertically on tablet, adapts control panel height, handles landscape mobile with side-by-side layout
+- added multiple breakpoints: 1024px (tablet stack), 640px (mobile compact), 400px (small screens), landscape detection for proper orientation handling
+- updated all parameter labels to uppercase with underscores (WAVE_FREQ_X, CENTER_POS, etc.) for raw industrial feel
+- simplified image thumbnails to grayscale by default, color on hover/selected
+- refactored section rendering with reusable Section component for cleaner collapsible headers in WebGLPlaygroundPage.jsx
+- created interactive WebGL playground page at /playground with comprehensive real-time parameter controls for exploring shader effects
+- added image selection from 7 preset images plus custom upload capability
+- implemented 6 effect presets (Default, Psychedelic, Glitch Art, Calm Waters, Vortex, Retro VHS) for quick exploration
+- built extensive control panel with sliders for waves, ripples, swirls, turbulence, pixel sorting, color adjustments, and post-effects
+- added XY pad controls for positioning ripple and swirl effect centers - can also click directly on canvas
+- created custom fragment shader supporting all parameters with real-time uniform updates
+- made "keep in touch" newsletter section full width with light gray background - moved it outside the constrained content areas in both mobile and desktop views of LayoutP in HomePageLayouts.jsx
+
+- changed notes bullet points to large asterisks (*) in moon-gray color with proper vertical alignment to heading text
+- refactored subtitle system to use slug-based keys instead of numeric indices - subtitles no longer break when posts are reordered or added
+- added multiple new blog posts: "how to attend meetings", "how designers should talk about AI", "diagramming with LLMs", "my design journal from when I worked for the NYC subway", "what it's like to design software for trading floors"
+- made WebGL component grayscale by default with color on hover, smooth 0.3s transitions, and removed outline on hover
+- added newsletter signup at bottom of notes section with minimal styling: "if you like these, consider joining my mailing list"
+- fixed WebGL loading flash by using aspect-ratio instead of fixed height, added opacity fade-in transition
+- various title and subtitle content updates for blog posts including "generative design thinking", "the split triple diamond", "media tool kit", etc.
+
 2026-01-28
+- added 6 experimental homepage layouts (J-O) with bolder form-making: "The Edge" (asymmetric left-aligned), "The Void" (dark cinematic), "The Overlap" (layered with giant type), "The Scroll" (ultra-narrow vertical), "The Split" (hard 50/50 divide), and "The Statement" (massive headline architecture) in HomePageLayouts.jsx
+- added Notes section to all standard layouts (A-E) to incorporate article list across all variations
 - removed WIP message, changed "He currently works" to "He works", updated slider labels to use site font instead of mono in HomePage.jsx and WebGLMorpher.jsx
 - increased horizontal padding on content containers (pa2 to ph4) for better mobile readability in HomePage.jsx
 - switched back to system default font for faster load times - removed Google Fonts import in index.html

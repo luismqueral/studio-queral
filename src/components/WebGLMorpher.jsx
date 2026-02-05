@@ -288,7 +288,7 @@ const FRAGMENT_SHADER = `
   }
 `;
 
-function WebGLMorpher({ image1Url, image2Url }) {
+function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
   const canvasRef = useRef(null)
   const glRef = useRef(null)
   const programRef = useRef(null)
@@ -302,6 +302,8 @@ function WebGLMorpher({ image1Url, image2Url }) {
   const [isLoading, setIsLoading] = useState(true)
   const [sliderValue, setSliderValue] = useState(50)
   const [isInitialized, setIsInitialized] = useState(false)
+  const [clickCount, setClickCount] = useState(0)
+  const [showHiddenSlider, setShowHiddenSlider] = useState(false)
 
   // Generate weighted random parameters (75% subtle, 25% extreme)
   const generateRandomParams = () => {
@@ -431,7 +433,7 @@ function WebGLMorpher({ image1Url, image2Url }) {
     if (!isInitialized) return
 
     const animate = () => {
-      timeRef.current += 0.016
+      timeRef.current += 0.008
       render()
       animationIdRef.current = requestAnimationFrame(animate)
     }
@@ -557,57 +559,71 @@ function WebGLMorpher({ image1Url, image2Url }) {
     randomParamsRef.current = generateRandomParams()
     console.log('🎲 Randomized effects:', randomParamsRef.current)
     render()
+    
+    // Easter egg: show slider after 5 clicks
+    if (hideSlider && !showHiddenSlider) {
+      const newCount = clickCount + 1
+      setClickCount(newCount)
+      if (newCount >= 5) {
+        setShowHiddenSlider(true)
+        console.log('🎛️ Secret slider unlocked!')
+      }
+    }
   }
 
   return (
     <div className="center" style={{ width: '100%' }}>
       <div className="tc mb3 relative">
-        {isLoading && (
-          <div
-            className="webgl-skeleton br2"
-            style={{
-              width: '100%',
-              height: '450px',
-              background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
-              backgroundSize: '200% 100%',
-              animation: 'shimmer 1.5s infinite',
-            }}
-          />
-        )}
+        <div
+          className="br2 webgl-skeleton-pulse"
+          style={{
+            width: '100%',
+            aspectRatio: '1 / 1',
+            backgroundColor: 'rgba(0, 0, 0, 0.08)',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            opacity: isLoading ? 1 : 0,
+            transition: 'opacity 0.5s ease',
+            pointerEvents: 'none',
+          }}
+        />
 
         <canvas
           ref={canvasRef}
           width="450"
           height="450"
           onClick={handleCanvasClick}
-          className="br2 webgl-canvas"
+          className="br2 webgl-canvas webgl-grayscale"
           style={{
             width: '100%',
             height: 'auto',
             objectFit: 'cover',
             cursor: 'pointer',
-            backgroundColor: '#f5f5f5',
-            display: isLoading ? 'none' : 'block',
+            opacity: isLoading ? 0 : 1,
+            transition: 'opacity 0.5s ease',
           }}
         />
       </div>
 
-      <div className="center" style={{ maxWidth: '100%' }}>
-        <div className="flex items-center justify-between mb2">
-          <span className="f5 gray">luis</span>
-          <span className="f5 gray">not luis</span>
+      {(!hideSlider || showHiddenSlider) && (
+        <div className="center" style={{ maxWidth: '100%' }}>
+          <div className="flex items-center justify-between mb2">
+            <span className="f5 near-black">luis</span>
+            <span className="f5 near-black">not luis</span>
+          </div>
+          <div className="relative">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={sliderValue}
+              onChange={handleSliderChange}
+              className="luis-slider"
+            />
+          </div>
         </div>
-        <div className="relative">
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={sliderValue}
-            onChange={handleSliderChange}
-            className="luis-slider"
-          />
-        </div>
-      </div>
+      )}
     </div>
   )
 }
