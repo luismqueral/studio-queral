@@ -102,35 +102,61 @@ function NotePage() {
 
   // Check if note has a custom header section (dark bg, etc.)
   if (note.headerSection) {
+    const hasPageBg = !!note.headerSection.pageBgClass
+    const headerLight = !!note.headerSection.headerLight
+    const secondaryColor = headerLight ? 'gray' : 'white-70'
+    const tertiaryColor = headerLight ? 'silver' : 'white-50'
+    const textClass = hasPageBg ? (note.headerSection.pageTextClass || 'white') : 'near-black'
+    const footerLinkClass = hasPageBg ? 'white-70 underline hover-white' : 'blue underline hover-no-underline'
+    const footerBorderClass = hasPageBg ? 'b--white-20' : 'b--light-gray'
+    const dateClass = hasPageBg ? 'white-50' : 'gray'
+
     return (
-      <div>
+      <div className={note.headerSection.pageBgClass || ''}>
         <div className={note.headerSection.bgClass || "bg-near-black white"}>
-          <div className="pa4 mw7 center">
-            <p className="f6 mb4"><Link to="/" className={note.headerSection.linkClass || "white underline hover-no-underline"}>← back</Link></p>
+          <div className="ph4 pt4 pb4 mw7 center">
+            <p className="f6 mb3"><Link to="/" className={note.headerSection.linkClass || "white underline hover-no-underline"}>← back</Link></p>
             <div className={note.headerSection.wrapperClass || "mw6 center tc"}>
               <h1 className={note.headerSection.titleClass || "font-blackletter f1 white mb0 lh-title normal"}>{note.title}</h1>
               {note.headerSection.subtitle && (
-                <p className="f6 white-70 mt2 mb0">{note.headerSection.subtitle}</p>
+                <p className={`f6 ${secondaryColor} mt2 mb0`}>{note.headerSection.subtitle}</p>
               )}
               {(note.headerSection.projectLink || note.headerSection.sourceLink) && (
                 <div className="mt3">
                   {note.headerSection.projectLink && (
-                    <a href={note.headerSection.projectLink} target="_blank" rel="noopener noreferrer" className="f6 white-70 hover-white underline dib">view project →</a>
+                    <a href={note.headerSection.projectLink} target="_blank" rel="noopener noreferrer" className={`f6 ${secondaryColor} hover-${headerLight ? 'near-black' : 'white'} underline dib`}>view project →</a>
                   )}
                   {note.headerSection.projectLink && note.headerSection.sourceLink && (
-                    <span className="white-50 mh2">·</span>
+                    <span className={`${tertiaryColor} mh2`}>·</span>
                   )}
                   {note.headerSection.sourceLink && (
-                    <a href={note.headerSection.sourceLink} target="_blank" rel="noopener noreferrer" className="f6 white-70 hover-white underline dib">view source</a>
+                    <a href={note.headerSection.sourceLink} target="_blank" rel="noopener noreferrer" className={`f6 ${secondaryColor} hover-${headerLight ? 'near-black' : 'white'} underline dib`}>view source</a>
                   )}
                 </div>
+              )}
+              {note.headerSection.description && (
+                <div className={`mw6 center f5 lh-copy ${secondaryColor} mt3`}>
+                  {note.headerSection.description.map((p, i) => (
+                    <p key={i} className={i === 0 ? 'mt0' : ''}>{p}</p>
+                  ))}
+                </div>
+              )}
+              {note.headerSection.audioSrc && (
+                <div className="tc mt4 mb2">
+                  <audio controls loop>
+                    <source src={note.headerSection.audioSrc} type="audio/mpeg" />
+                  </audio>
+                </div>
+              )}
+              {note.headerSection.audioCaption && (
+                <div className={`tc ${tertiaryColor} f6 i`}>{note.headerSection.audioCaption}</div>
               )}
             </div>
           </div>
         </div>
-        <div className="pa4 mw7 center">
+        <div className={`ph4 pb4 ${hasPageBg ? 'pt4' : 'pt4'} mw7 center`}>
           <article className="note-content">
-            <div className="f5 lh-copy near-black">
+            <div className={`f5 lh-copy ${textClass}`}>
               <Markdown 
                 remarkPlugins={[remarkGfm]} 
                 rehypePlugins={[rehypeRaw]}
@@ -144,9 +170,9 @@ function NotePage() {
             </div>
           </article>
           
-          {note.date && <p className="f6 gray mt5 mb0">last updated: {note.date}</p>}
-          <footer className="mt4 pt4 bt b--light-gray">
-            <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
+          {note.date && <p className={`f6 ${dateClass} mt5 mb0`}>last updated: {note.date}</p>}
+          <footer className={`mt4 pt4 bt ${footerBorderClass}`}>
+            <Link to="/" className={`f6 ${footerLinkClass}`}>← back</Link>
           </footer>
         </div>
       </div>

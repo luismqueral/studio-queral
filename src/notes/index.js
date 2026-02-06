@@ -14,6 +14,48 @@ const getContent = (slug) => {
 // Notes metadata - title is required, date is optional
 // Content is loaded from ./content/{slug}.md
 const notesMetadata = {
+  'looking-for-you': {
+    title: 'Looking for Y O U',
+    date: 'January 2023',
+    headerSection: {
+      bgClass: 'bg-purple white',
+      linkClass: 'white underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'f1 white mb0 lh-title i serif normal',
+      subtitle: 'craigslist classifieds extended with the help of GPT-3',
+    }
+  },
+  'we-are-open': {
+    title: '"We Are Open"',
+    date: '2020',
+    headerSection: {
+      pageBgClass: 'bg-near-black',
+      bgClass: 'bg-near-white near-black',
+      headerLight: true,
+      linkClass: 'near-black underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'font-brush-script f1 f-subheadline-l near-black mb0 lh-title normal',
+      description: [
+        'The days leading up to the 2020 elections were bleak and uneasy.',
+        'This was peak covid. New York was traumatized and felt unhinged. Lockdowns were growing tiring.',
+        'The sounds of neighbors banging pots and pans for front-line workers eased as the city hollowed out. Nowhere was that more true east of Lex.',
+        'These are some photos from that time.',
+      ],
+      audioSrc: '/notes/we-are-open/disaster-decision.mp3',
+      audioCaption: 'press play for the full experience',
+    }
+  },
+  'gloves-of-new-york': {
+    title: 'Gloves Of New York',
+    date: '2020',
+    headerSection: {
+      pageBgClass: 'bg-dark-gray',
+      bgClass: 'bg-dark-gray white',
+      linkClass: 'white underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'f1 white mb0 lh-title normal ttu',
+    }
+  },
   'richard-cigarette-bot': { title: 'richard cigarette (bot)', headerClass: 'font-blackletter f1 near-black mb4 lh-title normal tc center', headerWrapperClass: 'mw6 center tc' },
   'introducing-data-synth': { 
     title: 'Data Synth',

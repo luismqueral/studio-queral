@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- ported three projects from the old Kirby-based portfolio site: "Looking for Y O U" (GPT-3 craigslist classifieds), "We Are Open" (2020 NYC photography), and "Gloves Of New York" (lost gloves photo series) - each with custom header sections and media files copied to notes-media for CDN upload
 - updated README with documentation for the CDN media rewrite, `--env-file` usage for the upload script, and Vercel env var setup instructions
 - fixed `npm run upload:notes-media` to auto-load `.env.local` via `--env-file` flag so blob tokens are picked up automatically
 - fixed note media (images/videos) not loading on production by adding a CDN rewrite rule in vercel.json - requests to /notes/:slug/:file+ now proxy to the Vercel Blob CDN instead of being caught by the SPA catch-all
