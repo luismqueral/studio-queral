@@ -4,7 +4,15 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/notes/:path*.:ext(png|jpg|jpeg|gif|webp|mp4|webm|mov|pdf|svg)", "destination": "/api/notes-media?path=:path*.:ext" },
+    { "source": "/notes/:path*.png", "destination": "/api/notes-media?path=:path*.png" },
+    { "source": "/notes/:path*.jpg", "destination": "/api/notes-media?path=:path*.jpg" },
+    { "source": "/notes/:path*.jpeg", "destination": "/api/notes-media?path=:path*.jpeg" },
+    { "source": "/notes/:path*.gif", "destination": "/api/notes-media?path=:path*.gif" },
+    { "source": "/notes/:path*.webp", "destination": "/api/notes-media?path=:path*.webp" },
+    { "source": "/notes/:path*.mp4", "destination": "/api/notes-media?path=:path*.mp4" },
+    { "source": "/notes/:path*.webm", "destination": "/api/notes-media?path=:path*.webm" },
+    { "source": "/notes/:path*.svg", "destination": "/api/notes-media?path=:path*.svg" },
+    { "source": "/notes/:path*.pdf", "destination": "/api/notes-media?path=:path*.pdf" },
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
