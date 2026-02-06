@@ -1,4 +1,4 @@
-import { put } from '@vercel/blob'
+import { put, list } from '@vercel/blob'
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 
@@ -8,15 +8,32 @@ const parseArgs = (argv) => {
   const args = {
     dir: DEFAULT_DIR,
     dryRun: false,
+    force: false,
   }
 
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i]
     if (token === '--dir') args.dir = argv[i + 1]
     if (token === '--dry-run') args.dryRun = true
+    if (token === '--force') args.force = true
   }
 
   return args
+}
+
+const listExistingBlobs = async (token) => {
+  const existing = new Map() // pathname -> size
+  let cursor = undefined
+  
+  do {
+    const result = await list({ token, cursor, limit: 1000 })
+    for (const blob of result.blobs) {
+      existing.set(blob.pathname, blob.size)
+    }
+    cursor = result.cursor
+  } while (cursor)
+  
+  return existing
 }
 
 const listFilesRecursive = async (rootDir) => {
@@ -51,7 +68,7 @@ const getBlobToken = () => {
 }
 
 const main = async () => {
-  const { dir, dryRun } = parseArgs(process.argv.slice(2))
+  const { dir, dryRun, force } = parseArgs(process.argv.slice(2))
 
   const absDir = path.resolve(process.cwd(), dir)
   const token = getBlobToken()
@@ -84,8 +101,21 @@ const main = async () => {
   if (dryRun) {
     console.log('Dry run enabled — no uploads will happen.')
   }
+  if (force) {
+    console.log('Force mode — will re-upload all files.')
+  }
+
+  // Fetch existing blobs to skip unchanged files
+  let existingBlobs = new Map()
+  if (!force) {
+    console.log('Checking existing files on CDN...')
+    existingBlobs = await listExistingBlobs(token)
+    console.log(`Found ${existingBlobs.size} existing file(s) on CDN.`)
+  }
 
   let detectedOrigin = null
+  let uploaded = 0
+  let skipped = 0
 
   for (const filePath of files) {
     const rel = path.relative(absDir, filePath)
@@ -97,6 +127,12 @@ const main = async () => {
     // We expect the relative path to start with "notes/..." so the runtime rewrite works.
     if (!pathname.startsWith('notes/')) {
       console.warn(`Skipping (expected under notes/): ${pathname}`)
+      continue
+    }
+
+    // Skip if file exists with same size (unless --force)
+    if (!force && existingBlobs.has(pathname) && existingBlobs.get(pathname) === s.size) {
+      skipped++
       continue
     }
 
@@ -112,7 +148,10 @@ const main = async () => {
       access: 'public',
       token,
       addRandomSuffix: false,
+      allowOverwrite: true,
     })
+
+    uploaded++
 
     if (!detectedOrigin) {
       detectedOrigin = new URL(res.url).origin
@@ -123,7 +162,8 @@ const main = async () => {
     }
   }
 
-  console.log('Done.')
+  console.log('')
+  console.log(`Done. Uploaded: ${uploaded}, Skipped (unchanged): ${skipped}`)
   if (detectedOrigin) {
     console.log('')
     console.log('Next steps:')

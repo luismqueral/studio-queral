@@ -14,6 +14,7 @@ const getContent = (slug) => {
 // Notes metadata - title is required, date is optional
 // Content is loaded from ./content/{slug}.md
 const notesMetadata = {
+  'richard-cigarette-bot': { title: 'richard cigarette (bot)', headerClass: 'font-blackletter f1 near-black mb4 lh-title normal tc center', headerWrapperClass: 'mw6 center tc' },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
   'an-ode-to-interns': { title: 'an ode to interns', date: 'September 2013' },

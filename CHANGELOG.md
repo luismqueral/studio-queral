@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-05
+- converted all OTF fonts to WOFF2 for better web performance (~30-50% smaller file sizes) using fonttools
+- added 70+ new fonts to tachyons-ext.css with utility classes: Pilowlava, Compagnon, Mess, Anthony, Teranoptia, Typefesse (2 variants), Kaerukaeru, all 25 Cheee variants, 20 Obert variants, and 18 Bianzhidai variants
+- updated StyleGuidePage with new font sections: Fun & Experimental, Cheee Family, Obert Family, and Bianzhidai Family with clickable previews
+- added Holy Diver audio player (starting at :50) and autoplay video to richard-cigarette-bot post
+- improved upload-notes-media script to skip unchanged files (compares by pathname and size), added --force flag to override
+- made Dio album cover image larger (400px) and centered in richard-cigarette-bot post
+- added 4 screenshots to "Richard Cigarette (Bot)" post showing the last.fm profile and scrobble stats
+- updated notes index password screen: added keyboard-cowboy.gif image, removed title and description text, changed Enter button to blue
+- added new blog entry "Richard Cigarette (Bot)" about a last.fm bot obsessed with Dio's "Holy Diver" album in src/notes/content/richard-cigarette-bot.md and registered it in src/notes/index.js
 - added "Custom Extensions" section to StyleGuidePage showing all the new colors with swatches
 - added custom color palette to tachyons-ext.css: purple, teal, coral, indigo, amber, lime, cyan, rose, and slate with text/bg/border/hover variants plus washed backgrounds for each
 - added TeX Gyre font family: Heros (.font-tex-heros), Heros Condensed (.font-tex-heros-cn), and Termes (.font-tex-termes) with full weight/style variants

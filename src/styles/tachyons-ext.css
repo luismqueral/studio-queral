@@ -308,6 +308,139 @@
   font-style: italic;
 }
 
+/* ========================================
+   FUN & EXPERIMENTAL FONTS
+   ======================================== */
+
+@font-face {
+  font-family: 'Pilowlava';
+  src: url('/fonts/Pilowlava-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Compagnon';
+  src: url('/fonts/Compagnon-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mess';
+  src: url('/fonts/Mess.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Anthony';
+  src: url('/fonts/Anthony.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Teranoptia';
+  src: url('/fonts/Teranoptia-Furiae.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Typefesse Claire';
+  src: url('/fonts/Typefesse_Claire-Obscure.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Typefesse Pleine';
+  src: url('/fonts/Typefesse_Pleine.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kaerukaeru';
+  src: url('/fonts/kaerukaeru-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Cheee Demo font family - 25 variants */
+@font-face { font-family: 'Cheee Baby'; src: url('/fonts/CheeeDemo-Baby.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Bingbong'; src: url('/fonts/CheeeDemo-Bingbong.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Boogy'; src: url('/fonts/CheeeDemo-Boogy.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Chaarleee'; src: url('/fonts/CheeeDemo-Chaarleee.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Choy'; src: url('/fonts/CheeeDemo-Choy.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Conshred'; src: url('/fonts/CheeeDemo-Conshred.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Crimer'; src: url('/fonts/CheeeDemo-Crimer.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Gnat'; src: url('/fonts/CheeeDemo-Gnat.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Jabroni'; src: url('/fonts/CheeeDemo-Jabroni.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Jimbo'; src: url('/fonts/CheeeDemo-Jimbo.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Juanito'; src: url('/fonts/CheeeDemo-Juanito.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Kingstreet'; src: url('/fonts/CheeeDemo-Kingstreet.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Oldskool'; src: url('/fonts/CheeeDemo-Oldskool.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Oyen'; src: url('/fonts/CheeeDemo-Oyen.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Peeenutt'; src: url('/fonts/CheeeDemo-Peeenutt.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Pickles'; src: url('/fonts/CheeeDemo-Pickles.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Schemer'; src: url('/fonts/CheeeDemo-Schemer.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Shishi'; src: url('/fonts/CheeeDemo-Shishi.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Small'; src: url('/fonts/CheeeDemo-Small.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Smortious'; src: url('/fonts/CheeeDemo-Smortious.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Sticky'; src: url('/fonts/CheeeDemo-Sticky.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Stinkhead'; src: url('/fonts/CheeeDemo-Stinkhead.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Tbone'; src: url('/fonts/CheeeDemo-Tbone.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Tomboe'; src: url('/fonts/CheeeDemo-Tomboe.woff2') format('woff2'); }
+@font-face { font-family: 'Cheee Wowie'; src: url('/fonts/CheeeDemo-Wowie.woff2') format('woff2'); }
+
+/* Obert font family - geometric display */
+@font-face { font-family: 'Obert Basic'; src: url('/fonts/Obert-Basic-0.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Basic 45'; src: url('/fonts/Obert-Basic-45.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Basic 90'; src: url('/fonts/Obert-Basic-90.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Basic 135'; src: url('/fonts/Obert-Basic-135.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Slant'; src: url('/fonts/Obert-Slant-0.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Slant 45'; src: url('/fonts/Obert-Slant-45.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Slant 90'; src: url('/fonts/Obert-Slant-90.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Slant 135'; src: url('/fonts/Obert-Slant-135.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Reclined'; src: url('/fonts/Obert-Reclined-0.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Reclined 45'; src: url('/fonts/Obert-Reclined-45.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Reclined 90'; src: url('/fonts/Obert-Reclined-90.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Reclined 135'; src: url('/fonts/Obert-Reclined-135.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Bright High'; src: url('/fonts/Obert-Bright-High-Power-0.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Bright Mid'; src: url('/fonts/Obert-Bright-Mid-Power-0.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Bright Low'; src: url('/fonts/Obert-Bright-Low-Power-22.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Ball'; src: url('/fonts/ObertExpTrial-Ball.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Chip'; src: url('/fonts/ObertExpTrial-Chip.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Screen'; src: url('/fonts/ObertExpTrial-Screen.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Sharp'; src: url('/fonts/ObertExpTrial-Sharp.woff2') format('woff2'); }
+@font-face { font-family: 'Obert Thorn'; src: url('/fonts/ObertExpTrial-Thorn.woff2') format('woff2'); }
+
+/* Bianzhidai font family - knit/weave style (using OTF - WOFF2 conversion fails for these) */
+@font-face { font-family: 'bianzhidai Base'; src: url('/fonts/bianzhidai-Base.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Brush'; src: url('/fonts/bianzhidai-Brush.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Bubble'; src: url('/fonts/bianzhidai-Bubble.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Cloud'; src: url('/fonts/bianzhidai-Cloud.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Cube'; src: url('/fonts/bianzhidai-Cube.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Messier'; src: url('/fonts/bianzhidai-Messier.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Messy'; src: url('/fonts/bianzhidai-Messy.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Pearl'; src: url('/fonts/bianzhidai-Pearl.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Ring'; src: url('/fonts/bianzhidai-Ring.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai Stitches'; src: url('/fonts/bianzhidai-Stitches.otf') format('opentype'); }
+
+/* Bianzhidai No BG variants - transparent background */
+@font-face { font-family: 'bianzhidai_noBG Base'; src: url('/fonts/bianzhidai_noBG-Base.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Brush'; src: url('/fonts/bianzhidai_noBG-Brush.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Bubble'; src: url('/fonts/bianzhidai_noBG-Bubble.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Cloud'; src: url('/fonts/bianzhidai_noBG-Cloud.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Cube'; src: url('/fonts/bianzhidai_noBG-Cube.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Messier'; src: url('/fonts/bianzhidai_noBG-Messier.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Messy'; src: url('/fonts/bianzhidai_noBG-Messy.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Pearl'; src: url('/fonts/bianzhidai_noBG-Pearl.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Ring'; src: url('/fonts/bianzhidai_noBG-Ring.otf') format('opentype'); }
+@font-face { font-family: 'bianzhidai_noBG Stitches'; src: url('/fonts/bianzhidai_noBG-Stitches.otf') format('opentype'); }
+
 /* Prevent scrollbar jitter between pages */
 html {
   /* Base font size - all Tachyons typography scales from this */
@@ -381,6 +514,87 @@ body {
 .font-davida { font-family: 'Davida Bold BT', serif; }
 .font-hobo { font-family: 'Hobo Std', sans-serif; }
 .font-relinquish { font-family: 'Relinquish', serif; }
+
+/* Fun & Experimental fonts */
+.font-pilowlava { font-family: 'Pilowlava', sans-serif; }
+.font-compagnon { font-family: 'Compagnon', sans-serif; }
+.font-mess { font-family: 'Mess', sans-serif; }
+.font-anthony { font-family: 'Anthony', serif; }
+.font-teranoptia { font-family: 'Teranoptia', sans-serif; }
+.font-typefesse-claire { font-family: 'Typefesse Claire', sans-serif; }
+.font-typefesse-pleine { font-family: 'Typefesse Pleine', sans-serif; }
+.font-kaerukaeru { font-family: 'Kaerukaeru', sans-serif; }
+
+/* Cheee font family */
+.font-cheee-baby { font-family: 'Cheee Baby', sans-serif; }
+.font-cheee-bingbong { font-family: 'Cheee Bingbong', sans-serif; }
+.font-cheee-boogy { font-family: 'Cheee Boogy', sans-serif; }
+.font-cheee-chaarleee { font-family: 'Cheee Chaarleee', sans-serif; }
+.font-cheee-choy { font-family: 'Cheee Choy', sans-serif; }
+.font-cheee-conshred { font-family: 'Cheee Conshred', sans-serif; }
+.font-cheee-crimer { font-family: 'Cheee Crimer', sans-serif; }
+.font-cheee-gnat { font-family: 'Cheee Gnat', sans-serif; }
+.font-cheee-jabroni { font-family: 'Cheee Jabroni', sans-serif; }
+.font-cheee-jimbo { font-family: 'Cheee Jimbo', sans-serif; }
+.font-cheee-juanito { font-family: 'Cheee Juanito', sans-serif; }
+.font-cheee-kingstreet { font-family: 'Cheee Kingstreet', sans-serif; }
+.font-cheee-oldskool { font-family: 'Cheee Oldskool', sans-serif; }
+.font-cheee-oyen { font-family: 'Cheee Oyen', sans-serif; }
+.font-cheee-peeenutt { font-family: 'Cheee Peeenutt', sans-serif; }
+.font-cheee-pickles { font-family: 'Cheee Pickles', sans-serif; }
+.font-cheee-schemer { font-family: 'Cheee Schemer', sans-serif; }
+.font-cheee-shishi { font-family: 'Cheee Shishi', sans-serif; }
+.font-cheee-small { font-family: 'Cheee Small', sans-serif; }
+.font-cheee-smortious { font-family: 'Cheee Smortious', sans-serif; }
+.font-cheee-sticky { font-family: 'Cheee Sticky', sans-serif; }
+.font-cheee-stinkhead { font-family: 'Cheee Stinkhead', sans-serif; }
+.font-cheee-tbone { font-family: 'Cheee Tbone', sans-serif; }
+.font-cheee-tomboe { font-family: 'Cheee Tomboe', sans-serif; }
+.font-cheee-wowie { font-family: 'Cheee Wowie', sans-serif; }
+
+/* Obert font family */
+.font-obert-basic { font-family: 'Obert Basic', sans-serif; }
+.font-obert-basic-45 { font-family: 'Obert Basic 45', sans-serif; }
+.font-obert-basic-90 { font-family: 'Obert Basic 90', sans-serif; }
+.font-obert-basic-135 { font-family: 'Obert Basic 135', sans-serif; }
+.font-obert-slant { font-family: 'Obert Slant', sans-serif; }
+.font-obert-slant-45 { font-family: 'Obert Slant 45', sans-serif; }
+.font-obert-slant-90 { font-family: 'Obert Slant 90', sans-serif; }
+.font-obert-slant-135 { font-family: 'Obert Slant 135', sans-serif; }
+.font-obert-reclined { font-family: 'Obert Reclined', sans-serif; }
+.font-obert-reclined-45 { font-family: 'Obert Reclined 45', sans-serif; }
+.font-obert-reclined-90 { font-family: 'Obert Reclined 90', sans-serif; }
+.font-obert-reclined-135 { font-family: 'Obert Reclined 135', sans-serif; }
+.font-obert-bright-high { font-family: 'Obert Bright High', sans-serif; }
+.font-obert-bright-mid { font-family: 'Obert Bright Mid', sans-serif; }
+.font-obert-bright-low { font-family: 'Obert Bright Low', sans-serif; }
+.font-obert-ball { font-family: 'Obert Ball', sans-serif; }
+.font-obert-chip { font-family: 'Obert Chip', sans-serif; }
+.font-obert-screen { font-family: 'Obert Screen', sans-serif; }
+.font-obert-sharp { font-family: 'Obert Sharp', sans-serif; }
+.font-obert-thorn { font-family: 'Obert Thorn', sans-serif; }
+
+/* Bianzhidai font family */
+.font-bianzhidai-base { font-family: 'bianzhidai Base', sans-serif; }
+.font-bianzhidai-brush { font-family: 'bianzhidai Brush', sans-serif; }
+.font-bianzhidai-bubble { font-family: 'bianzhidai Bubble', sans-serif; }
+.font-bianzhidai-cloud { font-family: 'bianzhidai Cloud', sans-serif; }
+.font-bianzhidai-cube { font-family: 'bianzhidai Cube', sans-serif; }
+.font-bianzhidai-messier { font-family: 'bianzhidai Messier', sans-serif; }
+.font-bianzhidai-messy { font-family: 'bianzhidai Messy', sans-serif; }
+.font-bianzhidai-pearl { font-family: 'bianzhidai Pearl', sans-serif; }
+.font-bianzhidai-ring { font-family: 'bianzhidai Ring', sans-serif; }
+.font-bianzhidai-stitches { font-family: 'bianzhidai Stitches', sans-serif; }
+.font-bianzhidai-nobg-base { font-family: 'bianzhidai_noBG Base', sans-serif; }
+.font-bianzhidai-nobg-brush { font-family: 'bianzhidai_noBG Brush', sans-serif; }
+.font-bianzhidai-nobg-bubble { font-family: 'bianzhidai_noBG Bubble', sans-serif; }
+.font-bianzhidai-nobg-cloud { font-family: 'bianzhidai_noBG Cloud', sans-serif; }
+.font-bianzhidai-nobg-cube { font-family: 'bianzhidai_noBG Cube', sans-serif; }
+.font-bianzhidai-nobg-messier { font-family: 'bianzhidai_noBG Messier', sans-serif; }
+.font-bianzhidai-nobg-messy { font-family: 'bianzhidai_noBG Messy', sans-serif; }
+.font-bianzhidai-nobg-pearl { font-family: 'bianzhidai_noBG Pearl', sans-serif; }
+.font-bianzhidai-nobg-ring { font-family: 'bianzhidai_noBG Ring', sans-serif; }
+.font-bianzhidai-nobg-stitches { font-family: 'bianzhidai_noBG Stitches', sans-serif; }
 
 /* Google Fonts (requires external link or import) */
 .font-inter { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -545,6 +759,7 @@ body {
 }
 
 .note-content code {
+  display: inline;
   background: #f5f5f5;
   padding: 0.15rem 0.3rem;
   border-radius: 3px;
@@ -608,6 +823,25 @@ body {
 
 .note-content tr:last-child td {
   border-bottom: none;
+}
+
+/* Hover border-radius utilities (Tachyons-style) */
+.hover-br2:hover { border-radius: .25rem; }
+.hover-br3:hover { border-radius: .5rem; }
+
+/* Pointer cursor utility */
+.pointer { cursor: pointer; }
+
+/* Active press effect */
+.active-nudge:active { transform: translateY(2px); }
+
+/* Style guide tables */
+.style-guide-table td:first-child {
+  padding-left: 1rem;
+}
+
+.style-guide-table tr:hover code {
+  background-color: #F4F4F4; /* near-white */
 }
 
 /* Style guide tables - stack on mobile */

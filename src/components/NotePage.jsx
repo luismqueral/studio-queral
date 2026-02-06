@@ -16,13 +16,16 @@ import { notes } from '../notes'
  * 
  * Supports all Prism languages (js, python, markdown, bash, etc.)
  */
-const CodeBlock = ({ inline, className, children }) => {
+const CodeBlock = ({ inline, className, children, node }) => {
   const match = /language-(\w+)/.exec(className || '')
   const language = match ? match[1] : ''
   const code = String(children).replace(/\n$/, '')
+  
+  // Determine if this is truly inline: either explicitly inline, or no language and single line
+  const isInline = inline || (!language && !code.includes('\n'))
 
   // Fenced code block with language
-  if (!inline && language) {
+  if (!isInline && language) {
     return (
       <SyntaxHighlighter
         style={solarizedlight}
@@ -39,8 +42,8 @@ const CodeBlock = ({ inline, className, children }) => {
     )
   }
 
-  // Fenced code block without language
-  if (!inline) {
+  // Fenced code block without language (multiline)
+  if (!isInline) {
     return (
       <pre className="bg-near-white pa3 br2 overflow-auto f6" style={{ whiteSpace: 'pre-wrap' }}>
         <code>{code}</code>
@@ -49,7 +52,7 @@ const CodeBlock = ({ inline, className, children }) => {
   }
 
   // Inline code
-  return <code className="bg-light-gray ph1 br1 f6">{children}</code>
+  return <code className="bg-light-gray ph1 br1 f6" style={{ display: 'inline' }}>{children}</code>
 }
 
 const normalizeBaseUrl = (url) => {
@@ -101,7 +104,13 @@ function NotePage() {
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back</Link></p>
       <article className="note-content">
-        <h1 className="f3 near-black mb4 lh-title">{note.title}</h1>
+        {note.headerWrapperClass ? (
+          <div className={note.headerWrapperClass}>
+            <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
+          </div>
+        ) : (
+          <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
+        )}
         
         <div className="f5 lh-copy near-black">
           <Markdown 

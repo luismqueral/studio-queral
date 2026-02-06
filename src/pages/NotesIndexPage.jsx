@@ -32,9 +32,8 @@ function NotesIndexPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="pa4 mw5 center" style={{ marginTop: '20vh' }}>
-        <h1 className="f4 near-black mb3">Notes Index</h1>
-        <p className="f6 gray mb4">This page is password protected.</p>
+      <div className="pa4 mw5 center" style={{ marginTop: '15vh' }}>
+        <img src="/images/keyboard-cowboy.gif" alt="" className="db center mb4" style={{ width: '320px' }} />
         <form onSubmit={handleSubmit}>
           <input
             type="password"
@@ -47,7 +46,7 @@ function NotesIndexPage() {
           {error && <p className="f6 red mb2">{error}</p>}
           <button 
             type="submit"
-            className="f6 link dim br2 ph3 pv2 mb2 dib white bg-dark-gray bn pointer w-100"
+            className="f6 link dim br2 ph3 pv2 mb2 dib white bg-blue bn pointer w-100"
           >
             Enter
           </button>
