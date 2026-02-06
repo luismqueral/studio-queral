@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- added five more fonts — Gamilia Pixel, Mr Saturn, Pixelfraktur, Shellybu, and Texticles — @font-face declarations, utility classes, and Style Guide entries for each
+- added Wingdings font — downloaded TTF, added @font-face and `.font-wingdings` utility class, added to Style Guide page
+- added Sanfrisco and Valencia fonts — @font-face declarations, `.font-sanfrisco` and `.font-valencia` utility classes in tachyons-ext.css, and entries in the Style Guide page
+- removed lingering hover state on style guide table rows — deleted the `.style-guide-table tr:hover code` CSS rule from tachyons-ext.css
 - re-uploaded all richie cigs media to CDN under new `notes/richie-cigs/` path, updated all asset references in markdown and index.js to match
 - changed richie cigs URL slug from `richard-cigarette-bot` to `richie-cigs` — renamed content file, updated index and homepage references
 - updated homepage title from "richard cigarette (bot)" to "Richie Cigs"
@@ -12,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - bumped richie cigs header title size from `f1` to `f-subheadline`
 - renamed richard cigarette note title to "Richie Cigs"
 - updated richard cigarette audio caption styling — removed italic and changed color to near-white, added per-note `audioCaptionClass` override in NotePage.jsx
+- cleaned up Style Guide page: removed pill/badge treatment from class labels, stacked rem/px values vertically in the type scale table, and unified left column width across all font tables
 - added the full AI styling prompt as a code block at the bottom of the Style Guide page for reference
 - removed all inline styles from components (HomePage, AboutPage, NotesIndexPage, NotePage, NewsletterSignup, StyleGuidePage, WebGLMorpher) and replaced with Tachyons utility classes or custom utilities in tachyons-ext.css — only 4 JS-driven exceptions remain (dynamic bgColor on HomePage, loading opacity on WebGLMorpher)
 - added custom utility classes to tachyons-ext.css: max-width scale (mw5-1 through mw5-7), sidebar layout (w-sidebar, ml-sidebar), whitespace (pre-wrap), interaction (us-none, pe-none), layout (break-avoid, object-cover, aspect-1x1, bullet-asterisk, mt-15vh, f8), and style guide specifics (sg-label, sg-swatch, etc.)

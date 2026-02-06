@@ -83,6 +83,8 @@ const customColors = [
 
 // Typography scale - Tachyons defaults at base 22px
 const typeScale = [
+  { class: 'f-headline', size: '6rem', px: '132px', preview: 'Hero' },
+  { class: 'f-subheadline', size: '5rem', px: '110px', preview: 'Hero small' },
   { class: 'f1', size: '3rem', px: '66px', preview: 'Headline' },
   { class: 'f2', size: '2.25rem', px: '49.5px', preview: 'Subheadline' },
   { class: 'f3', size: '1.5rem', px: '33px', preview: 'Section title' },
@@ -90,6 +92,7 @@ const typeScale = [
   { class: 'f5', size: '1rem', px: '22px', preview: 'The quick brown fox jumps over the lazy dog. This is the base body text size at 22px, used for main content throughout the site.' },
   { class: 'f6', size: '.875rem', px: '19.25px', preview: 'The quick brown fox jumps over the lazy dog. This smaller text size is useful for secondary information, captions, and metadata.' },
   { class: 'f7', size: '.75rem', px: '16.5px', preview: 'Caption text' },
+  { class: 'f8', size: '.55rem', px: '~12px', preview: 'Fine print, labels (custom)' },
 ]
 
 function ColorSwatch({ color }) {
@@ -97,7 +100,7 @@ function ColorSwatch({ color }) {
   
   return (
     <li 
-      className="flex items-center mb3 hover-bg-near-white hover-br2 pointer active-nudge break-avoid" 
+      className="flex items-center mb3 bb b--moon-gray pointer active-nudge break-avoid" 
       onClick={() => navigator.clipboard.writeText(color.name)}
     >
       <div 
@@ -113,7 +116,7 @@ function ColorSwatch({ color }) {
 
 function StyleGuidePage() {
   return (
-    <div className="us-none">
+    <div>
       <header className="bg-light-yellow pa4">
         <div className="measure-wide center">
           <p className="f6 mb3">
@@ -135,11 +138,13 @@ function StyleGuidePage() {
         <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             {typeScale.map((t) => (
-              <tr key={t.class} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(t.class)}>
-                <td className="pv2 pl4 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{t.class}</code></td>
+              <tr key={t.class} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(t.class)}>
+                <td className="pv2 sg-label-lg"><code className="gray f8">.{t.class}</code></td>
                 <td className="pv2"><span className={`${t.class} near-black`}>{t.preview}</span></td>
-                <td className="pv2 tr gray font-system-mono sg-data f8">{t.size}</td>
-                <td className="pv2 pr4 tr silver font-system-mono sg-data-sm f8">{t.px}</td>
+                <td className="pv2 pr4 pl4 tr nowrap">
+                  <span className="gray font-system-mono f8 db">{t.size}</span>
+                  <span className="silver font-system-mono f8 db">{t.px}</span>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -148,24 +153,24 @@ function StyleGuidePage() {
         <h3 className="f5 gray mb3">Font Stacks</h3>
         <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-system</code></td>
               <td className="pv2 font-system f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-serif')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system-serif</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-serif')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-system-serif</code></td>
               <td className="pv2 font-system-serif f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-mono')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system-mono</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-mono')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-system-mono</code></td>
               <td className="pv2 font-system-mono f5 near-black">const x = 42;</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-ibm-plex-mono')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-ibm-plex-mono</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-ibm-plex-mono')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-ibm-plex-mono</code></td>
               <td className="pv2 font-ibm-plex-mono f5 near-black">const x = 42;</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-times')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-times</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-times')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-times</code></td>
               <td className="pv2 font-times f4 near-black">The quick brown fox</td>
             </tr>
           </tbody>
@@ -174,97 +179,129 @@ function StyleGuidePage() {
         <h4 className="f6 gray mb2">Other Fonts</h4>
         <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-neue-haas-unica')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-neue-haas-unica</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-neue-haas-unica')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-neue-haas-unica</code></td>
               <td className="pv2 font-neue-haas-unica f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-a')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-a</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-a')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-galapagos-a</code></td>
               <td className="pv2 font-galapagos-a f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-ab')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-ab</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-ab')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-galapagos-ab</code></td>
               <td className="pv2 font-galapagos-ab f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-abc')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-abc</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-abc')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-galapagos-abc</code></td>
               <td className="pv2 font-galapagos-abc f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-comic')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-comic</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-comic')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-comic</code></td>
               <td className="pv2 font-comic f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-blackletter')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-blackletter</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-blackletter')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-blackletter</code></td>
               <td className="pv2 font-blackletter f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-algerian')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-algerian</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-algerian')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-algerian</code></td>
               <td className="pv2 font-algerian f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-brush-script')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-brush-script</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-brush-script')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-brush-script</code></td>
               <td className="pv2 font-brush-script f3 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-curlz')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-curlz</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-curlz')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-curlz</code></td>
               <td className="pv2 font-curlz f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-davida')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-davida</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-davida')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-davida</code></td>
               <td className="pv2 font-davida f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-hobo')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-hobo</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-hobo')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-hobo</code></td>
               <td className="pv2 font-hobo f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-relinquish')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-relinquish</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-relinquish')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-relinquish</code></td>
               <td className="pv2 font-relinquish f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-heros</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-sanfrisco')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-sanfrisco</code></td>
+              <td className="pv2 font-sanfrisco f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-valencia')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-valencia</code></td>
+              <td className="pv2 font-valencia f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-wingdings')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-wingdings</code></td>
+              <td className="pv2 font-wingdings f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-gamilia-pixel')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-gamilia-pixel</code></td>
+              <td className="pv2 font-gamilia-pixel f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-mr-saturn')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-mr-saturn</code></td>
+              <td className="pv2 font-mr-saturn f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-pixelfraktur')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-pixelfraktur</code></td>
+              <td className="pv2 font-pixelfraktur f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-shellybu')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-shellybu</code></td>
+              <td className="pv2 font-shellybu f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-texticles')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-texticles</code></td>
+              <td className="pv2 font-texticles f4 near-black">The quick brown fox</td>
+            </tr>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-tex-heros</code></td>
               <td className="pv2 font-tex-heros f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros-cn')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-heros-cn</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros-cn')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-tex-heros-cn</code></td>
               <td className="pv2 font-tex-heros-cn f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-termes')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-termes</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-termes')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-tex-termes</code></td>
               <td className="pv2 font-tex-termes f4 near-black">The quick brown fox</td>
             </tr>
             {/* Fun & Experimental */}
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-pilowlava')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-pilowlava</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-pilowlava')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-pilowlava</code></td>
               <td className="pv2 font-pilowlava f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-compagnon')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-compagnon</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-compagnon')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-compagnon</code></td>
               <td className="pv2 font-compagnon f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-mess')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-mess</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-mess')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-mess</code></td>
               <td className="pv2 font-mess f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-anthony')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-anthony</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-anthony')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-anthony</code></td>
               <td className="pv2 font-anthony f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-teranoptia')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-teranoptia</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-teranoptia')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-teranoptia</code></td>
               <td className="pv2 font-teranoptia f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-claire')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-typefesse-claire</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-claire')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-typefesse-claire</code></td>
               <td className="pv2 font-typefesse-claire f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-pleine')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-typefesse-pleine</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-pleine')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-typefesse-pleine</code></td>
               <td className="pv2 font-typefesse-pleine f4 near-black">The quick brown fox</td>
             </tr>
-            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-kaerukaeru')}>
-              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-kaerukaeru</code></td>
+            <tr className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-kaerukaeru')}>
+              <td className="pv2 sg-label-lg"><code className="gray f8">.font-kaerukaeru</code></td>
               <td className="pv2 font-kaerukaeru f4 near-black">The quick brown fox</td>
             </tr>
           </tbody>
@@ -279,8 +316,8 @@ function StyleGuidePage() {
               'pickles', 'schemer', 'shishi', 'small', 'smortious', 'sticky', 'stinkhead',
               'tbone', 'tomboe', 'wowie'
             ].map(v => (
-              <tr key={v} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(`font-cheee-${v}`)}>
-                <td className="pv2 sg-label-md"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-cheee-{v}</code></td>
+              <tr key={v} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(`font-cheee-${v}`)}>
+                <td className="pv2 sg-label-lg"><code className="gray f8">.font-cheee-{v}</code></td>
                 <td className={`pv2 font-cheee-${v} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}
@@ -312,8 +349,8 @@ function StyleGuidePage() {
               { cls: 'font-obert-sharp', name: 'Sharp' },
               { cls: 'font-obert-thorn', name: 'Thorn' },
             ].map(f => (
-              <tr key={f.cls} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
-                <td className="pv2 sg-label-md"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{f.cls}</code></td>
+              <tr key={f.cls} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
+                <td className="pv2 sg-label-lg"><code className="gray f8">.{f.cls}</code></td>
                 <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}
@@ -345,8 +382,8 @@ function StyleGuidePage() {
               { cls: 'font-bianzhidai-nobg-ring', name: 'NoBG Ring' },
               { cls: 'font-bianzhidai-nobg-stitches', name: 'NoBG Stitches' },
             ].map(f => (
-              <tr key={f.cls} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
-                <td className="pv2 sg-label-lg"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{f.cls}</code></td>
+              <tr key={f.cls} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
+                <td className="pv2 sg-label-lg"><code className="gray f8">.{f.cls}</code></td>
                 <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}

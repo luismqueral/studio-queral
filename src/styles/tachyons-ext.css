@@ -308,6 +308,63 @@
   font-style: italic;
 }
 
+/* Script & Display fonts */
+@font-face {
+  font-family: 'Sanfrisco';
+  src: url('/fonts/Sanfrisco.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Valencia';
+  src: url('/fonts/Valencia.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Wingdings';
+  src: url('/fonts/Wingdings.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gamilia Pixel';
+  src: url('/fonts/gamilia-pixel-demo-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mr Saturn';
+  src: url('/fonts/mr-saturn.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixelfraktur';
+  src: url('/fonts/pixelfraktur.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Shellybu';
+  src: url('/fonts/shellybu.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Texticles';
+  src: url('/fonts/texticles.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* ========================================
    FUN & EXPERIMENTAL FONTS
    ======================================== */
@@ -514,6 +571,14 @@ body {
 .font-davida { font-family: 'Davida Bold BT', serif; }
 .font-hobo { font-family: 'Hobo Std', sans-serif; }
 .font-relinquish { font-family: 'Relinquish', serif; }
+.font-sanfrisco { font-family: 'Sanfrisco', cursive; }
+.font-valencia { font-family: 'Valencia', cursive; }
+.font-wingdings { font-family: 'Wingdings', sans-serif; }
+.font-gamilia-pixel { font-family: 'Gamilia Pixel', monospace; }
+.font-mr-saturn { font-family: 'Mr Saturn', sans-serif; }
+.font-pixelfraktur { font-family: 'Pixelfraktur', monospace; }
+.font-shellybu { font-family: 'Shellybu', cursive; }
+.font-texticles { font-family: 'Texticles', sans-serif; }
 
 /* Fun & Experimental fonts */
 .font-pilowlava { font-family: 'Pilowlava', sans-serif; }
@@ -671,7 +736,7 @@ body {
 /* Style guide specific: table column widths and swatch dimensions */
 .sg-label { width: 9rem; white-space: nowrap; }
 .sg-label-md { width: 10rem; white-space: nowrap; }
-.sg-label-lg { width: 12rem; white-space: nowrap; }
+.sg-label-lg { width: 10.5rem; white-space: nowrap; }
 .sg-swatch { width: 4.5rem; height: 2.25rem; }
 .sg-data { width: 3.5rem; }
 .sg-data-sm { width: 2.75rem; }
@@ -883,10 +948,6 @@ body {
 /* Style guide tables */
 .style-guide-table td:first-child {
   padding-left: 1rem;
-}
-
-.style-guide-table tr:hover code {
-  background-color: #F4F4F4; /* near-white */
 }
 
 /* Style guide tables - stack on mobile */
