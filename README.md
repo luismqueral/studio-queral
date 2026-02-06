@@ -155,6 +155,10 @@ Notes media (images, videos) is stored on Vercel Blob, not in git.
    ```bash
    npm run upload:notes-media
    ```
+   This automatically loads tokens from `.env.local`. To run the script manually without npm:
+   ```bash
+   node --env-file=.env.local scripts/upload-notes-media.mjs
+   ```
 
 4. **Set the CDN URL** (script prints detected origin):
    ```env
@@ -167,7 +171,9 @@ Notes media (images, videos) is stored on Vercel Blob, not in git.
    <video src="/notes/<slug>/video_456.mp4" controls></video>
    ```
 
-   The `/notes/...` paths are automatically rewritten to the CDN URL at render time.
+   The `/notes/...` paths are rewritten to the CDN URL in two ways:
+   - **Client-side:** `NotePage.jsx` rewrites `src="/notes/..."` to CDN URLs at render time (requires `VITE_NOTES_CDN_BASE_URL`)
+   - **Server-side:** `vercel.json` has a rewrite rule that proxies `/notes/:slug/:file+` requests directly to Vercel Blob, so direct media URLs also work
 
 ### Current Blob Contents
 
@@ -201,9 +207,11 @@ Uses Buttondown for subscriptions.
 
 Deployed on Vercel. Push to `main` triggers automatic deployment.
 
-**Required Vercel env vars:**
-- `VITE_NOTES_CDN_BASE_URL` — CDN origin for note media
+**Required Vercel env vars** (Settings → Environment Variables):
+- `VITE_NOTES_CDN_BASE_URL` — CDN origin for note media (e.g. `https://xxx.public.blob.vercel-storage.com`). This is baked into the JS bundle at build time by Vite, so you must **redeploy** after adding or changing it.
 - `BUTTONDOWN_API_KEY` — Newsletter API key (if using newsletter)
+
+**Media proxying:** `vercel.json` includes a rewrite rule that proxies `/notes/:slug/:file+` to Vercel Blob. This ensures direct media URLs work (e.g. sharing an image link). The CDN base URL is hardcoded in `vercel.json` — if the Blob store changes, update it there too.
 
 ## Tech Stack
 

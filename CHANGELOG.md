@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- updated README with documentation for the CDN media rewrite, `--env-file` usage for the upload script, and Vercel env var setup instructions
+- fixed `npm run upload:notes-media` to auto-load `.env.local` via `--env-file` flag so blob tokens are picked up automatically
 - fixed note media (images/videos) not loading on production by adding a CDN rewrite rule in vercel.json - requests to /notes/:slug/:file+ now proxy to the Vercel Blob CDN instead of being caught by the SPA catch-all
 
 2026-02-05
