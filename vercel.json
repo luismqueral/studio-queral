@@ -4,7 +4,7 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/notes/(.*)", "destination": "/api/notes-media?path=$1" },
+    { "source": "/notes/:path*.:ext(png|jpg|jpeg|gif|webp|mp4|webm|mov|pdf|svg)", "destination": "/api/notes-media?path=:path*.:ext" },
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
