@@ -604,6 +604,7 @@ body {
 .font-arimo { font-family: 'Arimo', -apple-system, BlinkMacSystemFont, sans-serif; }
 .font-source-sans { font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif; }
 .font-ibm-plex-sans { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+.font-ibm-plex-mono { font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace; }
 
 /* Link hover utility */
 .hover-no-underline:hover {

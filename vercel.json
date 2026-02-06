@@ -4,14 +4,8 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/notes/(.*)", "destination": "/api/notes-media?path=$1" },
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
-

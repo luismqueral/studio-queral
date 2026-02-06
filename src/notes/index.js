@@ -15,6 +15,18 @@ const getContent = (slug) => {
 // Content is loaded from ./content/{slug}.md
 const notesMetadata = {
   'richard-cigarette-bot': { title: 'richard cigarette (bot)', headerClass: 'font-blackletter f1 near-black mb4 lh-title normal tc center', headerWrapperClass: 'mw6 center tc' },
+  'introducing-data-synth': { 
+    title: 'Data Synth',
+    headerSection: {
+      bgClass: 'bg-purple white',
+      linkClass: 'white underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'font-blackletter f1 white mb0 lh-title normal',
+      subtitle: 'a browser-based modular synth for sonifying json/csv datasets',
+      projectLink: 'https://datasynth.vercel.app',
+      sourceLink: 'https://github.com/luismqueral/data-synth'
+    }
+  },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
   'an-ode-to-interns': { title: 'an ode to interns', date: 'September 2013' },
@@ -35,7 +47,6 @@ const notesMetadata = {
   'how-designers-talk-about-ai': { title: 'how designers should talk about AI' },
   'cursor-for-research': { title: 'how I use Cursor for design research' },
   'writing-design-superpower': { title: 'a writing habit is a design superpower' },
-  'introducing-data-synth': { title: 'Introducing Data Synth' },
   'split-triple-diamond': { title: 'the "split triple diamond"' },
   'media-toolkit': { title: 'media tool kit' },
   'prompts-that-help': { title: 'LLM prompts and techniques' },

@@ -56,8 +56,8 @@ const CodeBlock = ({ inline, className, children, node }) => {
 }
 
 const normalizeBaseUrl = (url) => {
-  if (!url) return ''
-  return url.replace(/\/+$/, '')
+  if (url == null || typeof url !== 'string') return ''
+  return url.trim().replace(/\/+$/, '')
 }
 
 const rewriteNotesAssetUrls = (content) => {
@@ -100,16 +100,71 @@ function NotePage() {
 
   const content = rewriteNotesAssetUrls(stripFirstHeading(note.content))
 
+  // Check if note has a custom header section (dark bg, etc.)
+  if (note.headerSection) {
+    return (
+      <div>
+        <div className={note.headerSection.bgClass || "bg-near-black white"}>
+          <div className="pa4 mw7 center">
+            <p className="f6 mb4"><Link to="/" className={note.headerSection.linkClass || "white underline hover-no-underline"}>← back</Link></p>
+            <div className={note.headerSection.wrapperClass || "mw6 center tc"}>
+              <h1 className={note.headerSection.titleClass || "font-blackletter f1 white mb0 lh-title normal"}>{note.title}</h1>
+              {note.headerSection.subtitle && (
+                <p className="f6 white-70 mt2 mb0">{note.headerSection.subtitle}</p>
+              )}
+              {(note.headerSection.projectLink || note.headerSection.sourceLink) && (
+                <div className="mt3">
+                  {note.headerSection.projectLink && (
+                    <a href={note.headerSection.projectLink} target="_blank" rel="noopener noreferrer" className="f6 white-70 hover-white underline dib">view project →</a>
+                  )}
+                  {note.headerSection.projectLink && note.headerSection.sourceLink && (
+                    <span className="white-50 mh2">·</span>
+                  )}
+                  {note.headerSection.sourceLink && (
+                    <a href={note.headerSection.sourceLink} target="_blank" rel="noopener noreferrer" className="f6 white-70 hover-white underline dib">view source</a>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="pa4 mw7 center">
+          <article className="note-content">
+            <div className="f5 lh-copy near-black">
+              <Markdown 
+                remarkPlugins={[remarkGfm]} 
+                rehypePlugins={[rehypeRaw]}
+                components={{ 
+                  code: CodeBlock,
+                  pre: ({ children }) => <>{children}</>
+                }}
+              >
+                {content}
+              </Markdown>
+            </div>
+          </article>
+          
+          {note.date && <p className="f6 gray mt5 mb0">last updated: {note.date}</p>}
+          <footer className="mt4 pt4 bt b--light-gray">
+            <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
+          </footer>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back</Link></p>
       <article className="note-content">
-        {note.headerWrapperClass ? (
-          <div className={note.headerWrapperClass}>
+        {!note.skipDefaultHeader && (
+          note.headerWrapperClass ? (
+            <div className={note.headerWrapperClass}>
+              <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
+            </div>
+          ) : (
             <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
-          </div>
-        ) : (
-          <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
+          )
         )}
         
         <div className="f5 lh-copy near-black">

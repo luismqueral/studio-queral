@@ -4,6 +4,7 @@ import NewsletterSignup from './NewsletterSignup'
 
 // Hardcoded notes list
 const notes = [
+  // { title: 'Data Synth', slug: 'introducing-data-synth', subtitle: 'turn any dataset into sound' },
   { title: 'richard cigarette (bot)', slug: 'richard-cigarette-bot', subtitle: 'a last.fm bot that listened to Holy Diver for a year' },
   { title: 'how to make paella', slug: 'paella-recipe', subtitle: 'a family recipe from Málaga' },
   { title: 'why i love the wu-tang clan', slug: 'wu-tang-final-tour', subtitle: 'and why the RZA is such a talented, silly goose' },

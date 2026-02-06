@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-05
+- added IBM Plex Mono font via Google Fonts with `.font-ibm-plex-mono` utility class for data-heavy tables
+- added complex baseball stats table to Data Synth case study showcasing dense numerical data in IBM Plex Mono
+- fixed note images not loading in production: Vercel was serving index.html for /notes/* due to SPA catch-all; added rewrite so /notes/(.*) goes to api/notes-media which redirects to the notes CDN (requires VITE_NOTES_CDN_BASE_URL or NOTES_CDN_BASE_URL in Vercel)
+- added Vite dev middleware to serve note media from notes-media/notes at /notes so local dev shows images without setting VITE_NOTES_CDN_BASE_URL
+- hardened NotePage URL rewrite: normalize CDN base URL with trim and safe empty check
+- added "Introducing Data Synth" case study page for the data sonification project (datasynth.vercel.app)
 - converted all OTF fonts to WOFF2 for better web performance (~30-50% smaller file sizes) using fonttools
 - added 70+ new fonts to tachyons-ext.css with utility classes: Pilowlava, Compagnon, Mess, Anthony, Teranoptia, Typefesse (2 variants), Kaerukaeru, all 25 Cheee variants, 20 Obert variants, and 18 Bianzhidai variants
 - updated StyleGuidePage with new font sections: Fun & Experimental, Cheee Family, Obert Family, and Bianzhidai Family with clickable previews

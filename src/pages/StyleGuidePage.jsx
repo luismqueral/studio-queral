@@ -159,6 +159,10 @@ function StyleGuidePage() {
               <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-system-mono</code></td>
               <td className="pv2 font-system-mono f5 near-black">const x = 42;</td>
             </tr>
+            <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-ibm-plex-mono')}>
+              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-ibm-plex-mono</code></td>
+              <td className="pv2 font-ibm-plex-mono f5 near-black">const x = 42;</td>
+            </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-times')}>
               <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-times</code></td>
               <td className="pv2 font-times f4 near-black">The quick brown fox</td>
