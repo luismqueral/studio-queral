@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- re-uploaded all richie cigs media to CDN under new `notes/richie-cigs/` path, updated all asset references in markdown and index.js to match
+- changed richie cigs URL slug from `richard-cigarette-bot` to `richie-cigs` — renamed content file, updated index and homepage references
+- updated homepage title from "richard cigarette (bot)" to "Richie Cigs"
+- linked the full phrase "was a bot on last.fm" to the last.fm profile, opens in a new tab
+- styled "press play" in richie cigs audio caption as yellow, underlined, and bold
+- added `mt0` to richie cigs h1 to remove inherited top margin, reverted header padding back to default `pt4`
+- bumped richie cigs header title size from `f1` to `f-subheadline`
+- renamed richard cigarette note title to "Richie Cigs"
+- updated richard cigarette audio caption styling — removed italic and changed color to near-white, added per-note `audioCaptionClass` override in NotePage.jsx
+- added the full AI styling prompt as a code block at the bottom of the Style Guide page for reference
+- removed all inline styles from components (HomePage, AboutPage, NotesIndexPage, NotePage, NewsletterSignup, StyleGuidePage, WebGLMorpher) and replaced with Tachyons utility classes or custom utilities in tachyons-ext.css — only 4 JS-driven exceptions remain (dynamic bgColor on HomePage, loading opacity on WebGLMorpher)
+- added custom utility classes to tachyons-ext.css: max-width scale (mw5-1 through mw5-7), sidebar layout (w-sidebar, ml-sidebar), whitespace (pre-wrap), interaction (us-none, pe-none), layout (break-avoid, object-cover, aspect-1x1, bullet-asterisk, mt-15vh, f8), and style guide specifics (sg-label, sg-swatch, etc.)
+- added "styling ruleset for this site" note documenting the Tachyons-first approach, decision tree, and baseline patterns as a reference page on the site itself
+- added `.cursor/rules/styling.mdc` — a Tachyons-first styling rule that codifies how this site should be styled: no inline styles, no Tailwind, extend `tachyons-ext.css` following Tachyons conventions, and always ask before introducing non-utility CSS
+- updated `general-rules.mdc` to reference the new styling rule and replace the Tailwind/Shadcn/Radix references with Tachyons
 - ported three projects from the old Kirby-based portfolio site: "Looking for Y O U" (GPT-3 craigslist classifieds), "We Are Open" (2020 NYC photography), and "Gloves Of New York" (lost gloves photo series) - each with custom header sections and media files copied to notes-media for CDN upload
 - updated README with documentation for the CDN media rewrite, `--env-file` usage for the upload script, and Vercel env var setup instructions
 - fixed `npm run upload:notes-media` to auto-load `.env.local` via `--env-file` flag so blob tokens are picked up automatically

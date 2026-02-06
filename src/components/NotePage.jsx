@@ -45,14 +45,14 @@ const CodeBlock = ({ inline, className, children, node }) => {
   // Fenced code block without language (multiline)
   if (!isInline) {
     return (
-      <pre className="bg-near-white pa3 br2 overflow-auto f6" style={{ whiteSpace: 'pre-wrap' }}>
+      <pre className="bg-near-white pa3 br2 overflow-auto f6 pre-wrap">
         <code>{code}</code>
       </pre>
     )
   }
 
   // Inline code
-  return <code className="bg-light-gray ph1 br1 f6" style={{ display: 'inline' }}>{children}</code>
+  return <code className="bg-light-gray ph1 br1 f6 di">{children}</code>
 }
 
 const normalizeBaseUrl = (url) => {
@@ -114,7 +114,7 @@ function NotePage() {
     return (
       <div className={note.headerSection.pageBgClass || ''}>
         <div className={note.headerSection.bgClass || "bg-near-black white"}>
-          <div className="ph4 pt4 pb4 mw7 center">
+          <div className={`ph4 ${note.headerSection.headerPadClass || 'pt4'} pb4 mw7 center`}>
             <p className="f6 mb3"><Link to="/" className={note.headerSection.linkClass || "white underline hover-no-underline"}>← back</Link></p>
             <div className={note.headerSection.wrapperClass || "mw6 center tc"}>
               <h1 className={note.headerSection.titleClass || "font-blackletter f1 white mb0 lh-title normal"}>{note.title}</h1>
@@ -149,7 +149,7 @@ function NotePage() {
                 </div>
               )}
               {note.headerSection.audioCaption && (
-                <div className={`tc ${tertiaryColor} f6 i`}>{note.headerSection.audioCaption}</div>
+                <div className={`tc f6 ${note.headerSection.audioCaptionClass || `${tertiaryColor} i`}`} dangerouslySetInnerHTML={{ __html: note.headerSection.audioCaption }} />
               )}
             </div>
           </div>

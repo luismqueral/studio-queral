@@ -627,10 +627,54 @@ body {
 }
 
 
-/* Custom max-width for homepage */
-.mw5-5 {
-  max-width: 30rem;
-}
+/* ========================================
+   CUSTOM LAYOUT UTILITIES
+   ======================================== */
+
+/* Max-width scale — fills the gap between Tachyons mw5 (16rem/352px) and mw6 (32rem/704px)
+   Values are rem-based (base 22px), so they scale with the root font size */
+.mw5-1 { max-width: 11.5rem; }   /* ~253px — compact containers, morpher */
+.mw5-2 { max-width: 14.5rem; }   /* ~319px — small content */
+.mw5-3 { max-width: 18rem; }     /* ~396px — medium containers */
+.mw5-5 { max-width: 23rem; }     /* ~506px — standard content width */
+.mw5-7 { max-width: 26.5rem; }   /* ~583px — wide content */
+
+/* Homepage sidebar layout */
+.w-sidebar { width: 18rem; }
+.ml-sidebar { margin-left: 18rem; }
+
+/* Whitespace */
+.pre-wrap { white-space: pre-wrap; }
+
+/* User interaction */
+.us-none { user-select: none; }
+.pe-none { pointer-events: none; }
+
+/* Multi-column layout */
+.break-avoid { break-inside: avoid; }
+
+/* Object fit */
+.object-cover { object-fit: cover; }
+
+/* Aspect ratio (modern CSS property) */
+.aspect-1x1 { aspect-ratio: 1 / 1; }
+
+/* Decorative bullet asterisk — uses em so it scales with parent font size */
+.bullet-asterisk { font-size: 2em; line-height: 1; }
+
+/* Vertical offset for centered layouts */
+.mt-15vh { margin-top: 15vh; }
+
+/* Font size below f7 (.75rem) — for small labels and metadata */
+.f8 { font-size: .55rem; }
+
+/* Style guide specific: table column widths and swatch dimensions */
+.sg-label { width: 9rem; white-space: nowrap; }
+.sg-label-md { width: 10rem; white-space: nowrap; }
+.sg-label-lg { width: 12rem; white-space: nowrap; }
+.sg-swatch { width: 4.5rem; height: 2.25rem; }
+.sg-data { width: 3.5rem; }
+.sg-data-sm { width: 2.75rem; }
 
 /* WebGL effect - faded/blended by default, full color on hover */
 /* On mobile (below 700px), show full color */
@@ -863,6 +907,10 @@ body {
     padding-bottom: 0.5rem;
   }
 }
+
+/* Additional color variants */
+.bg-darker-red { background-color: #8B0000; }
+.darker-red { color: #8B0000; }
 
 /* Color palette - responsive columns */
 .color-palette-grid {

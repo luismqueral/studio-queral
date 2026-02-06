@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 /**
  * StyleGuidePage - Documents the custom Tachyons instance for Studio Queral
@@ -76,6 +78,7 @@ const customColors = [
   { name: 'washed-rose', bg: 'bg-washed-rose', hex: '#FCE4EC' },
   { name: 'slate', bg: 'bg-slate', hex: '#607D8B' },
   { name: 'washed-slate', bg: 'bg-washed-slate', hex: '#ECEFF1' },
+  { name: 'darker-red', bg: 'bg-darker-red', hex: '#8B0000' },
 ]
 
 // Typography scale - Tachyons defaults at base 22px
@@ -94,13 +97,11 @@ function ColorSwatch({ color }) {
   
   return (
     <li 
-      className="flex items-center mb3 hover-bg-near-white hover-br2 pointer active-nudge" 
-      style={{ breakInside: 'avoid' }}
+      className="flex items-center mb3 hover-bg-near-white hover-br2 pointer active-nudge break-avoid" 
       onClick={() => navigator.clipboard.writeText(color.name)}
     >
       <div 
-        className={`${color.bg} ba b--light-gray br1`}
-        style={{ width: '96px', height: '48px', flexShrink: 0 }}
+        className={`${color.bg} ba b--light-gray br1 sg-swatch flex-shrink-0`}
       />
       <div className="ml3">
         <strong className="f6 near-black db">{color.name}</strong>
@@ -112,7 +113,7 @@ function ColorSwatch({ color }) {
 
 function StyleGuidePage() {
   return (
-    <div style={{ userSelect: 'none' }}>
+    <div className="us-none">
       <header className="bg-light-yellow pa4">
         <div className="measure-wide center">
           <p className="f6 mb3">
@@ -131,146 +132,146 @@ function StyleGuidePage() {
       <section className="mb5">
         <h2 className="f4 near-black mb3">Typography</h2>
         
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             {typeScale.map((t) => (
               <tr key={t.class} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(t.class)}>
-                <td className="pv2 pl4" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.{t.class}</code></td>
+                <td className="pv2 pl4 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{t.class}</code></td>
                 <td className="pv2"><span className={`${t.class} near-black`}>{t.preview}</span></td>
-                <td className="pv2 tr gray font-system-mono" style={{ width: '80px', fontSize: '12px' }}>{t.size}</td>
-                <td className="pv2 pr4 tr silver font-system-mono" style={{ width: '60px', fontSize: '12px' }}>{t.px}</td>
+                <td className="pv2 tr gray font-system-mono sg-data f8">{t.size}</td>
+                <td className="pv2 pr4 tr silver font-system-mono sg-data-sm f8">{t.px}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
         <h3 className="f5 gray mb3">Font Stacks</h3>
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-system</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system</code></td>
               <td className="pv2 font-system f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-serif')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-system-serif</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system-serif</code></td>
               <td className="pv2 font-system-serif f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-system-mono')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-system-mono</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-system-mono</code></td>
               <td className="pv2 font-system-mono f5 near-black">const x = 42;</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-ibm-plex-mono')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-ibm-plex-mono</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-ibm-plex-mono</code></td>
               <td className="pv2 font-ibm-plex-mono f5 near-black">const x = 42;</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-times')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-times</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-times</code></td>
               <td className="pv2 font-times f4 near-black">The quick brown fox</td>
             </tr>
           </tbody>
         </table>
 
         <h4 className="f6 gray mb2">Other Fonts</h4>
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-neue-haas-unica')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-neue-haas-unica</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-neue-haas-unica</code></td>
               <td className="pv2 font-neue-haas-unica f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-a')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-galapagos-a</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-a</code></td>
               <td className="pv2 font-galapagos-a f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-ab')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-galapagos-ab</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-ab</code></td>
               <td className="pv2 font-galapagos-ab f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-galapagos-abc')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-galapagos-abc</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-galapagos-abc</code></td>
               <td className="pv2 font-galapagos-abc f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-comic')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-comic</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-comic</code></td>
               <td className="pv2 font-comic f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-blackletter')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-blackletter</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-blackletter</code></td>
               <td className="pv2 font-blackletter f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-algerian')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-algerian</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-algerian</code></td>
               <td className="pv2 font-algerian f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-brush-script')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-brush-script</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-brush-script</code></td>
               <td className="pv2 font-brush-script f3 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-curlz')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-curlz</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-curlz</code></td>
               <td className="pv2 font-curlz f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-davida')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-davida</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-davida</code></td>
               <td className="pv2 font-davida f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-hobo')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-hobo</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-hobo</code></td>
               <td className="pv2 font-hobo f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-relinquish')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-relinquish</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-relinquish</code></td>
               <td className="pv2 font-relinquish f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-tex-heros</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-heros</code></td>
               <td className="pv2 font-tex-heros f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-heros-cn')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-tex-heros-cn</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-heros-cn</code></td>
               <td className="pv2 font-tex-heros-cn f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-tex-termes')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-tex-termes</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-tex-termes</code></td>
               <td className="pv2 font-tex-termes f4 near-black">The quick brown fox</td>
             </tr>
             {/* Fun & Experimental */}
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-pilowlava')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-pilowlava</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-pilowlava</code></td>
               <td className="pv2 font-pilowlava f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-compagnon')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-compagnon</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-compagnon</code></td>
               <td className="pv2 font-compagnon f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-mess')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-mess</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-mess</code></td>
               <td className="pv2 font-mess f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-anthony')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-anthony</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-anthony</code></td>
               <td className="pv2 font-anthony f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-teranoptia')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-teranoptia</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-teranoptia</code></td>
               <td className="pv2 font-teranoptia f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-claire')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-typefesse-claire</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-typefesse-claire</code></td>
               <td className="pv2 font-typefesse-claire f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-typefesse-pleine')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-typefesse-pleine</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-typefesse-pleine</code></td>
               <td className="pv2 font-typefesse-pleine f4 near-black">The quick brown fox</td>
             </tr>
             <tr className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText('font-kaerukaeru')}>
-              <td className="pv2" style={{ width: '200px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-kaerukaeru</code></td>
+              <td className="pv2 sg-label"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-kaerukaeru</code></td>
               <td className="pv2 font-kaerukaeru f4 near-black">The quick brown fox</td>
             </tr>
           </tbody>
         </table>
 
         <h4 className="f6 gray mb2">Cheee Family (25 variants)</h4>
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             {[
               'baby', 'bingbong', 'boogy', 'chaarleee', 'choy', 'conshred', 'crimer', 'gnat',
@@ -279,7 +280,7 @@ function StyleGuidePage() {
               'tbone', 'tomboe', 'wowie'
             ].map(v => (
               <tr key={v} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(`font-cheee-${v}`)}>
-                <td className="pv2" style={{ width: '220px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.font-cheee-{v}</code></td>
+                <td className="pv2 sg-label-md"><code className="gray bg-light-gray ph2 pv1 br2 f8">.font-cheee-{v}</code></td>
                 <td className={`pv2 font-cheee-${v} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}
@@ -287,7 +288,7 @@ function StyleGuidePage() {
         </table>
 
         <h4 className="f6 gray mb2">Obert Family (20 variants)</h4>
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             {[
               { cls: 'font-obert-basic', name: 'Basic' },
@@ -312,7 +313,7 @@ function StyleGuidePage() {
               { cls: 'font-obert-thorn', name: 'Thorn' },
             ].map(f => (
               <tr key={f.cls} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
-                <td className="pv2" style={{ width: '220px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.{f.cls}</code></td>
+                <td className="pv2 sg-label-md"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{f.cls}</code></td>
                 <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}
@@ -320,7 +321,7 @@ function StyleGuidePage() {
         </table>
 
         <h4 className="f6 gray mb2">Bianzhidai Family (18 variants)</h4>
-        <table className="w-100 mb4 style-guide-table" style={{ borderCollapse: 'collapse' }}>
+        <table className="w-100 mb4 style-guide-table collapse">
           <tbody>
             {[
               { cls: 'font-bianzhidai-base', name: 'Base' },
@@ -345,7 +346,7 @@ function StyleGuidePage() {
               { cls: 'font-bianzhidai-nobg-stitches', name: 'NoBG Stitches' },
             ].map(f => (
               <tr key={f.cls} className="hover-bg-near-white hover-br2 pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
-                <td className="pv2" style={{ width: '260px', whiteSpace: 'nowrap' }}><code className="gray bg-light-gray ph2 pv1 br2" style={{ fontSize: '12px' }}>.{f.cls}</code></td>
+                <td className="pv2 sg-label-lg"><code className="gray bg-light-gray ph2 pv1 br2 f8">.{f.cls}</code></td>
                 <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
               </tr>
             ))}
@@ -370,6 +371,77 @@ function StyleGuidePage() {
             <ColorSwatch key={c.name} color={c} />
           ))}
         </ul>
+      </section>
+
+      {/* AI Styling Prompt */}
+      <section className="mb5">
+        <h2 className="f4 near-black mb3">Generative Styling Direction</h2>
+        <p className="f6 gray mb3">These are the styling rules I use to govern the growth of this site. I primarily use Cursor as my main editor.</p>
+        <SyntaxHighlighter
+          language="markdown"
+          style={solarizedlight}
+          customStyle={{ borderRadius: '0.25rem', fontSize: '.55rem', lineHeight: '1.5' }}
+        >
+{`# Styling: Tachyons-First
+
+This project uses Tachyons v4.12.0 (loaded via CDN). Not Tailwind, not CSS-in-JS.
+All styling decisions should be made in the mental model of Tachyons.
+
+## Decision Tree (follow this every time)
+
+1. Can Tachyons do it? → Use the Tachyons class. Done.
+2. Tachyons can't do it? → Extend src/styles/tachyons-ext.css with a custom
+   utility class that follows Tachyons naming conventions. Done.
+3. Neither works? → Stop and ask before proceeding. Explain why inline styles
+   or custom CSS are needed. Do not silently introduce inline style={} or hex values.
+
+## Hard Rules
+
+- No inline styles. No style={{ color: '#ff0000' }}, no style={{ maxWidth: '500px' }}.
+  If a value doesn't exist in Tachyons, create a utility class.
+- No Tailwind. No tw- prefixes, no Tailwind config, no @apply.
+- No CSS-in-JS. No styled-components, emotion, or similar.
+- One exception: JS-driven dynamic styles (animations, randomized values, WebGL, etc.)
+  may use inline styles. Flag these before implementing.
+
+## Extending Tachyons (tachyons-ext.css)
+
+When adding to the extension stylesheet, follow Tachyons conventions:
+
+Colors — always add the full set:
+  .{name}            { color: #hex; }
+  .bg-{name}         { background-color: #hex; }
+  .b--{name}         { border-color: #hex; }
+  .hover-{name}:hover    { color: #hex; }
+  .hover-bg-{name}:hover { background-color: #hex; }
+
+Fonts — register the @font-face, then add a utility class:
+  .font-{name} { font-family: 'Font Name', fallback-stack; }
+
+Custom utilities — name them like Tachyons would. Short, composable, single-purpose.
+
+## Baseline Patterns (defaults, not rigid rules)
+
+- Base font size: 22px on <html> — all rem values scale from this
+- Body font: .font-system (Helvetica stack) on <body>
+- Primary text: near-black | Secondary: gray | Tertiary: silver, moon-gray
+- Links: blue underline hover-no-underline
+- Page containers: pa4 mw7 center
+- Type scale: f1 display → f3 page titles → f4–f5 body → f6 meta → f7 captions
+- Spacing: Tachyons scale (pa1–pa5, ma1–ma5) — don't invent custom spacing
+
+## Breakpoints
+
+- Tachyons built-in: -ns (≥30em), -m (30–60em), -l (≥60em)
+- Custom 700px breakpoint: dn-md / db-md
+- Prefer Tachyons breakpoint suffixes over media queries in component CSS
+
+## Why Tachyons over Tailwind
+
+Tachyons is more legible, lighter, doesn't require a compile step, and lets you
+tweak styles directly in the browser devtools. The tradeoff (fewer utilities) is
+handled by extending tachyons-ext.css when needed.`}
+        </SyntaxHighlighter>
       </section>
 
       <footer className="mt5 pt4">

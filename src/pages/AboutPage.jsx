@@ -6,10 +6,10 @@ function AboutPage() {
     <div className="min-vh-100">
       {/* Header with WebGL and slider */}
       <div className="bg-near-white pa4">
-        <div className="center" style={{ maxWidth: '500px' }}>
+        <div className="center mw5-5">
           <p className="f6 mb4"><a href="/" className="blue underline hover-no-underline">← back</a></p>
         </div>
-        <div className="center" style={{ maxWidth: '400px' }}>
+        <div className="center mw5-3">
           <WebGLMorpher
             image1Url="/images/luis.png"
             image2Url="/images/pelican.png"
@@ -20,7 +20,7 @@ function AboutPage() {
       
       {/* Text content */}
       <div className="bg-white pa4">
-        <div className="center" style={{ maxWidth: '500px' }}>
+        <div className="center mw5-5">
           <p className="f5 lh-copy near-black">
             <strong>Luis Queral</strong> is a product designer and creative technologist based in Baltimore, MD.
           </p>
@@ -41,7 +41,7 @@ function AboutPage() {
             He graduated from UMBC's <em>Interdisciplinary Studies</em> program where he wrote a thesis using storytelling as a framing for designing interactive experiences.
           </p> */}
           
-          <p className="tc moon-gray mv4" style={{ fontSize: '2em', lineHeight: '1' }}>*&nbsp;*&nbsp;*</p>
+          <p className="tc moon-gray mv4 bullet-asterisk">*&nbsp;*&nbsp;*</p>
           
           <p className="f5 lh-copy near-black">
             I'm not on social media much, but if I am, it's mostly on this <a href="https://instagram.com/studio.queral" className="blue underline hover-no-underline">instagram</a> page.

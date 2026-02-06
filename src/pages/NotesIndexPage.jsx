@@ -32,8 +32,8 @@ function NotesIndexPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="pa4 mw5 center" style={{ marginTop: '15vh' }}>
-        <img src="/images/keyboard-cowboy.gif" alt="" className="db center mb4" style={{ width: '320px' }} />
+      <div className="pa4 mw5 center mt-15vh">
+        <img src="/images/keyboard-cowboy.gif" alt="" className="db center mb4 mw5-2" />
         <form onSubmit={handleSubmit}>
           <input
             type="password"

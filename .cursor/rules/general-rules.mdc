@@ -41,8 +41,8 @@ alwaysApply: True
 - Optimize images: WebP, size data, lazy loading
 
 ## UI & Styling
-- Tailwind CSS utility-first approach
-- Shadcn UI and Radix UI for accessible components
+- **See `.cursor/rules/styling.mdc` for full styling rules**
+- Tachyons utility-first CSS (not Tailwind) — see styling rule for decision tree
 - Consistent design patterns, mobile-first responsive
 - Proper contrast ratios, WCAG 2.1 AA minimum
 - Semantic HTML, proper ARIA attributes

@@ -56,7 +56,18 @@ const notesMetadata = {
       titleClass: 'f1 white mb0 lh-title normal ttu',
     }
   },
-  'richard-cigarette-bot': { title: 'richard cigarette (bot)', headerClass: 'font-blackletter f1 near-black mb4 lh-title normal tc center', headerWrapperClass: 'mw6 center tc' },
+  'richie-cigs': {
+    title: 'Richie Cigs',
+    headerSection: {
+      bgClass: 'bg-darker-red white',
+      linkClass: 'white underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'font-blackletter f-subheadline white mt0 mb0 lh-title normal',
+      audioSrc: '/notes/richie-cigs/holy-diver-audio.mp3',
+      audioCaption: '<b>press play</b> for the full richard cigarette experience',
+      audioCaptionClass: 'near-white',
+    }
+  },
   'introducing-data-synth': { 
     title: 'Data Synth',
     headerSection: {
@@ -69,6 +80,7 @@ const notesMetadata = {
       sourceLink: 'https://github.com/luismqueral/data-synth'
     }
   },
+  'styling-ruleset': { title: 'styling ruleset for this site', date: 'February 2026' },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
   'an-ode-to-interns': { title: 'an ode to interns', date: 'September 2013' },

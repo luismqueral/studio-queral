@@ -5,7 +5,7 @@ import NewsletterSignup from './NewsletterSignup'
 // Hardcoded notes list
 const notes = [
   // { title: 'Data Synth', slug: 'introducing-data-synth', subtitle: 'turn any dataset into sound' },
-  { title: 'richard cigarette (bot)', slug: 'richard-cigarette-bot', subtitle: 'a last.fm bot that listened to Holy Diver for a year' },
+  { title: 'Richie Cigs', slug: 'richie-cigs', subtitle: 'a last.fm bot that listened to Holy Diver for a year' },
   { title: 'how to make paella', slug: 'paella-recipe', subtitle: 'a family recipe from Málaga' },
   { title: 'why i love the wu-tang clan', slug: 'wu-tang-final-tour', subtitle: 'and why the RZA is such a talented, silly goose' },
   // { title: 'a guidebook for product cowboys', slug: 'generating-software', subtitle: 'a few things to keep in mind when generating software' },
@@ -63,7 +63,6 @@ const colorPairs = [
 ]
 
 function HomePage() {
-  const sidebarWidth = 400
   const [selectedPair] = useState(() => colorPairs[Math.floor(Math.random() * colorPairs.length)])
   const bgColor = selectedPair.bg
 
@@ -72,7 +71,7 @@ function HomePage() {
     <ul className="list pl0 mt0 mb0">
       {notes.map((note) => (
         <li key={note.slug} className="mb4 flex items-start">
-          <span className="mr2 moon-gray" style={{ fontSize: '2em', lineHeight: '1', marginTop: '0.02em' }}>*</span>
+          <span className="mr2 moon-gray bullet-asterisk">*</span>
           <div>
             <a href={`/notes/${note.slug}`} className="f5 blue underline hover-no-underline lh-title db">
               {note.title}
@@ -93,7 +92,7 @@ function HomePage() {
         <strong>Luis Queral</strong> is a product designer and creative technologist.
       </p>
       <p className="f6 lh-copy near-black">
-        He currently works for <em style={{ whiteSpace: 'nowrap' }}>The New York Times</em> and focuses on infrastructure tooling.
+        He currently works for <em className="nowrap">The New York Times</em> and focuses on infrastructure tooling.
       </p>
       {/* and running the <em>Generative Design Lab</em>. */}
       <p className="f6 lh-copy near-black">
@@ -109,19 +108,12 @@ function HomePage() {
   return (
     <>
       {/* Fixed left sidebar - only on desktop */}
+      {/* bgColor is JS-driven (random on load) — inline style exception */}
       <div 
-        className="dn-md pa4 hide-scrollbar"
-        style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: `${sidebarWidth}px`,
-          height: '100vh',
-          overflowY: 'auto',
-          backgroundColor: bgColor
-        }}
+        className="dn-md pa4 hide-scrollbar fixed top-0 left-0 w-sidebar vh-100 overflow-y-auto"
+        style={{ backgroundColor: bgColor }}
       >
-        <div className="mb3 center" style={{ maxWidth: '250px' }}>
+        <div className="mb3 center mw5-1">
           <WebGLMorpher
             image1Url="/images/luis.png"
             image2Url="/images/pelican.png"
@@ -133,9 +125,10 @@ function HomePage() {
       
       {/* Mobile: stacked layout (no fixed positioning) */}
       <div className="db-md">
+        {/* bgColor is JS-driven (random on load) — inline style exception */}
         <div className="pa4" style={{ backgroundColor: bgColor }}>
-          <div className="center" style={{ maxWidth: '400px' }}>
-            <div className="mb3 center" style={{ maxWidth: '240px' }}>
+          <div className="center mw5-3">
+            <div className="mb3 center mw5-1">
               <WebGLMorpher
                 image1Url="/images/luis.png"
                 image2Url="/images/pelican.png"
@@ -146,7 +139,7 @@ function HomePage() {
           </div>
         </div>
         <div className="pa4">
-          <div className="center" style={{ maxWidth: '500px' }}>
+          <div className="center mw5-5">
             <p className="f6 near-black mb4">a few things I'm thinking about:</p>
             <NotesList />
           </div>
@@ -154,34 +147,23 @@ function HomePage() {
         
         {/* Keep in touch section - full width, lightest gray */}
         {/* <div className="bg-near-white pt3 pb5">
-          <div className="center ph4" style={{ maxWidth: '500px' }}>
+          <div className="center ph4 mw5-5">
             <NewsletterSignup />
           </div>
         </div> */}
       </div>
       
       {/* Desktop: scrollable right content with margin offset */}
-      <div 
-        className="dn-md pa4"
-        style={{ 
-          marginLeft: `${sidebarWidth}px`, 
-          minHeight: '100vh'
-        }}
-      >
-        <div style={{ maxWidth: '580px' }}>
+      <div className="dn-md pa4 ml-sidebar min-vh-100">
+        <div className="mw5-7">
           <p className="f6 near-black mb4">a few things I'm thinking about:</p>
           <NotesList />
         </div>
       </div>
       
       {/* Desktop: Keep in touch section - full width, lightest gray */}
-      {/* <div 
-        className="dn-md bg-near-white pt3 pb5"
-        style={{ 
-          marginLeft: `${sidebarWidth}px`
-        }}
-      >
-        <div className="ph4" style={{ maxWidth: '580px' }}>
+      {/* <div className="dn-md bg-near-white pt3 pb5 ml-sidebar">
+        <div className="ph4 mw5-7">
           <NewsletterSignup />
         </div>
       </div> */}

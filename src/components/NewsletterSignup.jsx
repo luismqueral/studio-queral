@@ -5,7 +5,7 @@ function NewsletterSignup({
   showDescription = true
 }) {
   return (
-    <div style={{ maxWidth: '500px' }}>
+    <div className="mw5-5">
       {showHeading && heading && <p className="f6 mb1 near-black b">{heading}</p>}
       {showHeading && subtitle && <p className="f6 mb3 gray">{subtitle}</p>}
       

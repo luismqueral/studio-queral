@@ -572,34 +572,25 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
   }
 
   return (
-    <div className="center" style={{ width: '100%' }}>
+    <div className="center w-100">
       <div className="tc mb3 relative">
+        {/* Loading skeleton — opacity is JS-driven (loading state), inline style exception */}
         <div
-          className="br2 webgl-skeleton-pulse"
+          className="br2 webgl-skeleton-pulse w-100 aspect-1x1 bg-black-10 absolute top-0 left-0 pe-none"
           style={{
-            width: '100%',
-            aspectRatio: '1 / 1',
-            backgroundColor: 'rgba(0, 0, 0, 0.08)',
-            position: 'absolute',
-            top: 0,
-            left: 0,
             opacity: isLoading ? 1 : 0,
             transition: 'opacity 0.5s ease',
-            pointerEvents: 'none',
           }}
         />
 
+        {/* Canvas — opacity is JS-driven (loading state), inline style exception */}
         <canvas
           ref={canvasRef}
           width="450"
           height="450"
           onClick={handleCanvasClick}
-          className="br2 webgl-canvas webgl-grayscale"
+          className="br2 webgl-canvas webgl-grayscale w-100 h-auto object-cover pointer"
           style={{
-            width: '100%',
-            height: 'auto',
-            objectFit: 'cover',
-            cursor: 'pointer',
             opacity: isLoading ? 0 : 1,
             transition: 'opacity 0.5s ease',
           }}
@@ -607,7 +598,7 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
       </div>
 
       {(!hideSlider || showHiddenSlider) && (
-        <div className="center" style={{ maxWidth: '100%' }}>
+        <div className="center mw-100">
           <div className="flex items-center justify-between mb2">
             <span className="f5 near-black">luis</span>
             <span className="f5 near-black">not luis</span>
