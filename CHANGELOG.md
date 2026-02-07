@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- flattened Style Guide font sections — removed separate family headers (Cheee, Digestive, Obert, Bianzhidai) and merged all fonts into a single "Other Fonts" table
+- added Digestive font family (7 variants: Zero through Five + Small) — @font-face declarations, `.font-digestive-*` utility classes in tachyons-ext.css
+- removed Cheee family from the Style Guide page (font-face and utility classes kept in CSS for use elsewhere)
 - fixed notes subdomain routing — Vercel rewrites alone don't work for an SPA since React Router reads the browser URL client-side; added subdomain detection in App.jsx so `notes.queral.studio/` maps to the notes index and `notes.queral.studio/:slug` maps to individual notes; cleaned up redundant Vercel rewrite rules, keeping only the media file proxy for the subdomain
 - added five more fonts — Gamilia Pixel, Mr Saturn, Pixelfraktur, Shellybu, and Texticles — @font-face declarations, utility classes, and Style Guide entries for each
 - added Wingdings font — downloaded TTF, added @font-face and `.font-wingdings` utility class, added to Style Guide page

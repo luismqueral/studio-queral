@@ -474,6 +474,15 @@
 @font-face { font-family: 'Obert Sharp'; src: url('/fonts/ObertExpTrial-Sharp.woff2') format('woff2'); }
 @font-face { font-family: 'Obert Thorn'; src: url('/fonts/ObertExpTrial-Thorn.woff2') format('woff2'); }
 
+/* Digestive Demo font family - 7 variants */
+@font-face { font-family: 'Digestive Zero'; src: url('/fonts/DigestiveDemo-Zero.otf') format('opentype'); }
+@font-face { font-family: 'Digestive One'; src: url('/fonts/DigestiveDemo-One.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Two'; src: url('/fonts/DigestiveDemo-Two.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Three'; src: url('/fonts/DigestiveDemo-Three.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Four'; src: url('/fonts/DigestiveDemo-Four.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Five'; src: url('/fonts/DigestiveDemo-Five.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Small'; src: url('/fonts/DigestiveDemo-Small.otf') format('opentype'); }
+
 /* Bianzhidai font family - knit/weave style (using OTF - WOFF2 conversion fails for these) */
 @font-face { font-family: 'bianzhidai Base'; src: url('/fonts/bianzhidai-Base.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai Brush'; src: url('/fonts/bianzhidai-Brush.otf') format('opentype'); }
@@ -616,6 +625,15 @@ body {
 .font-cheee-tbone { font-family: 'Cheee Tbone', sans-serif; }
 .font-cheee-tomboe { font-family: 'Cheee Tomboe', sans-serif; }
 .font-cheee-wowie { font-family: 'Cheee Wowie', sans-serif; }
+
+/* Digestive font family */
+.font-digestive-zero { font-family: 'Digestive Zero', sans-serif; }
+.font-digestive-one { font-family: 'Digestive One', sans-serif; }
+.font-digestive-two { font-family: 'Digestive Two', sans-serif; }
+.font-digestive-three { font-family: 'Digestive Three', sans-serif; }
+.font-digestive-four { font-family: 'Digestive Four', sans-serif; }
+.font-digestive-five { font-family: 'Digestive Five', sans-serif; }
+.font-digestive-small { font-family: 'Digestive Small', sans-serif; }
 
 /* Obert font family */
 .font-obert-basic { font-family: 'Obert Basic', sans-serif; }

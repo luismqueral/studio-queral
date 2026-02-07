@@ -304,87 +304,58 @@ function StyleGuidePage() {
               <td className="pv2 sg-label-lg"><code className="gray f8">.font-kaerukaeru</code></td>
               <td className="pv2 font-kaerukaeru f4 near-black">The quick brown fox</td>
             </tr>
-          </tbody>
-        </table>
-
-        <h4 className="f6 gray mb2">Cheee Family (25 variants)</h4>
-        <table className="w-100 mb4 style-guide-table collapse">
-          <tbody>
             {[
-              'baby', 'bingbong', 'boogy', 'chaarleee', 'choy', 'conshred', 'crimer', 'gnat',
-              'jabroni', 'jimbo', 'juanito', 'kingstreet', 'oldskool', 'oyen', 'peeenutt',
-              'pickles', 'schemer', 'shishi', 'small', 'smortious', 'sticky', 'stinkhead',
-              'tbone', 'tomboe', 'wowie'
-            ].map(v => (
-              <tr key={v} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(`font-cheee-${v}`)}>
-                <td className="pv2 sg-label-lg"><code className="gray f8">.font-cheee-{v}</code></td>
-                <td className={`pv2 font-cheee-${v} f3 near-black`}>The quick brown fox</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h4 className="f6 gray mb2">Obert Family (20 variants)</h4>
-        <table className="w-100 mb4 style-guide-table collapse">
-          <tbody>
-            {[
-              { cls: 'font-obert-basic', name: 'Basic' },
-              { cls: 'font-obert-basic-45', name: 'Basic 45°' },
-              { cls: 'font-obert-basic-90', name: 'Basic 90°' },
-              { cls: 'font-obert-basic-135', name: 'Basic 135°' },
-              { cls: 'font-obert-slant', name: 'Slant' },
-              { cls: 'font-obert-slant-45', name: 'Slant 45°' },
-              { cls: 'font-obert-slant-90', name: 'Slant 90°' },
-              { cls: 'font-obert-slant-135', name: 'Slant 135°' },
-              { cls: 'font-obert-reclined', name: 'Reclined' },
-              { cls: 'font-obert-reclined-45', name: 'Reclined 45°' },
-              { cls: 'font-obert-reclined-90', name: 'Reclined 90°' },
-              { cls: 'font-obert-reclined-135', name: 'Reclined 135°' },
-              { cls: 'font-obert-bright-high', name: 'Bright High' },
-              { cls: 'font-obert-bright-mid', name: 'Bright Mid' },
-              { cls: 'font-obert-bright-low', name: 'Bright Low' },
-              { cls: 'font-obert-ball', name: 'Ball' },
-              { cls: 'font-obert-chip', name: 'Chip' },
-              { cls: 'font-obert-screen', name: 'Screen' },
-              { cls: 'font-obert-sharp', name: 'Sharp' },
-              { cls: 'font-obert-thorn', name: 'Thorn' },
+              { cls: 'font-digestive-zero' },
+              { cls: 'font-digestive-one' },
+              { cls: 'font-digestive-two' },
+              { cls: 'font-digestive-three' },
+              { cls: 'font-digestive-four' },
+              { cls: 'font-digestive-five' },
+              { cls: 'font-digestive-small' },
+              { cls: 'font-obert-basic' },
+              { cls: 'font-obert-basic-45' },
+              { cls: 'font-obert-basic-90' },
+              { cls: 'font-obert-basic-135' },
+              { cls: 'font-obert-slant' },
+              { cls: 'font-obert-slant-45' },
+              { cls: 'font-obert-slant-90' },
+              { cls: 'font-obert-slant-135' },
+              { cls: 'font-obert-reclined' },
+              { cls: 'font-obert-reclined-45' },
+              { cls: 'font-obert-reclined-90' },
+              { cls: 'font-obert-reclined-135' },
+              { cls: 'font-obert-bright-high' },
+              { cls: 'font-obert-bright-mid' },
+              { cls: 'font-obert-bright-low' },
+              { cls: 'font-obert-ball' },
+              { cls: 'font-obert-chip' },
+              { cls: 'font-obert-screen' },
+              { cls: 'font-obert-sharp' },
+              { cls: 'font-obert-thorn' },
+              { cls: 'font-bianzhidai-base' },
+              { cls: 'font-bianzhidai-brush' },
+              { cls: 'font-bianzhidai-bubble' },
+              { cls: 'font-bianzhidai-cloud' },
+              { cls: 'font-bianzhidai-cube' },
+              { cls: 'font-bianzhidai-messier' },
+              { cls: 'font-bianzhidai-messy' },
+              { cls: 'font-bianzhidai-pearl' },
+              { cls: 'font-bianzhidai-ring' },
+              { cls: 'font-bianzhidai-stitches' },
+              { cls: 'font-bianzhidai-nobg-base' },
+              { cls: 'font-bianzhidai-nobg-brush' },
+              { cls: 'font-bianzhidai-nobg-bubble' },
+              { cls: 'font-bianzhidai-nobg-cloud' },
+              { cls: 'font-bianzhidai-nobg-cube' },
+              { cls: 'font-bianzhidai-nobg-messier' },
+              { cls: 'font-bianzhidai-nobg-messy' },
+              { cls: 'font-bianzhidai-nobg-pearl' },
+              { cls: 'font-bianzhidai-nobg-ring' },
+              { cls: 'font-bianzhidai-nobg-stitches' },
             ].map(f => (
               <tr key={f.cls} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
                 <td className="pv2 sg-label-lg"><code className="gray f8">.{f.cls}</code></td>
-                <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h4 className="f6 gray mb2">Bianzhidai Family (18 variants)</h4>
-        <table className="w-100 mb4 style-guide-table collapse">
-          <tbody>
-            {[
-              { cls: 'font-bianzhidai-base', name: 'Base' },
-              { cls: 'font-bianzhidai-brush', name: 'Brush' },
-              { cls: 'font-bianzhidai-bubble', name: 'Bubble' },
-              { cls: 'font-bianzhidai-cloud', name: 'Cloud' },
-              { cls: 'font-bianzhidai-cube', name: 'Cube' },
-              { cls: 'font-bianzhidai-messier', name: 'Messier' },
-              { cls: 'font-bianzhidai-messy', name: 'Messy' },
-              { cls: 'font-bianzhidai-pearl', name: 'Pearl' },
-              { cls: 'font-bianzhidai-ring', name: 'Ring' },
-              { cls: 'font-bianzhidai-stitches', name: 'Stitches' },
-              { cls: 'font-bianzhidai-nobg-base', name: 'NoBG Base' },
-              { cls: 'font-bianzhidai-nobg-brush', name: 'NoBG Brush' },
-              { cls: 'font-bianzhidai-nobg-bubble', name: 'NoBG Bubble' },
-              { cls: 'font-bianzhidai-nobg-cloud', name: 'NoBG Cloud' },
-              { cls: 'font-bianzhidai-nobg-cube', name: 'NoBG Cube' },
-              { cls: 'font-bianzhidai-nobg-messier', name: 'NoBG Messier' },
-              { cls: 'font-bianzhidai-nobg-messy', name: 'NoBG Messy' },
-              { cls: 'font-bianzhidai-nobg-pearl', name: 'NoBG Pearl' },
-              { cls: 'font-bianzhidai-nobg-ring', name: 'NoBG Ring' },
-              { cls: 'font-bianzhidai-nobg-stitches', name: 'NoBG Stitches' },
-            ].map(f => (
-              <tr key={f.cls} className="bb b--moon-gray pointer active-nudge" onClick={() => navigator.clipboard.writeText(f.cls)}>
-                <td className="pv2 sg-label-lg"><code className="gray f8">.{f.cls}</code></td>
-                <td className={`pv2 ${f.cls} f3 near-black`}>The quick brown fox</td>
+                <td className={`pv2 ${f.cls} f4 near-black`}>The quick brown fox</td>
               </tr>
             ))}
           </tbody>

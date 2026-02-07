@@ -600,8 +600,8 @@ function WebGLMorpher({ image1Url, image2Url, hideSlider = false }) {
       {(!hideSlider || showHiddenSlider) && (
         <div className="center mw-100">
           <div className="flex items-center justify-between mb2">
-            <span className="f5 near-black">luis</span>
-            <span className="f5 near-black">not luis</span>
+            <span className="f6 near-black">luis</span>
+            <span className="f6 near-black">not luis</span>
           </div>
           <div className="relative">
             <input
