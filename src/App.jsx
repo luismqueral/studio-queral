@@ -5,15 +5,26 @@ import NotePage from './components/NotePage'
 import NotesIndexPage from './pages/NotesIndexPage'
 import StyleGuidePage from './pages/StyleGuidePage'
 
+const isNotesSubdomain = window.location.hostname === 'notes.queral.studio'
+
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/notes" element={<NotesIndexPage />} />
-        <Route path="/notes/:slug" element={<NotePage />} />
-        <Route path="/styles" element={<StyleGuidePage />} />
+        {isNotesSubdomain ? (
+          <>
+            <Route path="/" element={<NotesIndexPage />} />
+            <Route path="/:slug" element={<NotePage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/notes" element={<NotesIndexPage />} />
+            <Route path="/notes/:slug" element={<NotePage />} />
+            <Route path="/styles" element={<StyleGuidePage />} />
+          </>
+        )}
       </Routes>
     </div>
   )

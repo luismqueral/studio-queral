@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
-- added Vercel rewrite rules for `notes.queral.studio` subdomain — requests to `notes.queral.studio/:slug` silently rewrite to `/notes/:slug`, and media file requests route to the Blob CDN; no code changes needed, just DNS setup in Vercel dashboard when ready to go live
+- fixed notes subdomain routing — Vercel rewrites alone don't work for an SPA since React Router reads the browser URL client-side; added subdomain detection in App.jsx so `notes.queral.studio/` maps to the notes index and `notes.queral.studio/:slug` maps to individual notes; cleaned up redundant Vercel rewrite rules, keeping only the media file proxy for the subdomain
 - added five more fonts — Gamilia Pixel, Mr Saturn, Pixelfraktur, Shellybu, and Texticles — @font-face declarations, utility classes, and Style Guide entries for each
 - added Wingdings font — downloaded TTF, added @font-face and `.font-wingdings` utility class, added to Style Guide page
 - added Sanfrisco and Valencia fonts — @font-face declarations, `.font-sanfrisco` and `.font-valencia` utility classes in tachyons-ext.css, and entries in the Style Guide page
