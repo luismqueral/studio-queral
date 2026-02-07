@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-02-06
+- added Vercel rewrite rules for `notes.queral.studio` subdomain — requests to `notes.queral.studio/:slug` silently rewrite to `/notes/:slug`, and media file requests route to the Blob CDN; no code changes needed, just DNS setup in Vercel dashboard when ready to go live
 - added five more fonts — Gamilia Pixel, Mr Saturn, Pixelfraktur, Shellybu, and Texticles — @font-face declarations, utility classes, and Style Guide entries for each
 - added Wingdings font — downloaded TTF, added @font-face and `.font-wingdings` utility class, added to Style Guide page
 - added Sanfrisco and Valencia fonts — @font-face declarations, `.font-sanfrisco` and `.font-valencia` utility classes in tachyons-ext.css, and entries in the Style Guide page

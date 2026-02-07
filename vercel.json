@@ -4,6 +4,21 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "rewrites": [
+    {
+      "source": "/:slug/:file+",
+      "has": [{ "type": "host", "value": "notes.queral.studio" }],
+      "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/notes/:slug/:file+"
+    },
+    {
+      "source": "/:slug",
+      "has": [{ "type": "host", "value": "notes.queral.studio" }],
+      "destination": "/notes/:slug"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "notes.queral.studio" }],
+      "destination": "/notes"
+    },
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/notes/:slug/:file+", "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/notes/:slug/:file+" },
     { "source": "/(.*)", "destination": "/index.html" }
