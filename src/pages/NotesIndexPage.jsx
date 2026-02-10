@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { notes } from '../notes'
 
+// Detect subdomain to adjust link targets:
+// - On subdomain: note links use relative /:slug paths, "back" goes to main site
+// - On main site: note links point to the subdomain
+const isNotesSubdomain = window.location.hostname === 'notes.queral.studio'
+
 // Simple password protection (client-side only — not truly secure, just a casual gate)
 const CORRECT_PASSWORD = 'queral2026'
 const STORAGE_KEY = 'notes-index-auth'
@@ -51,7 +56,13 @@ function NotesIndexPage() {
             Enter
           </button>
         </form>
-        <p className="f6 mt4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
+        <p className="f6 mt4">
+          {isNotesSubdomain ? (
+            <a href="https://queral.studio" className="blue underline hover-no-underline">← back home</a>
+          ) : (
+            <Link to="/" className="blue underline hover-no-underline">← back home</Link>
+          )}
+        </p>
       </div>
     )
   }
@@ -82,7 +93,13 @@ function NotesIndexPage() {
 
   return (
     <div className="pa4 mw7 center">
-      <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back home</Link></p>
+      <p className="f6 mb4">
+        {isNotesSubdomain ? (
+          <a href="https://queral.studio" className="blue underline hover-no-underline">← back home</a>
+        ) : (
+          <Link to="/" className="blue underline hover-no-underline">← back home</Link>
+        )}
+      </p>
       
       <h1 className="f3 near-black mb2">Notes Index</h1>
       <p className="f6 gray mb4">Internal reference — {notesList.length} total notes</p>
@@ -94,9 +111,15 @@ function NotesIndexPage() {
         <ul className="list pl0">
           {publicNotes.map(note => (
             <li key={note.slug} className="mb2 f6">
-              <Link to={`/notes/${note.slug}`} className="blue underline hover-no-underline">
-                {note.title}
-              </Link>
+              {isNotesSubdomain ? (
+                <Link to={`/${note.slug}`} className="blue underline hover-no-underline">
+                  {note.title}
+                </Link>
+              ) : (
+                <a href={`https://notes.queral.studio/${note.slug}`} className="blue underline hover-no-underline">
+                  {note.title}
+                </a>
+              )}
               {note.date && <span className="gray ml2">({note.date})</span>}
               <span className="moon-gray ml2">— {Math.round(note.contentLength / 1000)}k chars</span>
             </li>
@@ -111,9 +134,15 @@ function NotesIndexPage() {
         <ul className="list pl0">
           {drafts.map(note => (
             <li key={note.slug} className="mb2 f6">
-              <Link to={`/notes/${note.slug}`} className="gray underline hover-no-underline">
-                {note.title}
-              </Link>
+              {isNotesSubdomain ? (
+                <Link to={`/${note.slug}`} className="gray underline hover-no-underline">
+                  {note.title}
+                </Link>
+              ) : (
+                <a href={`https://notes.queral.studio/${note.slug}`} className="gray underline hover-no-underline">
+                  {note.title}
+                </a>
+              )}
               {note.date && <span className="moon-gray ml2">({note.date})</span>}
             </li>
           ))}

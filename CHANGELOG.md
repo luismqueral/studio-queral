@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-02-10
+- updated all notes links across the site to leverage the `notes.queral.studio` subdomain — homepage note links now point to `https://notes.queral.studio/:slug` instead of `/notes/:slug`, and NotesIndexPage links are subdomain-aware (relative paths on the subdomain, full subdomain URLs on the main site)
+- fixed "back" links on the subdomain so they navigate to `https://queral.studio` instead of `/` — previously, clicking "back" from a note on `notes.queral.studio` would land on the password-gated notes index, which was a dead end for readers who were given a direct note link
+- added a reusable `BackLink` component in NotePage.jsx to centralize the subdomain-aware back link logic
+
 2026-02-06
 - flattened Style Guide font sections — removed separate family headers (Cheee, Digestive, Obert, Bianzhidai) and merged all fonts into a single "Other Fonts" table
 - added Digestive font family (7 variants: Zero through Five + Small) — @font-face declarations, `.font-digestive-*` utility classes in tachyons-ext.css
 - removed Cheee family from the Style Guide page (font-face and utility classes kept in CSS for use elsewhere)
 - fixed notes subdomain routing — Vercel rewrites alone don't work for an SPA since React Router reads the browser URL client-side; added subdomain detection in App.jsx so `notes.queral.studio/` maps to the notes index and `notes.queral.studio/:slug` maps to individual notes; cleaned up redundant Vercel rewrite rules, keeping only the media file proxy for the subdomain
+- converted all font files to WOFF2 — batch-converted 72 TTF/OTF/WOFF files using fonttools, updated all @font-face declarations to use WOFF2 only, removed WOFF fallbacks from dual-format declarations, deleted 141 old font files saving ~39MB
+- added Abstract Sunday, C059 (Roman/Bold/Italic/BoldItalic), Century Schoolbook Mono, H-Zen, Merchant Copy (regular + wide), and Redacted Script (light/regular/bold) — @font-face declarations, utility classes, and Style Guide entries
+- added Gikit, Mineral (5 variants: Regular, Blunt, Border, Outline, Smooth), Pickle Standard (3 variants: -1, 0, 1), and Timtam fonts — @font-face declarations, utility classes, and Style Guide entries
 - added five more fonts — Gamilia Pixel, Mr Saturn, Pixelfraktur, Shellybu, and Texticles — @font-face declarations, utility classes, and Style Guide entries for each
 - added Wingdings font — downloaded TTF, added @font-face and `.font-wingdings` utility class, added to Style Guide page
 - added Sanfrisco and Valencia fonts — @font-face declarations, `.font-sanfrisco` and `.font-valencia` utility classes in tachyons-ext.css, and entries in the Style Guide page

@@ -6,6 +6,18 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { notes } from '../notes'
 
+// On the subdomain, "back" should go to the main site (not the password-gated index)
+const isNotesSubdomain = window.location.hostname === 'notes.queral.studio'
+
+// Back link that's subdomain-aware: on notes.queral.studio it links to the main
+// site via a full URL; on the main site it uses client-side routing to "/"
+const BackLink = ({ className }) => {
+  if (isNotesSubdomain) {
+    return <a href="https://queral.studio" className={className}>← back</a>
+  }
+  return <Link to="/" className={className}>← back</Link>
+}
+
 /**
  * CodeBlock - Renders fenced code blocks with syntax highlighting
  * 
@@ -93,7 +105,7 @@ function NotePage() {
       <div className="pa4 mw7 center">
         <h1 className="f4 near-black mb3">Note not found</h1>
         <p className="f5 gray mb4">The note "{slug}" doesn't exist yet.</p>
-        <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
+        <BackLink className="f6 blue underline hover-no-underline" />
       </div>
     )
   }
@@ -115,7 +127,7 @@ function NotePage() {
       <div className={note.headerSection.pageBgClass || ''}>
         <div className={note.headerSection.bgClass || "bg-near-black white"}>
           <div className={`ph4 ${note.headerSection.headerPadClass || 'pt4'} pb4 mw7 center`}>
-            <p className="f6 mb3"><Link to="/" className={note.headerSection.linkClass || "white underline hover-no-underline"}>← back</Link></p>
+            <p className="f6 mb3"><BackLink className={note.headerSection.linkClass || "white underline hover-no-underline"} /></p>
             <div className={note.headerSection.wrapperClass || "mw6 center tc"}>
               <h1 className={note.headerSection.titleClass || "font-blackletter f1 white mb0 lh-title normal"}>{note.title}</h1>
               {note.headerSection.subtitle && (
@@ -172,7 +184,7 @@ function NotePage() {
           
           {note.date && <p className={`f6 ${dateClass} mt5 mb0`}>last updated: {note.date}</p>}
           <footer className={`mt4 pt4 bt ${footerBorderClass}`}>
-            <Link to="/" className={`f6 ${footerLinkClass}`}>← back</Link>
+            <BackLink className={`f6 ${footerLinkClass}`} />
           </footer>
         </div>
       </div>
@@ -181,7 +193,7 @@ function NotePage() {
 
   return (
     <div className="pa4 mw7 center">
-      <p className="f6 mb4"><Link to="/" className="blue underline hover-no-underline">← back</Link></p>
+      <p className="f6 mb4"><BackLink className="blue underline hover-no-underline" /></p>
       <article className="note-content">
         {!note.skipDefaultHeader && (
           note.headerWrapperClass ? (
@@ -209,7 +221,7 @@ function NotePage() {
       
       {note.date && <p className="f6 gray mt5 mb0">last updated: {note.date}</p>}
       <footer className="mt4 pt4 bt b--light-gray">
-        <Link to="/" className="f6 blue underline hover-no-underline">← back</Link>
+        <BackLink className="f6 blue underline hover-no-underline" />
       </footer>
     </div>
   )

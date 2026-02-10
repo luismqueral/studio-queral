@@ -73,7 +73,7 @@ function HomePage() {
         <li key={note.slug} className="mb4 flex items-start">
           <span className="mr2 moon-gray bullet-asterisk">*</span>
           <div>
-            <a href={`/notes/${note.slug}`} className="f5 blue underline hover-no-underline lh-title db">
+            <a href={`https://notes.queral.studio/${note.slug}`} className="f5 blue underline hover-no-underline lh-title db">
               {note.title}
             </a>
             {note.subtitle && (

@@ -106,21 +106,21 @@
 /* Neue Haas Unica */
 @font-face {
   font-family: 'Neue Haas Unica';
-  src: url('/fonts/neuehaasunicaw1g-regular.woff') format('woff');
+  src: url('/fonts/neuehaasunicaw1g-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Neue Haas Unica';
-  src: url('/fonts/neuehaasunicaw1g-medium.woff') format('woff');
+  src: url('/fonts/neuehaasunicaw1g-medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Neue Haas Unica';
-  src: url('/fonts/neuehaasunicaw1g-bold.woff') format('woff');
+  src: url('/fonts/neuehaasunicaw1g-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -128,24 +128,21 @@
 /* Galapagos variants */
 @font-face {
   font-family: 'Galapagos A Grid';
-  src: url('/fonts/GalapagosAGrid-Bold.woff2') format('woff2'),
-       url('/fonts/GalapagosAGrid-Bold.woff') format('woff');
+  src: url('/fonts/GalapagosAGrid-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Galapagos AB Grid';
-  src: url('/fonts/GalapagosABGrid-Bold.woff2') format('woff2'),
-       url('/fonts/GalapagosABGrid-Bold.woff') format('woff');
+  src: url('/fonts/GalapagosABGrid-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Galapagos ABC Grid';
-  src: url('/fonts/GalapagosABCGrid-Bold.woff2') format('woff2'),
-       url('/fonts/GalapagosABCGrid-Bold.woff') format('woff');
+  src: url('/fonts/GalapagosABCGrid-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -153,72 +150,63 @@
 /* Display & Decorative fonts */
 @font-face {
   font-family: 'Comic Sans MS';
-  src: url('/fonts/ComicSansMS.woff2') format('woff2'),
-       url('/fonts/ComicSansMS.woff') format('woff');
+  src: url('/fonts/ComicSansMS.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Comic Sans MS';
-  src: url('/fonts/ComicSansMS-Bold.woff2') format('woff2'),
-       url('/fonts/ComicSansMS-Bold.woff') format('woff');
+  src: url('/fonts/ComicSansMS-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lucida Blackletter';
-  src: url('/fonts/LucidaBlackletter.woff2') format('woff2'),
-       url('/fonts/LucidaBlackletter.woff') format('woff');
+  src: url('/fonts/LucidaBlackletter.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Algerian';
-  src: url('/fonts/Algerian.woff2') format('woff2'),
-       url('/fonts/Algerian.woff') format('woff');
+  src: url('/fonts/Algerian.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Brush Script Std';
-  src: url('/fonts/BrushScriptStd.woff2') format('woff2'),
-       url('/fonts/BrushScriptStd.woff') format('woff');
+  src: url('/fonts/BrushScriptStd.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Curlz MT';
-  src: url('/fonts/CurlzMT.woff2') format('woff2'),
-       url('/fonts/CurlzMT.woff') format('woff');
+  src: url('/fonts/CurlzMT.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Davida Bold BT';
-  src: url('/fonts/DavidaBoldBT-Regular.woff2') format('woff2'),
-       url('/fonts/DavidaBoldBT-Regular.woff') format('woff');
+  src: url('/fonts/DavidaBoldBT-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Hobo Std';
-  src: url('/fonts/HoboStd.woff2') format('woff2'),
-       url('/fonts/HoboStd.woff') format('woff');
+  src: url('/fonts/HoboStd.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Relinquish';
-  src: url('/fonts/Relinquish-Regular.woff2') format('woff2'),
-       url('/fonts/Relinquish-Regular.woff') format('woff');
+  src: url('/fonts/Relinquish-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
@@ -226,84 +214,84 @@
 /* TeX Gyre fonts */
 @font-face {
   font-family: 'TeX Gyre Heros';
-  src: url('/fonts/TeX Gyre/texgyreheros-regular.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheros-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros';
-  src: url('/fonts/TeX Gyre/texgyreheros-italic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheros-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros';
-  src: url('/fonts/TeX Gyre/texgyreheros-bold.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheros-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros';
-  src: url('/fonts/TeX Gyre/texgyreheros-bolditalic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheros-bolditalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros Condensed';
-  src: url('/fonts/TeX Gyre/texgyreheroscn-regular.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheroscn-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros Condensed';
-  src: url('/fonts/TeX Gyre/texgyreheroscn-italic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheroscn-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros Condensed';
-  src: url('/fonts/TeX Gyre/texgyreheroscn-bold.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheroscn-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Heros Condensed';
-  src: url('/fonts/TeX Gyre/texgyreheroscn-bolditalic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyreheroscn-bolditalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeX Gyre Termes';
-  src: url('/fonts/TeX Gyre/texgyretermes-regular.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyretermes-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Termes';
-  src: url('/fonts/TeX Gyre/texgyretermes-italic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyretermes-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'TeX Gyre Termes';
-  src: url('/fonts/TeX Gyre/texgyretermes-bold.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyretermes-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TeX Gyre Termes';
-  src: url('/fonts/TeX Gyre/texgyretermes-bolditalic.otf') format('opentype');
+  src: url('/fonts/TeX Gyre/texgyretermes-bolditalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
 }
@@ -311,57 +299,211 @@
 /* Script & Display fonts */
 @font-face {
   font-family: 'Sanfrisco';
-  src: url('/fonts/Sanfrisco.ttf') format('truetype');
+  src: url('/fonts/Sanfrisco.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Valencia';
-  src: url('/fonts/Valencia.ttf') format('truetype');
+  src: url('/fonts/Valencia.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Wingdings';
-  src: url('/fonts/Wingdings.ttf') format('truetype');
+  src: url('/fonts/Wingdings.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gamilia Pixel';
-  src: url('/fonts/gamilia-pixel-demo-regular.otf') format('opentype');
+  src: url('/fonts/gamilia-pixel-demo-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Mr Saturn';
-  src: url('/fonts/mr-saturn.ttf') format('truetype');
+  src: url('/fonts/mr-saturn.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Pixelfraktur';
-  src: url('/fonts/pixelfraktur.ttf') format('truetype');
+  src: url('/fonts/pixelfraktur.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Shellybu';
-  src: url('/fonts/shellybu.ttf') format('truetype');
+  src: url('/fonts/shellybu.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Texticles';
-  src: url('/fonts/texticles.ttf') format('truetype');
+  src: url('/fonts/texticles.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gikit';
+  src: url('/fonts/Gikit-trial-Text.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mineral Regular';
+  src: url('/fonts/Mineral-trial-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mineral Blunt';
+  src: url('/fonts/Mineral-trial-Blunt.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mineral Border';
+  src: url('/fonts/Mineral-trial-Border.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mineral Outline';
+  src: url('/fonts/Mineral-trial-Outline.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mineral Smooth';
+  src: url('/fonts/Mineral-trial-Smooth.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pickle Standard -1';
+  src: url('/fonts/Pickle-Standard-trial--1.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pickle Standard 0';
+  src: url('/fonts/Pickle-Standard-trial-0.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pickle Standard 1';
+  src: url('/fonts/Pickle-Standard-trial-1.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Timtam';
+  src: url('/fonts/Timtam-trial.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Abstract Sunday';
+  src: url('/fonts/abstractsunday-regular7-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'C059';
+  src: url('/fonts/C059-Roman.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'C059';
+  src: url('/fonts/C059-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'C059';
+  src: url('/fonts/C059-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'C059';
+  src: url('/fonts/C059-BdIta.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Century Schoolbook Mono';
+  src: url('/fonts/Century-Schoolbook-Monospace-BT.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'H-Zen';
+  src: url('/fonts/h-zen-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merchant Copy';
+  src: url('/fonts/merchant-copy.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merchant Copy Wide';
+  src: url('/fonts/merchant-copy-wide.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Redacted Script';
+  src: url('/fonts/RedactedScript-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Redacted Script';
+  src: url('/fonts/RedactedScript-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Redacted Script';
+  src: url('/fonts/RedactedScript-Bold.woff2') format('woff2');
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -475,15 +617,15 @@
 @font-face { font-family: 'Obert Thorn'; src: url('/fonts/ObertExpTrial-Thorn.woff2') format('woff2'); }
 
 /* Digestive Demo font family - 7 variants */
-@font-face { font-family: 'Digestive Zero'; src: url('/fonts/DigestiveDemo-Zero.otf') format('opentype'); }
-@font-face { font-family: 'Digestive One'; src: url('/fonts/DigestiveDemo-One.otf') format('opentype'); }
-@font-face { font-family: 'Digestive Two'; src: url('/fonts/DigestiveDemo-Two.otf') format('opentype'); }
-@font-face { font-family: 'Digestive Three'; src: url('/fonts/DigestiveDemo-Three.otf') format('opentype'); }
-@font-face { font-family: 'Digestive Four'; src: url('/fonts/DigestiveDemo-Four.otf') format('opentype'); }
-@font-face { font-family: 'Digestive Five'; src: url('/fonts/DigestiveDemo-Five.otf') format('opentype'); }
-@font-face { font-family: 'Digestive Small'; src: url('/fonts/DigestiveDemo-Small.otf') format('opentype'); }
+@font-face { font-family: 'Digestive Zero'; src: url('/fonts/DigestiveDemo-Zero.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive One'; src: url('/fonts/DigestiveDemo-One.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive Two'; src: url('/fonts/DigestiveDemo-Two.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive Three'; src: url('/fonts/DigestiveDemo-Three.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive Four'; src: url('/fonts/DigestiveDemo-Four.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive Five'; src: url('/fonts/DigestiveDemo-Five.woff2') format('woff2'); }
+@font-face { font-family: 'Digestive Small'; src: url('/fonts/DigestiveDemo-Small.woff2') format('woff2'); }
 
-/* Bianzhidai font family - knit/weave style (using OTF - WOFF2 conversion fails for these) */
+/* Bianzhidai font family - knit/weave style (kept as OTF — complex CFF paths don't render reliably in WOFF2) */
 @font-face { font-family: 'bianzhidai Base'; src: url('/fonts/bianzhidai-Base.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai Brush'; src: url('/fonts/bianzhidai-Brush.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai Bubble'; src: url('/fonts/bianzhidai-Bubble.otf') format('opentype'); }
@@ -495,7 +637,7 @@
 @font-face { font-family: 'bianzhidai Ring'; src: url('/fonts/bianzhidai-Ring.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai Stitches'; src: url('/fonts/bianzhidai-Stitches.otf') format('opentype'); }
 
-/* Bianzhidai No BG variants - transparent background */
+/* Bianzhidai No BG variants - transparent background (kept as OTF — same reason) */
 @font-face { font-family: 'bianzhidai_noBG Base'; src: url('/fonts/bianzhidai_noBG-Base.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai_noBG Brush'; src: url('/fonts/bianzhidai_noBG-Brush.otf') format('opentype'); }
 @font-face { font-family: 'bianzhidai_noBG Bubble'; src: url('/fonts/bianzhidai_noBG-Bubble.otf') format('opentype'); }
@@ -588,6 +730,23 @@ body {
 .font-pixelfraktur { font-family: 'Pixelfraktur', monospace; }
 .font-shellybu { font-family: 'Shellybu', cursive; }
 .font-texticles { font-family: 'Texticles', sans-serif; }
+.font-gikit { font-family: 'Gikit', sans-serif; }
+.font-mineral { font-family: 'Mineral Regular', sans-serif; }
+.font-mineral-blunt { font-family: 'Mineral Blunt', sans-serif; }
+.font-mineral-border { font-family: 'Mineral Border', sans-serif; }
+.font-mineral-outline { font-family: 'Mineral Outline', sans-serif; }
+.font-mineral-smooth { font-family: 'Mineral Smooth', sans-serif; }
+.font-pickle-n1 { font-family: 'Pickle Standard -1', sans-serif; }
+.font-pickle-0 { font-family: 'Pickle Standard 0', sans-serif; }
+.font-pickle-1 { font-family: 'Pickle Standard 1', sans-serif; }
+.font-timtam { font-family: 'Timtam', sans-serif; }
+.font-abstract-sunday { font-family: 'Abstract Sunday', sans-serif; }
+.font-c059 { font-family: 'C059', serif; }
+.font-century-schoolbook-mono { font-family: 'Century Schoolbook Mono', monospace; }
+.font-h-zen { font-family: 'H-Zen', sans-serif; }
+.font-merchant-copy { font-family: 'Merchant Copy', monospace; }
+.font-merchant-copy-wide { font-family: 'Merchant Copy Wide', monospace; }
+.font-redacted-script { font-family: 'Redacted Script', cursive; }
 
 /* Fun & Experimental fonts */
 .font-pilowlava { font-family: 'Pilowlava', sans-serif; }
