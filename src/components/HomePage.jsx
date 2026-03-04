@@ -11,6 +11,7 @@ const notes = [
   // { title: 'a guidebook for product cowboys', slug: 'generating-software', subtitle: 'a few things to keep in mind when generating software' },
   { title: 'an ode to interns (2013)', slug: 'an-ode-to-interns', subtitle: 'thoughts on being an apprentice in the workplace' },
   { title: 'forget grades, break rules, build things (2013)', slug: 'forget-grades', subtitle: 'how I stopped studying and started learning' },
+  { title: '"We Are Open"', slug: 'we-are-open', subtitle: 'photos from NYC, 2020' },
   // { title: 'mapping the "generative arena"', slug: 'mapping-generative-arena', subtitle: 'breaking down emerging workflows in product design' },
   // { title: 'how to attend meetings', slug: 'how-to-attend-meetings' },
   // { title: 'my design journal from when I worked for the NYC subway', slug: 'nyc-subway-design-journal' },
