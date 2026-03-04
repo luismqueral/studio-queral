@@ -14,6 +14,10 @@ const getContent = (slug) => {
 // Notes metadata - title is required, date is optional
 // Content is loaded from ./content/{slug}.md
 const notesMetadata = {
+  'about-this-blog': {
+    title: 'things you should know about this "blog"',
+    date: 'March 2026',
+  },
   'looking-for-you': {
     title: 'Looking for Y O U',
     date: 'January 2023',
@@ -68,16 +72,14 @@ const notesMetadata = {
       audioCaptionClass: 'near-white',
     }
   },
-  'introducing-data-synth': { 
+  'data-synth': { 
     title: 'Data Synth',
     headerSection: {
-      bgClass: 'bg-purple white',
-      linkClass: 'white underline hover-no-underline',
+      bgClass: 'bg-yellow near-black',
+      headerLight: true,
+      linkClass: 'near-black underline hover-no-underline',
       wrapperClass: 'mw6 center tc',
-      titleClass: 'font-blackletter f1 white mb0 lh-title normal',
-      subtitle: 'a browser-based modular synth for sonifying json/csv datasets',
-      projectLink: 'https://datasynth.vercel.app',
-      sourceLink: 'https://github.com/luismqueral/data-synth'
+      titleClass: 'font-blackletter f-subheadline near-black mt0 mb0 lh-title normal',
     }
   },
   'styling-ruleset': { title: 'styling ruleset for this site', date: 'February 2026' },

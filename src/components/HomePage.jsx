@@ -4,7 +4,7 @@ import NewsletterSignup from './NewsletterSignup'
 
 // Hardcoded notes list
 const notes = [
-  // { title: 'Data Synth', slug: 'introducing-data-synth', subtitle: 'turn any dataset into sound' },
+  // { title: 'Data Synth', slug: 'data-synth', subtitle: 'turn any dataset into sound' },
   { title: 'richie cigs', slug: 'richie-cigs', subtitle: 'a last.fm bot that listened to Holy Diver for a year' },
   { title: 'how to make paella', slug: 'paella-recipe', subtitle: 'a family recipe from Málaga' },
   { title: 'why i love the wu-tang clan', slug: 'wu-tang-final-tour', subtitle: 'and why the RZA is such a talented, silly goose' },
@@ -26,7 +26,7 @@ const notes = [
   // { title: 'how designers should talk about AI', slug: 'how-designers-talk-about-ai', subtitle: 'communication standards from the Generative Design Lab' },
   // { title: 'how I use Cursor for design research', slug: 'cursor-for-research', subtitle: "it's more than just for prototypes!" },
   // { title: 'a writing habit is a design superpower', slug: 'writing-design-superpower', subtitle: 'reflections on my writing practice over the years' },
-  // { title: 'Introducing Data Synth', slug: 'introducing-data-synth', subtitle: 'ever wondered what it would sound like to run a spreadsheet through a modular synth?' },
+  // { title: 'Data Synth', slug: 'data-synth', subtitle: 'ever wondered what it would sound like to run a spreadsheet through a modular synth?' },
   // { title: 'the "split triple diamond"', slug: 'split-triple-diamond', subtitle: 'a working model for design and engineering teams that block each other constantly.' },
   // { title: 'media tool kit', slug: 'media-toolkit', subtitle: 'my personal workflow for automated media manipulation' },
   // { title: 'LLM prompts and techniques', slug: 'prompts-that-help', subtitle: 'an ever growing, updated list of my personal favorites' },
@@ -69,6 +69,15 @@ function HomePage() {
   // Notes list component (used in both mobile and desktop)
   const NotesList = () => (
     <ul className="list pl0 mt0 mb0">
+      <li className="mb4 flex items-start">
+        <span className="mr2 f6">👋</span>
+        <div>
+          <a href="https://notes.queral.studio/about-this-blog" className="f5 blue underline hover-no-underline lh-title db">
+            things you should know about this "blog"
+          </a>
+          <p className="f6 gray mt1 mb0 lh-copy">a quick readme before you dig in</p>
+        </div>
+      </li>
       {notes.map((note) => (
         <li key={note.slug} className="mb4 flex items-start">
           <span className="mr2 moon-gray bullet-asterisk">*</span>
@@ -140,7 +149,7 @@ function HomePage() {
         </div>
         <div className="pa4">
           <div className="center mw5-5">
-            <p className="f6 near-black mb4">a few things I'm thinking about:</p>
+            <p className="f6 near-black mb4">assorted notes and writing:</p>
             <NotesList />
           </div>
         </div>
@@ -156,7 +165,7 @@ function HomePage() {
       {/* Desktop: scrollable right content with margin offset */}
       <div className="dn-md pa4 ml-sidebar min-vh-100">
         <div className="mw5-7">
-          <p className="f6 near-black mb4">a few things I'm thinking about:</p>
+          <p className="f6 near-black mb4">assorted notes and writing:</p>
           <NotesList />
         </div>
       </div>

@@ -2,7 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-03-04
+- fixed images and media 404ing on `notes.queral.studio` for the "We Are Open" post (and any note with `/notes/` asset paths) — the subdomain's `/:slug/:file+` rewrite was treating `notes` as the slug and doubling the path; added a higher-priority `/notes/:slug/:file+` rewrite with the subdomain condition in `vercel.json`
+- changed homepage notes section heading from "a few things I'm thinking about:" to "assorted notes and writing"
+- restyled the Data Synth project page to match the Richie Cigs look and feel — yellow header background with black text, blackletter font at `f-subheadline` scale, centered layout; changed slug from `introducing-data-synth` to `data-synth`, replaced body content with TK placeholder
+- fixed richie cigs audio 404 on `notes.queral.studio` — the `audioSrc` in note metadata was rendered directly without being rewritten to the CDN URL, so on the subdomain the Vercel rewrite rule doubled the `/notes/` prefix; added `rewriteNoteAssetUrl` helper in `NotePage.jsx` to rewrite audio src the same way markdown content URLs are handled
+
+2026-03-03
+- added a pinned "about this blog" post that sits at the top of the notes list on the homepage — serves as a readme/disclaimer for the site, explaining that posts are living documents that get revised over time
+- created `src/notes/content/about-this-blog.md` with the post content and registered it in `src/notes/index.js`
+- updated `HomePage.jsx` with a `PinnedNote` component that renders above the regular notes list, separated by a bottom border
+
 2026-02-10
+- added `/music` feature — a browse-only page for sharing your music collection with friends, powered by a Google Drive sync pipeline that extracts album metadata and cover art from audio files
+- created `scripts/sync-music.mjs` — a build-time script that authenticates with Google Drive via service account, lists album folders, downloads one representative track per album to extract ID3 metadata + cover art using `music-metadata`, uploads cover art to Vercel Blob, and writes `src/music/collection.json` with the full collection data
+- established a feature-folder convention for modularity — music lives self-contained in `src/music/` with its own pages, components, data loader, and generated data file; future mini-apps can follow the same pattern
+- added `MusicPage.jsx` with responsive album grid (1/2/3 columns), sort by artist/year/album, and artist filter dropdown; `AlbumCard.jsx` shows cover art, metadata, and an expandable track listing on click
+- added music cover art rewrite to vercel.json so `/music/*` paths serve from Vercel Blob CDN, same pattern as notes media
+- added `googleapis` and `music-metadata` dependencies for the sync script
 - updated all notes links across the site to leverage the `notes.queral.studio` subdomain — homepage note links now point to `https://notes.queral.studio/:slug` instead of `/notes/:slug`, and NotesIndexPage links are subdomain-aware (relative paths on the subdomain, full subdomain URLs on the main site)
 - fixed "back" links on the subdomain so they navigate to `https://queral.studio` instead of `/` — previously, clicking "back" from a note on `notes.queral.studio` would land on the password-gated notes index, which was a dead end for readers who were given a direct note link
 - added a reusable `BackLink` component in NotePage.jsx to centralize the subdomain-aware back link logic
