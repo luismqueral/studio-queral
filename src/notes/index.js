@@ -31,14 +31,13 @@ const notesMetadata = {
   },
   'we-are-open': {
     title: '"We Are Open"',
-    date: '2020',
+    date: '2026',
     headerSection: {
       pageBgClass: 'bg-near-black',
-      bgClass: 'bg-near-white near-black',
-      headerLight: true,
-      linkClass: 'near-black underline hover-no-underline',
+      bgClass: 'bg-near-black white',
+      linkClass: 'white underline hover-no-underline',
       wrapperClass: 'mw6 center tc',
-      titleClass: 'font-brush-script f1 f-subheadline-l near-black mb0 lh-title normal',
+      titleClass: 'font-brush-script f1 f-subheadline-l white mb0 lh-title normal',
       description: [
         'The days leading up to the 2020 elections were bleak and uneasy.',
         'This was peak covid. New York was traumatized and felt unhinged. Lockdowns were growing tiring.',

@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-04
+- added looping video from YouTube interspersed between photos on the "We Are Open" project page — downloaded and compressed the video (640p, no audio, ~46MB), uploaded to Vercel Blob, placed 5 instances between the 16 images each starting at a different point (0%, 20%, 40%, 60%, 80%) so they cycle out of sync; added `useStaggeredVideos` hook in `NotePage.jsx` that applies muted autoplay with staggered start times via DOM queries (more reliable than react-markdown component overrides for elements inside raw HTML blocks)
+- restyled "We Are Open" header to match the dark page background — header bg now `bg-near-black` instead of `bg-near-white`, title and links switched to white, updated date to 2026
+- added "We Are Open" to the homepage notes index
 - fixed images and media 404ing on `notes.queral.studio` for the "We Are Open" post (and any note with `/notes/` asset paths) — the subdomain's `/:slug/:file+` rewrite was treating `notes` as the slug and doubling the path; added a higher-priority `/notes/:slug/:file+` rewrite with the subdomain condition in `vercel.json`
 - changed homepage notes section heading from "a few things I'm thinking about:" to "assorted notes and writing"
 - restyled the Data Synth project page to match the Richie Cigs look and feel — yellow header background with black text, blackletter font at `f-subheadline` scale, centered layout; changed slug from `introducing-data-synth` to `data-synth`, replaced body content with TK placeholder

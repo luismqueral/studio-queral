@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
+import { useRef, useEffect } from 'react'
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
@@ -72,11 +73,17 @@ const normalizeBaseUrl = (url) => {
   return url.trim().replace(/\/+$/, '')
 }
 
-const rewriteNotesAssetUrls = (content) => {
-  const baseUrl = normalizeBaseUrl(import.meta.env.VITE_NOTES_CDN_BASE_URL)
-  if (!baseUrl) return content
+const cdnBaseUrl = normalizeBaseUrl(import.meta.env.VITE_NOTES_CDN_BASE_URL)
 
-  const notesPrefix = `${baseUrl}/notes/`
+const rewriteNoteAssetUrl = (url) => {
+  if (!cdnBaseUrl || !url || !url.startsWith('/notes/')) return url
+  return `${cdnBaseUrl}${url}`
+}
+
+const rewriteNotesAssetUrls = (content) => {
+  if (!cdnBaseUrl) return content
+
+  const notesPrefix = `${cdnBaseUrl}/notes/`
 
   return content
     // html attrs
@@ -88,6 +95,40 @@ const rewriteNotesAssetUrls = (content) => {
     .replaceAll("poster='/notes/", `poster='${notesPrefix}`)
     // markdown links/images
     .replaceAll('](/notes/', `](${notesPrefix}`)
+}
+
+// Finds all <video data-start-pct="..."> elements inside a container ref,
+// applies muted/autoplay/loop/playsInline, and seeks each to its start offset.
+// Works regardless of whether the video tags come from react-markdown components
+// or raw HTML blocks rendered by rehypeRaw.
+const useStaggeredVideos = (containerRef) => {
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const videos = container.querySelectorAll('video[data-start-pct]')
+    const cleanups = []
+
+    videos.forEach((video) => {
+      video.muted = true
+      video.autoplay = true
+      video.loop = true
+      video.playsInline = true
+
+      const handler = () => {
+        const pct = parseFloat(video.dataset.startPct || '0')
+        video.currentTime = (pct / 100) * video.duration
+        video.play().catch(() => {})
+      }
+
+      video.addEventListener('loadedmetadata', handler)
+      cleanups.push(() => video.removeEventListener('loadedmetadata', handler))
+
+      if (video.readyState >= 1) handler()
+    })
+
+    return () => cleanups.forEach((fn) => fn())
+  }, [containerRef])
 }
 
 // Strip the first # heading from markdown (title is handled by metadata)
@@ -111,6 +152,13 @@ function NotePage() {
   }
 
   const content = rewriteNotesAssetUrls(stripFirstHeading(note.content))
+  const contentRef = useRef(null)
+  useStaggeredVideos(contentRef)
+
+  const markdownComponents = {
+    code: CodeBlock,
+    pre: ({ children }) => <>{children}</>,
+  }
 
   // Check if note has a custom header section (dark bg, etc.)
   if (note.headerSection) {
@@ -156,7 +204,7 @@ function NotePage() {
               {note.headerSection.audioSrc && (
                 <div className="tc mt4 mb2">
                   <audio controls loop>
-                    <source src={note.headerSection.audioSrc} type="audio/mpeg" />
+                    <source src={rewriteNoteAssetUrl(note.headerSection.audioSrc)} type="audio/mpeg" />
                   </audio>
                 </div>
               )}
@@ -167,15 +215,12 @@ function NotePage() {
           </div>
         </div>
         <div className={`ph4 pb4 ${hasPageBg ? 'pt4' : 'pt4'} mw7 center`}>
-          <article className="note-content">
+          <article className="note-content" ref={contentRef}>
             <div className={`f5 lh-copy ${textClass}`}>
               <Markdown 
                 remarkPlugins={[remarkGfm]} 
                 rehypePlugins={[rehypeRaw]}
-                components={{ 
-                  code: CodeBlock,
-                  pre: ({ children }) => <>{children}</>
-                }}
+                components={markdownComponents}
               >
                 {content}
               </Markdown>
@@ -194,7 +239,7 @@ function NotePage() {
   return (
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><BackLink className="blue underline hover-no-underline" /></p>
-      <article className="note-content">
+      <article className="note-content" ref={contentRef}>
         {!note.skipDefaultHeader && (
           note.headerWrapperClass ? (
             <div className={note.headerWrapperClass}>
@@ -209,10 +254,7 @@ function NotePage() {
           <Markdown 
             remarkPlugins={[remarkGfm]} 
             rehypePlugins={[rehypeRaw]}
-            components={{ 
-              code: CodeBlock,
-              pre: ({ children }) => <>{children}</>
-            }}
+            components={markdownComponents}
           >
             {content}
           </Markdown>
