@@ -4,6 +4,7 @@ import AboutPage from './pages/AboutPage'
 import NotePage from './components/NotePage'
 import NotesIndexPage from './pages/NotesIndexPage'
 import StyleGuidePage from './pages/StyleGuidePage'
+import MusicPage from './music/pages/MusicPage'
 
 const isNotesSubdomain = window.location.hostname === 'notes.queral.studio'
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/notes" element={<NotesIndexPage />} />
             <Route path="/notes/:slug" element={<NotePage />} />
+            <Route path="/music" element={<MusicPage />} />
             <Route path="/styles" element={<StyleGuidePage />} />
           </>
         )}

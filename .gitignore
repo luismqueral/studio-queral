@@ -32,3 +32,6 @@ public/notes/**
 # Local source media for uploads (out of git)
 notes-media/**
 .env*.local
+
+# Generated music collection data (regenerate with `npm run sync:music`)
+src/music/collection.json

@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "upload:notes-media": "node --env-file=.env.local scripts/upload-notes-media.mjs"
+    "upload:notes-media": "node --env-file=.env.local scripts/upload-notes-media.mjs",
+    "sync:music": "node --env-file=.env.local scripts/sync-music.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^1.1.1",
+    "googleapis": "^171.4.0",
+    "music-metadata": "^11.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",

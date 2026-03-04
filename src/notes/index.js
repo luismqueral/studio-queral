@@ -81,6 +81,19 @@ const notesMetadata = {
       titleClass: 'font-blackletter f-subheadline near-black mt0 mb0 lh-title normal',
     }
   },
+  'default-filename-footage-search': {
+    title: 'default filename footage search',
+    date: 'March 2026',
+    headerSection: {
+      bgClass: 'bg-white near-black',
+      headerLight: true,
+      headerPadClass: 'pt4',
+      headerBottomPadClass: 'pb2',
+      linkClass: 'blue underline hover-no-underline',
+      wrapperClass: 'mw6 center tc',
+      titleClass: 'f1 near-black mb0 lh-title normal font-gamilia-pixel',
+    }
+  },
   'styling-ruleset': { title: 'styling ruleset for this site', date: 'February 2026' },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },

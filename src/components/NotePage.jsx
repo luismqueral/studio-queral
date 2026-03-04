@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { notes } from '../notes'
+import RawFootageFinder from './RawFootageFinder'
 
 // On the subdomain, "back" should go to the main site (not the password-gated index)
 const isNotesSubdomain = window.location.hostname === 'notes.queral.studio'
@@ -155,9 +156,18 @@ function NotePage() {
   const contentRef = useRef(null)
   useStaggeredVideos(contentRef)
 
+  const noteWidgets = {
+    'default-filename-widget': RawFootageFinder,
+  }
+
   const markdownComponents = {
     code: CodeBlock,
     pre: ({ children }) => <>{children}</>,
+    div: ({ node, id, ...props }) => {
+      const Widget = id && noteWidgets[id]
+      if (Widget) return <Widget />
+      return <div id={id} {...props} />
+    },
   }
 
   // Check if note has a custom header section (dark bg, etc.)
@@ -174,7 +184,7 @@ function NotePage() {
     return (
       <div className={note.headerSection.pageBgClass || ''}>
         <div className={note.headerSection.bgClass || "bg-near-black white"}>
-          <div className={`ph4 ${note.headerSection.headerPadClass || 'pt4'} pb4 mw7 center`}>
+          <div className={`ph4 ${note.headerSection.headerPadClass || 'pt4'} ${note.headerSection.headerBottomPadClass || 'pb4'} mw7 center`}>
             <p className="f6 mb3"><BackLink className={note.headerSection.linkClass || "white underline hover-no-underline"} /></p>
             <div className={note.headerSection.wrapperClass || "mw6 center tc"}>
               <h1 className={note.headerSection.titleClass || "font-blackletter f1 white mb0 lh-title normal"}>{note.title}</h1>

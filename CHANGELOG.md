@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-04
+- added new "default filename footage search" note — a tool that generates random camera default filenames (based on the DCF standard) and searches YouTube for them to surface raw, unedited footage; includes an interactive widget embedded directly in the post as a React component (`RawFootageFinder.jsx`), wired into the markdown rendering via a `div` id-based component swap in `NotePage.jsx`; widget sits above the description text, uses a random background color from a curated palette that changes on each refresh; white header with IBM Plex Mono title; inspired by Everest Pipkin's default filename tv
 - added looping video from YouTube interspersed between photos on the "We Are Open" project page — downloaded and compressed the video (640p, no audio, ~46MB), uploaded to Vercel Blob, placed 5 instances between the 16 images each starting at a different point (0%, 20%, 40%, 60%, 80%) so they cycle out of sync; added `useStaggeredVideos` hook in `NotePage.jsx` that applies muted autoplay with staggered start times via DOM queries (more reliable than react-markdown component overrides for elements inside raw HTML blocks)
 - restyled "We Are Open" header to match the dark page background — header bg now `bg-near-black` instead of `bg-near-white`, title and links switched to white, updated date to 2026
 - added "We Are Open" to the homepage notes index

@@ -5,12 +5,18 @@
   "installCommand": "npm install",
   "rewrites": [
     {
+      "source": "/notes/:slug/:file+",
+      "has": [{ "type": "host", "value": "notes.queral.studio" }],
+      "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/notes/:slug/:file+"
+    },
+    {
       "source": "/:slug/:file+",
       "has": [{ "type": "host", "value": "notes.queral.studio" }],
       "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/notes/:slug/:file+"
     },
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/notes/:slug/:file+", "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/notes/:slug/:file+" },
+    { "source": "/music/:path+", "destination": "https://nfhon28yqctvdy9h.public.blob.vercel-storage.com/music/:path+" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
