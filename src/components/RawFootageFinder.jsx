@@ -154,6 +154,7 @@ function RawFootageFinder() {
   const [result, setResult] = useState(() => generate())
   const [palette, setPalette] = useState(() => pickPalette())
   const [buttonHovered, setButtonHovered] = useState(false)
+  const [linkHovered, setLinkHovered] = useState(false)
 
   const refresh = useCallback(() => {
     setResult(generate())
@@ -173,16 +174,18 @@ function RawFootageFinder() {
         rel="noopener noreferrer"
         className="font-ibm-plex-mono no-underline db"
         style={{ color: palette.text }}
+        onMouseEnter={() => setLinkHovered(true)}
+        onMouseLeave={() => setLinkHovered(false)}
       >
         <span className="f2 f1-ns fw5 tracked-tight">{result.query}</span>
       </a>
-      <div className="mt2 font-ibm-plex-mono" style={{ color: palette.text, opacity: 0.35 }}>
+      <div className="mt2 font-ibm-plex-mono" style={{ color: palette.text, opacity: 0.35, visibility: (linkHovered || buttonHovered) ? 'visible' : 'hidden' }}>
         <span className="f7">{buttonHovered ? 'regenerate filename' : 'click to search youtube'}</span>
       </div>
       <div className="mt3">
         <button
           onClick={refresh}
-          className="bn pointer f3 ph3 pv2 br2 inline-flex items-center"
+          className="bn pointer f2 ph3 pv2 br2 inline-flex items-center"
           style={{ color: palette.text, opacity: buttonHovered ? 0.8 : 0.5, backgroundColor: buttonHovered ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.15)' }}
           title="regenerate filename"
           onMouseEnter={() => setButtonHovered(true)}

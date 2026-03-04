@@ -81,7 +81,7 @@ const notesMetadata = {
       titleClass: 'font-blackletter f-subheadline near-black mt0 mb0 lh-title normal',
     }
   },
-  'default-filename-footage-search': {
+  'found-footage-search': {
     title: 'default filename footage search',
     date: 'March 2026',
     headerSection: {
