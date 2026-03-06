@@ -58,9 +58,19 @@ The interconnected, branching nature of interactive fiction (decision trees, mul
 
 The entire game lives in a Python dictionary called `SCENES`.
 
-Each entry is a scene — a location, some text, and a list of choices that link to other scenes:
+Each entry is a "scene", which consists of a location, some text, and a list of choices that link to other scenes.
+
+**Here are a few examples:**
 
 ```python
+"arrival": {
+    "location": "NARITA AIRPORT — TOKYO",
+    "text": "Meg and Lauria step off the plane at Narita...",
+    "choices": [
+        ("Ignore the itinerary — explore Shinjuku", "tokyo_night"),
+        ("Follow Lauria's plan to the letter", "pachinko"),
+    ],
+},
 "pachinko": {
     "location": "SHINJUKU — PACHINKO PARLOR",
     "text": "The parlor is too-bright lights and a suspicious number...",
@@ -68,6 +78,22 @@ Each entry is a scene — a location, some text, and a list of choices that link
         ("Try to give the winnings back", "the_grab"),
         ("Pocket the winnings and run", "the_grab"),
     ],
+},
+"fushimi_choice": {
+    "location": "FUSHIMI INARI — UPPER GATES",
+    "text": "Ten thousand vermillion torii gates march up the mountainside...",
+    "choices": [
+        ("Lauria calls a standup. With the yakuza.", "standup"),
+        ("Sprint through all ten thousand gates.", "torii_sprint"),
+        ("Take the side path to the bamboo grove.", "bamboo_grove"),
+    ],
+},
+"ending_action": {
+    "type": "ending",
+    "ending_name": "THE FOOD PROCESSOR GAMBIT",
+    "ending_class": "action",
+    "text": "The battle of Matsumoto Castle will be spoken of in hushed tones...",
+    "choices": [("Bon voyage, Meg!", "bon_voyage")],
 },
 ```
 
@@ -121,7 +147,9 @@ def main():
     prs.save(OUTPUT_PATH)
 ```
 
-Pass 1 walks through `SCENE_ORDER`, routes each scene to the right builder by type, and stashes the slide object and its button shapes in a dict. Pass 2 walks through again and wires each button to its target using `add_hyperlink`.
+**Pass 1** walks through `SCENE_ORDER`, routes each scene to the right builder by type, and stashes the slide object and its button shapes in a dict. 
+
+**Pass 2** walks through again and wires each button to its target using `add_hyperlink`.
 
 You can't link to a slide that doesn't exist yet, so you build everything first, then connect it.
 
@@ -159,9 +187,13 @@ def build_scene_slide(prs, scene):
     return slide, shapes
 ```
 
-Layout 6 is a completely blank slide — no title placeholder, no footer, nothing. The function adds a location label (the `// NARITA AIRPORT` text), draws a thin accent line, calculates how much vertical space the narrative text gets after accounting for the choice buttons, and then stacks the buttons at the bottom.
+Layout 6 is a completely blank slide — no title placeholder, no footer, nothing.
 
-The text area height is dynamic: slides with three choices get less reading room than slides with two. The story content is completely separate from the layout code, letting you rewrite the narrative without touching the generator.
+The function adds a location label (the `// NARITA AIRPORT` text), draws a thin accent line, calculates how much vertical space the narrative text gets after accounting for the choice buttons, and then stacks the buttons at the bottom.
+
+The text area height is dynamic: slides with three choices get less reading room than slides with two.
+
+The story content is completely separate from the layout code, letting you rewrite the narrative without touching the generator.
 
 #### Hyperlinks and pptx
 
