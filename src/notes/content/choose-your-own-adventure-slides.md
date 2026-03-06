@@ -2,6 +2,10 @@
 
 *thoughts on generating interactive fiction using .pptx*
 
+This week I made a personalized going away present for a friend who is sadly leaving our team at _The Times_.
+
+You can play it here:
+
 <div class="aspect-ratio aspect-ratio--16x9 mv4">
   <iframe src="https://docs.google.com/presentation/d/1ZpMtaNmbJCsKe9euchYP3WgJxBC8-a9fdq4xE2cd8Ow/embed?start=false&loop=false&delayms=3000" class="aspect-ratio--object" frameborder="0" allowfullscreen="true"></iframe>
 </div>
@@ -10,7 +14,7 @@
 
 ### Why did I build this?
 
-This was a going away present for a friend who is sadly leaving our team at _The Times_. Not only did I want to do a nice thing for, I also wanted a technical and creative challenge to distract me from my day job.
+Not only did I want to do a nice thing for a good friend, I also wanted a technical and creative challenge to distract me from my day job.
 
 I was actually in the middle of figuring out how to create generate a deck template "design system" and series of title card color combinations with Python when I realized... what if we made a game?
 

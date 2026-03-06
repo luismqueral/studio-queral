@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-05
+- moved choose-your-own-adventure screenshots from git to Vercel Blob where they belong — they were incorrectly force-added to the repo bypassing the `public/notes/**` gitignore
+- updated subtitle in the markdown to "thoughts on generating interactive fiction using .pptx"
 - renamed the choose-your-own-adventure note to "Big Trouble, Little Tokyo" with subtitle "thoughts on generating interactive fiction using .pptx"; updated title in notes index and homepage
 - expanded the article with three additional code blocks from the Python script: the `main()` two-pass build-then-link loop, the `build_scene_slide` function showing how a scene dict becomes a slide, and the color palette constants including per-ending color identities
 - rewrote the choose-your-own-adventure note with three new sections: "why did i build this?" (motivation and the Twine comparison), "how did i build this?" (Cursor + LLM workflow, Google Slides theming), and "how does this work?" (the technical breakdown); replaced "the numbers" with a "final thoughts" section reflecting on the project
