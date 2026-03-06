@@ -14,15 +14,15 @@ This week I made a personalized going away present for a friend who is sadly lea
 
 ### Why did I build this?
 
-Not only did I want to do a nice thing for a good friend, I also wanted a technical and creative challenge to distract me from my day job.
+Not only did I want to do a nice thing for a good friend, I also wanted a technical and creative challenge.
 
-I was actually in the middle of figuring out how to create generate a deck template "design system" and series of title card color combinations with Python when I realized... what if we made a game?
+I was actually in the middle of experimenting with the extent to which you can script a Google Slides deck template "design system" and series of title card color combinations when I realized... what if we made a game instead?
 
-I forgot that I used to fantasize about pushing a stupid medium like Powerpoint as far as possible, so why not.
+I used to fantasize about pushing a stupid medium like Powerpoint as far as possible, so maybe a quick little detour might scratch that itch.
 
-And yeah, it's hard to build an argument to _not_ use HTML for interactive fiction. Twine, the defacto standard for building interactive fiction, exists (and rocks)...
+And yeah, it's hard to build an argument to _not_ use HTML for a browser-based games, or interactive fiction for that matter. Twine, the defacto standard for building interactive fiction, exists (and rocks)...
 
-But why not? Let's try it out!
+But why not? Let's try it out.
 
 </div>
 
