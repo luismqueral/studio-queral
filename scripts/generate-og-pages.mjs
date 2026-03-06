@@ -126,13 +126,20 @@ const run = () => {
         `<!-- Open Graph / social previews -->\n    ${ogTags}`
       )
 
-    const outDir = path.join(DIST_DIR, 'notes', slug)
-    mkdirSync(outDir, { recursive: true })
-    writeFileSync(path.join(outDir, 'index.html'), noteHtml)
+    // Main site: /notes/{slug}
+    const mainDir = path.join(DIST_DIR, 'notes', slug)
+    mkdirSync(mainDir, { recursive: true })
+    writeFileSync(path.join(mainDir, 'index.html'), noteHtml)
+
+    // Subdomain (notes.queral.studio): /{slug}
+    const subdomainDir = path.join(DIST_DIR, slug)
+    mkdirSync(subdomainDir, { recursive: true })
+    writeFileSync(path.join(subdomainDir, 'index.html'), noteHtml)
+
     generated++
   }
 
-  console.log(`Generated ${generated} OG-tagged HTML files (${withImages} with images) in dist/notes/`)
+  console.log(`Generated ${generated} OG-tagged HTML files (${withImages} with images) in dist/`)
 }
 
 run()

@@ -35,3 +35,6 @@ notes-media/**
 
 # Generated music collection data (regenerate with `npm run sync:music`)
 src/music/collection.json
+
+# Cursor rules (local only)
+.cursor/rules/writing-voice.mdc
