@@ -49,6 +49,10 @@ const CodeBlock = ({ inline, className, children, node }) => {
           margin: '1rem 0',
           borderRadius: '6px',
           fontSize: '14px',
+          fontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace",
+        }}
+        codeTagProps={{
+          style: { fontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace" },
         }}
       >
         {code}
@@ -251,13 +255,10 @@ function NotePage() {
       <p className="f6 mb4"><BackLink className="blue underline hover-no-underline" /></p>
       <article className="note-content" ref={contentRef}>
         {!note.skipDefaultHeader && (
-          note.headerWrapperClass ? (
-            <div className={note.headerWrapperClass}>
-              <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
-            </div>
-          ) : (
-            <h1 className={note.headerClass || "f3 near-black mb4 lh-title"}>{note.title}</h1>
-          )
+          <div className={note.headerWrapperClass || "mw6 center mb4"}>
+            <h1 className={note.headerClass || "f3 near-black mb1 lh-title"}>{note.title}</h1>
+            {note.subtitle && <p className="f5 gray mt1 mb0">{note.subtitle}</p>}
+          </div>
         )}
         
         <div className="f5 lh-copy near-black">

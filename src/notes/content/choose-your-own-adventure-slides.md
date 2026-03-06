@@ -1,10 +1,10 @@
-# Big Trouble, Little Tokyo
-
-*thoughts on generating interactive fiction in powerpoint*
+<div class="mw6 center tl mb4">
 
 This week I made a personalized going away present for a friend who is sadly leaving our team at _The Times_.
 
-You can play it here:
+**You can play it here:**
+
+</div>
 
 <div class="aspect-ratio aspect-ratio--16x9 mv4">
   <iframe src="https://docs.google.com/presentation/d/1ZpMtaNmbJCsKe9euchYP3WgJxBC8-a9fdq4xE2cd8Ow/embed?start=false&loop=false&delayms=3000" class="aspect-ratio--object" frameborder="0" allowfullscreen="true"></iframe>

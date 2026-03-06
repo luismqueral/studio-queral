@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-05
+- fixed screenshot crops to only remove the bottom Google Slides UI bar while preserving top content; re-uploaded to Vercel Blob
+- reverted default heading size back to `f3` (the `f2` bump was too large)
+- made "You can play it here:" bold in the Big Trouble article
+- updated the default note template: added `subtitle` config field, wrapped title/subtitle in `mw6 center` to match body content width, tightened title-subtitle spacing; moved the "Big Trouble" subtitle from markdown into the note config
+- set IBM Plex Mono as the default font for all `code` and `pre` elements in note content via `tachyons-ext.css`, so it no longer needs to be applied per-element
 - cropped Google Slides UI (navigation bar, slide numbers, branding) out of all four screenshots and re-uploaded to Vercel Blob
 - updated subtitle to "thoughts on generating interactive fiction in powerpoint"
 - moved choose-your-own-adventure screenshots from git to Vercel Blob where they belong — they were incorrectly force-added to the repo bypassing the `public/notes/**` gitignore
