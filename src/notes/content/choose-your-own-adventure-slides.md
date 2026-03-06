@@ -8,13 +8,17 @@
 
 <div class="mw6 center tl mb4">
 
-### why did i build this?
+### Why did I build this?
 
-Not only did I want to do a nice thing for a friend who will be dearly missed, I also wanted a technical and creative challenge.
+This was a going away present for a friend who is sadly leaving our team at _The Times_. Not only did I want to do a nice thing for, I also wanted a technical and creative challenge to distract me from my day job.
 
-I've always fantasized about Powerpoint as a game engine and it's hard to build an argument to _not_ use HTML for something like this. Twine, the defacto standard for building interactive fiction, exists (and rocks).
+I was actually in the middle of figuring out how to create generate a deck template "design system" and series of title card color combinations with Python when I realized... what if we made a game?
 
-But why not? Let's see how far we can push a medium.
+I forgot that I used to fantasize about pushing a stupid medium like Powerpoint as far as possible, so why not.
+
+And yeah, it's hard to build an argument to _not_ use HTML for interactive fiction. Twine, the defacto standard for building interactive fiction, exists (and rocks)...
+
+But why not? Let's try it out!
 
 </div>
 
@@ -22,7 +26,7 @@ But why not? Let's see how far we can push a medium.
 
 <div class="mw6 center tl mb4">
 
-### how did i build this?
+### How did I build this?
 
 To construct this from scratch in Google Slides would take forever and be a nightmare.
 
