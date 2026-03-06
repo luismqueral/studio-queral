@@ -662,7 +662,7 @@ body {
 /* Code Block Styling - base styles for plain code blocks */
 .note-content pre {
   overflow-x: auto;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
@@ -1052,6 +1052,7 @@ body {
   padding: 0.15rem 0.3rem;
   border-radius: 3px;
   font-size: 0.9em;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 

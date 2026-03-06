@@ -251,6 +251,7 @@ function NotePage() {
   }
 
   return (
+    <div className={note.pageBgClass || ''}>
     <div className="pa4 mw7 center">
       <p className="f6 mb4"><BackLink className="blue underline hover-no-underline" /></p>
       <article className="note-content" ref={contentRef}>
@@ -276,6 +277,7 @@ function NotePage() {
       <footer className="mt4 pt4 bt b--light-gray">
         <BackLink className="f6 blue underline hover-no-underline" />
       </footer>
+    </div>
     </div>
   )
 }

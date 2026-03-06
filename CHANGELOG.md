@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-05
+- added `pageBgClass` support to the default note template so any note can set a full-page background color; set Big Trouble to `bg-white`
 - fixed screenshot crops to only remove the bottom Google Slides UI bar while preserving top content; re-uploaded to Vercel Blob
 - reverted default heading size back to `f3` (the `f2` bump was too large)
 - made "You can play it here:" bold in the Big Trouble article
