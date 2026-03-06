@@ -5,7 +5,7 @@ import NewsletterSignup from './NewsletterSignup'
 // Hardcoded notes list
 const notes = [
   // { title: 'Data Synth', slug: 'data-synth', subtitle: 'turn any dataset into sound' },
-  { title: 'Big Trouble, Little Tokyo', slug: 'choose-your-own-adventure-slides', subtitle: 'thoughts on generating interactive fiction using .pptx' },
+  { title: 'Big Trouble, Little Tokyo', slug: 'choose-your-own-adventure-slides', subtitle: 'thoughts on generating interactive fiction in powerpoint' },
   { title: 'default filename footage search', slug: 'found-footage-search', subtitle: 'a tool for finding underexposed video on youtube' },
   { title: 'richie cigs', slug: 'richie-cigs', subtitle: 'a last.fm bot that listened to Holy Diver for a year' },
   { title: 'how to make paella', slug: 'paella-recipe', subtitle: 'a family recipe from Málaga' },

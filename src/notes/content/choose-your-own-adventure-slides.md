@@ -1,6 +1,6 @@
 # Big Trouble, Little Tokyo
 
-*thoughts on generating interactive fiction using .pptx*
+*thoughts on generating interactive fiction in powerpoint*
 
 This week I made a personalized going away present for a friend who is sadly leaving our team at _The Times_.
 
