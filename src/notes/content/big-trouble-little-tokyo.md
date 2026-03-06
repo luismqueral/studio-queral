@@ -20,7 +20,7 @@ I was actually in the middle of experimenting with the extent to which you can s
 
 I used to fantasize about pushing a stupid medium like Powerpoint as far as possible, so maybe a quick little detour might scratch that itch.
 
-And yeah, it's hard to build an argument to _not_ use HTML for a browser-based games, or interactive fiction for that matter. Twine, the defacto standard for building interactive fiction, exists (and rocks)...
+And yeah, it's hard to build an argument to _not_ use HTML for a browser-based games, or interactive fiction for that matter. [Twine](https://twinery.org/), the defacto standard for building interactive fiction, exists (and rocks)...
 
 But why not? Let's try it out.
 
