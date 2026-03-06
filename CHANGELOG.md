@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 2026-03-06
+- added OG image support to social link previews — the build script now auto-detects the first image in each note's markdown and uses it as `og:image`; notes can also set an explicit `ogImage` in their metadata to override; uploaded a cover image for "big trouble, little tokyo" to the CDN; notes with images get `summary_large_image` Twitter cards for bigger previews
 - added Open Graph meta tags for social link previews — when note URLs are shared on Slack, iMessage, Twitter, etc., they now show the note title and description instead of a generic link; added default OG tags to `index.html`, created `scripts/generate-og-pages.mjs` post-build script that generates per-note HTML files in `dist/notes/{slug}/index.html` with the correct OG/Twitter tags injected while still loading the full SPA
 
 2026-03-05
