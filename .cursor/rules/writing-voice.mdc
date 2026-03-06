@@ -1,0 +1,122 @@
+---
+description: Writing voice guide for Luis — use when generating prose, blog posts, notes, or any written content
+alwaysApply: false
+globs:
+  - src/notes/content/*.md
+---
+
+# Writing Voice: Luis's Style
+
+When writing prose for this project (notes, blog posts, descriptions), match Luis's natural voice. The biggest risk is sounding like an LLM — polished, dramatic, and structurally predictable. His writing is conversational, direct, and doesn't try to impress.
+
+## The core feel
+
+Luis writes like he's explaining something to a friend at a table. Not performing, not teaching from a podium. Sentences are simple and declarative. He says what things are, then moves on.
+
+Good: "it lived on a server, where it used the VLC media player to scrobble every single listen."
+Good: "it defines how files and folders are named on the memory card so that any device can read any card."
+Good: "I was personally inspired by Everest Pipkin's default filename tv."
+
+## LLM tells to avoid
+
+### Dramatic framing
+Don't introduce mundane features as secrets, tricks, or surprises.
+
+- Bad: "but it has a hidden trick"
+- Bad: "there's a secret feature most people don't know about"
+- Bad: "this is where the magic happens"
+- Good: just describe the feature directly
+
+### Audience-knowledge claims
+Don't make statements about what "most people" know or don't know.
+
+- Bad: "most people have never touched this feature"
+- Bad: "you've probably never thought about this, but"
+- Good: just explain the thing without editorializing on whether the reader already knows it
+
+### Juxtaposition jokes
+Don't contrast something technical with something mundane for comedic effect.
+
+- Bad: "a game engine hiding inside a tool most people use for quarterly business reviews"
+- Bad: "turns out the world's most powerful database is a spreadsheet"
+- These read as writerly flourishes. Luis doesn't do this. He just calls things what they are.
+
+### Performative signposting
+Don't announce that something is about to be interesting, difficult, or important.
+
+- Bad: "here's where it gets a little gnarly"
+- Bad: "this is the interesting part"
+- Bad: "now for the fun bit"
+- Good: just start explaining. The reader will figure out if it's gnarly.
+
+### Textbook transitions
+Don't use formal transitional phrases between ideas.
+
+- Bad: "this separation has another benefit"
+- Bad: "there's an additional advantage to this approach"
+- Bad: "this brings us to the next point"
+- Good: just start the next thought. If the connection isn't obvious, one short bridging sentence is fine.
+
+### Filler intensifiers
+Don't pad sentences with words that add emphasis but no meaning.
+
+- Bad: "sidesteps the problem entirely"
+- Bad: "takes roughly 15 minutes"
+- Bad: "this is essentially just a ZIP file"
+- Good: "sidesteps the problem" / "takes 15 minutes" / "this is a ZIP file"
+
+### Tricolons and neat lists
+LLMs love groups of three, especially after an em dash. Vary the rhythm.
+
+- Bad: "where you are, what's happening, and what you can do next"
+- These feel generated because they're too rhythmically balanced. Real writing is lopsided.
+
+### Anthropomorphizing with nested quotes
+Don't personify code with multiple inline quoted phrases in one sentence.
+
+- Bad: "it tells the slide 'I know about that other slide' and then says 'when clicked, go there'"
+- One instance of this is fine. Two in the same sentence is a pattern LLMs fall into.
+
+### Inline definition appositives
+Don't over-use the "X, the Y that does Z" construction.
+
+- Bad: "`python-pptx`, the library that creates `.pptx` files, supports..."
+- OK sometimes, but LLMs lean on this structure heavily. Consider just explaining what the thing does in a separate sentence or assuming context.
+
+### Mirrored sentence pairs
+Don't follow a statement with a second sentence that restates the same idea from a slightly different angle.
+
+- Bad: "buttons are placed from the bottom up, and the story text gets whatever space is left. scenes with two choices get more reading room than scenes with three."
+- The second sentence is just a restatement of the first. Pick one.
+
+### Cliché wrap-ups
+Don't end sections with tidy summary phrases.
+
+- Bad: "wiring it all together"
+- Bad: "and that's the beauty of it"
+- Bad: "bringing everything full circle"
+- Luis's endings are either casual ("you learn new things every day!!") or he just stops.
+
+### Em dash usage
+Em dashes should be for genuine parenthetical asides, not dramatic pivots.
+
+- Bad (dramatic pivot): "PowerPoint is a stack of slides — but it has a hidden trick."
+- Good (genuine aside): "the ones cameras assign automatically, like `DSC_0001` or `IMG_0042` — and searches YouTube for them."
+
+## What Luis's writing actually does
+
+- **Lowercase everything** in newer writing. No title case in headings or sentence starts (for notes/blog posts).
+- **Short paragraphs.** One or two sentences max. Alternate between the two for rhythm. Never three or more sentences in a single paragraph.
+- **Simple declarative sentences.** Says what something is, then moves on.
+- **Personal without being performative.** Uses "I" freely. "I was personally inspired by" — honest, not strategic.
+- **Short standalone punches** come from genuine feeling: "I bet." "It's flat out wrong." "This was not by accident."
+- **Doesn't announce transitions.** Just moves to the next idea.
+- **Italics for emphasis** on key words, not bold on everything.
+- **Casual endings.** Sections end when they're done, sometimes with a throwaway line.
+- **Commas over em dashes** when either would work. Em dashes are the exception, not the default connector.
+- **Lists things plainly**: "Canon uses `IMG_`, Fujifilm uses `DSCF`, Nikon compacts use `DSCN`, GoPro uses `GOPR`, and so on."
+- **Older essays (2013) use standard capitalization and a more formal register.** Newer writing is all lowercase and more casual. Match the era.
+
+## When in doubt
+
+Read the sentence out loud. If it sounds like it belongs in a Medium article about productivity, rewrite it. If it sounds like something you'd say to a coworker while looking at a screen together, it's probably fine.

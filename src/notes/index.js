@@ -94,6 +94,7 @@ const notesMetadata = {
       titleClass: 'f1 near-black mb0 lh-title normal font-gamilia-pixel',
     }
   },
+  'choose-your-own-adventure-slides': { title: 'Big Trouble, Little Tokyo', date: 'March 2026' },
   'styling-ruleset': { title: 'styling ruleset for this site', date: 'February 2026' },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
