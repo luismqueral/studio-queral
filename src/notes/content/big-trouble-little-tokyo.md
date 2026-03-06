@@ -52,7 +52,7 @@ Ultimately, the deck above is the compiled output of [a single Python script](ht
 
 The interconnected, branching nature of interactive fiction (decision trees, multiple endings, etc.) makes a project like extremely difficult to manage manually, which makes a scripting language attractive, even if I wasn't building this with an LLM.
 
-![a gameplay slide from the game](/notes/choose-your-own-adventure-slides/slide-gameplay.png)
+![a gameplay slide from the game](/notes/big-trouble-little-tokyo/slide-gameplay.png)
 
 #### The Story Graph
 
@@ -264,7 +264,7 @@ C_ENDINGS = {
 
 The ending colors give each conclusion its own visual identity.
 
-![one of the four endings](/notes/choose-your-own-adventure-slides/slide-ending.png)
+![one of the four endings](/notes/big-trouble-little-tokyo/slide-ending.png)
 
 #### Final Thoughts
 
