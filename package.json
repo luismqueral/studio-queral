@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-og-pages.mjs",
     "preview": "vite preview",
     "upload:notes-media": "node --env-file=.env.local scripts/upload-notes-media.mjs",
     "sync:music": "node --env-file=.env.local scripts/sync-music.mjs"
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "playwright": "^1.58.2",
     "vite": "^5.4.2"
   }
 }

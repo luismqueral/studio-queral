@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+2026-03-06
+- added Open Graph meta tags for social link previews — when note URLs are shared on Slack, iMessage, Twitter, etc., they now show the note title and description instead of a generic link; added default OG tags to `index.html`, created `scripts/generate-og-pages.mjs` post-build script that generates per-note HTML files in `dist/notes/{slug}/index.html` with the correct OG/Twitter tags injected while still loading the full SPA
+
 2026-03-05
 - added `pageBgClass` support to the default note template so any note can set a full-page background color; set Big Trouble to `bg-white`
 - fixed screenshot crops to only remove the bottom Google Slides UI bar while preserving top content; re-uploaded to Vercel Blob
