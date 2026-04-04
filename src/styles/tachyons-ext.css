@@ -1177,3 +1177,13 @@ body {
   }
 }
 
+/* Pomodoro timer */
+.font-tabular { font-variant-numeric: tabular-nums; }
+.f-timer { font-size: 6rem; }
+.f-timer-ns { font-size: 6rem; }
+@media screen and (min-width: 30em) {
+  .f-timer-ns { font-size: 8rem; }
+}
+.lh-timer { line-height: 1; }
+.transition-color { transition: color 0.3s ease, background-color 0.3s ease; }
+
