@@ -1,11 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-const MODES = {
-  work: { label: 'work', minutes: 25 },
-  break: { label: 'break', minutes: 5 },
-}
+const PRESETS = [3, 5, 10, 15, 25]
 
-// gentle three-tone chime using Web Audio API — no external files needed
+// gentle three-tone chime using Web Audio API
 function playChime() {
   const ctx = new (window.AudioContext || window.webkitAudioContext)()
   const notes = [440, 523.25, 659.25] // A4, C5, E5
@@ -24,17 +21,16 @@ function playChime() {
 }
 
 function PomodoroPage() {
-  const [mode, setMode] = useState('work')
-  const [secondsLeft, setSecondsLeft] = useState(MODES.work.minutes * 60)
+  const [intervalMinutes, setIntervalMinutes] = useState(5)
+  const [secondsLeft, setSecondsLeft] = useState(5 * 60)
   const [isRunning, setIsRunning] = useState(false)
   const intervalRef = useRef(null)
+  const intervalMinutesRef = useRef(5)
 
-  const resetTimer = useCallback((newMode) => {
-    clearInterval(intervalRef.current)
-    setIsRunning(false)
-    setMode(newMode)
-    setSecondsLeft(MODES[newMode].minutes * 60)
-  }, [])
+  // keep ref in sync so the setInterval callback always reads the latest value
+  useEffect(() => {
+    intervalMinutesRef.current = intervalMinutes
+  }, [intervalMinutes])
 
   useEffect(() => {
     if (!isRunning) return
@@ -42,38 +38,39 @@ function PomodoroPage() {
     intervalRef.current = setInterval(() => {
       setSecondsLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(intervalRef.current)
-          setIsRunning(false)
           playChime()
-          const next = mode === 'work' ? 'break' : 'work'
-          setMode(next)
-          return MODES[next].minutes * 60
+          return intervalMinutesRef.current * 60
         }
         return prev - 1
       })
     }, 1000)
 
     return () => clearInterval(intervalRef.current)
-  }, [isRunning, mode])
+  }, [isRunning])
 
-  // update document title with time remaining
   useEffect(() => {
     const mm = String(Math.floor(secondsLeft / 60)).padStart(2, '0')
     const ss = String(secondsLeft % 60).padStart(2, '0')
-    document.title = `${mm}:${ss} — ${MODES[mode].label}`
+    document.title = `${mm}:${ss} — timer`
     return () => { document.title = 'Studio Queral' }
-  }, [secondsLeft, mode])
+  }, [secondsLeft])
+
+  const selectPreset = (minutes) => {
+    setIntervalMinutes(minutes)
+    setSecondsLeft(minutes * 60)
+  }
+
+  const reset = () => {
+    clearInterval(intervalRef.current)
+    setIsRunning(false)
+    setSecondsLeft(intervalMinutes * 60)
+  }
 
   const mm = String(Math.floor(secondsLeft / 60)).padStart(2, '0')
   const ss = String(secondsLeft % 60).padStart(2, '0')
 
-  const toggleRunning = () => setIsRunning((prev) => !prev)
-
   return (
     <div className="vh-100 flex flex-column items-center justify-center pa3 transition-color">
-      {/* mode label */}
-      <p className="f6 gray tracked ttu mb2">{MODES[mode].label}</p>
-
       {/* time display */}
       <h1 className="f-timer-ns near-black font-system-mono font-tabular lh-timer ma0 mb3">
         {mm}:{ss}
@@ -82,34 +79,32 @@ function PomodoroPage() {
       {/* controls */}
       <div className="flex items-center mb4">
         <button
-          onClick={toggleRunning}
+          onClick={() => setIsRunning((prev) => !prev)}
           className="f6 link pointer bn bg-transparent near-black underline hover-no-underline ph3 pv2"
         >
           {isRunning ? 'pause' : 'start'}
         </button>
         <button
-          onClick={() => resetTimer(mode)}
+          onClick={reset}
           className="f6 link pointer bn bg-transparent gray underline hover-no-underline ph3 pv2"
         >
           reset
         </button>
       </div>
 
-      {/* mode switcher */}
+      {/* presets */}
       <div className="flex items-center">
-        <button
-          onClick={() => resetTimer('work')}
-          className={`f7 link pointer bn bg-transparent ph2 pv1 ${mode === 'work' ? 'near-black' : 'silver hover-gray'}`}
-        >
-          25 min
-        </button>
-        <span className="silver ph1">/</span>
-        <button
-          onClick={() => resetTimer('break')}
-          className={`f7 link pointer bn bg-transparent ph2 pv1 ${mode === 'break' ? 'near-black' : 'silver hover-gray'}`}
-        >
-          5 min
-        </button>
+        {PRESETS.map((m, i) => (
+          <span key={m} className="flex items-center">
+            {i > 0 && <span className="silver ph1">/</span>}
+            <button
+              onClick={() => selectPreset(m)}
+              className={`f7 link pointer bn bg-transparent ph2 pv1 ${intervalMinutes === m ? 'near-black' : 'silver hover-gray'}`}
+            >
+              {m} min
+            </button>
+          </span>
+        ))}
       </div>
 
       {/* back link */}
