@@ -265,6 +265,9 @@
     while (node) {
       if (inspectorUI.has(node)) return true;
       if (node.nodeType === 1 && node.hasAttribute && node.hasAttribute('data-dt-ignore')) return true;
+      // The canvas wrapper is a structural container — not selectable itself,
+      // but its children are normal page content (don't propagate further).
+      if (node.id === 'dt-canvas-wrapper' && node === el) return true;
       node = node.parentElement;
     }
     return false;
@@ -608,6 +611,21 @@
     inspectorUI.add(tbHandle);
 
     setActiveButton('style-modifier');
+
+    // Counter-scale toolbar against browser zoom so it stays a fixed
+    // physical size regardless of Cmd+/- zoom level.
+    // devicePixelRatio changes ONLY on browser zoom (Cmd+/-), NOT on
+    // window resize, so it's the reliable signal.
+    const baseDPR = window.devicePixelRatio;
+    function compensateZoom() {
+      const zoomFactor = window.devicePixelRatio / baseDPR;
+      if (Math.abs(zoomFactor - 1) > 0.05) {
+        toolbar.style.zoom = 1 / zoomFactor;
+      } else {
+        toolbar.style.zoom = '';
+      }
+    }
+    window.addEventListener('resize', compensateZoom);
   }
 
   /**
@@ -619,7 +637,7 @@
    */
 
 
-  let visible$1 = false;
+  let visible = false;
   let _settingsBtn = null;
   let _popover = null;
 
@@ -629,7 +647,6 @@
 
   const EXPERIMENT_DEFS = [
     { id: 'dock', label: 'Edge snap', description: 'Drag the toolbar near a screen edge to dock it.', default: true },
-    { id: 'terminal', label: 'Terminal', description: 'Mock terminal overlay for experimentation.', default: false },
     {
       id: 'move',
       label: 'Move elements',
@@ -667,7 +684,7 @@
       id: 'dblclick-edit',
       label: 'Double-click to edit text',
       description: 'Double-click a text element in Select mode to edit it inline.',
-      default: false,
+      default: true,
     },
   ];
 
@@ -693,6 +710,24 @@
   function setExperimentOption(id, optionId, value) {
     experiments[`${id}.${optionId}`] = value;
     localStorage.setItem(EXP_KEY, JSON.stringify(experiments));
+  }
+
+  let _refreshHint = null;
+  function showRefreshHint(container) {
+    if (_refreshHint) return;
+    _refreshHint = document.createElement('div');
+    _refreshHint.textContent = 'Refresh page for changes to take effect';
+    Object.assign(_refreshHint.style, {
+      marginTop: '16px',
+      padding: '8px 12px',
+      background: 'rgba(255,255,255,0.06)',
+      border: '1px solid rgba(255,255,255,0.1)',
+      borderRadius: '6px',
+      fontSize: '11px',
+      color: '#aaa',
+      textAlign: 'center',
+    });
+    container.appendChild(_refreshHint);
   }
 
   function sectionTitle(text, opts = {}) {
@@ -793,6 +828,7 @@
       checkbox.addEventListener('change', () => {
         setExperiment(exp.id, checkbox.checked);
         if (optionsBlock) optionsBlock.style.display = checkbox.checked ? 'block' : 'none';
+        showRefreshHint(container);
       });
 
       container.appendChild(wrap);
@@ -932,8 +968,8 @@
   }
 
   function toggleSettings() {
-    visible$1 = !visible$1;
-    if (visible$1) {
+    visible = !visible;
+    if (visible) {
       activateModule(null);
       setActiveButton(null);
       showPopover();
@@ -947,8 +983,8 @@
   }
 
   function closeSettings() {
-    if (visible$1) {
-      visible$1 = false;
+    if (visible) {
+      visible = false;
       hidePopover();
       if (_settingsBtn) _settingsBtn.style.background = '#222';
       activateModule('style-modifier');
@@ -968,8 +1004,8 @@
     _settingsBtn = document.createElement('div');
     _settingsBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.44.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6a3.6 3.6 0 110-7.2 3.6 3.6 0 010 7.2z"/></svg>';
     Object.assign(_settingsBtn.style, btnStyle);
-    _settingsBtn.addEventListener('mouseenter', () => { if (!visible$1) _settingsBtn.style.background = '#333'; });
-    _settingsBtn.addEventListener('mouseleave', () => { if (!visible$1) _settingsBtn.style.background = '#222'; });
+    _settingsBtn.addEventListener('mouseenter', () => { if (!visible) _settingsBtn.style.background = '#333'; });
+    _settingsBtn.addEventListener('mouseleave', () => { if (!visible) _settingsBtn.style.background = '#222'; });
     _settingsBtn.addEventListener('click', (e) => { e.stopPropagation(); nudge(_settingsBtn); toggleSettings(); });
     addTooltip(_settingsBtn, 'Settings');
 
@@ -979,7 +1015,7 @@
     // Live theme: keep the gear's "active" background in sync if the
     // user changes color while the popover is open.
     onColorChange((color) => {
-      if (visible$1 && _settingsBtn) _settingsBtn.style.background = color;
+      if (visible && _settingsBtn) _settingsBtn.style.background = color;
     });
   }
 
@@ -1340,8 +1376,8 @@
 
   function onMove$1(e) {
     if (!activeMode$1) return;
-    // Suppress hover while hand tool or inline editing is active
-    if (state.handToolActive || editingEl) {
+    // Suppress hover while hand tool, inline editing, or modifier key (zoom) is active
+    if (state.handToolActive || editingEl || e.metaKey || e.ctrlKey) {
       if (hoveredEl$1) clearHover$1();
       return;
     }
@@ -2123,6 +2159,8 @@
     });
     textEdits.forEach((e, el) => {
       if (el.innerText === e.originalText && el.className === e.originalClasses) return;
+      // Skip structural containers (canvas wrapper) — only track leaf edits
+      if (el.id === 'dt-canvas-wrapper') return;
       items.push({
         kind: 'text',
         el,
@@ -2799,6 +2837,9 @@
     disable() { this.deactivate(); },
   };
 
+  // Pencil cursor — same icon as the toolbar button, white fill, 20x20 with hotspot at bottom-left tip
+  const PENCIL_CURSOR = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' fill='%23fff' stroke='%23000' stroke-width='0.5'/%3E%3C/svg%3E") 2 18, crosshair`;
+
   let drawCanvas = null;
   let isDrawing = false;
   let drawPanel = null;
@@ -2839,28 +2880,74 @@
     ctx.lineJoin = 'round';
   }
 
-  // --- Floating draw panel (top-right, tldraw-style) ---
+  // --- Floating draw panel (draggable window) ---
   function createDrawPanel() {
     const panel = document.createElement('div');
     panel.setAttribute('data-dt-ignore', '');
     Object.assign(panel.style, {
-      position: 'fixed', top: '16px', right: '16px', zIndex: String(Z.toolbar + 1),
-      background: '#fff', borderRadius: '12px', padding: '12px',
-      boxShadow: '0 2px 16px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06)',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      position: 'fixed', top: '16px', right: '16px',
+      zIndex: String(Z.toolbar + 1),
+      background: 'rgba(30,30,30,0.85)', borderRadius: '10px', padding: '10px 14px',
+      backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+      fontFamily: 'system-ui, sans-serif',
       fontSize: '11px', userSelect: 'none', WebkitUserSelect: 'none',
-      display: 'none', minWidth: '148px',
+      display: 'none',
     });
     inspectorUI.add(panel);
 
-    // Color swatches
-    const colorLabel = document.createElement('div');
-    colorLabel.textContent = 'Color';
-    Object.assign(colorLabel.style, { fontSize: '10px', fontWeight: '600', color: '#6b7280', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' });
-    panel.appendChild(colorLabel);
+    // --- Drag handle header ---
+    const header = document.createElement('div');
+    Object.assign(header.style, {
+      display: 'flex', alignItems: 'center', gap: '6px',
+      marginBottom: '8px', cursor: 'grab',
+    });
+    const grip = document.createElement('span');
+    grip.textContent = '\u2837';
+    Object.assign(grip.style, {
+      color: 'rgba(255,255,255,0.35)', fontSize: '14px', lineHeight: '1',
+    });
+    const label = document.createElement('span');
+    label.textContent = 'Brush';
+    Object.assign(label.style, {
+      color: 'rgba(255,255,255,0.5)', fontSize: '11px', fontWeight: '600',
+      letterSpacing: '0.5px', textTransform: 'uppercase',
+    });
+    header.appendChild(grip);
+    header.appendChild(label);
+    panel.appendChild(header);
 
+    // Drag logic
+    let dragging = false, dx = 0, dy = 0;
+    header.addEventListener('mousedown', (e) => {
+      dragging = true;
+      const rect = panel.getBoundingClientRect();
+      dx = e.clientX - rect.left;
+      dy = e.clientY - rect.top;
+      header.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      let x = e.clientX - dx;
+      let y = e.clientY - dy;
+      // Clamp to viewport
+      const pw = panel.offsetWidth, ph = panel.offsetHeight;
+      x = Math.max(0, Math.min(window.innerWidth - pw, x));
+      y = Math.max(0, Math.min(window.innerHeight - ph, y));
+      panel.style.left = x + 'px';
+      panel.style.top = y + 'px';
+      panel.style.right = 'auto';
+    });
+    document.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      header.style.cursor = 'grab';
+    });
+
+    // Color swatches
     const colorRow = document.createElement('div');
-    Object.assign(colorRow.style, { display: 'flex', gap: '4px', flexWrap: 'wrap', marginBottom: '12px' });
+    Object.assign(colorRow.style, { display: 'flex', gap: '6px', alignItems: 'center' });
     panel.appendChild(colorRow);
 
     DRAW_COLORS.forEach(c => {
@@ -2883,28 +2970,26 @@
       colorRow.appendChild(swatch);
     });
 
-    // Size options
-    const sizeLabel = document.createElement('div');
-    sizeLabel.textContent = 'Size';
-    Object.assign(sizeLabel.style, { fontSize: '10px', fontWeight: '600', color: '#6b7280', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' });
-    panel.appendChild(sizeLabel);
+    // Divider
+    const divider = document.createElement('div');
+    Object.assign(divider.style, { width: '1px', height: '20px', background: 'rgba(255,255,255,0.12)', margin: '0 4px' });
+    colorRow.appendChild(divider);
 
-    const sizeRow = document.createElement('div');
-    Object.assign(sizeRow.style, { display: 'flex', gap: '6px', alignItems: 'center' });
-    panel.appendChild(sizeRow);
+    // Size options (inline with colors, separated by divider)
+    const sizeRow = colorRow; // same row
 
     DRAW_SIZES.forEach(s => {
       const btn = document.createElement('button');
       btn.dataset.sizeId = s.id;
-      const dotSize = Math.max(6, s.width * 2.2);
+      const dotSize = Math.max(4, s.width * 2);
       Object.assign(btn.style, {
-        width: '32px', height: '28px', borderRadius: '6px', border: '1.5px solid #e5e7eb',
-        background: '#fff', cursor: 'pointer', padding: '0',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'border-color 0.1s, background 0.1s',
+        width: '26px', height: '26px', borderRadius: '50%', border: '2px solid transparent',
+        background: 'rgba(255,255,255,0.08)', cursor: 'pointer', padding: '0',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'border-color 0.12s',
       });
       const dot = document.createElement('span');
       Object.assign(dot.style, {
-        width: dotSize + 'px', height: dotSize + 'px', borderRadius: '50%', background: '#374151', display: 'block',
+        width: dotSize + 'px', height: dotSize + 'px', borderRadius: '50%', background: '#fff', display: 'block',
       });
       btn.appendChild(dot);
       btn.addEventListener('click', () => {
@@ -2934,15 +3019,28 @@
     // Update size buttons
     drawPanel.querySelectorAll('[data-size-id]').forEach(btn => {
       const isActive = btn.dataset.sizeId === activeSizeId;
-      btn.style.borderColor = isActive ? getSelectionColor() : '#e5e7eb';
-      btn.style.background = isActive ? getSelectionColor() + '12' : '#fff';
+      btn.style.borderColor = isActive ? 'rgba(255,255,255,0.5)' : 'transparent';
+      btn.style.background = isActive ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)';
     });
+  }
+
+  // Convert a mouse event to canvas-local coordinates, accounting for
+  // any CSS transform on the parent wrapper (canvas-zoom).
+  function canvasCoords(e) {
+    const rect = drawCanvas.getBoundingClientRect();
+    const scaleX = drawCanvas.clientWidth / rect.width;
+    const scaleY = drawCanvas.clientHeight / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
   }
 
   function resizeDrawCanvas() {
     const dpr = window.devicePixelRatio || 1;
-    const pageW = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
-    const pageH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    const container = drawCanvas.parentElement || document.body;
+    const pageW = Math.max(container.scrollWidth, document.documentElement.scrollWidth);
+    const pageH = Math.max(container.scrollHeight, document.documentElement.scrollHeight);
     const oldData = drawCanvas.width > 0 ? drawCanvas.getContext('2d').getImageData(0, 0, drawCanvas.width, drawCanvas.height) : null;
     drawCanvas.width = pageW * dpr;
     drawCanvas.height = pageH * dpr;
@@ -2970,11 +3068,14 @@
 
     init() {
       drawCanvas = document.createElement('canvas');
+      drawCanvas.setAttribute('data-dt-ignore', '');
       Object.assign(drawCanvas.style, {
         position: 'absolute', top: '0', left: '0', zIndex: String(Z.overlay), pointerEvents: 'none'
       });
       document.body.appendChild(drawCanvas);
-      inspectorUI.add(drawCanvas);
+      // NOTE: drawCanvas is intentionally NOT added to inspectorUI so that
+      // canvas-zoom's ensureWrapper() moves it into #dt-canvas-wrapper.
+      // This makes drawings scale with the page when zooming.
       resizeDrawCanvas();
       window.addEventListener('resize', resizeDrawCanvas);
       // Theme swap → re-arm the context so the next stroke uses the new
@@ -2990,6 +3091,7 @@
         display: 'none', zIndex: '100003', background: 'rgba(255,255,255,0.3)'
       });
       document.body.appendChild(eraserCursor);
+      inspectorUI.add(eraserCursor);
       let isErasing = false;
 
       // Prevent context menu on canvas
@@ -2999,18 +3101,16 @@
 
       drawCanvas.addEventListener('mousedown', (e) => {
         if (!state.annotateMode || state.annotateSub !== 'pen') return;
+        const pos = canvasCoords(e);
         if (e.button === 2) {
           // Right-click: erase mode
           isErasing = true;
           eraserCursor.style.display = 'block';
           const ctx = drawCanvas.getContext('2d');
-          const dpr = window.devicePixelRatio || 1;
-          const x = (e.clientX + window.scrollX) * dpr;
-          const y = (e.clientY + window.scrollY) * dpr;
           ctx.save();
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x / dpr, y / dpr, ERASER_SIZE / 2, 0, Math.PI * 2);
+          ctx.arc(pos.x, pos.y, ERASER_SIZE / 2, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
           eraserCursor.style.left = (e.clientX - ERASER_SIZE / 2) + 'px';
@@ -3020,24 +3120,26 @@
         isDrawing = true;
         const ctx = drawCanvas.getContext('2d');
         ctx.beginPath();
-        ctx.moveTo(e.clientX + window.scrollX, e.clientY + window.scrollY);
+        ctx.moveTo(pos.x, pos.y);
       });
       drawCanvas.addEventListener('mousemove', (e) => {
         if (isErasing) {
           eraserCursor.style.left = (e.clientX - ERASER_SIZE / 2) + 'px';
           eraserCursor.style.top = (e.clientY - ERASER_SIZE / 2) + 'px';
+          const pos = canvasCoords(e);
           const ctx = drawCanvas.getContext('2d');
           ctx.save();
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(e.clientX + window.scrollX, e.clientY + window.scrollY, ERASER_SIZE / 2, 0, Math.PI * 2);
+          ctx.arc(pos.x, pos.y, ERASER_SIZE / 2, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
           return;
         }
         if (!isDrawing) return;
+        const pos = canvasCoords(e);
         const ctx = drawCanvas.getContext('2d');
-        ctx.lineTo(e.clientX + window.scrollX, e.clientY + window.scrollY);
+        ctx.lineTo(pos.x, pos.y);
         ctx.stroke();
       });
       drawCanvas.addEventListener('mouseup', () => { isDrawing = false; isErasing = false; eraserCursor.style.display = 'none'; });
@@ -3048,8 +3150,8 @@
       state.annotateMode = true;
       state.annotateSub = 'pen';
       drawCanvas.style.pointerEvents = 'auto';
-      document.body.style.cursor = 'crosshair';
-      drawCanvas.style.cursor = 'crosshair';
+      document.body.style.cursor = PENCIL_CURSOR;
+      drawCanvas.style.cursor = PENCIL_CURSOR;
       if (!drawPanel) drawPanel = createDrawPanel();
       drawPanel.style.display = 'block';
       renderPanelState();
@@ -3342,312 +3444,6 @@
 
     enable() {},
     disable() { this.deactivate(); },
-  };
-
-  /**
-   * Mock Terminal experiment.
-   *
-   * Toggled from Settings → Experiments. When enabled, a toolbar button
-   * appears; clicking it opens a draggable, resizable terminal overlay
-   * with a fake shell prompt that echoes commands. Pure UI experiment —
-   * nothing actually executes.
-   */
-
-
-  let termEl = null;
-  let inputEl = null;
-  let outputEl = null;
-  let visible = false;
-  let history = [];
-  let historyIdx = -1;
-
-  const PROMPT = '<span style="color:#10b981">guest@dom-tools</span><span style="color:#888">:</span><span style="color:#3b82f6">~</span><span style="color:#888">$</span> ';
-
-  const MOCK_FS = {
-    '/': ['home', 'usr', 'etc', 'var', 'tmp'],
-    '/home': ['guest'],
-    '/home/guest': ['notes.txt', 'projects', '.bashrc'],
-    '/home/guest/projects': ['dom-tools', 'sketches'],
-  };
-
-  const MOCK_FILES = {
-    '/home/guest/notes.txt': 'Remember to ship the annotation feature.\nAlso: fix that z-index bug.',
-    '/home/guest/.bashrc': '# .bashrc\nexport PATH="$PATH:/usr/local/bin"\nalias ll="ls -la"',
-  };
-
-  let cwd = '/home/guest';
-
-  function resolvePath(p) {
-    if (!p || p === '~') return '/home/guest';
-    if (p.startsWith('~/')) p = '/home/guest/' + p.slice(2);
-    if (!p.startsWith('/')) {
-      p = cwd === '/' ? '/' + p : cwd + '/' + p;
-    }
-    const parts = p.split('/').filter(Boolean);
-    const resolved = [];
-    for (const part of parts) {
-      if (part === '..') resolved.pop();
-      else if (part !== '.') resolved.push(part);
-    }
-    return '/' + resolved.join('/');
-  }
-
-  function runCommand(cmd) {
-    const parts = cmd.trim().split(/\s+/);
-    const bin = parts[0];
-    const args = parts.slice(1);
-
-    if (!bin) return '';
-
-    switch (bin) {
-      case 'help':
-        return 'Available commands: help, echo, pwd, cd, ls, cat, clear, whoami, date, uname';
-      case 'echo':
-        return args.join(' ');
-      case 'pwd':
-        return cwd;
-      case 'whoami':
-        return 'guest';
-      case 'uname':
-        return 'DomToolsOS 1.0.0 mock-kernel';
-      case 'date':
-        return new Date().toString();
-      case 'cd': {
-        const target = resolvePath(args[0]);
-        if (MOCK_FS[target]) { cwd = target; return ''; }
-        return `cd: ${args[0] || ''}: No such file or directory`;
-      }
-      case 'ls': {
-        const target = args[0] ? resolvePath(args[0]) : cwd;
-        const entries = MOCK_FS[target];
-        if (!entries) return `ls: cannot access '${args[0] || target}': No such file or directory`;
-        return entries.join('  ');
-      }
-      case 'cat': {
-        if (!args[0]) return 'cat: missing operand';
-        const target = resolvePath(args[0]);
-        if (MOCK_FILES[target]) return MOCK_FILES[target];
-        return `cat: ${args[0]}: No such file or directory`;
-      }
-      case 'clear':
-        return '\x00CLEAR';
-      default:
-        return `${bin}: command not found`;
-    }
-  }
-
-  function appendOutput(html) {
-    outputEl.innerHTML += html;
-    outputEl.scrollTop = outputEl.scrollHeight;
-  }
-
-  function handleInput(cmd) {
-    appendOutput(`<div style="white-space:pre-wrap">${PROMPT}<span style="color:#e2e8f0">${escapeHtml(cmd)}</span></div>`);
-    const result = runCommand(cmd);
-    if (result === '\x00CLEAR') {
-      outputEl.innerHTML = '';
-    } else if (result) {
-      appendOutput(`<div style="white-space:pre-wrap;color:#cbd5e1">${escapeHtml(result)}</div>`);
-    }
-  }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function createTerminal() {
-    termEl = document.createElement('div');
-    Object.assign(termEl.style, {
-      position: 'fixed',
-      bottom: '80px',
-      right: '20px',
-      width: '480px',
-      height: '320px',
-      background: '#0d1117',
-      border: '1px solid #30363d',
-      borderRadius: '8px',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-      zIndex: String(Z.toolbar + 2),
-      display: 'none',
-      flexDirection: 'column',
-      fontFamily: '"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace',
-      fontSize: '12px',
-      overflow: 'hidden',
-      resize: 'both',
-      minWidth: '320px',
-      minHeight: '200px',
-    });
-
-    const titleBar = document.createElement('div');
-    Object.assign(titleBar.style, {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '8px 12px',
-      background: '#161b22',
-      borderBottom: '1px solid #30363d',
-      cursor: 'grab',
-      userSelect: 'none',
-      gap: '8px',
-    });
-
-    const dots = document.createElement('div');
-    dots.innerHTML = '<span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block;margin-right:6px"></span>'
-      + '<span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block;margin-right:6px"></span>'
-      + '<span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>';
-
-    const titleText = document.createElement('span');
-    titleText.textContent = 'terminal — guest@dom-tools:~';
-    Object.assign(titleText.style, { color: '#8b949e', fontSize: '11px', flex: '1', textAlign: 'center' });
-
-    const closeBtn = document.createElement('span');
-    closeBtn.textContent = '×';
-    Object.assign(closeBtn.style, { color: '#8b949e', fontSize: '16px', cursor: 'pointer', lineHeight: '1' });
-    closeBtn.addEventListener('click', () => hideTerminal());
-
-    titleBar.appendChild(dots);
-    titleBar.appendChild(titleText);
-    titleBar.appendChild(closeBtn);
-
-    outputEl = document.createElement('div');
-    Object.assign(outputEl.style, {
-      flex: '1',
-      overflow: 'auto',
-      padding: '8px 12px',
-      color: '#c9d1d9',
-      lineHeight: '1.5',
-    });
-    outputEl.innerHTML = '<div style="color:#8b949e;margin-bottom:8px">Welcome to dom-tools mock terminal. Type "help" for commands.</div>';
-
-    const inputRow = document.createElement('div');
-    Object.assign(inputRow.style, {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '6px 12px 10px',
-      borderTop: '1px solid #21262d',
-      gap: '0',
-    });
-
-    const promptLabel = document.createElement('span');
-    promptLabel.innerHTML = PROMPT;
-    Object.assign(promptLabel.style, { flexShrink: '0', whiteSpace: 'nowrap' });
-
-    inputEl = document.createElement('input');
-    inputEl.type = 'text';
-    inputEl.setAttribute('data-dt-allow-select', '');
-    Object.assign(inputEl.style, {
-      flex: '1',
-      background: 'transparent',
-      border: 'none',
-      outline: 'none',
-      color: '#e2e8f0',
-      fontFamily: 'inherit',
-      fontSize: 'inherit',
-      caretColor: getSelectionColor(),
-    });
-
-    inputEl.addEventListener('keydown', (e) => {
-      e.stopPropagation();
-      if (e.key === 'Enter') {
-        const cmd = inputEl.value;
-        if (cmd.trim()) {
-          history.push(cmd);
-          historyIdx = history.length;
-        }
-        handleInput(cmd);
-        inputEl.value = '';
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIdx > 0) {
-          historyIdx--;
-          inputEl.value = history[historyIdx];
-        }
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIdx < history.length - 1) {
-          historyIdx++;
-          inputEl.value = history[historyIdx];
-        } else {
-          historyIdx = history.length;
-          inputEl.value = '';
-        }
-      }
-    });
-
-    inputRow.appendChild(promptLabel);
-    inputRow.appendChild(inputEl);
-
-    termEl.appendChild(titleBar);
-    termEl.appendChild(outputEl);
-    termEl.appendChild(inputRow);
-
-    // Drag by title bar
-    let dragging = false, dx = 0, dy = 0;
-    titleBar.addEventListener('mousedown', (e) => {
-      if (e.target === closeBtn) return;
-      dragging = true;
-      const rect = termEl.getBoundingClientRect();
-      dx = e.clientX - rect.left;
-      dy = e.clientY - rect.top;
-      titleBar.style.cursor = 'grabbing';
-      e.preventDefault();
-    });
-    document.addEventListener('mousemove', (e) => {
-      if (!dragging) return;
-      termEl.style.left = (e.clientX - dx) + 'px';
-      termEl.style.top = (e.clientY - dy) + 'px';
-      termEl.style.right = 'auto';
-      termEl.style.bottom = 'auto';
-    });
-    document.addEventListener('mouseup', () => {
-      dragging = false;
-      titleBar.style.cursor = 'grab';
-    });
-
-    // Click inside terminal focuses input
-    termEl.addEventListener('click', (e) => {
-      if (e.target !== closeBtn) inputEl.focus();
-    });
-
-    document.body.appendChild(termEl);
-    inspectorUI.add(termEl);
-  }
-
-  function showTerminal() {
-    if (!termEl) createTerminal();
-    termEl.style.display = 'flex';
-    visible = true;
-    setTimeout(() => inputEl.focus(), 0);
-  }
-
-  function hideTerminal() {
-    if (termEl) termEl.style.display = 'none';
-    visible = false;
-  }
-
-  function toggleTerminal() {
-    if (visible) hideTerminal();
-    else showTerminal();
-  }
-
-  var terminal = {
-    id: 'terminal',
-    label: 'Terminal',
-    experiment: true,
-    enabledByDefault: true,
-
-    button: {
-      icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v12zM7 10l4 3-4 3v-6zm5 5h5v2h-5v-2z"/></svg>',
-      tooltip: 'Terminal',
-      color: '#10b981',
-      order: 12,
-    },
-
-    init() {},
-    activate() { showTerminal(); },
-    deactivate() {},
-    toggle() { toggleTerminal(); return visible; },
-    enable() {},
-    disable() { hideTerminal(); },
   };
 
   /**
@@ -4578,7 +4374,8 @@
       border: '1px solid rgba(255,255,255,0.12)',
       borderRadius: '8px',
       zIndex: String(Z.toolbar + 1),
-      pointerEvents: 'none',
+      pointerEvents: 'auto',
+      cursor: 'crosshair',
       opacity: '0',
       transition: 'opacity 0.2s ease',
       overflow: 'hidden',
@@ -4609,8 +4406,70 @@
     });
     minimap.appendChild(minimapViewport);
 
+    // Click/drag to navigate
+    minimap.addEventListener('mousedown', onMinimapDown);
+    minimap.addEventListener('click', (e) => e.stopPropagation());
+
     document.body.appendChild(minimap);
     inspectorUI.add(minimap);
+
+    // Update viewport on scroll
+    window.addEventListener('scroll', () => { if (minimap) updateMinimap(); }, true);
+  }
+
+  // --- Minimap click-to-navigate ---
+  // Convert a click position on the minimap to document coordinates and pan there.
+  function minimapClickToPan(e) {
+    if (!wrapper) return;
+    const rect = minimap.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    const pad = MAP_PAD;
+    const innerW = MAP_W - pad * 2;
+    const innerH = MAP_H - pad * 2;
+    const docW = wrapper.scrollWidth;
+    const docH = wrapper.scrollHeight;
+
+    const docAspect = docW / docH;
+    const mapAspect = innerW / innerH;
+    let drawW, drawH;
+    if (docAspect > mapAspect) {
+      drawW = innerW;
+      drawH = innerW / docAspect;
+    } else {
+      drawH = innerH;
+      drawW = innerH * docAspect;
+    }
+    const offsetX = pad + (innerW - drawW) / 2;
+    const offsetY = pad + (innerH - drawH) / 2;
+    const s = drawW / docW;
+
+    // Target document position (center of viewport on this point)
+    const docX = (mx - offsetX) / s;
+    const docY = (my - offsetY) / s;
+
+    // Pan so this point is centered in the viewport
+    const vpW = window.innerWidth / scale;
+    const vpH = window.innerHeight / scale;
+    panX = -(docX - vpW / 2) * scale;
+    panY = -(docY - vpH / 2) * scale;
+
+    applyTransform();
+  }
+
+  function onMinimapDown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    minimapClickToPan(e);
+
+    function onMove(ev) { minimapClickToPan(ev); }
+    function onUp() {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
   }
 
   // Render a lightweight thumbnail of the page by sampling visible elements
@@ -4724,11 +4583,11 @@
     const offsetY = pad + (innerH - drawH) / 2;
     const s = drawW / docW;
 
-    // Viewport in document coordinates
+    // Viewport in document coordinates (pan + scroll)
     const vpW = window.innerWidth / scale;
     const vpH = window.innerHeight / scale;
-    const vpX = -panX / scale;
-    const vpY = -panY / scale;
+    const vpX = -panX / scale + window.scrollX;
+    const vpY = -panY / scale + window.scrollY;
 
     Object.assign(minimapViewport.style, {
       left: (offsetX + vpX * s) + 'px',
@@ -4792,7 +4651,13 @@
 
   function snapshotDocBg() {
     if (originalDocBg !== null) return;
-    const isTransparent = (c) => !c || c === 'rgba(0, 0, 0, 0)' || c === 'transparent';
+    const isTransparent = (c) => {
+      if (!c || c === 'transparent') return true;
+      const m = c.match(/rgba?\(\s*[\d.]+,\s*[\d.]+,\s*[\d.]+(?:,\s*([\d.]+))?\)/);
+      if (m && m[1] !== undefined && parseFloat(m[1]) === 0) return true;
+      if (c === 'rgba(0, 0, 0, 0)') return true;
+      return false;
+    };
     const bodyBg = window.getComputedStyle(document.body).backgroundColor;
     const htmlBg = window.getComputedStyle(document.documentElement).backgroundColor;
     originalDocBg = !isTransparent(bodyBg) ? bodyBg : !isTransparent(htmlBg) ? htmlBg : '#fff';
@@ -4809,18 +4674,17 @@
       if (!wrapper.dataset.dtBgSet) {
         snapshotDocBg();
         wrapper.style.background = originalDocBg;
-        wrapper.style.padding = '16px';
-        wrapper.style.border = '1px solid #d1d5db';
         wrapper.style.borderRadius = '4px';
-        wrapper.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
+        wrapper.style.boxShadow = '0 0 0 16px ' + originalDocBg + ', 0 0 0 17px #d1d5db, 0 4px 24px rgba(0,0,0,0.12)';
         wrapper.dataset.dtBgSet = '1';
       }
-      document.body.style.background = computeCanvasBg(originalDocBg);
+      const canvasBg = computeCanvasBg(originalDocBg);
+      document.body.style.background = canvasBg;
+      document.documentElement.style.background = canvasBg;
     } else {
       document.body.style.background = '';
+      document.documentElement.style.background = '';
       wrapper.style.background = '';
-      wrapper.style.padding = '';
-      wrapper.style.border = '';
       wrapper.style.borderRadius = '';
       wrapper.style.boxShadow = '';
       delete wrapper.dataset.dtBgSet;
@@ -4835,13 +4699,12 @@
     if (wrapper) {
       wrapper.style.transform = '';
       wrapper.style.background = '';
-      wrapper.style.padding = '';
-      wrapper.style.border = '';
       wrapper.style.borderRadius = '';
       wrapper.style.boxShadow = '';
       delete wrapper.dataset.dtBgSet;
     }
     document.body.style.background = '';
+    document.documentElement.style.background = '';
     updateMinimap();
     showZoomLevel();
   }
@@ -4898,16 +4761,18 @@
 
     e.preventDefault();
 
-    // Cursor position in content coordinates (before transform)
-    const cursorX = (e.clientX - panX) / scale;
-    const cursorY = (e.clientY - panY) / scale;
+    // With CSS zoom, getBoundingClientRect() returns the zoomed rect.
+    // The cursor position in unzoomed content space:
+    const rect = wrapper.getBoundingClientRect();
+    const cursorX = (e.clientX - rect.left) / scale;
+    const cursorY = (e.clientY - rect.top) / scale;
 
     const delta = -e.deltaY * ZOOM_SPEED;
     const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (1 + delta)));
 
-    // Adjust pan so the point under the cursor stays fixed
-    panX = e.clientX - cursorX * newScale;
-    panY = e.clientY - cursorY * newScale;
+    // Keep the point under the cursor fixed after scale change.
+    panX += cursorX * (scale - newScale);
+    panY += cursorY * (scale - newScale);
     scale = newScale;
 
     applyTransform();
@@ -5093,6 +4958,16 @@
       document.addEventListener('mousemove', onMouseMove, true);
       document.addEventListener('mouseup', onMouseUp, true);
       window.addEventListener('blur', onWindowBlur);
+
+      // Re-center content when window resizes while zoomed
+      window.addEventListener('resize', () => {
+        if (!wrapper || scale === 1) return;
+        const contentW = wrapper.scrollWidth * scale;
+        if (contentW < window.innerWidth) {
+          panX = (window.innerWidth - contentW) / 2;
+        }
+        applyTransform();
+      });
     },
 
     enable() { active = true; },
@@ -5131,7 +5006,6 @@
     if (isExperimentEnabled('camera')) register(camera);
     register(copySelector);
     register(canvasZoom);
-    if (isExperimentEnabled('terminal')) register(terminal);
     if (isExperimentEnabled('move')) register(move);
     if (isExperimentEnabled('duplicate')) register(duplicate);
 
