@@ -5,8 +5,17 @@
   "installCommand": "npm install",
   "headers": [
     {
-      "source": "/dom-tools(.min)?.js",
+      "source": "/dom-tools.js",
       "headers": [
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/dom-tools.min.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
