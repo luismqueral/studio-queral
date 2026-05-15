@@ -11,6 +11,7 @@
     "sync:music": "node --env-file=.env.local scripts/sync-music.mjs"
   },
   "dependencies": {
+    "@upstash/redis": "^1.38.0",
     "@vercel/blob": "^1.1.1",
     "@vercel/kv": "^3.0.0",
     "googleapis": "^171.4.0",
