@@ -19,6 +19,14 @@
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
+    },
+    {
+      "source": "/nyt.css",
+      "headers": [
+        { "key": "Content-Type", "value": "text/css; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
     }
   ],
   "rewrites": [
