@@ -1,10 +1,10 @@
 <div class="mw6 center tl mb4">
 
-A few months ago I wrote about a [100-line element inspector](/notes/element-inspector) — a dumb script that copies CSS selectors to your clipboard so you can point at things when talking to an LLM. It worked. But I kept wanting more.
+a few months ago I wrote about a [100-line element inspector](/notes/element-inspector) — a script that copies CSS selectors to your clipboard so you can point at things when talking to an LLM. it worked, but I kept wanting more.
 
-I'd copy a selector, paste it into Claude, type "make this bolder" — and then realize I actually wanted to say three things about three different elements. And I wanted to sketch an arrow. And I wanted to just *edit the text directly* to show what I meant rather than describe it.
+I'd copy a selector, paste it into Claude, type "make this bolder" — and then realize I actually wanted to say three things about three different elements. and I wanted to sketch an arrow, and edit the text directly to show what I meant rather than describe it.
 
-So the inspector grew into something else.
+so the inspector grew into something else.
 
 </div>
 
@@ -12,21 +12,21 @@ So the inspector grew into something else.
 
 <div class="mw6 center tl mb4">
 
-### DOM-Tools
+### what it is now
 
-It's a floating toolbar you drop onto any page. One script tag. No dependencies, no Tailwind, no build step required on the consuming end.
+a floating toolbar you drop onto any page. one script tag, no dependencies, no build step.
 
 ```html
 <script src="https://queral.studio/dom-tools.min.js"></script>
 ```
 
-You get a pill-shaped toolbar at the bottom of the screen with a handful of modes:
+you get a pill-shaped bar at the bottom of the screen with a handful of modes:
 
-**Select** — hover to see element boundaries, click to open a popover where you type what you'd change. Your note sticks to the element as a little bubble. Click another element, leave another note. When you're done, hit "Copy All" and the whole batch exports as structured Markdown — selectors, notes, text diffs, class diffs — ready to paste into a prompt.
+**select** — hover to see element boundaries, click to open a popover where you type what you'd change. your note sticks as a bubble anchored to the element.
 
-**Edit Text** — double-click any text element and just... type. The change is tracked silently. No popover, no extra UI. When you copy, the before/after shows up in the output.
+**edit text** — double-click any text element and just... type. the change is tracked silently, and when you copy, the before/after shows up in the output.
 
-**Draw** — freehand annotation directly on the page. Pencil cursor, color swatches, size options. Right-click to erase. The canvas lives inside the page content, so when you zoom it scales with everything else.
+**draw** — freehand annotation directly on the page. the canvas lives inside the page content, so when you zoom it scales with everything else.
 
 </div>
 
@@ -34,11 +34,11 @@ You get a pill-shaped toolbar at the bottom of the screen with a handful of mode
 
 <div class="mw6 center tl mb4">
 
-### The workflow it enables
+### the workflow it enables
 
-The thing I was actually building toward: **describe a full round of design feedback in one shot**.
+the thing I was actually building toward: **describe a full round of design feedback in one shot**.
 
-Instead of:
+instead of:
 > "make the header smaller"
 >
 > *wait*
@@ -49,7 +49,7 @@ Instead of:
 >
 > "and change 'Get Started' to 'Try it'"
 
-You load the page, click around, leave notes, edit some text inline, draw an arrow pointing at the thing that's wrong, and then hit copy. What lands in your clipboard is a single structured document:
+you load the page, click around, leave notes, edit some text inline, draw an arrow pointing at the thing that's wrong, and hit copy. what lands in your clipboard:
 
 ```markdown
 ## DOM Changes
@@ -65,7 +65,7 @@ Text: "Get Started" → "Try it"
 Note: see drawing — arrow indicates preferred position
 ```
 
-One paste, one generation, one diff to review. The LLM gets everything it needs in one message — selectors it can find in the source, plain-language intent, and concrete text changes it can apply verbatim.
+one paste, one generation, one diff to review. the LLM gets selectors, plain-language intent, and concrete text changes it can apply verbatim.
 
 </div>
 
@@ -73,27 +73,15 @@ One paste, one generation, one diff to review. The LLM gets everything it needs 
 
 <div class="mw6 center tl mb4">
 
-### Canvas zoom
+### canvas zoom
 
-This part surprised me. I added Figma-style zoom (Cmd+Scroll) mostly as a convenience — sometimes you want to zoom out and see the whole page at once. But it turned the tool into something closer to a design canvas.
+I added figma-style zoom (cmd+scroll) mostly as a convenience. but it turned the tool into something closer to a design canvas.
 
-When you zoom out, the page floats in a grey field with a subtle border. There's a minimap in the corner. You can pan with spacebar. The draw layer scales with the content. It stops feeling like "a webpage with annotations" and starts feeling like "a design artifact you're marking up."
+when you zoom out, the page floats in a grey field with a subtle border. there's a minimap, you can pan with spacebar, and the draw layer scales with the content.
 
-The zoom is pure CSS transforms on a wrapper div. No rasterization, no canvas rendering of the page. Everything stays interactive — you can still click elements, edit text, leave notes — all while zoomed to 40%.
+it stops feeling like "a webpage with annotations" and starts feeling like "a design artifact you're marking up." everything stays interactive — click elements, edit text, leave notes — all while zoomed to 40%.
 
-</div>
-
----
-
-<div class="mw6 center tl mb4">
-
-### What I learned building it
-
-**The communication bottleneck is real.** I keep coming back to this. LLMs are fast at generating code. The slow part is telling them what you want with enough precision that they get it right on the first try. Every tool that reduces the gap between "what I'm looking at" and "what the model receives" saves multiple round-trips.
-
-**Inline editing is underrated.** When I want to change a headline from "Welcome to our platform" to "Make something," the fastest way to communicate that is to just *type it*. Not describe it. Not say "change the h1 text to..." — just put the cursor in the word and type. The tool tracks the diff automatically.
-
-**Annotations compound.** A single note is fine. But five notes on five elements, plus two text edits, plus a sketch — that's a complete design review in one clipboard copy. The structured output means the LLM can process them all in one pass without asking clarifying questions.
+the zoom is pure CSS transforms on a wrapper div. no rasterization, no canvas rendering of the page.
 
 </div>
 
@@ -101,13 +89,13 @@ The zoom is pure CSS transforms on a wrapper div. No rasterization, no canvas re
 
 <div class="mw6 center tl mb4">
 
-### Technical notes
+### what I learned building it
 
-It's ~300KB unminified, zero dependencies. The architecture is a module registry — each tool (select, draw, edit, camera, copy-selector) registers independently and can be toggled on/off. There's an experiment system in settings for features that aren't ready yet (move elements, duplicate elements).
+**the communication bottleneck is real.** LLMs are fast at generating code — the slow part is telling them what you want with enough precision that they get it right on the first try.
 
-The trickiest part was making everything coexist. When you're in draw mode, hover outlines need to stop. When you zoom, the draw canvas needs to scale with the page but the toolbar needs to stay fixed. When you hold Cmd for zoom-scroll, the selection hover needs to suppress. Lots of small state coordination problems that individually are trivial but collectively make or break the feel.
+**inline editing is underrated.** when I want to change a headline from "Welcome to our platform" to "Make something," the fastest way to communicate that is to just *type it*. the tool tracks the diff automatically.
 
-It boots via `Esc Esc` (double-tap Escape) on any page, or automatically if `?dom-tools` is in the URL.
+**annotations compound.** five notes on five elements, plus two text edits, plus a sketch — that's a complete design review in one clipboard copy. the structured output means the LLM can process them all in one pass without asking clarifying questions.
 
 </div>
 
@@ -115,16 +103,30 @@ It boots via `Esc Esc` (double-tap Escape) on any page, or automatically if `?do
 
 <div class="mw6 center tl mb4">
 
-### Try it
+### technical notes
 
-Add the script to any project and double-tap Escape:
+~300KB unminified, zero dependencies. the architecture is a module registry — each tool registers independently and can be toggled on/off.
+
+the trickiest part was making everything coexist. when you're in draw mode, hover outlines need to stop; when you zoom, the draw canvas scales with the page but the toolbar stays fixed; when you hold cmd for zoom-scroll, selection hover suppresses.
+
+it boots via `Esc Esc` (double-tap escape) on any page, or automatically if `?dom-tools` is in the URL.
+
+</div>
+
+---
+
+<div class="mw6 center tl mb4">
+
+### try it
+
+it's running on this page right now — look at the toolbar at the bottom. click around, leave a note, hit copy.
+
+add it to any project with one script tag and double-tap escape:
 
 ```html
 <script src="https://queral.studio/dom-tools.min.js"></script>
 ```
 
-Or just visit the [project page](https://luismqueral.github.io/dom-tools/?dom-tools) — it loads itself.
-
-[Source on GitHub.](https://github.com/luismqueral/dom-tools)
+[project page](https://luismqueral.github.io/dom-tools/?dom-tools) · [source on GitHub](https://github.com/luismqueral/dom-tools)
 
 </div>

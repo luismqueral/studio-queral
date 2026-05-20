@@ -95,6 +95,7 @@ const notesMetadata = {
     }
   },
   'big-trouble-little-tokyo': { title: '"big trouble, little tokyo"', subtitle: 'thoughts on generating interactive fiction in powerpoint', date: 'March 2026', pageBgClass: 'bg-white', ogImage: '/notes/big-trouble-little-tokyo/og-cover.jpg' },
+  'studio-queral-voice': { title: 'writing voice for this site', date: 'May 2026' },
   'styling-ruleset': { title: 'styling ruleset for this site', date: 'February 2026' },
   'paella-recipe': { title: 'how to make paella', date: 'February 2026' },
   'wu-tang-final-tour': { title: 'why i love the wu-tang clan', date: 'January 2026' },
@@ -117,7 +118,9 @@ const notesMetadata = {
   'generative-design-thinking': { title: '"generative design thinking"' },
   'how-designers-talk-about-ai': { title: 'how designers should talk about AI' },
   'its-a-lot': { title: "it's a lot", date: 'May 2026' },
+  'html-as-a-deck': { title: 'HTML is a deck format', date: 'May 2026' },
   'dom-tools': { title: 'DOM-Tools', date: 'May 2026' },
+  'dom-tools-plugins': { title: 'plugins for DOM-Tools', date: 'May 2026' },
   'element-inspector': { title: 'a 100-line bridge between your eyes and your LLM', date: 'April 2026' },
   'cursor-for-research': { title: 'how I use Cursor for design research' },
   'writing-design-superpower': { title: 'a writing habit is a design superpower' },

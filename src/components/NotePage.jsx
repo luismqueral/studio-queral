@@ -146,6 +146,13 @@ function NotePage() {
   const { slug } = useParams()
   const note = notes[slug]
 
+  // Auto-boot DOM-Tools on the dom-tools post
+  useEffect(() => {
+    if (slug === 'dom-tools' && window.bootDomTools) {
+      window.bootDomTools()
+    }
+  }, [slug])
+
   if (!note) {
     return (
       <div className="pa4 mw7 center">
