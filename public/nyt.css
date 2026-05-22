@@ -1,36 +1,36 @@
-/* nyt.css — Tokens + document defaults for NYT prototypes
+/* nyt.css -- a design token library for Times-ian documents
  *
- * FONTS — Load from the NYT CDN. Add this to your <head>:
+ * FONTS -- Load from the NYT CDN. Add this to your <head>:
  *
  *   <link rel="preconnect" href="https://g1.nyt.com" crossorigin>
  *   <link rel="stylesheet" href="https://g1.nyt.com/fonts/css/web-fonts.c851560786173ad206e1f76c1901be7e096e8f8b.css">
  *
- * Do NOT bundle font files locally — use the CDN link above.
+ * Do NOT bundle font files locally -- use the CDN link above.
  *
  * FONT USAGE GUIDELINES:
  *
- *   nyt-franklin        — Primary UI font. Navigation, buttons, labels, product body text.
- *   nyt-franklin-small  — Smaller optical size of Franklin for fine print, captions.
- *   nyt-cheltenham      — Journalism headlines. Article titles, section headers on nytimes.com.
- *   nyt-cheltenham-cond — Condensed headlines where space is tight.
- *   nyt-cheltenham-wide — Wide setting for display headlines.
- *   nyt-cheltenham-small— Small optical size for bylines, credits.
- *   nyt-cheltenham-scaps— Small caps variant for labels, kickers.
- *   nyt-imperial        — Article body text. Long-form reading on nytimes.com.
- *   nyt-karnak          — Display/statement type. Large headlines, masthead, section fronts.
- *   nyt-karnak-cond     — Condensed display for narrow spaces (e.g. Games).
- *   nyt-karnak-small    — Smaller optical size of Karnak.
- *   nyt-kippenberger    — NYT Magazine. Covers, features, pull quotes.
- *   nyt-kippenberger-condensed — Magazine condensed variant.
- *   nyt-kippenberger-poster    — Magazine poster/display size.
- *   nyt-magsans         — Magazine sans-serif for captions, credits.
- *   nyt-magserif        — Magazine serif for body text.
- *   nyt-magslab         — Magazine slab for callouts.
- *   nyt-fact            — Wirecutter / product reviews. Clean modern sans.
- *   nyt-fact-display    — Wirecutter display headlines.
- *   nyt-athletic-slab   — The Athletic. Sports headlines and branding.
- *   nyt-schnyder-s      — Decorative serif for special features.
- *   nyt-ibm-plex        — Monospace. Code blocks, data tables, technical content.
+ *   nyt-franklin        -- Primary UI font. Navigation, buttons, labels, product body text.
+ *   nyt-franklin-small  -- Smaller optical size of Franklin for fine print, captions.
+ *   nyt-cheltenham      -- Journalism headlines. Article titles, section headers on nytimes.com.
+ *   nyt-cheltenham-cond -- Condensed headlines where space is tight.
+ *   nyt-cheltenham-wide -- Wide setting for display headlines.
+ *   nyt-cheltenham-small -- Small optical size for bylines, credits.
+ *   nyt-cheltenham-scaps -- Small caps variant for labels, kickers.
+ *   nyt-imperial        -- Article body text. Long-form reading on nytimes.com.
+ *   nyt-karnak          -- Display/statement type. Large headlines, masthead, section fronts.
+ *   nyt-karnak-cond     -- Condensed display for narrow spaces (e.g. Games).
+ *   nyt-karnak-small    -- Smaller optical size of Karnak.
+ *   nyt-kippenberger    -- NYT Magazine. Covers, features, pull quotes.
+ *   nyt-kippenberger-condensed -- Magazine condensed variant.
+ *   nyt-kippenberger-poster    -- Magazine poster/display size.
+ *   nyt-magsans         -- Magazine sans-serif for captions, credits.
+ *   nyt-magserif        -- Magazine serif for body text.
+ *   nyt-magslab         -- Magazine slab for callouts.
+ *   nyt-fact            -- Wirecutter / product reviews. Clean modern sans.
+ *   nyt-fact-display    -- Wirecutter display headlines.
+ *   nyt-athletic-slab   -- The Athletic. Sports headlines and branding.
+ *   nyt-schnyder-s      -- Decorative serif for special features.
+ *   nyt-ibm-plex        -- Monospace. Code blocks, data tables, technical content.
  */
 
 :root {
@@ -47,7 +47,7 @@
   --nyt-orange: #b87a00;
   --nyt-green: #3f7f63;
 
-  /* Data Viz — Stela categorical palette */
+  /* Data Viz -- Stela categorical palette */
   --viz-1: #2A6586;
   --viz-2: #6CBAAB;
   --viz-3: #B2A5E7;
@@ -57,7 +57,7 @@
   --viz-7: #657D53;
   --viz-8: #BD5D91;
 
-  /* Data Viz — Sequential scales */
+  /* Data Viz -- Sequential scales */
   --viz-blue-1: #242b40;
   --viz-blue-2: #1f497d;
   --viz-blue-3: #00577e;
@@ -67,7 +67,7 @@
   --viz-green-3: #a8ddc7;
   --viz-green-4: #e2eceb;
 
-  /* Data Viz — Product colors */
+  /* Data Viz -- Product colors */
   --viz-core: #2F3E7A;
   --viz-cooking: #f9351a;
   --viz-games: #F8CD0F;
@@ -75,7 +75,7 @@
   --viz-wirecutter: #6085ff;
   --viz-audio: #357a8a;
 
-  /* Fonts — Primary stacks */
+  /* Fonts -- Primary stacks */
   --nyt-sans: 'nyt-franklin', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --nyt-sans-small: 'nyt-franklin-small', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --nyt-serif: 'nyt-cheltenham', Georgia, "Times New Roman", serif;
@@ -88,7 +88,7 @@
   --nyt-display-cond: 'nyt-karnak-cond', Georgia, serif;
   --nyt-display-small: 'nyt-karnak-small', Georgia, serif;
 
-  /* Fonts — Magazine */
+  /* Fonts -- Magazine */
   --nyt-mag: 'nyt-kippenberger', Georgia, serif;
   --nyt-mag-cond: 'nyt-kippenberger-condensed', Georgia, serif;
   --nyt-mag-poster: 'nyt-kippenberger-poster', Georgia, serif;
@@ -96,7 +96,7 @@
   --nyt-mag-serif: 'nyt-magserif', Georgia, serif;
   --nyt-mag-slab: 'nyt-magslab', Georgia, serif;
 
-  /* Fonts — Products */
+  /* Fonts -- Products */
   --nyt-fact: 'nyt-fact', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --nyt-fact-display: 'nyt-fact-display', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --nyt-athletic: 'nyt-athletic-slab', Georgia, serif;
@@ -174,7 +174,7 @@
   --mw-wide: 960px;
   --mw-full: 1200px;
 
-  /* Sizing — proportional */
+  /* Sizing -- proportional */
   --size-quarter: 25%;
   --size-third: 33.333%;
   --size-half: 50%;
